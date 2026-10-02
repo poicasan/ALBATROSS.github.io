@@ -104,43 +104,48 @@
             padding: 20px 0;
         }
 
-        /* Trek yang menampung semua slide secara sejajar */
+        /* Trek slider menggunakan flexbox */
         .slide-track {
             display: flex;
-            width: calc(400px * 10);
-            /* (Lebar 1 slide * Total semua slide beserta duplikat) */
-            animation: scroll 20s linear infinite;
+            gap: 20px; /* Jarak antar gambar */
+            /* Lebar track: 10 slide x (lebar slide + gap) */
+            width: calc((250px + 20px) * 10);
+            animation: scroll-mobile 15s linear infinite;
         }
 
-        /* Pengaturan untuk setiap item slide */
+        /* Ukuran item slide default (Mobile) */
         .slide {
-            width: 550px;
-            height: 200px;
+            width: 250px;
+            flex-shrink: 0; /* Penting: Mencegah gambar menyusut (gepeng) */
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .slide img {
-            width: 300px;
-            height: 200px;
-            object-fit: contain;
-        }
-
-        /* Efek opsional: Berhenti bergeser saat kursor diarahkan ke slider */
+        /* Efek hover berhenti */
         .slider:hover .slide-track {
             animation-play-state: paused;
         }
 
-        /* Logika Animasi Infinite Scroll */
-        @keyframes scroll {
-            0% {
-                transform: translateX(0);
-            }
+        /* Animasi scroll untuk Mobile */
+        @keyframes scroll-mobile {
+            0% { transform: translateX(0); }
+            /* Geser sejauh 5 gambar orisinil: 5 x (lebar + gap) */
+            100% { transform: translateX(calc((-250px - 20px) * 5)); }
+        }
 
-            100% {
-                transform: translateX(calc(-250px * 5));
-                /* Geser sejauh (Lebar 1 slide * Jumlah item asli sebelum diduplikat) */
+        /* Penyesuaian untuk layar Tablet dan Desktop */
+        @media (min-width: 768px) {
+            .slide-track {
+                width: calc((350px + 20px) * 10);
+                animation: scroll-desktop 20s linear infinite;
+            }
+            .slide {
+                width: 350px;
+            }
+            @keyframes scroll-desktop {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(calc((-350px - 20px) * 5)); }
             }
         }
     </style>
@@ -379,86 +384,67 @@
         </p>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 py-8">
+   <div class="max-w-7xl mx-auto px-4 py-8">
         <div class="slider">
             <div class="slide-track">
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-6 items-center">
-                    <div class="slide">
-                        <div
-                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
-                            <img src="IMG_1502.JPG" alt="Exhibition 1"
-                                class="w-full aspect-[16/9] object-cover rounded-xl">
-                        </div>
+                
+                <!-- 5 Gambar Asli -->
+                <div class="slide">
+                    <div class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02] w-full">
+                        <img src="IMG_1502.JPG" alt="Exhibition 1" class="w-full aspect-[16/9] object-cover rounded-xl">
                     </div>
-                    <div class="slide">
-                        <div
-                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
-                            <img src="IMG_1706.JPG" alt="Exhibition 2"
-                                class="w-full aspect-[16/9] object-cover rounded-xl">
-                        </div>
+                </div>
+                <div class="slide">
+                    <div class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02] w-full">
+                        <img src="IMG_1706.JPG" alt="Exhibition 2" class="w-full aspect-[16/9] object-cover rounded-xl">
                     </div>
-                    <div class="slide">
-                        <div
-                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
-                            <img src="IMG_1502.JPG" alt="Exhibition 3"
-                                class="w-full aspect-[16/9] object-cover rounded-xl">
-                        </div>
+                </div>
+                <div class="slide">
+                    <div class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02] w-full">
+                        <img src="IMG_1502.JPG" alt="Exhibition 3" class="w-full aspect-[16/9] object-cover rounded-xl">
                     </div>
-                    <div class="slide">
-                        <div
-                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
-                            <img src="IMG_1502.JPG" alt="Exhibition 4"
-                                class="w-full aspect-[16/9] object-cover rounded-xl">
-                        </div>
+                </div>
+                <div class="slide">
+                    <div class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02] w-full">
+                        <img src="IMG_1502.JPG" alt="Exhibition 4" class="w-full aspect-[16/9] object-cover rounded-xl">
                     </div>
-                    <div class="slide">
-                        <div
-                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
-                            <img src="IMG_1502.JPG" alt="Exhibition 5"
-                                class="w-full aspect-[16/9] object-cover rounded-xl">
-                        </div>
+                </div>
+                <div class="slide">
+                    <div class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02] w-full">
+                        <img src="IMG_1502.JPG" alt="Exhibition 5" class="w-full aspect-[16/9] object-cover rounded-xl">
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-6 items-center">
-                    <div class="slide">
-                        <div
-                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
-                            <img src="IMG_1502.JPG" alt="Exhibition 1"
-                                class="w-full aspect-[16/9] object-cover rounded-xl">
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div
-                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
-                            <img src="IMG_1706.JPG" alt="Exhibition 2"
-                                class="w-full aspect-[16/9] object-cover rounded-xl">
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div
-                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
-                            <img src="IMG_1502.JPG" alt="Exhibition 3"
-                                class="w-full aspect-[16/9] object-cover rounded-xl">
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div
-                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
-                            <img src="IMG_1502.JPG" alt="Exhibition 4"
-                                class="w-full aspect-[16/9] object-cover rounded-xl">
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div
-                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
-                            <img src="IMG_1502.JPG" alt="Exhibition 5"
-                                class="w-full aspect-[16/9] object-cover rounded-xl">
-                        </div>
+                <!-- 5 Gambar Duplikat (Wajib ada agar infinite loop tidak putus) -->
+                <div class="slide">
+                    <div class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02] w-full">
+                        <img src="IMG_1502.JPG" alt="Exhibition 1" class="w-full aspect-[16/9] object-cover rounded-xl">
                     </div>
                 </div>
+                <div class="slide">
+                    <div class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02] w-full">
+                        <img src="IMG_1706.JPG" alt="Exhibition 2" class="w-full aspect-[16/9] object-cover rounded-xl">
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02] w-full">
+                        <img src="IMG_1502.JPG" alt="Exhibition 3" class="w-full aspect-[16/9] object-cover rounded-xl">
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02] w-full">
+                        <img src="IMG_1502.JPG" alt="Exhibition 4" class="w-full aspect-[16/9] object-cover rounded-xl">
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02] w-full">
+                        <img src="IMG_1502.JPG" alt="Exhibition 5" class="w-full aspect-[16/9] object-cover rounded-xl">
+                    </div>
+                </div>
+
             </div>
         </div>
+    </div>
 
         <div>
             <h2 class="font-tech text-xl md:text-3xl font-bold flex justify-center items-center h-40 text-[#464B71]">
