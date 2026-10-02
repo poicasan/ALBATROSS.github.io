@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albatross - Sistem Pemantauan Perairan</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 1. PERUBAHAN DI SINI: Link Google Fonts mengganti Exo 2 dengan Anta -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anta&family=Inter:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Config Tailwind CSS untuk mendukung Utility Class font-anta & font-inter -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        anta: ['Anta', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            blue: '#1b85b8',
+                            dark: '#2d3748',
+                            slate: '#4d566c',
+                            bg: '#eef5f9'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* 2. PERUBAHAN DI SINI: Mengubah font-family Exo 2 menjadi Anta */
+        .font-tech {
+            font-family: 'Anta', sans-serif;
+        }
+
+        /* Glassmorphism effect for buttons */
+        .glass-btn {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .card-tab {
+            clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
+        }
+
+        /* Sembunyikan scrollbar horizontal jika item overflow di layar sangat kecil */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        textarea::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        textarea::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        textarea::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        /* Kontainer utama untuk menyembunyikan elemen yang keluar layar */
+        .slider {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            background: white;
+            padding: 20px 0;
+        }
+
+        /* Trek yang menampung semua slide secara sejajar */
+        .slide-track {
+            display: flex;
+            width: calc(400px * 10);
+            /* (Lebar 1 slide * Total semua slide beserta duplikat) */
+            animation: scroll 20s linear infinite;
+        }
+
+        /* Pengaturan untuk setiap item slide */
+        .slide {
+            width: 550px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide img {
+            width: 300px;
+            height: 200px;
+            object-fit: contain;
+        }
+
+        /* Efek opsional: Berhenti bergeser saat kursor diarahkan ke slider */
+        .slider:hover .slide-track {
+            animation-play-state: paused;
+        }
+
+        /* Logika Animasi Infinite Scroll */
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(calc(-250px * 5));
+                /* Geser sejauh (Lebar 1 slide * Jumlah item asli sebelum diduplikat) */
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-white text-gray-800 font-inter">
+
+    <!-- Sticky Navigation Bar -->
+    <nav id="navbar"
+        class="fixed top-0 left-0 w-full z-50 p-4 lg:px-12 transition-all duration-300 bg-transparent text-white">
+        <div class="max-w-7xl mx-auto flex justify-between items-center relative">
+
+            <!-- Logo ALBATROSS -->
+            <a href="#" id="logo-btn" class="flex items-center transition-transform hover:scale-105">
+                <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="h-12 w-auto object-contain">
+            </a>
+
+            <!-- Container Kanan: Menu Navigasi + Tombol Mobile -->
+            <div class="flex items-center space-x-3">
+                <ul id="nav-links"
+                    class="hidden md:flex items-center space-x-2 sm:space-x-3 text-xs sm:text-sm font-semibold tracking-wider sm:tracking-widest uppercase transition-all duration-300 py-1">
+                    <li>
+                        <a href="homepage.html"
+                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
+                            BERANDA
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tentang kami.html"
+                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
+                            TENTANG KAMI
+                        </a>
+                    </li>
+
+                    <!-- MENU DROPDOWN ALAT -->
+                    <li class="relative group" id="alat-dropdown">
+                        <button id="alat-btn" type="button"
+                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+                            ALAT
+                        </button>
+                        <!-- DROPDOWN KE ARAH KIRI: Gunakan right-0 + rounded-tr-none -->
+                        <div id="alat-menu"
+                            class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
+                            <a href="alat alba.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">Alat
+                                Alba</a>
+                            <a href="alat bat.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">Alat
+                                Bat</a>
+                            <a href="alat tross.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">Alat
+                                Tross</a>
+                        </div>
+                    </li>
+
+                    <!-- MENU DROPDOWN DATA -->
+                    <li class="relative group" id="data-dropdown">
+                        <button id="data-btn" type="button"
+                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+                            DATA
+                        </button>
+                        <!-- DROPDOWN KE ARAH KIRI: Gunakan right-0 + rounded-tr-none -->
+                        <div id="data-menu"
+                            class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
+                            <a href="data alba.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">Data
+                                Alba</a>
+                            <a href="data bat.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">Data
+                                Bat</a>
+                            <a href="data tross.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">Data
+                                Tross</a>
+                        </div>
+                    </li>
+                </ul>
+
+                <button id="mobile-toggle-btn" class="md:hidden text-2xl p-2 transition-colors focus:outline-none">
+                    <i id="toggle-icon" class="fas fa-bars"></i>
+                </button>
+            </div>
+
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="relative w-full h-screen min-h-[600px] flex flex-col bg-gray-900 overflow-hidden pt-20">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="IMG_0895.jpg" alt="Water and Equipment Background" class="w-full h-full object-cover opacity-70">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/60"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 flex-grow flex flex-col justify-center items-center text-center px-6 mt-[-40px]">
+            <h1
+                class="font-tech text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-[0.15em] drop-shadow-lg mb-6">
+                ALBATROSS
+            </h1>
+
+            <p
+                class="text-white text-sm md:text-base lg:text-lg max-w-3xl leading-relaxed drop-shadow-md mb-10 font-medium px-4">
+                Memantau perairan dan ekosistem mangrove dari sedimentasi secara akurat untuk mendukung keberlangsungan
+                masyarakat dan biota yang hidup sekitarnya.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-5">
+                <a href="data.html"
+                    class="glass-btn text-white px-8 py-3 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 font-semibold tracking-wide w-48">
+                    <i class="fas fa-qrcode text-lg"></i>
+                    Data
+                </a>
+                <a href="alat.html"
+                    class="glass-btn text-white px-8 py-3 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 font-semibold tracking-wide w-48">
+                    <i class="fas fa-tools text-lg"></i>
+                    Alat
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="w-full bg-white py-20 px-6 lg:px-12">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+            <!-- Left Column: Image -->
+            <div class="w-full relative group">
+                <div
+                    class="absolute -inset-2 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-3xl blur-lg opacity-70 group-hover:opacity-100 transition duration-500">
+                </div>
+
+                <img src="Foto di Aquatic.jpg" alt="Tim Albatross di Aquatic Center"
+                    class="relative w-full h-auto aspect-[4/3] object-cover rounded-2xl shadow-xl z-10 transition-transform duration-500 group-hover:scale-[1.02]">
+            </div>
+
+            <!-- Right Column: Info Card -->
+            <div class="w-full relative mt-8 lg:mt-0">
+                <div class="relative bg-[#1a7f9f] rounded-2xl p-8 pt-20 md:p-20 md:pt-30 shadow-2xl mt-0">
+                    <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-4/5 sm:w-auto">
+                        <div
+                            class="bg-white px-10 py-6 rounded-t-xl rounded-b-md shadow-lg border-b-4 border-[#1a7f9f] flex justify-center items-center">
+                            <h2
+                                class="font-tech text-xl md:text-3xl font-bold text-[#445b73] tracking-wide text-center whitespace-nowrap pt-3">
+                                Apa itu Albatross?
+                            </h2>
+                        </div>
+                    </div>
+
+                    <p class="text-white/95 text-base md:text-lg leading-relaxed text-justify mt-7 font-light">
+                        Sistem pemantauan yang mengintegrasikan pengukuran kondisi perairan dan pengamatan ekosistem
+                        mangrove melalui tiga subsistem, yaitu
+                        <strong class="font-semibold text-white">ALBA</strong> <i class="text-white/80">(Autonomous
+                            Littoral Bathymetric and Aquatic)</i>,
+                        <strong class="font-semibold text-white">BAT</strong> <i class="text-white/80">(Buoy-based
+                            Aquatic Tracking)</i>, dan
+                        <strong class="font-semibold text-white">TROSS</strong> <i class="text-white/80">(Trap-based
+                            Recognition and Observation Surveillance System)</i>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript Toggle & Scroll Navbar -->
+    <script>
+        const mobileToggleBtn = document.getElementById('mobile-toggle-btn');
+        const navLinks = document.getElementById('nav-links');
+        const toggleIcon = document.getElementById('toggle-icon');
+
+        mobileToggleBtn.addEventListener('click', function () {
+            navLinks.classList.toggle('hidden');
+            navLinks.classList.toggle('flex');
+
+            if (navLinks.classList.contains('flex')) {
+                toggleIcon.classList.remove('fa-bars');
+                toggleIcon.classList.add('fa-xmark');
+            } else {
+                toggleIcon.classList.remove('fa-xmark');
+                toggleIcon.classList.add('fa-bars');
+            }
+        });
+
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('navbar');
+            const navItems = document.querySelectorAll('.nav-item');
+            const mobileBtn = document.getElementById('mobile-toggle-btn');
+
+            if (window.scrollY > 50) {
+                navbar.classList.remove('bg-transparent', 'text-white');
+                navbar.classList.add('bg-white', 'shadow-md', 'py-3');
+
+                navItems.forEach(link => {
+                    link.classList.add('text-[#118AB2]');
+                });
+
+                mobileBtn.classList.add('text-gray-800');
+
+            } else {
+                navbar.classList.add('bg-transparent', 'text-white');
+                navbar.classList.remove('bg-white', 'shadow-md', 'py-3');
+
+                navItems.forEach(link => {
+                    link.classList.remove('text-[#118AB2]');
+                });
+
+                mobileBtn.classList.remove('text-gray-800');
+            }
+        });
+    </script>
+
+    <!-- Peta Lokasi Monitoring -->
+    <section id="data-map" class="w-full bg-white py-16 px-6 lg:px-12">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="font-tech text-2xl md:text-3xl font-bold text-[#464B71] text-center mb-10">
+                Peta Lokasi Monitoring
+            </h2>
+
+            <div class="w-full h-[450px] md:h-[600px] rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+                <iframe
+                    src="https://www.google.com/maps/d/embed?mid=1VZPmoYAKLJNFjlaemzn78e-kN0fwwlk&ehbc=2E312F&noprof=1"
+                    width="100%" height="100%" style="border:0;" loading="lazy" allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <div>
+        <h2 class="font-tech text-xl md:text-3xl font-bold flex justify-center items-center h-2 text-[#464B71]">
+            Kata Mereka:
+        </h2>
+        <p
+            class="text-[#118AB2] text-base md:text-lg leading-relaxed text-center mt-7 font-light max-w-2xl mx-auto text-justify">
+            “Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem
+            placerat. In id cursus mi pretium tellus duis convallis.”<strong class="font-semibold text-[#118AB2]"> -
+                Perlman </strong>
+        </p>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <div class="slider">
+            <div class="slide-track">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-6 items-center">
+                    <div class="slide">
+                        <div
+                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
+                            <img src="IMG_1502.jpg" alt="Exhibition 1"
+                                class="w-full aspect-[16/9] object-cover rounded-xl">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div
+                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
+                            <img src="IMG_1706.jpg" alt="Exhibition 2"
+                                class="w-full aspect-[16/9] object-cover rounded-xl">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div
+                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
+                            <img src="IMG_1502.jpg" alt="Exhibition 3"
+                                class="w-full aspect-[16/9] object-cover rounded-xl">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div
+                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
+                            <img src="IMG_1502.jpg" alt="Exhibition 4"
+                                class="w-full aspect-[16/9] object-cover rounded-xl">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div
+                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
+                            <img src="IMG_1502.jpg" alt="Exhibition 5"
+                                class="w-full aspect-[16/9] object-cover rounded-xl">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-6 items-center">
+                    <div class="slide">
+                        <div
+                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
+                            <img src="IMG_1502.jpg" alt="Exhibition 1"
+                                class="w-full aspect-[16/9] object-cover rounded-xl">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div
+                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
+                            <img src="IMG_1706.jpg" alt="Exhibition 2"
+                                class="w-full aspect-[16/9] object-cover rounded-xl">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div
+                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
+                            <img src="IMG_1502.jpg" alt="Exhibition 3"
+                                class="w-full aspect-[16/9] object-cover rounded-xl">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div
+                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
+                            <img src="IMG_1502.jpg" alt="Exhibition 4"
+                                class="w-full aspect-[16/9] object-cover rounded-xl">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div
+                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
+                            <img src="IMG_1502.jpg" alt="Exhibition 5"
+                                class="w-full aspect-[16/9] object-cover rounded-xl">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h2 class="font-tech text-xl md:text-3xl font-bold flex justify-center items-center h-40 text-[#464B71]">
+                DIDUKUNG OLEH:
+            </h2>
+
+            <div class="max-w-6xl mx-auto px-4 py-8">
+                <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-4 md:gap-6 justify-items-center">
+                    <!-- Sponsor Logos -->
+                    <div
+                        class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg flex items-center justify-center p-2 shadow-sm hover:shadow-md transition-all">
+                        <img src="Logo Pertamina.png" alt="Pertamina" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <div
+                        class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg flex items-center justify-center p-2 shadow-sm hover:shadow-md transition-all">
+                        <img src="Logo PLN.png" alt="PLN" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <div
+                        class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg flex items-center justify-center p-2 shadow-sm hover:shadow-md transition-all">
+                        <img src="Logo klhk.png" alt="klhk" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <div
+                        class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg flex items-center justify-center p-2 shadow-sm hover:shadow-md transition-all">
+                        <img src="Logo kkp.png" alt="kkp" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <div
+                        class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg flex items-center justify-center p-2 shadow-sm hover:shadow-md transition-all">
+                        <img src="Logo Le_Minerale.png" alt="Le_Minerale" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <div
+                        class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg flex items-center justify-center p-2 shadow-sm hover:shadow-md transition-all">
+                        <img src="Logo BRIN.png" alt="BRIN" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <div
+                        class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg flex items-center justify-center p-2 shadow-sm hover:shadow-md transition-all">
+                        <img src="Logo CNT.jpe" alt="CNT" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <div
+                        class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg flex items-center justify-center p-2 shadow-sm hover:shadow-md transition-all">
+                        <img src="Logo TOMORO.png" alt="TOMORO" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <div
+                        class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg flex items-center justify-center p-2 shadow-sm hover:shadow-md transition-all">
+                        <img src="Logo dragonship.png" alt="dragonship" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <div
+                        class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg flex items-center justify-center p-2 shadow-sm hover:shadow-md transition-all">
+                        <img src="Logo GOJEK.png" alt="GOJEK" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <div
+                        class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg flex items-center justify-center p-2 shadow-sm hover:shadow-md transition-all">
+                        <img src="Logo INTEN.png" alt="INTEN" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <div
+                        class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg flex items-center justify-center p-2 shadow-sm hover:shadow-md transition-all">
+                        <img src="Logo BCA.png" alt="BCA" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <div
+                        class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg flex items-center justify-center p-2 shadow-sm hover:shadow-md transition-all">
+                        <img src="Logo BSI.png" alt="BSI" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <div
+                        class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg flex items-center justify-center p-2 shadow-sm hover:shadow-md transition-all">
+                        <img src="Logo KAI.png" alt="KAI" class="max-w-full max-h-full object-contain">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="w-full pt-10 pb-0">
+        <div
+            class="w-full max-w-6xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden border border-gray-200 flex flex-col">
+
+            <!-- ============================================== -->
+            <!-- SECTION 1: COMMENTS (DIPERBARUI)               -->
+            <!-- ============================================== -->
+            <div class="bg-brand-bg px-6 py-8 relative">
+                <div class="flex justify-between items-center mb-8">
+                    <div class="flex items-baseline gap-3">
+                        <h2 class="text-2xl font-bold text-gray-800">Komentar</h2>
+                        <!-- ID ditambahkan di sini -->
+                        <span id="comment-count" class="text-sm text-gray-500 font-medium">0 balasan</span>
+                    </div>
+                    <!-- Tambahkan ID dan sesuaikan class warna default-nya -->
+                    <div class="flex text-sm font-medium shadow-sm rounded-full">
+                        <button id="btn-terbaru"
+                            class="bg-brand-blue text-white px-4 py-1.5 rounded-l-full transition">Terbaru</button>
+                        <button id="btn-teratas"
+                            class="bg-gray-200 text-gray-600 px-4 py-1.5 rounded-r-full hover:bg-gray-300 transition">Teratas</button>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 mb-8">
+                    <div
+                        class="w-12 h-12 bg-[#dfdfdf] rounded-full flex-shrink-0 flex items-center justify-center overflow-hidden border border-gray-300">
+                        <svg class="w-8 h-8 text-gray-500 mt-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                    </div>
+                    <div
+                        class="flex-grow flex items-center border-b border-gray-400 py-2 focus-within:border-brand-blue transition-colors group">
+                        <!-- ID ditambahkan pada input -->
+                        <input id="comment-input" type="text" placeholder="Tambahkan komentar..."
+                            class="w-full bg-transparent text-gray-700 focus:outline-none placeholder-gray-500">
+                        <!-- ID dan type button ditambahkan di sini -->
+                        <button id="submit-comment"
+                            class="text-gray-400 group-focus-within:text-brand-blue hover:text-blue-700 transition-colors ml-3 px-1">
+                            <i class="fa-regular fa-paper-plane text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Kontainer list komentar -->
+                <div id="comments-list" class="pb-16 flex flex-col gap-4 max-h-80 overflow-y-auto w-full px-2">
+                    <div id="empty-comment" class="flex justify-center items-center h-full">
+                        <p class="text-gray-400 text-sm italic">Belum ada komentar.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================== -->
+            <!-- SECTION 2: CONTACT US (DIPERBARUI)             -->
+            <!-- ============================================== -->
+            <div class="bg-brand-blue px-6 py-8 relative text-white">
+                <button
+                    class="absolute top-6 left-6 w-10 h-10 bg-[#cfd7e1] text-black rounded-full flex items-center justify-center hover:bg-gray-300 transition">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+
+                <div class="text-center mt-2 mb-8">
+                    <div
+                        class="inline-block bg-white text-brand-blue font-bold px-6 py-2 rounded-full mb-4 shadow-sm text-lg font-anta">
+                        Kontak Kami</div>
+                    <p class="text-sm md:text-base font-medium max-w-lg mx-auto leading-relaxed font-inter">
+                        Ingin tahu lebih banyak tentang alat yang telah kami kembangkan?<br>
+                        Silakan tinggalkan pesan melalui form di bawah ini.
+                    </p>
+                </div>
+
+                <!-- Form diperbarui dengan Formspree action & atribut name -->
+                <!-- GANTI "KODE_FORMSPREE_ANDA" DENGAN ID MILIKMU! -->
+                <form action="https://formspree.io/f/xwlpjjvv" method="POST"
+                    class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 max-w-3xl mx-auto">
+                    <div class="flex flex-col gap-5">
+                        <div>
+                            <label class="block font-semibold mb-2 text-lg font-anta">Nama</label>
+                            <input type="text" name="nama" required placeholder="Masukkan nama Anda"
+                                class="w-full px-4 py-3 rounded-md text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-2 text-lg font-anta">Email</label>
+                            <input type="email" name="email" required placeholder="Masukkan email Anda"
+                                class="w-full px-4 py-3 rounded-md text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <label class="block font-semibold mb-2 text-lg font-anta">Pesan</label>
+                        <div class="relative flex-grow">
+                            <textarea name="pesan" required placeholder="Ketik pesan Anda"
+                                class="w-full h-full min-h-[140px] px-4 py-3 pb-12 rounded-md text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300 resize-none"></textarea>
+                            <!-- Diubah dari type="button" menjadi type="submit" -->
+                            <button type="submit"
+                                class="absolute bottom-3 right-4 text-brand-blue hover:text-blue-700 transition">
+                                <i class="fa-regular fa-paper-plane text-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="text-center text-sm font-medium leading-relaxed opacity-90 font-inter">
+                    Pertanyaan dan masukan dari Anda dapat membantu kami<br>
+                    untuk terus mengembangkan alat menjadi lebih baik.
+                </div>
+            </div>
+
+            <!-- SECTION 3: FOOTER INFO -->
+            <div class="bg-white px-4 py-4 border-t-2 border-brand-blue">
+                <div
+                    class="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 text-brand-blue text-sm font-medium">
+                    <a href="#" class="flex items-center gap-2 hover:text-blue-800 transition">
+                        <i class="fa-brands fa-instagram text-xl"></i><span>@mitr_ipb</span>
+                    </a>
+                    <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-2 hover:text-blue-800 transition">
+                        <i class="fa-regular fa-envelope text-xl"></i><span>mitr.ipb@gmail.com</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-2 hover:text-blue-800 transition">
+                        <i class="fa-brands fa-whatsapp text-xl"></i><span>085935000474 (Raras Adinda Wulandari)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SCRIPT BARU UNTUK FITUR KOMENTAR (UPDATE SORT) -->
+    <!-- ============================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const commentInput = document.getElementById('comment-input');
+            const submitCommentBtn = document.getElementById('submit-comment');
+            const commentsList = document.getElementById('comments-list');
+            const commentCount = document.getElementById('comment-count');
+
+            // Ambil tombol sorting
+            const btnTerbaru = document.getElementById('btn-terbaru');
+            const btnTeratas = document.getElementById('btn-teratas');
+
+            // Mengambil data komentar dari LocalStorage
+            let comments = JSON.parse(localStorage.getItem('albatross_comments')) || [];
+
+            // Status urutan saat ini (default: terbaru)
+            let currentSort = 'terbaru';
+
+            // Fungsi mengubah warna tombol saat diklik
+            function updateButtonStyles() {
+                if (currentSort === 'terbaru') {
+                    btnTerbaru.className = 'bg-brand-blue text-white px-4 py-1.5 rounded-l-full transition';
+                    btnTeratas.className = 'bg-gray-200 text-gray-600 px-4 py-1.5 rounded-r-full hover:bg-gray-300 transition';
+                } else {
+                    btnTeratas.className = 'bg-brand-blue text-white px-4 py-1.5 rounded-r-full transition';
+                    btnTerbaru.className = 'bg-gray-200 text-gray-600 px-4 py-1.5 rounded-l-full hover:bg-gray-300 transition';
+                }
+            }
+
+            // Fungsi untuk menampilkan komentar ke UI
+            function renderComments() {
+                if (comments.length === 0) {
+                    commentsList.innerHTML = `<div id="empty-comment" class="flex justify-center items-center h-full py-8"><p class="text-gray-400 text-sm italic">Belum ada komentar.</p></div>`;
+                    commentCount.innerText = `0 balasan`;
+                    return;
+                }
+
+                commentsList.innerHTML = '';
+                commentCount.innerText = `${comments.length} balasan`;
+
+                // Proses Sorting (Pengurutan)
+                let sortedComments = [...comments]; // Buat copy array agar data asli tidak rusak
+                if (currentSort === 'terbaru') {
+                    // Urutkan dari timestamp terbesar (paling baru) ke terkecil
+                    sortedComments.sort((a, b) => b.timestamp - a.timestamp);
+                } else {
+                    // Teratas (karena tidak ada 'like', diurutkan dari timestamp terkecil / terlama)
+                    sortedComments.sort((a, b) => a.timestamp - b.timestamp);
+                }
+
+                // Looping komentar yang sudah diurutkan
+                sortedComments.forEach(comment => {
+                    const date = new Date(comment.timestamp).toLocaleDateString('id-ID', {
+                        day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                    });
+
+                    const html = `
+                        <div class="flex gap-4 w-full bg-white p-4 rounded-xl border border-gray-100 shadow-sm transition-all duration-300">
+                            <div class="w-10 h-10 bg-[#eef5f9] rounded-full flex-shrink-0 flex items-center justify-center border border-gray-200">
+                                <i class="fa-solid fa-user text-gray-400"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <div class="flex justify-between items-baseline mb-1">
+                                    <h4 class="font-bold text-gray-700 text-sm">Pengunjung Anonim</h4>
+                                    <span class="text-xs text-gray-400">${date}</span>
+                                </div>
+                                <p class="text-gray-600 text-sm leading-relaxed">${comment.text}</p>
+                            </div>
+                        </div>
+                    `;
+                    commentsList.insertAdjacentHTML('beforeend', html);
+                });
+            }
+
+            // Event Listener untuk Tombol Terbaru
+            btnTerbaru.addEventListener('click', () => {
+                currentSort = 'terbaru';
+                updateButtonStyles();
+                renderComments();
+            });
+
+            // Event Listener untuk Tombol Teratas
+            btnTeratas.addEventListener('click', () => {
+                currentSort = 'teratas';
+                updateButtonStyles();
+                renderComments();
+            });
+
+            // Aksi saat tombol kirim diklik
+            submitCommentBtn.addEventListener('click', () => {
+                const text = commentInput.value.trim();
+                if (text) {
+                    // Tambahkan komentar dengan timestamp saat ini
+                    comments.push({ text: text, timestamp: new Date().getTime() });
+                    // Simpan ke LocalStorage
+                    localStorage.setItem('albatross_comments', JSON.stringify(comments));
+
+                    commentInput.value = '';
+                    renderComments();
+                }
+            });
+
+            commentInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    submitCommentBtn.click();
+                }
+            });
+
+            // Eksekusi tampilan awal
+            updateButtonStyles();
+            renderComments();
+        });
+
+        // --- DROPDOWN MENUS ---
+        const alatBtn = document.getElementById('alat-btn');
+        const alatMenu = document.getElementById('alat-menu');
+        const alatDropdown = document.getElementById('alat-dropdown');
+
+        const dataBtn = document.getElementById('data-btn');
+        const dataMenu = document.getElementById('data-menu');
+        const dataDropdown = document.getElementById('data-dropdown');
+
+        // Klik tombol ALAT
+        alatBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            dataMenu.classList.remove('!block');
+            dataBtn.classList.remove('bg-[#118AB2]');
+
+            alatMenu.classList.toggle('!block');
+            alatBtn.classList.toggle('bg-[#118AB2]');
+            alatBtn.classList.toggle('text-white');
+        });
+
+        // Klik tombol DATA
+        dataBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            alatMenu.classList.remove('!block');
+            alatBtn.classList.remove('bg-[#118AB2]');
+
+            dataMenu.classList.toggle('!block');
+            dataBtn.classList.toggle('bg-[#118AB2]');
+            dataBtn.classList.toggle('text-white');
+        });
+
+        // Menutup dropdown jika mengklik area lain di luar menu
+        document.addEventListener('click', function (e) {
+            if (!alatDropdown.contains(e.target)) {
+                alatMenu.classList.remove('!block');
+                alatBtn.classList.remove('bg-[#118AB2]');
+            }
+            if (!dataDropdown.contains(e.target)) {
+                dataMenu.classList.remove('!block');
+                dataBtn.classList.remove('bg-[#118AB2]');
+            }
+        });
+    </script>
+</body>
+
+</html>

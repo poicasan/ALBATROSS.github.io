@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data - Albatross</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anta&family=Inter:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        anta: ['Anta', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .font-tech {
+            font-family: 'Anta', sans-serif;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-gray-800 font-inter">
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 p-4 lg:px-12 transition-all duration-300 bg-white shadow-md">
+        <div class="max-w-7xl mx-auto flex justify-between items-center relative">
+
+            <!-- Logo ALBATROSS -->
+            <a href="index.html" class="flex items-center transition-transform hover:scale-105">
+                <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="h-12 w-auto object-contain">
+            </a>
+
+            <!-- Menu Navigasi -->
+            <div class="flex items-center space-x-3">
+                <ul id="nav-links"
+                    class="hidden md:flex items-center space-x-2 sm:space-x-3 text-xs sm:text-sm font-semibold tracking-wider sm:tracking-widest uppercase transition-all duration-300 overflow-x-auto no-scrollbar py-1">
+
+                    <li>
+                        <a href="index.html"
+                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4 text-[#118AB2]">
+                            BERANDA
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="tentang kami.html"
+                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4 text-[#118AB2]">
+                            TENTANG KAMI
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="alat.html"
+                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4 text-[#118AB2]">
+                            ALAT
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="data.html"
+                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4 text-[#118AB2]">
+                            DATA
+                        </a>
+                    </li>
+
+                </ul>
+
+                <!-- Tombol Menu Mobile -->
+                <button id="mobile-toggle-btn"
+                    class="md:hidden text-2xl p-2 text-gray-800 transition-colors focus:outline-none">
+                    <i id="toggle-icon" class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Konten Halaman DATA -->
+    <main class="min-h-screen flex flex-col items-center justify-center px-6 pt-28 pb-16">
+
+        <!-- Judul -->
+        <h1 class="font-tech text-3xl md:text-4xl font-bold text-[#464B71] text-center mb-12">
+            DATA ALBATROSS
+        </h1>
+
+
+        <!-- Grid 4 Kotak -->
+        <div class="w-full max-w-5xl grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-14">
+
+            <!-- Kotak Pemetaan -->
+            <div
+                class="bg-[#1a7f9f] rounded-2xl shadow-xl p-0 h-56 md:h-72 flex flex-col transition-transform duration-300 hover:scale-[1.02]">
+                <div
+                    class="bg-white w-fit mx-auto px-6 py-4 rounded-b-md shadow-lg border-b-4 border-[#1a7f9f] flex justify-center items-center">
+                    <h2 class="font-tech text-xl md:text-2xl font-bold text-[#445b73] text-center">
+                        <a href="#" class="hover:underline cursor-pointer">
+                            Pemetaan
+                        </a>
+                    </h2>
+                </div>
+            </div>
+
+            <!-- Kotak Data ALBA -->
+            <div
+                class="bg-[#1a7f9f] rounded-2xl shadow-xl p-0 h-56 md:h-72 flex flex-col transition-transform duration-300 hover:scale-[1.02]">
+                <div
+                    class="bg-white w-fit mx-auto px-6 py-4 rounded-b-md shadow-lg border-b-4 border-[#1a7f9f] flex justify-center items-center">
+                    <h2 class="font-tech text-xl md:text-2xl font-bold text-[#445b73] text-center">
+                        <a href="data alba.html" class="hover:underline cursor-pointer">
+                            Data ALBA
+                        </a>
+                    </h2>
+                </div>
+            </div>
+
+            <!-- Kotak Data BAT -->
+            <div
+                class="bg-[#1a7f9f] rounded-2xl shadow-xl p-0 h-56 md:h-72 flex flex-col transition-transform duration-300 hover:scale-[1.02]">
+                <div
+                    class="bg-white w-fit mx-auto px-6 py-4 rounded-b-md shadow-lg border-b-4 border-[#1a7f9f] flex justify-center items-center">
+                    <h2 class="font-tech text-xl md:text-2xl font-bold text-[#445b73] text-center">
+                        <a href="data bat.html" class="hover:underline cursor-pointer">
+                            Data BAT
+                        </a>
+                    </h2>
+                </div>
+            </div>
+
+            <!-- Kotak Data TROSS -->
+            <div
+                class="bg-[#1a7f9f] rounded-2xl shadow-xl p-0 h-56 md:h-72 flex flex-col transition-transform duration-300 hover:scale-[1.02]">
+                <div
+                    class="bg-white w-fit mx-auto px-6 py-4 rounded-b-md shadow-lg border-b-4 border-[#1a7f9f] flex justify-center items-center">
+                    <h2 class="font-tech text-xl md:text-2xl font-bold text-[#445b73] text-center">
+                        <a href="data tross.html" class="hover:underline cursor-pointer">
+                            Data TROSS
+                        </a>
+                    </h2>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- JavaScript Menu Mobile -->
+    <script>
+        const mobileToggleBtn = document.getElementById('mobile-toggle-btn');
+        const navLinks = document.getElementById('nav-links');
+        const toggleIcon = document.getElementById('toggle-icon');
+
+        mobileToggleBtn.addEventListener('click', function () {
+            navLinks.classList.toggle('hidden');
+            navLinks.classList.toggle('flex');
+
+            if (navLinks.classList.contains('flex')) {
+                toggleIcon.classList.remove('fa-bars');
+                toggleIcon.classList.add('fa-xmark');
+            } else {
+                toggleIcon.classList.remove('fa-xmark');
+                toggleIcon.classList.add('fa-bars');
+            }
+        });
+    </script>
+
+</body>
+
+</html>

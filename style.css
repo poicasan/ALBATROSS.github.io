@@ -1,0 +1,24 @@
+.image-container {
+  position: relative; /* Membuat acuan untuk posisi teks */
+  width: 100%;
+  max-width: 600px; /* Atur ukuran sesuai kebutuhan */
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.text-overlay {
+  position: absolute; /* Menempatkan teks di atas gambar */
+  top: 50%; /* Posisi vertikal di tengah */
+  left: 50%; /* Posisi horizontal di tengah */
+  transform: translate(-50%, -50%); /* Menyesuaikan titik tengah persis */
+  color: white; /* Warna teks */
+  font-size: 24px; /* Ukuran font */
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.5); /* Latar belakang transparan hitam agar terbaca */
+  padding: 10px 20px;
+  border-radius: 5px;
+}

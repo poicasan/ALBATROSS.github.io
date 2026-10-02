@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alat Alba - Monitoring Kampung Laut</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Poppins / Montserrat style -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cyan: '#008ba3',
+                            lightCyan: '#e6f7f9',
+                            darkText: '#2d3757',
+                            borderCyan: '#b2e3ea',
+                            tealBg: '#0883a4'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col justify-between text-gray-800">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+            <!-- Close Button / Icon -->
+            <button class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-300 transition duration-200 focus:outline-none" title="Tutup">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Navigation Links -->
+            <nav class="flex items-center space-x-6 sm:space-x-8 text-sm font-bold tracking-wider text-brand-cyan">
+                <a href="#Homepage.html" class="hover:text-brand-tealBg transition duration-150">BERANDA</a>
+                <a href="#" class="hover:text-brand-tealBg transition duration-150">TENTANG KAMI</a>
+                <a href="#" class="hover:text-brand-tealBg transition duration-150 border-b-2 border-brand-cyan pb-0.5">ALAT</a>
+                <a href="#" class="hover:text-brand-tealBg transition duration-150">DATA</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="bg-brand-tealBg text-white py-8 px-4 sm:px-6 lg:px-8 shadow-inner">
+        <div class="max-w-6xl mx-auto space-y-4">
+            <!-- Breadcrumbs -->
+            <nav class="flex items-center space-x-2 text-xs sm:text-sm text-cyan-100 font-medium">
+                <a href="index.html" class="hover:underline flex items-center gap-1">
+                    <i class="fa-solid fa-house text-xs"></i> Beranda
+                </a>
+                <span>&gt;</span>
+                <a href="#" class="hover:underline">Alat</a>
+                <span>&gt;</span>
+                <span class="text-white font-semibold">Alat Alba</span>
+            </nav>
+
+            <!-- Title with Network Icon -->
+            <div class="flex items-center space-x-3 pt-2">
+                <div class="text-3xl sm:text-4xl">
+                    <i class="fa-solid fa-diagram-project"></i>
+                </div>
+                <h1 class="text-3xl sm:text-4xl font-bold tracking-wide">Alat Alba</h1>
+            </div>
+
+            <!-- Description -->
+            <p class="text-sm sm:text-base text-cyan-50 max-w-3xl leading-relaxed font-normal">
+                Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data salinitas, kedalaman, kekeruhan, pH, oksigen terlarut (DO), dan suhu.
+            </p>
+
+            <!-- Action Button -->
+            <div class="pt-2">
+                <a href="#" class="inline-flex items-center space-x-2 bg-white text-brand-darkText font-semibold px-4 py-2 rounded-full text-xs sm:text-sm shadow hover:bg-gray-100 transition duration-200 border border-gray-200">
+                    <span class="w-5 h-5 rounded-full bg-brand-darkText text-white flex items-center justify-center text-[10px]">
+                        <i class="fa-solid fa-wrench"></i>
+                    </span>
+                    <span>Maintenance Alat</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow">
+        <!-- Section Heading -->
+        <h2 class="text-2xl sm:text-3xl font-bold text-center text-brand-darkText mb-6">
+            Alat Alba
+        </h2>
+
+        <!-- Main Image Card Container -->
+        <div class="bg-white p-3 sm:p-4 rounded-2xl border-2 border-brand-borderCyan shadow-sm mb-10 max-w-3xl mx-auto">
+            <div class="overflow-hidden rounded-xl bg-gray-100 aspect-[16/9] flex items-center justify-center">
+                <img src="Alba.jpe" 
+                     alt="Alat Alba" 
+                     class="w-full h-full object-cover transform hover:scale-105 transition duration-500"
+                     onerror="this.onerror=null; this.src='https://placehold.co/800x450/0883a4/ffffff?text=Alat+Alba+Boat';">
+            </div>
+        </div>
+
+        <!-- Components Grid (Elektro & Mekanik) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <!-- Komponen Elektro Box -->
+            <div class="flex flex-col items-center">
+                <h3 class="text-xl sm:text-2xl font-bold text-brand-darkText mb-4">
+                    Komponen Elektro
+                </h3>
+                <div class="w-full bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm min-h-[450px] p-6 hover:shadow-md transition duration-200 flex flex-col justify-start">
+                    <!-- Content for Elektro components can go here -->
+                    <div class="border-2 border-dashed border-gray-200 rounded-xl h-full min-h-[400px] flex items-center justify-center text-gray-400 p-4 text-center">
+                        <span class="text-sm">Area Modul/Komponen Elektro</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Komponen Mekanik Box -->
+            <div class="flex flex-col items-center">
+                <h3 class="text-xl sm:text-2xl font-bold text-brand-darkText mb-4">
+                    Komponen Mekanik
+                </h3>
+                <div class="w-full bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm min-h-[450px] p-6 hover:shadow-md transition duration-200 flex flex-col justify-start">
+                    <!-- Content for Mekanik components can go here -->
+                    <div class="border-2 border-dashed border-gray-200 rounded-xl h-full min-h-[400px] flex items-center justify-center text-gray-400 p-4 text-center">
+                        <span class="text-sm">Area Modul/Komponen Mekanik</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-brand-borderCyan py-4 mt-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-brand-cyan text-sm sm:text-base font-medium">
+                <!-- Instagram -->
+                <a href="https://instagram.com/mitr_ipb" target="_blank" class="flex items-center space-x-2 hover:opacity-80 transition">
+                    <i class="fa-solid fa-camera-retro text-lg"></i>
+                    <span>@mitr_ipb</span>
+                </a>
+
+                <!-- Email -->
+                <a href="mailto:mitr.ipb@gmail.com" class="flex items-center space-x-2 hover:opacity-80 transition">
+                    <i class="fa-regular fa-envelope text-lg"></i>
+                    <span>mitr.ipb@gmail.com</span>
+                </a>
+
+                <!-- Phone / Contact Person -->
+                <a href="tel:085935000474" class="flex items-center space-x-2 hover:opacity-80 transition">
+                    <i class="fa-solid fa-phone text-sm"></i>
+                    <span>085935000474 (Raras Adinda Wulandari)</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

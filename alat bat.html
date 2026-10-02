@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alat Bat - Monitoring Kampung Laut</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Quicksand for clean rounded aesthetic matching screenshot -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cyan: '#0c8fae',
+                            lightCyan: '#e6f7f9',
+                            darkText: '#2e3859',
+                            borderCyan: '#bae6fd',
+                            tealBg: '#0982a3'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Quicksand', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-white min-h-screen flex flex-col justify-between text-gray-800 antialiased selection:bg-cyan-100">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+            <!-- Close Button / Icon -->
+            <button class="w-8 h-8 rounded-full bg-gray-200/80 flex items-center justify-center text-gray-700 hover:bg-gray-300 transition duration-200 focus:outline-none" title="Tutup">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Navigation Links -->
+            <nav class="flex items-center space-x-5 sm:space-x-8 text-xs sm:text-sm font-bold tracking-wider text-brand-cyan">
+                <a href="#" class="hover:text-brand-tealBg transition duration-150">BERANDA</a>
+                <a href="#" class="hover:text-brand-tealBg transition duration-150">TENTANG KAMI</a>
+                <a href="#" class="hover:text-brand-tealBg transition duration-150 border-b-2 border-brand-cyan pb-0.5">ALAT</a>
+                <a href="#" class="hover:text-brand-tealBg transition duration-150">DATA</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="bg-brand-tealBg text-white py-8 px-4 sm:px-6 lg:px-8 shadow-sm">
+        <div class="max-w-5xl mx-auto space-y-4">
+            <!-- Breadcrumbs -->
+            <nav class="flex items-center space-x-2 text-xs sm:text-sm text-cyan-100 font-semibold">
+                <a href="#" class="hover:underline flex items-center gap-1.5">
+                    <i class="fa-solid fa-house text-xs"></i> Beranda
+                </a>
+                <span>&gt;</span>
+                <a href="#" class="hover:underline">Alat</a>
+                <span>&gt;</span>
+                <span class="text-white font-bold" id="current-tool-breadcrumb">Alat Bat</span>
+            </nav>
+
+            <!-- Title with Network/Node Icon -->
+            <div class="flex items-center space-x-3 pt-1">
+                <div class="text-3xl sm:text-4xl">
+                    <i class="fa-solid fa-diagram-project"></i>
+                </div>
+                <h1 class="text-3xl sm:text-4xl font-bold tracking-tight" id="tool-banner-title">Alat Bat</h1>
+            </div>
+
+            <!-- Tool Switcher Tabs (Bonus Interactive Toggle for Alba/Bat) -->
+            <div class="flex space-x-2 pt-1">
+                <button onclick="switchTool('bat')" id="tab-bat" class="px-3 py-1 rounded-full text-xs font-bold transition bg-white text-brand-tealBg shadow">
+                    Alat Bat
+                </button>
+                <button onclick="switchTool('alba')" id="tab-alba" class="px-3 py-1 rounded-full text-xs font-bold transition bg-cyan-900/40 text-cyan-100 hover:bg-white/20">
+                    Alat Alba
+                </button>
+            </div>
+
+            <!-- Description -->
+            <p class="text-xs sm:text-sm text-cyan-50 max-w-2xl leading-relaxed font-medium" id="tool-description">
+                Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data arus dan GPS.
+            </p>
+
+            <!-- Maintenance Action Button -->
+            <div class="pt-2">
+                <button class="inline-flex items-center space-x-2.5 bg-white text-brand-darkText font-bold px-4 py-2 rounded-full text-xs shadow hover:bg-cyan-50 transition duration-200 border border-cyan-100">
+                    <span class="w-5 h-5 rounded-full bg-brand-darkText text-white flex items-center justify-center text-[10px]">
+                        <i class="fa-solid fa-wrench"></i>
+                    </span>
+                    <span>Maintenance Alat</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow">
+        <!-- Section Heading -->
+        <h2 class="text-2xl sm:text-3xl font-bold text-center text-brand-darkText mb-6" id="main-content-title">
+            Alat Bat
+        </h2>
+
+        <!-- Main Image Card Container -->
+        <div class="bg-white p-2.5 sm:p-3 rounded-2xl border-2 border-brand-borderCyan shadow-xs mb-10 max-w-2xl mx-auto">
+            <div class="overflow-hidden rounded-xl bg-slate-900 aspect-[16/10] flex items-center justify-center relative group">
+                <!-- Underwater Buoy Sensor Image for Alat Bat -->
+                <img id="main-tool-image"
+                     src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80" 
+                     alt="Alat Bat Underwater Buoy Sensor" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500 brightness-90 contrast-110"
+                     onerror="this.onerror=null; this.src='https://placehold.co/800x500/0c8fae/ffffff?text=Alat+Bat+Buoy+Sensor';">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-60"></div>
+            </div>
+        </div>
+
+        <!-- Components Grid (Elektro & Mekanik) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            <!-- Komponen Elektro Box -->
+            <div class="flex flex-col items-center">
+                <h3 class="text-xl sm:text-2xl font-bold text-brand-darkText mb-4">
+                    Komponen Elektro
+                </h3>
+                <div class="w-full bg-white rounded-2xl border-2 border-brand-borderCyan shadow-xs min-h-[480px] p-6 hover:shadow-sm transition duration-200">
+                    <!-- Area Komponen Elektro -->
+                </div>
+            </div>
+
+            <!-- Komponen Mekanik Box -->
+            <div class="flex flex-col items-center">
+                <h3 class="text-xl sm:text-2xl font-bold text-brand-darkText mb-4">
+                    Komponen Mekanik
+                </h3>
+                <div class="w-full bg-white rounded-2xl border-2 border-brand-borderCyan shadow-xs min-h-[480px] p-6 hover:shadow-sm transition duration-200">
+                    <!-- Area Komponen Mekanik -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-brand-borderCyan py-3.5 mt-10">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 text-brand-cyan text-xs sm:text-sm font-semibold">
+                <!-- Left Info: Instagram & Email -->
+                <div class="flex items-center space-x-6">
+                    <a href="https://instagram.com/mitr_ipb" target="_blank" class="flex items-center space-x-2 hover:opacity-80 transition">
+                        <i class="fa-solid fa-camera text-base"></i>
+                        <span>@mitr_ipb</span>
+                    </a>
+
+                    <a href="mailto:mitr.ipb@gmail.com" class="flex items-center space-x-2 hover:opacity-80 transition">
+                        <i class="fa-regular fa-envelope text-base"></i>
+                        <span>mitr.ipb@gmail.com</span>
+                    </a>
+                </div>
+
+                <!-- Right Info: Contact Person -->
+                <div>
+                    <a href="tel:085935000474" class="flex items-center space-x-2 hover:opacity-80 transition">
+                        <span>085935000474 (Raras Adinda Wulandari)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Interactive Switcher to toggle between Alat Bat and Alat Alba
+        const toolData = {
+            bat: {
+                title: "Alat Bat",
+                description: "Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data arus dan GPS.",
+                image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80"
+            },
+            alba: {
+                title: "Alat Alba",
+                description: "Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data salinitas, kedalaman, kekeruhan, pH, oksigen terlarut (DO), dan suhu.",
+                image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1200&q=80"
+            }
+        };
+
+        function switchTool(toolKey) {
+            const data = toolData[toolKey];
+            if (!data) return;
+
+            document.getElementById('current-tool-breadcrumb').innerText = data.title;
+            document.getElementById('tool-banner-title').innerText = data.title;
+            document.getElementById('main-content-title').innerText = data.title;
+            document.getElementById('tool-description').innerText = data.description;
+            document.getElementById('main-tool-image').src = data.image;
+
+            const batTab = document.getElementById('tab-bat');
+            const albaTab = document.getElementById('tab-alba');
+
+            if (toolKey === 'bat') {
+                batTab.className = "px-3 py-1 rounded-full text-xs font-bold transition bg-white text-brand-tealBg shadow";
+                albaTab.className = "px-3 py-1 rounded-full text-xs font-bold transition bg-cyan-900/40 text-cyan-100 hover:bg-white/20";
+            } else {
+                albaTab.className = "px-3 py-1 rounded-full text-xs font-bold transition bg-white text-brand-tealBg shadow";
+                batTab.className = "px-3 py-1 rounded-full text-xs font-bold transition bg-cyan-900/40 text-cyan-100 hover:bg-white/20";
+            }
+        }
+    </script>
+</body>
+</html>
