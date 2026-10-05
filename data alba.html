@@ -1,668 +1,884 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monitoring Alat & Data Kampung Laut</title>
+    <title>Data - Albatross</title>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Google Fonts: Quicksand & Outfit -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anta&family=Inter:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
-        tailwind.config = {
+       tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         brand: {
-                            cyan: '#0284C7',
-                            darkCyan: '#0369A1',
-                            teal: '#0891B2',
-                            border: '#BAE6FD',
-                            bgSoft: '#F0F9FF',
-                            navy: '#1E293B',
-                            purpleText: '#2E1065',
-                            accent: '#22D3EE'
+                            cyan: '#008ba3',
+                            lightCyan: '#e6f7f9',
+                            darkText: '#2d3757',
+                            borderCyan: '#b2e3ea',
+                            tealBg: '#0883a4'
                         }
                     },
                     fontFamily: {
-                        sans: ['Quicksand', 'sans-serif'],
-                        heading: ['Outfit', 'sans-serif']
+                        anta: ['Anta', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
+
+    <style>
+         body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-tech {
+            font-family: 'Anta', sans-serif;
+        }
+    </style>
 </head>
-<body class="bg-slate-50 min-h-screen text-slate-800 font-sans flex flex-col justify-between antialiased">
 
-    <div>
-        <!-- Top Navbar Header -->
-        <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-                <!-- Close / Home Button -->
-                <button onclick="switchTab('alba')" class="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition text-slate-700 font-bold border border-slate-300">
-                    <i class="fa-solid fa-xmark text-lg"></i>
+<body class="bg-white text-gray-800 font-inter">
+
+    <!-- Navbar -->
+    <nav id="navbar"
+        class="fixed top-0 left-0 w-full z-50 p-4 lg:px-12 transition-all duration-300 bg-white shadow-md text-[#118AB2]">
+        <div class="max-w-7xl mx-auto flex justify-between items-center relative">
+
+            <!-- Logo ALBATROSS -->
+            <a href="#" id="logo-btn" class="flex items-center transition-transform hover:scale-105">
+                <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="h-12 w-auto object-contain">
+            </a>
+
+            <!-- Container Kanan: Menu Navigasi + Tombol Mobile -->
+            <div class="flex items-center space-x-3">
+                <ul id="nav-links"
+                    class="hidden md:flex items-center space-x-2 sm:space-x-3 text-xs sm:text-sm font-semibold tracking-wider sm:tracking-widest uppercase transition-all duration-300 py-1 font-inter">
+                    <li>
+                        <a href="index.html"
+                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
+                            BERANDA
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tentang kami.html"
+                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
+                            TENTANG KAMI
+                        </a>
+                    </li>
+                    <!-- MENU DROPDOWN ALAT -->
+                    <li class="relative group" id="alat-dropdown">
+                        <button id="alat-btn" type="button"
+                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+                            ALAT
+                        </button>
+                        <div id="alat-menu"
+                            class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
+                            <a href="alat alba.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">Alat
+                                Alba</a>
+                            <a href="alat bat.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">Alat
+                                Bat</a>
+                            <a href="alat tross.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">Alat
+                                Tross</a>
+                        </div>
+                    </li>
+
+                    <!-- MENU DROPDOWN DATA -->
+                    <li class="relative group" id="data-dropdown">
+                        <button id="data-btn" type="button"
+                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+                            DATA
+                        </button>
+                        <div id="data-menu"
+                            class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
+                            <a href="data alba.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">Data
+                                Alba</a>
+                            <a href="data bat.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">Data
+                                Bat</a>
+                            <a href="data tross.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">Data
+                                Tross</a>
+                        </div>
+                    </li>
+                </ul>
+
+                <button id="mobile-toggle-btn" class="md:hidden text-2xl p-2 transition-colors focus:outline-none">
+                    <i id="toggle-icon" class="fas fa-bars"></i>
                 </button>
-
-                <!-- Navigation Links -->
-                <nav class="flex items-center space-x-4 sm:space-x-8 text-xs sm:text-sm font-bold tracking-wider uppercase">
-                    <button onclick="switchTab('alba')" class="text-cyan-600 hover:text-cyan-800 transition">BERANDA</button>
-                    <button onclick="showToast('Halaman Tentang Kami')" class="text-cyan-600 hover:text-cyan-800 transition">TENTANG KAMI</button>
-                    <button onclick="switchTab('alba')" class="text-cyan-600 hover:text-cyan-800 transition">ALAT</button>
-                    <button onclick="switchTab('data-alba')" class="text-cyan-600 hover:text-cyan-800 transition">DATA</button>
-                </nav>
             </div>
-        </header>
+        </div>
+    </nav>
 
-        <!-- Main Banner Header -->
-        <section class="bg-gradient-to-r from-cyan-600 to-sky-700 text-white py-8 px-4 sm:px-8 shadow-inner relative overflow-hidden">
-            <div class="max-w-6xl mx-auto relative z-10">
-                <!-- Breadcrumbs -->
-                <div class="flex items-center space-x-2 text-xs sm:text-sm text-cyan-100 mb-3 font-semibold">
-                    <button onclick="switchTab('alba')" class="hover:underline flex items-center gap-1">
-                        <i class="fa-solid fa-house text-xs"></i> Beranda
-                    </button>
-                    <span>&gt;</span>
-                    <span id="breadcrumb-category">Alat</span>
-                    <span>&gt;</span>
-                    <span id="breadcrumb-current" class="text-white font-bold">Alat Alba</span>
+   <!-- Hero Section -->
+    <section class="bg-brand-tealBg text-white py-28 px-8 sm:px-6 lg:px-8 shadow-inner" style="height: 350px;">
+        <div class="max-w-6xl mx-auto space-y-1">
+
+            <!-- Breadcrumbs -->
+            <nav class="flex items-center space-x-2 text-xs sm:text-sm text-cyan-100 font-medium font-inter">
+                <a href="index.html" class="hover:underline flex items-center gap-1">
+                    <i class="fa-solid fa-house text-xs"></i> Beranda
+                </a>
+                <span>&gt;</span>
+                <a href="alat.html" class="hover:underline">Data</a>
+                <span>&gt;</span>
+                <span class="text-white font-semibold">Data Alba</span>
+            </nav>
+
+            <!-- Title & Icon -->
+            <div class="flex items-center space-x-4 pt-4">
+                <!-- Custom SVG Icon -->
+                <div class="text-white flex-shrink-0">
+                   <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Teks Biner (Dibuat rata tengah dengan text-anchor) -->
+                        <text x="32" y="24" fill="white" font-family="'Anta', sans-serif" font-size="20" font-weight="bold" letter-spacing="2" text-anchor="middle">110</text>
+                        <text x="32" y="44" fill="white" font-family="'Anta', sans-serif" font-size="20" font-weight="bold" letter-spacing="2" text-anchor="middle">101</text>
+                        
+                        <!-- Garis Frame Alat -->
+                        <path d="M 12 36 H 8 V 48" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                        <path d="M 8 52 V 56 Q 8 60 12 60 H 52 Q 56 60 56 56 V 44 H 52" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                        
+                        <!-- Titik Indikator -->
+                        <rect x="14" y="52" width="4" height="4" fill="white" rx="1" />
+                    </svg>
                 </div>
+                <h1 class="text-3xl sm:text-4xl font-bold tracking-wide font-anta">
+                    Data Alat Alba
+                </h1>
+            </div>
 
-                <!-- Page Header Title & Info -->
-                <div class="flex items-start gap-4 mb-4">
-                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/10 backdrop-blur border border-white/20 flex items-center justify-center text-cyan-200 text-2xl sm:text-3xl shrink-0">
-                        <i id="hero-icon" class="fa-solid fa-diagram-project"></i>
+            <!-- Description -->
+            <p class="text-sm sm:text-base text-cyan-50 max-w-3xl leading-relaxed font-normal font-inter">
+                Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data salinitas, kedalaman, kekeruhan, pH, oksigen terlarut (DO), dan suhu.
+            </p>
+
+            <!-- Action Badges / Status Pill -->
+            <div class="pt-4">
+                <div class="inline-flex items-center bg-white rounded-full py-1.5 px-2 shadow-sm border-[1.5px] border-[#434b6e]">
+                    <!-- Status Kiri -->
+                    <div class="flex items-center space-x-2 px-3">
+                        <div class="w-4 h-4 rounded-full bg-gray-400"></div>
+                        <span class="font-bold text-[#434b6e] text-sm">Tidak online</span>
                     </div>
-                    <div>
-                        <h1 id="hero-title" class="text-3xl sm:text-4xl font-extrabold tracking-tight font-heading">
-                            Alat Alba
-                        </h1>
-                        <p id="hero-desc" class="text-cyan-100 text-xs sm:text-sm max-w-2xl mt-1 leading-relaxed">
-                            Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data salinitas, kedalaman, kekeruhan, pH, oksigen terlarut (DO), dan suhu.
-                        </p>
+                    <!-- Status Kanan -->
+                    <div class="flex items-center space-x-2 pr-4 pl-2">
+                        <div class="w-5 h-5 rounded-full bg-[#434b6e] flex items-center justify-center">
+                            <i class="fa-solid fa-chart-line text-white text-[10px]"></i>
+                        </div>
+                        <span class="font-bold text-[#434b6e] text-sm">Data non-real-time</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow">
+        <section class="mt-12 mb-20">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-brand-darkText font-inter mb-2">Parameter Monitoring Alat Alba</h2>
+                <p class="text-gray-500 font-inter text-sm sm:text-base">Grafik dan visualisasi pengukuran kualitas air secara sistematis</p><br>
+            </div>
+
+            <!-- Grid Container untuk 6 Data -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <!-- Card 1: Suhu Air -->
+                <div class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
+                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">Suhu Air</h3>
+                    
+                    <!-- Area Gambar/Grafik -->
+                    <div class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative">
+                        <canvas id="tampilgrafikSuhu"></canvas>
+                    </div>
+
+                    <!-- Footer Card -->
+                    <div class="flex justify-between items-center mt-auto">
+                        <span id="rataSuhu" class="text-gray-500 text-sm">Rata-rata: 0 °C</span>
+                    </div>
+                </div>
+                
+                <!-- Card 2: Data DO -->
+                 <div class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
+                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">Oksigen Terlarut (DO)</h3>
+                    
+                    <!-- Area Gambar/Grafik -->
+                    <div class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative">
+                        <canvas id="tampilgrafikDO"></canvas>
+                    </div>
+
+                    <!-- Footer Card -->
+                    <div class="flex justify-between items-center mt-auto">
+                        <span id="rataDO" class="text-gray-500 text-sm">Rata-rata: 0 mg/L</span>
                     </div>
                 </div>
 
-                <!-- Hero Action Buttons -->
-                <div id="hero-actions" class="flex flex-wrap items-center gap-3 mt-4">
-                    <button onclick="toggleMaintenance()" class="inline-flex items-center gap-2 bg-white text-slate-800 hover:bg-slate-100 font-bold text-xs sm:text-sm px-4 py-2 rounded-full shadow-md transition border border-slate-200">
-                        <span class="w-5 h-5 rounded-full bg-slate-200 text-slate-700 text-xs flex items-center justify-center font-bold">N</span>
-                        <span id="btn-maint-text">Maintenance Alat</span>
-                    </button>
+                <!-- Card 3: Data Kedalaman -->
+                <div class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
+                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">Data Kedalaman</h3>
+                    
+                    <!-- Area Gambar/Grafik -->
+                    <div class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative">
+                        <canvas id="tampilgrafikKedalaman"></canvas>
+                    </div>
+
+                    <!-- Footer Card -->
+                    <div class="flex justify-between items-center mt-auto">
+                        <span id="rataKedalaman" class="text-gray-500 text-sm">Rata-rata: 0 m</span>
+                    </div>
                 </div>
 
-                <!-- Device Selector Quick Switcher Tabs -->
-                <div class="mt-6 pt-4 border-t border-white/20 flex flex-wrap gap-2 text-xs font-semibold">
-                    <span class="text-cyan-100 self-center mr-2">Pilih Tampilan:</span>
-                    <button onclick="switchTab('alba')" id="btn-tab-alba" class="px-3 py-1.5 rounded-lg bg-white/20 hover:bg-white/30 text-white transition backdrop-blur border border-white/30">Alat Alba</button>
-                    <button onclick="switchTab('bat')" id="btn-tab-bat" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-cyan-100 transition">Alat Bat</button>
-                    <button onclick="switchTab('tross')" id="btn-tab-tross" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-cyan-100 transition">Alat Tross</button>
-                    <button onclick="switchTab('data-alba')" id="btn-tab-data-alba" class="px-3 py-1.5 rounded-lg bg-amber-400/30 hover:bg-amber-400/40 text-amber-100 transition font-bold border border-amber-300/40">Data Alba</button>
+                <!-- Card 4: Kekeruhan -->
+                <div class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
+                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">Kekeruhan</h3>
+                    
+                    <!-- Area Gambar/Grafik -->
+                    <div class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative">
+                       <canvas id="tampilgrafikKekeruhan"></canvas>
+                    </div>
+
+                    <!-- Footer Card -->
+                    <div class="flex justify-between items-center mt-auto">
+                        <span id="rataKekeruhan" class="text-gray-500 text-sm">Rata-rata: 0 NTU</span>
+                    </div>
+                </div>
+
+                <!-- Card 5: Data pH -->
+                <div class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
+                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">Data pH</h3>
+                    
+                    <!-- Area Gambar/Grafik -->
+                    <div class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative">
+                        <canvas id="tampilgrafikpH"></canvas>
+                    </div>
+
+                    <!-- Footer Card -->
+                    <div class="flex justify-between items-center mt-auto">
+                        <span id="ratapH" class="text-gray-500 text-sm">Rata-rata: 0</span>
+                    </div>
+                </div>
+
+                <!-- Card 6: Salinitas -->
+                <div class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
+                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">Salinitas Air</h3>
+                    
+                    <!-- Area Gambar/Grafik -->
+                    <div class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative">
+                       <canvas id="tampilgrafikSalinitas"></canvas>
+                    </div>
+
+                    <!-- Footer Card -->
+                    <div class="flex justify-between items-center mt-auto">
+                        <span id="rataSalinitas" class="text-gray-500 text-sm">Rata-rata: 0 ppt</span>
+                    </div>
                 </div>
             </div>
         </section>
-
-        <!-- Dynamic Content Body Container -->
-        <main class="max-w-6xl mx-auto px-4 sm:px-8 py-8">
-            
-            <!-- SECTION 1: ALAT VIEWS (ALBA, BAT, TROSS) -->
-            <div id="view-device" class="block space-y-10">
-                <!-- Device Title Header -->
-                <div class="text-center">
-                    <h2 id="device-title" class="text-2xl sm:text-3xl font-extrabold text-slate-800 font-heading">
-                        Alat Alba
-                    </h2>
-                </div>
-
-                <!-- Main Device Photo Frame Card -->
-                <div class="max-w-3xl mx-auto bg-white p-3 sm:p-4 rounded-2xl border-2 border-sky-200 shadow-md">
-                    <div class="relative aspect-video w-full overflow-hidden rounded-xl bg-slate-900 group">
-                        <img id="device-img" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80" alt="Alat" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
-                            <span id="device-badge" class="text-white text-xs font-semibold bg-cyan-600/80 px-3 py-1 rounded-full backdrop-blur">Unmanned Surface Vehicle (USV)</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Component Sections Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 pt-4">
-                    <!-- Electro Components Card -->
-                    <div class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-6 flex flex-col justify-between hover:shadow-md transition">
-                        <div>
-                            <h3 class="text-xl font-extrabold text-slate-800 mb-4 flex items-center gap-3 border-b border-sky-100 pb-3 font-heading">
-                                <i class="fa-solid fa-microchip text-cyan-600"></i>
-                                Komponen Elektro
-                            </h3>
-                            <div id="list-electro" class="space-y-3 min-h-[220px]">
-                                <!-- Dynamic List Inserted via JS -->
-                            </div>
-                        </div>
-                        <button onclick="showComponentDetail('Elektro')" class="mt-6 w-full py-2.5 bg-sky-50 hover:bg-sky-100 text-sky-700 font-bold text-xs rounded-xl border border-sky-200 transition">
-                            Lihat Detail Rangkaian Elektro
-                        </button>
-                    </div>
-
-                    <!-- Mechanic Components Card -->
-                    <div class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-6 flex flex-col justify-between hover:shadow-md transition">
-                        <div>
-                            <h3 class="text-xl font-extrabold text-slate-800 mb-4 flex items-center gap-3 border-b border-sky-100 pb-3 font-heading">
-                                <i class="fa-solid fa-gears text-cyan-600"></i>
-                                Komponen Mekanik
-                            </h3>
-                            <div id="list-mechanic" class="space-y-3 min-h-[220px]">
-                                <!-- Dynamic List Inserted via JS -->
-                            </div>
-                        </div>
-                        <button onclick="showComponentDetail('Mekanik')" class="mt-6 w-full py-2.5 bg-sky-50 hover:bg-sky-100 text-sky-700 font-bold text-xs rounded-xl border border-sky-200 transition">
-                            Lihat Spesiﬁkasi Mekanik
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- SECTION 2: DATA ALAT ALBA VIEW -->
-            <div id="view-data-alba" class="hidden space-y-8">
-                <div class="text-center mb-6">
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-800 font-heading">
-                        Parameter Monitoring Alat Alba
-                    </h2>
-                    <p class="text-slate-500 text-xs sm:text-sm mt-1">
-                        Grafik dan visualisasi pengukuran kualitas air secara sistematis
-                    </p>
-                </div>
-
-                <!-- 6 Parameter Cards Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-                    
-                    <!-- 1. Salinitas Air -->
-                    <div class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-5 hover:shadow-md transition flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold text-slate-800 text-center mb-4 font-heading">
-                                Salinitas Air
-                            </h3>
-                            <div class="bg-slate-50 rounded-xl p-3 border border-slate-100 flex items-center justify-center min-h-[260px]">
-                                <canvas id="chartSalinitas" class="max-h-[240px]"></canvas>
-                            </div>
-                        </div>
-                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                            <span>Rata-rata: <strong>28.4 PSU</strong></span>
-                            <button onclick="openChartModal('Salinitas Air')" class="text-cyan-600 font-bold hover:underline">Detail & Interactive &rarr;</button>
-                        </div>
-                    </div>
-
-                    <!-- 2. Data Kedalaman -->
-                    <div class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-5 hover:shadow-md transition flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold text-slate-800 text-center mb-4 font-heading">
-                                Data Kedalaman
-                            </h3>
-                            <div class="bg-slate-900 rounded-xl p-4 border border-slate-800 flex flex-col items-center justify-center min-h-[260px] text-white">
-                                <div class="w-full max-w-[280px] bg-slate-800 border-2 border-slate-700 rounded-lg p-3 text-center shadow-inner relative">
-                                    <div class="flex justify-between items-center text-[10px] text-cyan-400 font-mono mb-2">
-                                        <span>SAMYUNG ECHO SOUNDER</span>
-                                        <span>SES-1000</span>
-                                    </div>
-                                    <div class="grid grid-cols-2 gap-2 my-2 bg-black/60 p-2 rounded border border-slate-800">
-                                        <div class="border-r border-slate-800 pr-2">
-                                            <span class="text-[9px] text-slate-400 block">DEPTH (M)</span>
-                                            <span class="text-2xl font-black text-amber-400 font-mono">5.6</span>
-                                        </div>
-                                        <div class="pl-2">
-                                            <span class="text-[9px] text-slate-400 block">SONAR (M)</span>
-                                            <span class="text-2xl font-black text-emerald-400 font-mono">5.6</span>
-                                        </div>
-                                    </div>
-                                    <div class="h-20 bg-gradient-to-b from-blue-900 via-indigo-950 to-slate-950 rounded relative overflow-hidden flex items-end">
-                                        <div class="w-full h-1/2 bg-amber-800/40 border-t-2 border-amber-500"></div>
-                                        <span class="absolute inset-x-0 bottom-1 text-[8px] text-cyan-200/60 font-mono">ECHO PROFILE DISPLAY</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                            <span>Sensors: <strong>Acoustic Sonar</strong></span>
-                            <button onclick="showToast('Modul Kedalaman Aktif')" class="text-cyan-600 font-bold hover:underline">Detail & Interactive &rarr;</button>
-                        </div>
-                    </div>
-
-                    <!-- 3. Kekeruhan -->
-                    <div class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-5 hover:shadow-md transition flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold text-slate-800 text-center mb-4 font-heading">
-                                Kekeruhan
-                            </h3>
-                            <div class="bg-slate-50 rounded-xl p-3 border border-slate-100 flex items-center justify-center min-h-[260px]">
-                                <canvas id="chartKekeruhan" class="max-h-[240px]"></canvas>
-                            </div>
-                        </div>
-                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                            <span>Regresi: <strong>y = -0.0005x + 4.1026</strong></span>
-                            <button onclick="openChartModal('Kekeruhan (Turbidity)')" class="text-cyan-600 font-bold hover:underline">Detail & Interactive &rarr;</button>
-                        </div>
-                    </div>
-
-                    <!-- 4. Data pH -->
-                    <div class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-5 hover:shadow-md transition flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold text-slate-800 text-center mb-4 font-heading">
-                                Data pH
-                            </h3>
-                            <div class="bg-slate-50 rounded-xl p-3 border border-slate-100 flex items-center justify-center min-h-[260px]">
-                                <canvas id="chartPH" class="max-h-[240px]"></canvas>
-                            </div>
-                        </div>
-                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                            <span>Kisaran pH: <strong>6.8 - 7.2 (Normal)</strong></span>
-                            <button onclick="openChartModal('Data pH Air')" class="text-cyan-600 font-bold hover:underline">Detail & Interactive &rarr;</button>
-                        </div>
-                    </div>
-
-                    <!-- 5. Oksigen Terlarut -->
-                    <div class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-5 hover:shadow-md transition flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold text-slate-800 text-center mb-4 font-heading">
-                                Oksigen Terlarut
-                            </h3>
-                            <div class="bg-slate-50 rounded-xl p-3 border border-slate-100 flex items-center justify-center min-h-[260px]">
-                                <canvas id="chartDO" class="max-h-[240px]"></canvas>
-                            </div>
-                        </div>
-                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                            <span>Stasiun: <strong>CdA Station C5</strong></span>
-                            <button onclick="openChartModal('Oksigen Terlarut (DO)')" class="text-cyan-600 font-bold hover:underline">Detail & Interactive &rarr;</button>
-                        </div>
-                    </div>
-
-                    <!-- 6. Suhu Air -->
-                    <div class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-5 hover:shadow-md transition flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold text-slate-800 text-center mb-4 font-heading">
-                                Suhu Air
-                            </h3>
-                            <div class="bg-slate-50 rounded-xl p-3 border border-slate-100 flex items-center justify-center min-h-[260px]">
-                                <canvas id="chartSuhu" class="max-h-[240px]"></canvas>
-                            </div>
-                        </div>
-                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                            <span>Suhu Rata-rata: <strong>28.5°C</strong></span>
-                            <button onclick="openChartModal('Suhu Air')" class="text-cyan-600 font-bold hover:underline">Detail & Interactive &rarr;</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </main>
-    </div>
-
-    <!-- Footer Bar -->
-    <footer class="bg-white border-t border-sky-200 py-4 px-4 sm:px-8 mt-12">
-        <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-4 text-xs sm:text-sm text-cyan-600 font-medium">
-            <!-- Instagram -->
-            <a href="https://instagram.com" target="_blank" class="flex items-center gap-2 hover:text-cyan-800 transition">
-                <i class="fa-regular fa-square-minus text-base"></i>
-                <i class="fa-brands fa-instagram text-base"></i>
-                <span>@mitr_ipb</span>
-            </a>
-
-            <!-- Email -->
-            <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-2 hover:text-cyan-800 transition">
-                <i class="fa-regular fa-envelope text-base"></i>
-                <span>mitr.ipb@gmail.com</span>
-            </a>
-
-            <!-- Phone / Contact Person -->
-            <div class="text-cyan-700 font-semibold">
-                <span>085935000474 (Raras Adinda Wulandari)</span>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Toast Notification Overlay -->
-    <div id="toast" class="fixed bottom-6 right-6 bg-slate-900 text-white text-xs font-semibold px-4 py-3 rounded-xl shadow-xl transition transform translate-y-20 opacity-0 z-50 flex items-center gap-2 border border-slate-700">
-        <i class="fa-solid fa-circle-info text-cyan-400"></i>
-        <span id="toast-msg">Notifikasi</span>
-    </div>
-
-    <!-- Modal Dialog Interactive -->
-    <div id="modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-sky-100 space-y-4">
-            <div class="flex items-center justify-between border-b pb-3">
-                <h3 id="modal-title" class="text-lg font-bold text-slate-800 font-heading">Detail Informasi</h3>
-                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 text-lg">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div id="modal-body" class="text-xs sm:text-sm text-slate-600 space-y-2 leading-relaxed">
-                <!-- Content set via JS -->
-            </div>
-            <div class="flex justify-end pt-2">
-                <button onclick="closeModal()" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow">
-                    Tutup
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Application Script Logic -->
+    </main>
     <script>
-        // Data Store for Devices
-        const deviceData = {
-            alba: {
-                title: "Alat Alba",
-                breadcrumbCat: "Alat",
-                breadcrumbCurrent: "Alat Alba",
-                heroIcon: "fa-diagram-project",
-                heroDesc: "Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data salinitas, kedalaman, kekeruhan, pH, oksigen terlarut (DO), dan suhu.",
-                badge: "Unmanned Surface Vehicle (USV)",
-                img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80",
-                isMaintenance: true,
-                electro: [
-                    "Microcontroller ESP32 Mainboard",
-                    "Sensor Salinitas & Konduktivitas",
-                    "Sensor pH Digital Hydro-Probe",
-                    "Sensor Dissolved Oxygen (DO)",
-                    "Modul GPS & Telemetri LoRa 915MHz",
-                    "Sistem Daya Baterai LiFePO4 12V 20Ah"
-                ],
-                mechanic: [
-                    "Lambung Katamaran Fiber Glass Waterproof",
-                    "Dual Thruster Brushless Motor 12V",
-                    "Kemudi Servo Water-Resistant 25kg",
-                    "Mounting Bracket Sensor Stainless Steel 316",
-                    "Box Panel Komponen IP67 Waterproof",
-                    "Baling-baling Pelindung Anti-Gulma"
-                ]
+        // suhu
+        // 1. Buat data dummy statis sebagai pengganti database
+        const dataDummy = [
+            { Waktu: "2026-10-04 08:00:00", Suhu: 28.5 },
+            { Waktu: "2026-10-04 08:15:00", Suhu: 29.0 },
+            { Waktu: "2026-10-04 08:30:00", Suhu: 29.2 },
+            { Waktu: "2026-10-04 08:45:00", Suhu: 28.8 },
+            { Waktu: "2026-10-04 09:00:00", Suhu: 29.5 },
+            { Waktu: "2026-10-04 09:15:00", Suhu: 29.8 },
+            { Waktu: "2026-10-04 09:30:00", Suhu: 30.1 }
+        ];
+
+        // 2. Olah data dummy tersebut (tanpa perlu .then atau proses asinkronus)
+        // Memotong teks berdasarkan spasi, lalu mengambil bagian jamnya saja
+        // Mengambil jam dan menit saja (misal: "08:15:00" dipotong jadi "08:15")
+        const labelWaktu = dataDummy.map(item => {
+            let waktuFull = item.Waktu.split(' ')[1]; // "08:15:00"
+            return waktuFull.substring(0, 5); // Ambil 5 karakter pertama -> "08:15"
+        });
+
+        // Gunakan parseFloat agar nilai string dari dummy/database dipastikan menjadi angka desimal
+        const nilaiSuhu = dataDummy.map(item => parseFloat(item.Suhu)); 
+
+        // 3. Hitung rata-rata
+        const totalSuhu = nilaiSuhu.reduce((total, angka) => total + angka, 0);
+        const rataRataSuhu = (totalSuhu / nilaiSuhu.length).toFixed(1);
+        document.getElementById('rataSuhu').innerText = 'Rata-rata: ' + rataRataSuhu + ' °C';
+
+        // 4. Render Grafik
+        const ctx = document.getElementById('tampilgrafikSuhu').getContext('2d');
+
+        // Membuat efek gradasi warna
+        let gradient = ctx.createLinearGradient(0, 0, 0, 300);
+        gradient.addColorStop(0, 'rgba(17, 138, 178, 0.4)'); // Warna biru atas
+        gradient.addColorStop(1, 'rgba(17, 138, 178, 0.0)'); // Transparan bawah
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labelWaktu,
+                datasets: [{
+                    label: 'Suhu Air',
+                    data: nilaiSuhu,
+                    backgroundColor: gradient, // Pakai efek gradasi
+                    borderColor: '#FF0000',    // Warna garis utama
+                    borderWidth: 3,            // Garis sedikit lebih tebal
+                    fill: true,                // Mengisi area di bawah garis
+                    tension: 0.4,              // BIKIN GARIS MELENGKUNG (MODERN)
+                    pointBackgroundColor: '#ffffff', // Titik warna putih
+                    pointBorderColor: '#FF0000',     // Pinggiran titik
+                    pointBorderWidth: 2,
+                    pointRadius: 1,            // Titik disembunyikan/kecil saat diam
+                    pointHoverRadius: 6        // Titik membesar saat di-hover mouse
+                }]
             },
-            bat: {
-                title: "Alat Bat",
-                breadcrumbCat: "Alat",
-                breadcrumbCurrent: "Alat Bat",
-                heroIcon: "fa-water",
-                heroDesc: "Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data arus dan GPS.",
-                badge: "Underwater Acoustic / Current Meter",
-                img: "https://images.unsplash.com/photo-1682687220063-4742bd7fd538?auto=format&fit=crop&w=1200&q=80",
-                isMaintenance: true,
-                electro: [
-                    "Sensor Arus Water Flow Meter Acoustic",
-                    "Modul GPS High Precision Neo-M8N",
-                    "Microcontroller STM32 Ultra-Low Power",
-                    "Transceiver Gelombang Radio Telemetri",
-                    "Baterai Cadangan Solar Powered 6V"
-                ],
-                mechanic: [
-                    "Pelampung Buoy Oranye/Biru High-Visibility",
-                    "Kabel Tambat Rantai Baja Tahan Karat",
-                    "Pemberat Jangkar Dasar Laut 15kg",
-                    "Chassis Pelindung Sensor Bawah Air",
-                    "Segel Waterproof O-Ring Double Layer"
-                ]
-            },
-            tross: {
-                title: "Alat Tross",
-                breadcrumbCat: "Alat",
-                breadcrumbCurrent: "Alat Tross",
-                heroIcon: "fa-camera",
-                heroDesc: "Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data arus dan GPS.",
-                badge: "Wild-Cam & Environmental Tracker",
-                img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
-                isMaintenance: true,
-                electro: [
-                    "Kamera Trail Motion Detector Infra Red",
-                    "Modul Transmitter Komunikasi NRF24L01",
-                    "Sensor Suhu & Kelembaban Udara DHT22",
-                    "Power Management System 18650 Solar",
-                    "SD Card Logger Data Storage 64GB"
-                ],
-                mechanic: [
-                    "Casing Pelindung Kamuflase Anti-Air IP66",
-                    "Rantai Pengikat Pohon Heavy-Duty Lock",
-                    "Engsel Bracket Adjustable Angle 360",
-                    "Kaca Kamera Anti-Embun & Goresan"
-                ]
-            }
-        };
-
-        let currentActiveTab = 'alba';
-
-        function switchTab(tabKey) {
-            currentActiveTab = tabKey;
-
-            const viewDevice = document.getElementById('view-device');
-            const viewDataAlba = document.getElementById('view-data-alba');
-            const heroActions = document.getElementById('hero-actions');
-
-            // Highlight Tab Buttons Style Reset
-            ['alba', 'bat', 'tross', 'data-alba'].forEach(k => {
-                const b = document.getElementById('btn-tab-' + k);
-                if (b) {
-                    if (k === tabKey) {
-                        b.className = "px-3 py-1.5 rounded-lg bg-white/30 text-white font-bold transition backdrop-blur border border-white/50 shadow-sm";
-                    } else {
-                        b.className = "px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-cyan-100 transition";
+            options: {
+                responsive: true,
+                maintainAspectRatio: false, // Penting agar grafik pas di dalam div 'h-64'
+                plugins: {
+                    legend: {
+                        display: false // Sembunyikan label legend di atas biar clean
+                    },
+                    tooltip: {
+                        backgroundColor: '#FF0000', // Warna background tooltip
+                        titleFont: { family: 'Inter', size: 12 },
+                        bodyFont: { family: 'Inter', size: 14, weight: 'bold' },
+                        padding: 12,
+                        displayColors: false, // Hilangkan kotak warna kecil di tooltip
+                        cornerRadius: 8,
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y + ' °C'; // Tambah teks °C di tooltip
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false, // Hilangkan garis vertikal background
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: { family: 'Inter', size: 11 },
+                            color: '#94a3b8' // Warna abu-abu elegan
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: '#e2e8f0', // Warna garis horizontal samar
+                            borderDash: [5, 5], // Bikin garis putus-putus
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: { family: 'Inter', size: 11 },
+                            color: '#94a3b8',
+                            padding: 10
+                        }
                     }
                 }
-            });
-
-            if (tabKey === 'data-alba') {
-                // Show Data Alba Page
-                viewDevice.classList.add('hidden');
-                viewDataAlba.classList.remove('hidden');
-
-                document.getElementById('breadcrumb-category').innerText = "Data";
-                document.getElementById('breadcrumb-current').innerText = "Data Alba";
-                document.getElementById('hero-title').innerText = "Data Alat Alba";
-                document.getElementById('hero-icon').className = "fa-solid fa-chart-line";
-                document.getElementById('hero-desc').innerText = "Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data salinitas, kedalaman, kekeruhan, pH, oksigen terlarut (DO), dan suhu.";
-
-                // Status Badges for Data Page
-                heroActions.innerHTML = `
-                    <span class="inline-flex items-center gap-1.5 bg-white/20 text-white font-semibold text-xs px-3 py-1.5 rounded-full border border-white/30 backdrop-blur">
-                        <span class="w-2.5 h-2.5 rounded-full bg-slate-300"></span> Tidak online
-                    </span>
-                    <span class="inline-flex items-center gap-1.5 bg-white/20 text-white font-semibold text-xs px-3 py-1.5 rounded-full border border-white/30 backdrop-blur">
-                        <span class="w-4 h-4 rounded-full bg-indigo-900/60 text-white text-[9px] flex items-center justify-center font-bold">N</span> Data non-real-time
-                    </span>
-                `;
-
-                // Render Charts if not created
-                setTimeout(initCharts, 100);
-
-            } else {
-                // Show Alat Pages (Alba, Bat, Tross)
-                viewDevice.classList.remove('hidden');
-                viewDataAlba.classList.add('hidden');
-
-                const data = deviceData[tabKey];
-                if (!data) return;
-
-                document.getElementById('breadcrumb-category').innerText = data.breadcrumbCat;
-                document.getElementById('breadcrumb-current').innerText = data.breadcrumbCurrent;
-                document.getElementById('hero-title').innerText = data.title;
-                document.getElementById('hero-icon').className = "fa-solid " + data.heroIcon;
-                document.getElementById('hero-desc').innerText = data.heroDesc;
-                document.getElementById('device-title').innerText = data.title;
-                document.getElementById('device-badge').innerText = data.badge;
-                document.getElementById('device-img').src = data.img;
-
-                // Maintenance Button Reset
-                heroActions.innerHTML = `
-                    <button onclick="toggleMaintenance()" class="inline-flex items-center gap-2 bg-white text-slate-800 hover:bg-slate-100 font-bold text-xs sm:text-sm px-4 py-2 rounded-full shadow-md transition border border-slate-200">
-                        <span class="w-5 h-5 rounded-full bg-slate-200 text-slate-700 text-xs flex items-center justify-center font-bold">N</span>
-                        <span id="btn-maint-text">Maintenance Alat</span>
-                    </button>
-                `;
-
-                // Render Component Lists
-                const listEl = document.getElementById('list-electro');
-                listEl.innerHTML = data.electro.map(item => `
-                    <div class="flex items-start gap-3 text-xs sm:text-sm text-slate-700 p-2.5 rounded-xl bg-slate-50 border border-slate-100 hover:bg-sky-50/50 transition">
-                        <i class="fa-solid fa-circle-check text-cyan-600 mt-0.5 text-xs"></i>
-                        <span>${item}</span>
-                    </div>
-                `).join('');
-
-                const listMech = document.getElementById('list-mechanic');
-                listMech.innerHTML = data.mechanic.map(item => `
-                    <div class="flex items-start gap-3 text-xs sm:text-sm text-slate-700 p-2.5 rounded-xl bg-slate-50 border border-slate-100 hover:bg-sky-50/50 transition">
-                        <i class="fa-solid fa-gear text-sky-600 mt-0.5 text-xs"></i>
-                        <span>${item}</span>
-                    </div>
-                `).join('');
             }
+        });
 
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+        // DO
+        const dataDummyDO = [
+            { Waktu: "2026-10-04 08:00:00", DO: 8 },
+            { Waktu: "2026-10-04 08:15:00", DO: 8.2 },
+            { Waktu: "2026-10-04 08:30:00", DO: 7.5 },
+            { Waktu: "2026-10-04 08:45:00", DO: 7.8 },
+            { Waktu: "2026-10-04 09:00:00", DO: 9.7 },
+            { Waktu: "2026-10-04 09:15:00", DO: 8.2 },
+            { Waktu: "2026-10-04 09:30:00", DO: 7.8 }
+        ];
 
-        function toggleMaintenance() {
-            showToast("Status Maintenance diperbarui untuk " + document.getElementById('hero-title').innerText);
-        }
+        const nilaiDO = dataDummyDO.map(item => parseFloat(item.DO)); 
 
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toast-msg').innerText = msg;
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 3000);
-        }
+        // 3. Hitung rata-rata
+        const totalDO = nilaiDO.reduce((total, angka) => total + angka, 0);
+        const rataRataDO = (totalDO / nilaiDO.length).toFixed(1);
+        document.getElementById('rataDO').innerText = 'Rata-rata: ' + rataRataDO + ' mg/L';
 
-        function showComponentDetail(type) {
-            const title = `${type} - ${document.getElementById('hero-title').innerText}`;
-            const modalTitle = document.getElementById('modal-title');
-            const modalBody = document.getElementById('modal-body');
+        // 4. Render Grafik
+        const ctxa = document.getElementById('tampilgrafikDO').getContext('2d');
 
-            modalTitle.innerText = title;
-            modalBody.innerHTML = `
-                <p>Berikut adalah spesifikasi mendalam untuk rincian sistem <strong>${type}</strong> pada perangkat ini:</p>
-                <ul class="list-disc pl-5 space-y-1 font-semibold text-slate-700 mt-2">
-                    <li>Tegangan Kerja: 12V DC / 5V Regulated</li>
-                    <li>Suhu Operasional: 10°C - 45°C</li>
-                    <li>Sertifikasi Ketahanan Air: IP67 Enclosure Standard</li>
-                    <li>Interval Logging: Every 15 Minutes</li>
-                </ul>
-                <p class="mt-3 text-xs text-slate-500">Diverifikasi oleh tim laboratorium IPB University & Kampung Laut Research Group.</p>
-            `;
-            document.getElementById('modal').classList.remove('hidden');
-        }
+        // Membuat efek gradasi warna
+        let gradienta = ctxa.createLinearGradient(0, 0, 0, 300);
+        gradienta.addColorStop(0, 'rgba(17, 138, 178, 0.4)'); // Warna biru atas
+        gradienta.addColorStop(1, 'rgba(17, 138, 178, 0.0)'); // Transparan bawah
 
-        function openChartModal(paramName) {
-            const modalTitle = document.getElementById('modal-title');
-            const modalBody = document.getElementById('modal-body');
-
-            modalTitle.innerText = "Data Detail: " + paramName;
-            modalBody.innerHTML = `
-                <p>Menampilkan riwayat data pengukuran untuk parameter <strong>${paramName}</strong> pada stasiun Kampung Laut.</p>
-                <div class="bg-slate-50 p-3 rounded-lg border my-3 space-y-1 font-mono text-xs text-slate-700">
-                    <p>• Sampling Rate: 1 Hz (Aggregated hourly)</p>
-                    <p>• Calibration Date: 01 April 2025</p>
-                    <p>• Status Sensor: Operational / Non-realtime</p>
-                </div>
-                <p class="text-xs text-slate-500">Anda dapat mengunduh berkas mentah (.csv) untuk analisis laboratorium lebih lanjut.</p>
-                <button onclick="showToast('Mengunduh dataset .CSV...')" class="mt-2 text-xs font-bold text-cyan-600 underline">Unduh Data CSV (2.4 MB)</button>
-            `;
-            document.getElementById('modal').classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('modal').classList.add('hidden');
-        }
-
-        // Initialize Charts with Chart.js
-        let chartsInitialized = false;
-        function initCharts() {
-            if (chartsInitialized) return;
-            chartsInitialized = true;
-
-            const commonOptions = {
+        new Chart(ctxa, {
+            type: 'line',
+            data: {
+                labels: labelWaktu,
+                datasets: [{
+                    label: 'Suhu Air',
+                    data: nilaiDO,
+                    backgroundColor: gradienta, // Pakai efek gradasi
+                    borderColor: '#008000',    // Warna garis utama
+                    borderWidth: 3,            // Garis sedikit lebih tebal
+                    fill: true,                // Mengisi area di bawah garis
+                    tension: 0.4,              // BIKIN GARIS MELENGKUNG (MODERN)
+                    pointBackgroundColor: '#ffffff', // Titik warna putih
+                    pointBorderColor: '#008000',     // Pinggiran titik
+                    pointBorderWidth: 2,
+                    pointRadius: 1,            // Titik disembunyikan/kecil saat diam
+                    pointHoverRadius: 6        // Titik membesar saat di-hover mouse
+                }]
+            },
+            options: {
                 responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { labels: { font: { family: 'Quicksand', size: 10 } } } },
+                maintainAspectRatio: false, // Penting agar grafik pas di dalam div 'h-64'
+                plugins: {
+                    legend: {
+                        display: false // Sembunyikan label legend di atas biar clean
+                    },
+                    tooltip: {
+                        backgroundColor: '#008000', // Warna background tooltip
+                        titleFont: { family: 'Inter', size: 12 },
+                        bodyFont: { family: 'Inter', size: 14, weight: 'bold' },
+                        padding: 12,
+                        displayColors: false, // Hilangkan kotak warna kecil di tooltip
+                        cornerRadius: 8,
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y + ' mg/L'; // Tambah teks °C di tooltip
+                            }
+                        }
+                    }
+                },
                 scales: {
-                    x: { ticks: { font: { family: 'Quicksand', size: 9 } } },
-                    y: { ticks: { font: { family: 'Quicksand', size: 9 } } }
+                    x: {
+                        grid: {
+                            display: false, // Hilangkan garis vertikal background
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: { family: 'Inter', size: 11 },
+                            color: '#94a3b8' // Warna abu-abu elegan
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: '#e2e8f0', // Warna garis horizontal samar
+                            borderDash: [5, 5], // Bikin garis putus-putus
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: { family: 'Inter', size: 11 },
+                            color: '#94a3b8',
+                            padding: 10
+                        }
+                    }
                 }
-            };
+            }
+        });
 
-            // 1. Chart Salinitas
-            new Chart(document.getElementById('chartSalinitas'), {
-                type: 'line',
-                data: {
-                    labels: ['0m', '200m', '400m', '600m', '800m', '1000m'],
-                    datasets: [
-                        { label: 'Suhu (°C)', data: [29, 22, 12, 8, 5, 4], borderColor: '#ef4444', tension: 0.4 },
-                        { label: 'Salinitas (PSU)', data: [34, 34.5, 34.8, 34.6, 34.5, 34.6], borderColor: '#0284c7', tension: 0.4 }
-                    ]
+        
+        // Kedalaman
+         const dataDummyKed = [
+            { Waktu: "2026-10-04 08:00:00", Ked: 10 },
+            { Waktu: "2026-10-04 08:15:00", Ked: 10.2 },
+            { Waktu: "2026-10-04 08:30:00", Ked: 10.1 },
+            { Waktu: "2026-10-04 08:45:00", Ked: 9.8 },
+            { Waktu: "2026-10-04 09:00:00", Ked: 9.4 },
+            { Waktu: "2026-10-04 09:15:00", Ked: 9.1 },
+            { Waktu: "2026-10-04 09:30:00", Ked: 10.2 }
+        ];
+
+        const nilaiKed = dataDummyKed.map(item => parseFloat(item.Ked)); 
+
+        // 3. Hitung rata-rata
+        const totalKed = nilaiKed.reduce((total, angka) => total + angka, 0);
+        const rataRataKed = (totalKed / nilaiKed.length).toFixed(1);
+        document.getElementById('rataKedalaman').innerText = 'Rata-rata: ' + rataRataKed + ' m';
+
+        // 4. Render Grafik
+        const ctxb = document.getElementById('tampilgrafikKedalaman').getContext('2d');
+
+        // Membuat efek gradasi warna
+        let gradientb = ctxb.createLinearGradient(0, 0, 0, 300);
+        gradientb.addColorStop(0, 'rgba(17, 138, 178, 0.4)'); // Warna biru atas
+        gradientb.addColorStop(1, 'rgba(17, 138, 178, 0.0)'); // Transparan bawah
+
+        new Chart(ctxb, {
+            type: 'line',
+            data: {
+                labels: labelWaktu,
+                datasets: [{
+                    label: 'Suhu Air',
+                    data: nilaiKed,
+                    backgroundColor: gradientb, // Pakai efek gradasi
+                    borderColor: '#000080',    // Warna garis utama
+                    borderWidth: 3,            // Garis sedikit lebih tebal
+                    fill: true,                // Mengisi area di bawah garis
+                    tension: 0.4,              // BIKIN GARIS MELENGKUNG (MODERN)
+                    pointBackgroundColor: '#ffffff', // Titik warna putih
+                    pointBorderColor: '#000080',     // Pinggiran titik
+                    pointBorderWidth: 2,
+                    pointRadius: 1,            // Titik disembunyikan/kecil saat diam
+                    pointHoverRadius: 6        // Titik membesar saat di-hover mouse
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false, // Penting agar grafik pas di dalam div 'h-64'
+                plugins: {
+                    legend: {
+                        display: false // Sembunyikan label legend di atas biar clean
+                    },
+                    tooltip: {
+                        backgroundColor: '#000080', // Warna background tooltip
+                        titleFont: { family: 'Inter', size: 12 },
+                        bodyFont: { family: 'Inter', size: 14, weight: 'bold' },
+                        padding: 12,
+                        displayColors: false, // Hilangkan kotak warna kecil di tooltip
+                        cornerRadius: 8,
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y + ' m'; // Tambah teks °C di tooltip
+                            }
+                        }
+                    }
                 },
-                options: commonOptions
-            });
+                scales: {
+                    x: {
+                        grid: {
+                            display: false, // Hilangkan garis vertikal background
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: { family: 'Inter', size: 11 },
+                            color: '#94a3b8' // Warna abu-abu elegan
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: '#e2e8f0', // Warna garis horizontal samar
+                            borderDash: [5, 5], // Bikin garis putus-putus
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: { family: 'Inter', size: 11 },
+                            color: '#94a3b8',
+                            padding: 10
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Kekeruhan
+         const dataDummyKer = [
+            { Waktu: "2026-10-04 08:00:00", Ker: 14 },
+            { Waktu: "2026-10-04 08:15:00", Ker: 14.5 },
+            { Waktu: "2026-10-04 08:30:00", Ker: 14.7 },
+            { Waktu: "2026-10-04 08:45:00", Ker: 15 },
+            { Waktu: "2026-10-04 09:00:00", Ker: 14.3 },
+            { Waktu: "2026-10-04 09:15:00", Ker: 14.2 },
+            { Waktu: "2026-10-04 09:30:00", Ker: 15.6 }
+        ];
 
-            // 3. Chart Kekeruhan
-            new Chart(document.getElementById('chartKekeruhan'), {
-                type: 'scatter',
-                data: {
-                    datasets: [{
-                        label: 'Tegangan (V) vs NTU',
-                        data: [
-                            {x: 100, y: 4.1}, {x: 500, y: 3.8}, {x: 1000, y: 3.5},
-                            {x: 1500, y: 3.2}, {x: 2000, y: 3.0}, {x: 2500, y: 2.7}, {x: 3000, y: 2.3}
-                        ],
-                        backgroundColor: '#0284c7'
-                    }]
+        const nilaiKer = dataDummyKer.map(item => parseFloat(item.Ker)); 
+
+        // 3. Hitung rata-rata
+        const totalKer = nilaiKer.reduce((total, angka) => total + angka, 0);
+        const rataRataKer = (totalKer / nilaiKer.length).toFixed(1);
+        document.getElementById('rataKekeruhan').innerText = 'Rata-rata: ' + rataRataKer + ' NTU';
+
+        // 4. Render Grafik
+        const ctxc = document.getElementById('tampilgrafikKekeruhan').getContext('2d');
+
+        // Membuat efek gradasi warna
+        let gradientc = ctxc.createLinearGradient(0, 0, 0, 300);
+        gradientc.addColorStop(0, 'rgba(17, 138, 178, 0.4)'); // Warna biru atas
+        gradientc.addColorStop(1, 'rgba(17, 138, 178, 0.0)'); // Transparan bawah
+
+        new Chart(ctxc, {
+            type: 'line',
+            data: {
+                labels: labelWaktu,
+                datasets: [{
+                    label: 'Suhu Air',
+                    data: nilaiKer,
+                    backgroundColor: gradientc, // Pakai efek gradasi
+                    borderColor: '#F6BE00',    // Warna garis utama
+                    borderWidth: 3,            // Garis sedikit lebih tebal
+                    fill: true,                // Mengisi area di bawah garis
+                    tension: 0.4,              // BIKIN GARIS MELENGKUNG (MODERN)
+                    pointBackgroundColor: '#ffffff', // Titik warna putih
+                    pointBorderColor: '#F6BE00',     // Pinggiran titik
+                    pointBorderWidth: 2,
+                    pointRadius: 1,            // Titik disembunyikan/kecil saat diam
+                    pointHoverRadius: 6        // Titik membesar saat di-hover mouse
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false, // Penting agar grafik pas di dalam div 'h-64'
+                plugins: {
+                    legend: {
+                        display: false // Sembunyikan label legend di atas biar clean
+                    },
+                    tooltip: {
+                        backgroundColor: '#F6BE00', // Warna background tooltip
+                        titleFont: { family: 'Inter', size: 12 },
+                        bodyFont: { family: 'Inter', size: 14, weight: 'bold' },
+                        padding: 12,
+                        displayColors: false, // Hilangkan kotak warna kecil di tooltip
+                        cornerRadius: 8,
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y + ' NTU'; // Tambah teks °C di tooltip
+                            }
+                        }
+                    }
                 },
-                options: commonOptions
-            });
+                scales: {
+                    x: {
+                        grid: {
+                            display: false, // Hilangkan garis vertikal background
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: { family: 'Inter', size: 11 },
+                            color: '#94a3b8' // Warna abu-abu elegan
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: '#e2e8f0', // Warna garis horizontal samar
+                            borderDash: [5, 5], // Bikin garis putus-putus
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: { family: 'Inter', size: 11 },
+                            color: '#94a3b8',
+                            padding: 10
+                        }
+                    }
+                }
+            }
+        });
 
-            // 4. Chart pH
-            new Chart(document.getElementById('chartPH'), {
-                type: 'bar',
-                data: {
-                    labels: ['7-Apr-25', '14-Apr-25', '21-Apr-25', '28-Apr-25'],
-                    datasets: [
-                        { label: 'pH GKW Batri', data: [6.8, 6.9, 7.0, 7.1], backgroundColor: '#3b82f6' },
-                        { label: 'pH Palu', data: [7.2, 7.0, 7.3, 7.1], backgroundColor: '#ef4444' }
-                    ]
+        // pH
+         const dataDummypH = [
+            { Waktu: "2026-10-04 08:00:00", pH: 7.2 },
+            { Waktu: "2026-10-04 08:15:00", pH: 7.4 },
+            { Waktu: "2026-10-04 08:30:00", pH: 7.1 },
+            { Waktu: "2026-10-04 08:45:00", pH: 6.8 },
+            { Waktu: "2026-10-04 09:00:00", pH: 6.9 },
+            { Waktu: "2026-10-04 09:15:00", pH: 7.4 },
+            { Waktu: "2026-10-04 09:30:00", pH: 7.1 }
+        ];
+
+        const nilaipH = dataDummypH.map(item => parseFloat(item.pH)); 
+
+        // 3. Hitung rata-rata
+        const totalpH = nilaipH.reduce((total, angka) => total + angka, 0);
+        const rataRatapH = (totalpH / nilaipH.length).toFixed(1);
+        document.getElementById('ratapH').innerText = 'Rata-rata: ' + rataRatapH;
+
+        // 4. Render Grafik
+        const ctxd = document.getElementById('tampilgrafikpH').getContext('2d');
+
+        // Membuat efek gradasi warna
+        let gradientd = ctxd.createLinearGradient(0, 0, 0, 300);
+        gradientd.addColorStop(0, 'rgba(17, 138, 178, 0.4)'); // Warna biru atas
+        gradientd.addColorStop(1, 'rgba(17, 138, 178, 0.0)'); // Transparan bawah
+
+        new Chart(ctxd, {
+            type: 'line',
+            data: {
+                labels: labelWaktu,
+                datasets: [{
+                    label: 'Suhu Air',
+                    data: nilaipH,
+                    backgroundColor: gradientd, // Pakai efek gradasi
+                    borderColor: '#A020F0',    // Warna garis utama
+                    borderWidth: 3,            // Garis sedikit lebih tebal
+                    fill: true,                // Mengisi area di bawah garis
+                    tension: 0.4,              // BIKIN GARIS MELENGKUNG (MODERN)
+                    pointBackgroundColor: '#ffffff', // Titik warna putih
+                    pointBorderColor: '#A020F0',     // Pinggiran titik
+                    pointBorderWidth: 2,
+                    pointRadius: 1,            // Titik disembunyikan/kecil saat diam
+                    pointHoverRadius: 6        // Titik membesar saat di-hover mouse
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false, // Penting agar grafik pas di dalam div 'h-64'
+                plugins: {
+                    legend: {
+                        display: false // Sembunyikan label legend di atas biar clean
+                    },
+                    tooltip: {
+                        backgroundColor: '#A020F0', // Warna background tooltip
+                        titleFont: { family: 'Inter', size: 12 },
+                        bodyFont: { family: 'Inter', size: 14, weight: 'bold' },
+                        padding: 12,
+                        displayColors: false, // Hilangkan kotak warna kecil di tooltip
+                        cornerRadius: 8,
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y; // Tambah teks °C di tooltip
+                            }
+                        }
+                    }
                 },
-                options: commonOptions
-            });
+                scales: {
+                    x: {
+                        grid: {
+                            display: false, // Hilangkan garis vertikal background
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: { family: 'Inter', size: 11 },
+                            color: '#94a3b8' // Warna abu-abu elegan
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: '#e2e8f0', // Warna garis horizontal samar
+                            borderDash: [5, 5], // Bikin garis putus-putus
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: { family: 'Inter', size: 11 },
+                            color: '#94a3b8',
+                            padding: 10
+                        }
+                    }
+                }
+            }
+        });
 
-            // 5. Chart DO
-            new Chart(document.getElementById('chartDO'), {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Mar', 'May', 'Jul', 'Sept', 'Nov'],
-                    datasets: [
-                        { label: 'Surface (1-5m)', data: [11.5, 11, 10, 8.5, 8.2, 11], borderColor: '#b91c1c', backgroundColor: '#b91c1c' },
-                        { label: 'Bottom (14-17m)', data: [11, 10, 9.2, 6, 5.2, 10.2], borderColor: '#1e3a8a', backgroundColor: '#1e3a8a' }
-                    ]
+        // Salinitas
+         const dataDummySal = [
+            { Waktu: "2026-10-04 08:00:00", Sal: 28 },
+            { Waktu: "2026-10-04 08:15:00", Sal: 27.5 },
+            { Waktu: "2026-10-04 08:30:00", Sal: 27.8 },
+            { Waktu: "2026-10-04 08:45:00", Sal: 28.3 },
+            { Waktu: "2026-10-04 09:00:00", Sal: 27.9 },
+            { Waktu: "2026-10-04 09:15:00", Sal: 28 },
+            { Waktu: "2026-10-04 09:30:00", Sal: 28.4 }
+        ];
+
+        const nilaiSal = dataDummySal.map(item => parseFloat(item.Sal)); 
+
+        // 3. Hitung rata-rata
+        const totalSal = nilaiSal.reduce((total, angka) => total + angka, 0);
+        const rataRataSal = (totalSal / nilaiSal.length).toFixed(1);
+        document.getElementById('rataSalinitas').innerText = 'Rata-rata: ' + rataRataSal + ' ppt';
+
+        // 4. Render Grafik
+        const ctxe = document.getElementById('tampilgrafikSalinitas').getContext('2d');
+
+        // Membuat efek gradasi warna
+        let gradiente = ctxe.createLinearGradient(0, 0, 0, 300);
+        gradiente.addColorStop(0, 'rgba(17, 138, 178, 0.4)'); // Warna biru atas
+        gradiente.addColorStop(1, 'rgba(17, 138, 178, 0.0)'); // Transparan bawah
+
+        new Chart(ctxe, {
+            type: 'line',
+            data: {
+                labels: labelWaktu,
+                datasets: [{
+                    label: 'Suhu Air',
+                    data: nilaiSal,
+                    backgroundColor: gradiente, // Pakai efek gradasi
+                    borderColor: '#118AB2',    // Warna garis utama
+                    borderWidth: 3,            // Garis sedikit lebih tebal
+                    fill: true,                // Mengisi area di bawah garis
+                    tension: 0.4,              // BIKIN GARIS MELENGKUNG (MODERN)
+                    pointBackgroundColor: '#ffffff', // Titik warna putih
+                    pointBorderColor: '#118AB2',     // Pinggiran titik
+                    pointBorderWidth: 2,
+                    pointRadius: 1,            // Titik disembunyikan/kecil saat diam
+                    pointHoverRadius: 6        // Titik membesar saat di-hover mouse
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false, // Penting agar grafik pas di dalam div 'h-64'
+                plugins: {
+                    legend: {
+                        display: false // Sembunyikan label legend di atas biar clean
+                    },
+                    tooltip: {
+                        backgroundColor: '#118AB2', // Warna background tooltip
+                        titleFont: { family: 'Inter', size: 12 },
+                        bodyFont: { family: 'Inter', size: 14, weight: 'bold' },
+                        padding: 12,
+                        displayColors: false, // Hilangkan kotak warna kecil di tooltip
+                        cornerRadius: 8,
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y + ' ppt'; // Tambah teks °C di tooltip
+                            }
+                        }
+                    }
                 },
-                options: commonOptions
-            });
-
-            // 6. Chart Suhu Air
-            new Chart(document.getElementById('chartSuhu'), {
-                type: 'line',
-                data: {
-                    labels: ['1950', '1960', '1970', '1980', '1990', '2000', '2010', '2020'],
-                    datasets: [
-                        { label: 'Land Surface', data: [-0.2, -0.1, 0, 0.2, 0.5, 0.8, 1.2, 1.6], borderColor: '#dc2626', tension: 0.3 },
-                        { label: 'Ocean Surface', data: [-0.1, -0.1, 0, 0.1, 0.3, 0.4, 0.6, 0.8], borderColor: '#2563eb', tension: 0.3 }
-                    ]
-                },
-                options: commonOptions
-            });
-        }
-
-        // Initialize First View (Alat Alba)
-        document.addEventListener('DOMContentLoaded', () => {
-            switchTab('alba');
+                scales: {
+                    x: {
+                        grid: {
+                            display: false, // Hilangkan garis vertikal background
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: { family: 'Inter', size: 11 },
+                            color: '#94a3b8' // Warna abu-abu elegan
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: '#e2e8f0', // Warna garis horizontal samar
+                            borderDash: [5, 5], // Bikin garis putus-putus
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: { family: 'Inter', size: 11 },
+                            color: '#94a3b8',
+                            padding: 10
+                        }
+                    }
+                }
+            }
         });
     </script>
 </body>
+   <footer class="bg-white px-4 py-4 border-t-[2px] border-[#118AB2]">
+        <div>
+            <div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 text-[#118AB2] font-medium">
+                 <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9" class="flex items-center gap-2 hover:text-[#464b71] transition">
+                    <i class="fa-solid fa-location-dot text-xl"></i><span>Maker Space, Lt. Dasar Gedung FPIK, IPB University</span>
+                </a>
+                <a href="https://www.instagram.com/mitr_ipb/" class="flex items-center gap-2 hover:text-[#464b71] transition">
+                    <i class="fa-brands fa-instagram text-xl"></i><span>@mitr_ipb</span>
+                </a>
+                <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-2 hover:text-[#464b71] transition">
+                    <i class="fa-regular fa-envelope text-xl"></i><span>mitr.ipb@gmail.com</span>
+                </a>
+                <a href="https://wa.me/6285935000474" class="flex items-center gap-2 hover:text-[#464b71] transition">
+                    <i class="fa-brands fa-whatsapp text-xl"></i><span>+6285935000474 (Raras Adinda Wulandari)</span>
+                </a>
+            </div>
+        </div>
+    </footer>
 </html>
