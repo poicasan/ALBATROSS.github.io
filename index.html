@@ -102,50 +102,50 @@
             width: 100%;
             background: white;
             padding: 20px 0;
+            cursor: grab;
         }
 
-        /* Trek slider menggunakan flexbox */
+        .slider:active {
+            cursor: grabbing;
+        }
+
+        /* Trek yang menampung semua slide secara sejajar */
         .slide-track {
             display: flex;
-            gap: 20px; /* Jarak antar gambar */
-            /* Lebar track: 10 slide x (lebar slide + gap) */
-            width: calc((250px + 20px) * 10);
-            animation: scroll-mobile 15s linear infinite;
+            width: calc(400px * 10);
+            /* (Lebar 1 slide * Total semua slide beserta duplikat) */
+            animation: none;
         }
 
-        /* Ukuran item slide default (Mobile) */
+        /* Pengaturan untuk setiap item slide */
         .slide {
-            width: 250px;
-            flex-shrink: 0; /* Penting: Mencegah gambar menyusut (gepeng) */
+            width: 550px;
+            height: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* Efek hover berhenti */
+        .slide img {
+            width: 300px;
+            height: 200px;
+            object-fit: contain;
+        }
+
+        /* Efek opsional: Berhenti bergeser saat kursor diarahkan ke slider */
         .slider:hover .slide-track {
             animation-play-state: paused;
         }
 
-        /* Animasi scroll untuk Mobile */
-        @keyframes scroll-mobile {
-            0% { transform: translateX(0); }
-            /* Geser sejauh 5 gambar orisinil: 5 x (lebar + gap) */
-            100% { transform: translateX(calc((-250px - 20px) * 5)); }
-        }
+        /* Logika Animasi Infinite Scroll */
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
 
-        /* Penyesuaian untuk layar Tablet dan Desktop */
-        @media (min-width: 768px) {
-            .slide-track {
-                width: calc((350px + 20px) * 10);
-                animation: scroll-desktop 20s linear infinite;
-            }
-            .slide {
-                width: 350px;
-            }
-            @keyframes scroll-desktop {
-                0% { transform: translateX(0); }
-                100% { transform: translateX(calc((-350px - 20px) * 5)); }
+            100% {
+                transform: translateX(calc(-250px * 5));
+                /* Geser sejauh (Lebar 1 slide * Jumlah item asli sebelum diduplikat) */
             }
         }
     </style>
@@ -155,102 +155,111 @@
 
     <!-- Sticky Navigation Bar -->
     <nav id="navbar"
-        class="fixed top-0 left-0 w-full z-50 p-4 lg:px-12 transition-all duration-300 bg-transparent text-white">
-        <div class="max-w-7xl mx-auto flex justify-between items-center relative">
-
+        class="fixed top-0 left-0 w-full z-50 px-4 lg:px-12 py-4 bg-transparent text-white transition-colors duration-300">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
             <!-- Logo ALBATROSS -->
-            <a href="#" id="logo-btn" class="flex items-center transition-transform hover:scale-105">
-                <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="h-12 w-auto object-contain">
-            </a>
-
+            <div class="relative flex items-center justify-center">
+                <!-- Bulatan Biru: Default disembunyikan (hidden) -->
+                <div id="logo-bg-circle"
+                    class="hidden absolute bg-[#118AB2] rounded-full w-14 h-14 -z-0 transition-all duration-300"></div>
+                <!-- Tombol Logo Utama -->
+                <a href="#" id="logo-btn"
+                    class="relative z-10 flex items-center justify-center transition-transform hover:scale-105">
+                    <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="h-12 w-auto object-contain">
+                </a>
+            </div>
             <!-- Container Kanan: Menu Navigasi + Tombol Mobile -->
-            <div class="flex items-center space-x-3">
+            <div class="flex items-center">
                 <ul id="nav-links"
-                    class="hidden md:flex items-center space-x-2 sm:space-x-3 text-xs sm:text-sm font-semibold tracking-wider sm:tracking-widest uppercase transition-all duration-300 py-1">
+                    class="hidden md:flex items-center space-x-2 sm:space-x-3 text-xs sm:text-sm font-semibold tracking-wider sm:tracking-widest uppercase py-1">
                     <li>
-                        <a href="homepage.html"
-                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
+                        <a href="index.html"
+                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-colors duration-300 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
                             BERANDA
                         </a>
                     </li>
                     <li>
                         <a href="tentang kami.html"
-                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
+                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-colors duration-300 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
                             TENTANG KAMI
                         </a>
                     </li>
-
                     <!-- MENU DROPDOWN ALAT -->
                     <li class="relative group" id="alat-dropdown">
                         <button id="alat-btn" type="button"
-                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-colors duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
                             ALAT
                         </button>
-                        <!-- DROPDOWN KE ARAH KIRI: Gunakan right-0 + rounded-tr-none -->
                         <div id="alat-menu"
                             class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
-                            <a href="alat alba.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">Alat
-                                Alba</a>
-                            <a href="alat bat.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">Alat
-                                Bat</a>
-                            <a href="alat tross.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">Alat
-                                Tross</a>
+                            <a href="Alat Alba.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Alat Alba
+                            </a>
+                            <a href="Alat BAT.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Alat Bat
+                            </a>
+                            <a href="Alat TROSS.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">
+                                Alat Tross
+                            </a>
                         </div>
                     </li>
-
                     <!-- MENU DROPDOWN DATA -->
                     <li class="relative group" id="data-dropdown">
                         <button id="data-btn" type="button"
-                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-colors duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
                             DATA
                         </button>
-                        <!-- DROPDOWN KE ARAH KIRI: Gunakan right-0 + rounded-tr-none -->
                         <div id="data-menu"
                             class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
+                            <a href="data pemetaan.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Data Pemetaan
+                            </a>
                             <a href="data alba.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">Data
-                                Alba</a>
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Data Alba
+                            </a>
                             <a href="data bat.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">Data
-                                Bat</a>
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Data Bat
+                            </a>
                             <a href="data tross.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">Data
-                                Tross</a>
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">
+                                Data Tross
+                            </a>
                         </div>
                     </li>
                 </ul>
 
+                <!-- Mobile Button -->
                 <button id="mobile-toggle-btn" class="md:hidden text-2xl p-2 transition-colors focus:outline-none">
                     <i id="toggle-icon" class="fas fa-bars"></i>
                 </button>
             </div>
-
         </div>
     </nav>
+
     <!-- Hero Section -->
     <section class="relative w-full h-screen min-h-[600px] flex flex-col bg-gray-900 overflow-hidden pt-20">
         <!-- Background Image with Overlay -->
         <div class="absolute inset-0 z-0">
-            <img src="IMG_0895.JPG" alt="Foto Alat" class="w-full h-full object-cover opacity-70">
+            <img src="IMG_0895.jpg" alt="Water and Equipment Background" class="w-full h-full object-cover opacity-70">
             <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/60"></div>
         </div>
-
         <!-- Hero Content -->
         <div class="relative z-10 flex-grow flex flex-col justify-center items-center text-center px-6 mt-[-40px]">
             <h1
                 class="font-tech text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-[0.15em] drop-shadow-lg mb-6">
                 ALBATROSS
             </h1>
-
             <p
                 class="text-white text-sm md:text-base lg:text-lg max-w-3xl leading-relaxed drop-shadow-md mb-10 font-medium px-4">
                 Memantau perairan dan ekosistem mangrove dari sedimentasi secara akurat untuk mendukung keberlangsungan
                 masyarakat dan biota yang hidup sekitarnya.
             </p>
-
             <!-- Action Buttons -->
             <div class="flex flex-col sm:flex-row gap-5">
                 <a href="data.html"
@@ -270,7 +279,6 @@
     <!-- Content Section -->
     <section class="w-full bg-white py-20 px-6 lg:px-12">
         <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-
             <!-- Left Column: Image -->
             <div class="w-full relative group">
                 <div
@@ -280,7 +288,6 @@
                 <img src="Foto di Aquatic.jpg" alt="Tim Albatross di Aquatic Center"
                     class="relative w-full h-auto aspect-[4/3] object-cover rounded-2xl shadow-xl z-10 transition-transform duration-500 group-hover:scale-[1.02]">
             </div>
-
             <!-- Right Column: Info Card -->
             <div class="w-full relative mt-8 lg:mt-0">
                 <div class="relative bg-[#1a7f9f] rounded-2xl p-8 pt-20 md:p-20 md:pt-30 shadow-2xl mt-0">
@@ -332,16 +339,23 @@
             const navbar = document.getElementById('navbar');
             const navItems = document.querySelectorAll('.nav-item');
             const mobileBtn = document.getElementById('mobile-toggle-btn');
+            const logoCircle = document.getElementById('logo-bg-circle'); // 1. Ambil elemen lingkaran
 
             if (window.scrollY > 50) {
                 navbar.classList.remove('bg-transparent', 'text-white');
                 navbar.classList.add('bg-white', 'shadow-md', 'py-3');
 
                 navItems.forEach(link => {
+                    link.classList.remove('text-white');
                     link.classList.add('text-[#118AB2]');
                 });
 
                 mobileBtn.classList.add('text-gray-800');
+
+                // 2. Tampilkan lingkaran biru saat discroll
+                if (logoCircle) {
+                    logoCircle.classList.remove('hidden');
+                }
 
             } else {
                 navbar.classList.add('bg-transparent', 'text-white');
@@ -349,11 +363,29 @@
 
                 navItems.forEach(link => {
                     link.classList.remove('text-[#118AB2]');
+                    link.classList.add('text-white');
                 });
 
                 mobileBtn.classList.remove('text-gray-800');
+
+                // 3. Sembunyikan lingkaran biru saat di posisi paling atas
+                if (logoCircle) {
+                    logoCircle.classList.add('hidden');
+                }
             }
         });
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g,
+                tag => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    "'": '&#39;',
+                    '"': '&quot;'
+                }[tag] || tag)
+            );
+        }
     </script>
 
     <!-- Peta Lokasi Monitoring -->
@@ -362,7 +394,6 @@
             <h2 class="font-tech text-2xl md:text-3xl font-bold text-[#464B71] text-center mb-10">
                 Peta Lokasi Monitoring
             </h2>
-
             <div class="w-full h-[450px] md:h-[600px] rounded-2xl overflow-hidden shadow-lg border border-gray-200">
                 <iframe
                     src="https://www.google.com/maps/d/embed?mid=1VZPmoYAKLJNFjlaemzn78e-kN0fwwlk&ehbc=2E312F&noprof=1"
@@ -384,67 +415,86 @@
         </p>
     </div>
 
-   <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="max-w-7xl mx-auto px-4 py-8">
         <div class="slider">
             <div class="slide-track">
-                
-                <!-- 5 Gambar Asli -->
-                <div class="slide">
-                    <div class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02] w-full">
-                        <img src="IMG_1502.JPG" alt="Exhibition 1" class="w-full aspect-[16/9] object-cover rounded-xl">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-6 items-center">
+                    <div class="slide">
+                        <div
+                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
+                            <img src="IMG_1502.jpg" alt="Exhibition 1"
+                                class="w-full aspect-[16/9] object-cover rounded-xl">
+                        </div>
                     </div>
-                </div>
-                <div class="slide">
-                    <div class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02] w-full">
-                        <img src="IMG_1706.JPG" alt="Exhibition 2" class="w-full aspect-[16/9] object-cover rounded-xl">
+                    <div class="slide">
+                        <div
+                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
+                            <img src="IMG_1706.jpg" alt="Exhibition 2"
+                                class="w-full aspect-[16/9] object-cover rounded-xl">
+                        </div>
                     </div>
-                </div>
-                <div class="slide">
-                    <div class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02] w-full">
-                        <img src="IMG_1502.JPG" alt="Exhibition 3" class="w-full aspect-[16/9] object-cover rounded-xl">
+                    <div class="slide">
+                        <div
+                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
+                            <img src="IMG_1502.jpg" alt="Exhibition 3"
+                                class="w-full aspect-[16/9] object-cover rounded-xl">
+                        </div>
                     </div>
-                </div>
-                <div class="slide">
-                    <div class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02] w-full">
-                        <img src="IMG_1502.JPG" alt="Exhibition 4" class="w-full aspect-[16/9] object-cover rounded-xl">
+                    <div class="slide">
+                        <div
+                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
+                            <img src="IMG_1502.jpg" alt="Exhibition 4"
+                                class="w-full aspect-[16/9] object-cover rounded-xl">
+                        </div>
                     </div>
-                </div>
-                <div class="slide">
-                    <div class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02] w-full">
-                        <img src="IMG_1502.JPG" alt="Exhibition 5" class="w-full aspect-[16/9] object-cover rounded-xl">
-                    </div>
-                </div>
-
-                <!-- 5 Gambar Duplikat (Wajib ada agar infinite loop tidak putus) -->
-                <div class="slide">
-                    <div class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02] w-full">
-                        <img src="IMG_1502.JPG" alt="Exhibition 1" class="w-full aspect-[16/9] object-cover rounded-xl">
-                    </div>
-                </div>
-                <div class="slide">
-                    <div class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02] w-full">
-                        <img src="IMG_1706.JPG" alt="Exhibition 2" class="w-full aspect-[16/9] object-cover rounded-xl">
-                    </div>
-                </div>
-                <div class="slide">
-                    <div class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02] w-full">
-                        <img src="IMG_1502.JPG" alt="Exhibition 3" class="w-full aspect-[16/9] object-cover rounded-xl">
-                    </div>
-                </div>
-                <div class="slide">
-                    <div class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02] w-full">
-                        <img src="IMG_1502.JPG" alt="Exhibition 4" class="w-full aspect-[16/9] object-cover rounded-xl">
-                    </div>
-                </div>
-                <div class="slide">
-                    <div class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02] w-full">
-                        <img src="IMG_1502.JPG" alt="Exhibition 5" class="w-full aspect-[16/9] object-cover rounded-xl">
+                    <div class="slide">
+                        <div
+                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
+                            <img src="IMG_1502.jpg" alt="Exhibition 5"
+                                class="w-full aspect-[16/9] object-cover rounded-xl">
+                        </div>
                     </div>
                 </div>
 
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-6 items-center">
+                    <div class="slide">
+                        <div
+                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
+                            <img src="IMG_1502.jpg" alt="Exhibition 1"
+                                class="w-full aspect-[16/9] object-cover rounded-xl">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div
+                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
+                            <img src="IMG_1706.jpg" alt="Exhibition 2"
+                                class="w-full aspect-[16/9] object-cover rounded-xl">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div
+                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
+                            <img src="IMG_1502.jpg" alt="Exhibition 3"
+                                class="w-full aspect-[16/9] object-cover rounded-xl">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div
+                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
+                            <img src="IMG_1502.jpg" alt="Exhibition 4"
+                                class="w-full aspect-[16/9] object-cover rounded-xl">
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div
+                            class="bg-white p-3 rounded-2xl border-2 border-[#bae6fd] shadow-md transition-transform duration-300 hover:scale-[1.02]">
+                            <img src="IMG_1502.jpg" alt="Exhibition 5"
+                                class="w-full aspect-[16/9] object-cover rounded-xl">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
         <div>
             <h2 class="font-tech text-xl md:text-3xl font-bold flex justify-center items-center h-40 text-[#464B71]">
@@ -565,13 +615,18 @@
                         <p class="text-gray-400 text-sm italic">Belum ada komentar.</p>
                     </div>
                 </div>
+
+                <div class="flex items-center gap-2">
+                    <!-- TOMBOL HAPUS BARU -->
+                    <button data-index="${comment.originalIndex}"
+                        class="btn-delete-comment text-gray-400 hover:text-red-500 transition text-xs p-1"
+                        title="Hapus Komentar">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
             </div>
 
-            <!-- ============================================== -->
-            <!-- SECTION 2: CONTACT US (DIPERBARUI)             -->
-            <!-- ============================================== -->
             <div class="bg-brand-blue px-6 py-8 relative text-white">
-
                 <div class="text-center mt-2 mb-8">
                     <div
                         class="inline-block bg-white text-brand-blue font-bold px-6 py-2 rounded-full mb-4 shadow-sm text-lg font-anta">
@@ -598,7 +653,6 @@
                                 class="w-full px-4 py-3 rounded-md text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300">
                         </div>
                     </div>
-
                     <div class="flex flex-col">
                         <label class="block font-semibold mb-2 text-lg font-anta">Pesan</label>
                         <div class="relative flex-grow">
@@ -612,36 +666,15 @@
                         </div>
                     </div>
                 </form>
-
                 <div class="text-center text-sm font-medium leading-relaxed opacity-90 font-inter">
                     Pertanyaan dan masukan dari Anda dapat membantu kami<br>
                     untuk terus mengembangkan alat menjadi lebih baik.
                 </div>
             </div>
-
-            <!-- SECTION 3: FOOTER INFO -->
-           <div class="bg-white px-4 py-4 border-t-2 border-brand-blue">
-                <div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 text-[#118AB2] font-medium text-sm">
-                    <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9" class="flex items-center gap-2 hover:text-[#464b71] transition">
-                        <i class="fa-solid fa-location-dot text-xl"></i><span>Maker Space, Lt. Dasar Gedung FPIK, IPB University</span>
-                    </a>
-                    <a href="https://www.instagram.com/mitr_ipb/" class="flex items-center gap-2 hover:text-[#464b71] transition">
-                        <i class="fa-brands fa-instagram text-xl"></i><span>@mitr_ipb</span>
-                    </a>
-                    <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-2 hover:text-[#464b71] transition">
-                        <i class="fa-regular fa-envelope text-xl"></i><span>mitr.ipb@gmail.com</span>
-                    </a>
-                    <a href="https://wa.me/6285935000474" class="flex items-center gap-2 hover:text-[#464b71] transition">
-                        <i class="fa-brands fa-whatsapp text-xl"></i><span>+6285935000474 (Raras Adinda Wulandari)</span>
-                    </a>
-                </div>
-            </div>
         </div>
     </section>
 
-    <!-- ============================================== -->
-    <!-- SCRIPT BARU UNTUK FITUR KOMENTAR (UPDATE SORT) -->
-    <!-- ============================================== -->
+    <!-- FITUR KOMENTAR -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const commentInput = document.getElementById('comment-input');
@@ -658,6 +691,19 @@
 
             // Status urutan saat ini (default: terbaru)
             let currentSort = 'terbaru';
+
+            // Helper untuk mencegah Cross-Site Scripting (XSS)
+            function escapeHTML(str) {
+                return str.replace(/[&<>'"]/g,
+                    tag => ({
+                        '&': '&amp;',
+                        '<': '&lt;',
+                        '>': '&gt;',
+                        "'": '&#39;',
+                        '"': '&quot;'
+                    }[tag] || tag)
+                );
+            }
 
             // Fungsi mengubah warna tombol saat diklik
             function updateButtonStyles() {
@@ -681,39 +727,90 @@
                 commentsList.innerHTML = '';
                 commentCount.innerText = `${comments.length} balasan`;
 
-                // Proses Sorting (Pengurutan)
-                let sortedComments = [...comments]; // Buat copy array agar data asli tidak rusak
+                // Menyimpan indeks asli data sebelum diurutkan
+                let indexedComments = comments.map((comment, index) => ({ ...comment, originalIndex: index }));
+
+                // Proses Sorting
                 if (currentSort === 'terbaru') {
-                    // Urutkan dari timestamp terbesar (paling baru) ke terkecil
-                    sortedComments.sort((a, b) => b.timestamp - a.timestamp);
+                    indexedComments.sort((a, b) => b.timestamp - a.timestamp);
                 } else {
-                    // Teratas (karena tidak ada 'like', diurutkan dari timestamp terkecil / terlama)
-                    sortedComments.sort((a, b) => a.timestamp - b.timestamp);
+                    indexedComments.sort((a, b) => a.timestamp - b.timestamp);
                 }
 
                 // Looping komentar yang sudah diurutkan
-                sortedComments.forEach(comment => {
+                indexedComments.forEach(comment => {
                     const date = new Date(comment.timestamp).toLocaleDateString('id-ID', {
                         day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
                     });
 
                     const html = `
-                        <div class="flex gap-4 w-full bg-white p-4 rounded-xl border border-gray-100 shadow-sm transition-all duration-300">
-                            <div class="w-10 h-10 bg-[#eef5f9] rounded-full flex-shrink-0 flex items-center justify-center border border-gray-200">
-                                <i class="fa-solid fa-user text-gray-400"></i>
-                            </div>
-                            <div class="flex-grow">
-                                <div class="flex justify-between items-baseline mb-1">
-                                    <h4 class="font-bold text-gray-700 text-sm">Pengunjung Anonim</h4>
-                                    <span class="text-xs text-gray-400">${date}</span>
-                                </div>
-                                <p class="text-gray-600 text-sm leading-relaxed">${comment.text}</p>
+                <div class="flex gap-4 w-full bg-white p-4 rounded-xl border border-gray-100 shadow-sm transition-all duration-300 relative group">
+                    <div class="w-10 h-10 bg-[#eef5f9] rounded-full flex-shrink-0 flex items-center justify-center border border-gray-200">
+                        <i class="fa-solid fa-user text-gray-400"></i>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-baseline mb-1">
+                            <h4 class="font-bold text-gray-700 text-sm">Pengunjung Anonim</h4>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs text-gray-400">${date}</span>
+                                <button data-index="${comment.originalIndex}" class="btn-delete-comment text-gray-400 hover:text-red-500 transition text-xs p-1" title="Hapus Komentar">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
                             </div>
                         </div>
-                    `;
+                        <p class="text-gray-600 text-sm leading-relaxed">${escapeHTML(comment.text)}</p>
+                    </div>
+                </div>
+            `;
                     commentsList.insertAdjacentHTML('beforeend', html);
                 });
             }
+            // Event Listener untuk Menghapus Komentar
+            commentsList.addEventListener('click', (e) => {
+                const deleteBtn = e.target.closest('.btn-delete-comment');
+                if (deleteBtn) {
+                    const index = deleteBtn.getAttribute('data-index');
+                    if (index !== null) {
+                        // Hapus data dari array berdasarkan indeks asli
+                        comments.splice(index, 1);
+                        // Simpan perubahan ke LocalStorage
+                        localStorage.setItem('albatross_comments', JSON.stringify(comments));
+                        // Render ulang tampilan
+                        renderComments();
+                    }
+                }
+            });
+
+            submitCommentBtn.addEventListener('click', () => {
+                const text = commentInput.value.trim();
+                if (text) {
+                    // Tambahkan 'id' unik menggunakan timestamp
+                    comments.push({
+                        id: Date.now(),
+                        text: text,
+                        timestamp: new Date().getTime()
+                    });
+                    localStorage.setItem('albatross_comments', JSON.stringify(comments));
+                    commentInput.value = '';
+                    renderComments();
+                }
+            });
+
+            // Event Delegation untuk Menghapus Komentar
+            commentsList.addEventListener('click', (e) => {
+                const deleteBtn = e.target.closest('.btn-delete-comment');
+                if (deleteBtn) {
+                    const index = deleteBtn.getAttribute('data-index');
+                    if (index !== null) {
+                        // Hapus item dari array asli
+                        comments.splice(index, 1);
+                        // Simpan kembali array yang sudah diperbarui ke LocalStorage
+                        localStorage.setItem('albatross_comments', JSON.stringify(comments));
+                        // Rendernya kembali UI
+                        renderComments();
+                    }
+                }
+            });
 
             // Event Listener untuk Tombol Terbaru
             btnTerbaru.addEventListener('click', () => {
@@ -733,9 +830,7 @@
             submitCommentBtn.addEventListener('click', () => {
                 const text = commentInput.value.trim();
                 if (text) {
-                    // Tambahkan komentar dengan timestamp saat ini
                     comments.push({ text: text, timestamp: new Date().getTime() });
-                    // Simpan ke LocalStorage
                     localStorage.setItem('albatross_comments', JSON.stringify(comments));
 
                     commentInput.value = '';
@@ -753,50 +848,145 @@
             updateButtonStyles();
             renderComments();
         });
-
-        // --- DROPDOWN MENUS ---
-        const alatBtn = document.getElementById('alat-btn');
-        const alatMenu = document.getElementById('alat-menu');
-        const alatDropdown = document.getElementById('alat-dropdown');
-
-        const dataBtn = document.getElementById('data-btn');
-        const dataMenu = document.getElementById('data-menu');
-        const dataDropdown = document.getElementById('data-dropdown');
-
-        // Klik tombol ALAT
-        alatBtn.addEventListener('click', function (e) {
-            e.stopPropagation();
-            dataMenu.classList.remove('!block');
-            dataBtn.classList.remove('bg-[#118AB2]');
-
-            alatMenu.classList.toggle('!block');
-            alatBtn.classList.toggle('bg-[#118AB2]');
-            alatBtn.classList.toggle('text-white');
-        });
-
-        // Klik tombol DATA
-        dataBtn.addEventListener('click', function (e) {
-            e.stopPropagation();
-            alatMenu.classList.remove('!block');
-            alatBtn.classList.remove('bg-[#118AB2]');
-
-            dataMenu.classList.toggle('!block');
-            dataBtn.classList.toggle('bg-[#118AB2]');
-            dataBtn.classList.toggle('text-white');
-        });
-
-        // Menutup dropdown jika mengklik area lain di luar menu
-        document.addEventListener('click', function (e) {
-            if (!alatDropdown.contains(e.target)) {
-                alatMenu.classList.remove('!block');
-                alatBtn.classList.remove('bg-[#118AB2]');
-            }
-            if (!dataDropdown.contains(e.target)) {
-                dataMenu.classList.remove('!block');
-                dataBtn.classList.remove('bg-[#118AB2]');
-            }
-        });
     </script>
-</body>
 
+    <script>
+        const slider = document.querySelector('.slider');
+        const track = document.querySelector('.slide-track');
+
+        let position = 0;
+        let isDragging = false;
+        let startX = 0;
+        let startPosition = 0;
+        let lastTime = 0;
+
+        const speed = 62.5;
+
+        function getLoopWidth() {
+            return track.scrollWidth / 2;
+        }
+
+        function updateSlider() {
+            const loopWidth = getLoopWidth();
+
+            if (loopWidth > 0) {
+                position = ((position % loopWidth) + loopWidth) % loopWidth;
+            }
+
+            track.style.transform = `translateX(${-position}px)`;
+        }
+
+        function animate(time) {
+            if (!lastTime) lastTime = time;
+
+            const deltaTime = (time - lastTime) / 1000;
+            lastTime = time;
+
+            if (!isDragging) {
+                position += speed * deltaTime;
+                updateSlider();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        slider.addEventListener('pointerdown', (event) => {
+            isDragging = true;
+            startX = event.clientX;
+            startPosition = position;
+            lastTime = 0;
+
+            slider.setPointerCapture(event.pointerId);
+        });
+
+        slider.addEventListener('pointermove', (event) => {
+            if (!isDragging) return;
+
+            const distance = event.clientX - startX;
+            position = startPosition - distance;
+
+            updateSlider();
+        });
+
+        function stopDragging() {
+            isDragging = false;
+        }
+
+        slider.addEventListener('pointerup', stopDragging);
+        slider.addEventListener('pointercancel', stopDragging);
+        slider.addEventListener('lostpointercapture', stopDragging);
+
+        requestAnimationFrame(animate);
+    </script>
+
+    <footer class="bg-white px-6 py-10 border-t-[2px] border-[#118AB2]">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Kolom 1 (Dibuat lebih lebar/span 2): Lokasi, Email, dan WhatsApp -->
+            <div class="md:col-span-2 flex flex-col gap-4 text-[#118AB2]">
+                <h3 class="font-bold text-xl mb-2">Our Contact</h3>
+                <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9"
+                    class="flex items-start gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-solid fa-location-dot text-xl mt-1"></i>
+                    <span class="leading-relaxed">Workshop Instrumentasi dan Robotika Kelautan (Bengkel) ITK, Babakan,
+                        Dramaga, Bogor, Indonesia 16680</span>
+                </a>
+                <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-regular fa-envelope text-xl"></i>
+                    <span>mitr.ipb@gmail.com</span>
+                </a>
+                <a href="https://wa.me/6283898339620" class="flex items-center gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    <span>+6283898339620 (Deni Rizkiana Anwar Hidayat)</span>
+                </a>
+            </div>
+
+            <!-- Kolom 2: Sosial Media -->
+            <div class="flex flex-col gap-4 text-[#118AB2]">
+                <h3 class="font-bold text-xl mb-2">Social Media</h3>
+                <a href="https://www.instagram.com/mitr_ipb/"
+                    class="flex items-center gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-brands fa-instagram text-xl"></i>
+                    <span>@mitr_ipb</span>
+                </a>
+            </div>
+
+            <!-- Kolom 3: Logo dan Tombol Back to Top -->
+            <div class="flex flex-col items-start gap-6 text-[#118AB2]">
+                <h3 class="font-bold text-xl mb-2">About Us</h3>
+
+                <!-- Tempat untuk Logo MIT+R -->
+                <div class="relative flex items-center justify-center">
+                    <!-- Shape Bulat Biru (Ukuran lebih besar, tidak mempengaruhi tinggi header) -->
+                    <div class="absolute bg-[#118AB2] rounded-full w-[120px] h-[120px] -z-0"></div>
+
+                    <!-- Tombol Logo (Tetap menentukan ukuran utama di header) -->
+                    <a href="#" id="logo-btn"
+                        class="relative z-10 flex items-center justify-center transition-transform hover:scale-105">
+                        <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-24   object-contain">
+                    </a>
+                </div>
+
+                <!-- Tombol Back to Top -->
+                <div class="w-full flex justify-end mt-auto">
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+                        class="group flex items-center p-3 bg-[#118AB2] text-white rounded-full shadow-md hover:bg-[#0c6b8a] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
+
+                        <!-- Teks yang Muncul Saat Hover (Sekarang di urutan pertama / sebelah kiri) -->
+                        <span
+                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[120px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold">
+                            Back to Top
+                        </span>
+
+                        <!-- Lingkaran Icon Panah (Sekarang di urutan kedua / sebelah kanan) -->
+                        <span
+                            class="flex items-center justify-center w-7 h-7 bg-white text-[#118AB2] rounded-full transition-transform duration-500 group-hover:scale-110 shrink-0">
+                            <i class="fa-solid fa-arrow-up text-sm"></i>
+                        </span>
+
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+</body>
 </html>
