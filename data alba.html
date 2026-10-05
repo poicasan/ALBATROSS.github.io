@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
-       tailwind.config = {
+        tailwind.config = {
             theme: {
                 extend: {
                     colors: {
@@ -42,7 +42,7 @@
     </script>
 
     <style>
-         body {
+        body {
             font-family: 'Inter', sans-serif;
         }
 
@@ -50,6 +50,7 @@
             font-family: 'Anta', sans-serif;
         }
     </style>
+
 </head>
 
 <body class="bg-white text-gray-800 font-inter">
@@ -57,117 +58,201 @@
     <!-- Navbar -->
     <nav id="navbar"
         class="fixed top-0 left-0 w-full z-50 p-4 lg:px-12 transition-all duration-300 bg-white shadow-md text-[#118AB2]">
+
         <div class="max-w-7xl mx-auto flex justify-between items-center relative">
 
             <!-- Logo ALBATROSS -->
-            <a href="#" id="logo-btn" class="flex items-center transition-transform hover:scale-105">
-                <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="h-12 w-auto object-contain">
-            </a>
+            <div class="relative flex items-center justify-center">
+                <!-- Shape Bulat Biru (Ukuran lebih besar, tidak mempengaruhi tinggi header) -->
+                <div class="absolute bg-[#118AB2] rounded-full w-14 h-14 -z-0"></div>
 
-            <!-- Container Kanan: Menu Navigasi + Tombol Mobile -->
+                <!-- Tombol Logo (Tetap menentukan ukuran utama di header) -->
+                <a href="#" id="logo-btn"
+                    class="relative z-10 flex items-center justify-center transition-transform hover:scale-105">
+                    <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="h-12 w-auto object-contain">
+                </a>
+            </div>
+
+            <!-- Container Kanan -->
             <div class="flex items-center space-x-3">
+
                 <ul id="nav-links"
                     class="hidden md:flex items-center space-x-2 sm:space-x-3 text-xs sm:text-sm font-semibold tracking-wider sm:tracking-widest uppercase transition-all duration-300 py-1 font-inter">
+
                     <li>
                         <a href="index.html"
                             class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
                             BERANDA
                         </a>
                     </li>
+
                     <li>
                         <a href="tentang kami.html"
                             class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
                             TENTANG KAMI
                         </a>
                     </li>
-                    <!-- MENU DROPDOWN ALAT -->
+
+                    <!-- Dropdown ALAT -->
                     <li class="relative group" id="alat-dropdown">
+
                         <button id="alat-btn" type="button"
                             class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
                             ALAT
                         </button>
+
                         <div id="alat-menu"
                             class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
+
                             <a href="alat alba.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">Alat
-                                Alba</a>
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Alat Alba
+                            </a>
+
                             <a href="alat bat.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">Alat
-                                Bat</a>
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Alat Bat
+                            </a>
+
                             <a href="alat tross.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">Alat
-                                Tross</a>
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">
+                                Alat Tross
+                            </a>
+
                         </div>
                     </li>
 
-                    <!-- MENU DROPDOWN DATA -->
+                    <!-- Dropdown DATA -->
                     <li class="relative group" id="data-dropdown">
+
                         <button id="data-btn" type="button"
                             class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
                             DATA
                         </button>
+
                         <div id="data-menu"
                             class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
+                            <a href="data pemetaan.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Data Pemetaan
+                            </a>
                             <a href="data alba.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">Data
-                                Alba</a>
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Data Alba
+                            </a>
                             <a href="data bat.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">Data
-                                Bat</a>
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Data Bat
+                            </a>
+
                             <a href="data tross.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">Data
-                                Tross</a>
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">
+                                Data Tross
+                            </a>
+
                         </div>
                     </li>
+
                 </ul>
 
-                <button id="mobile-toggle-btn" class="md:hidden text-2xl p-2 transition-colors focus:outline-none">
+                <!-- Tombol Mobile -->
+                <button id="mobile-toggle-btn" class="md:hidden text-2xl p-2 transition-colors focus:outline-none"
+                    aria-label="Buka menu navigasi">
                     <i id="toggle-icon" class="fas fa-bars"></i>
                 </button>
             </div>
         </div>
+
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white mt-4 rounded-xl shadow-lg p-4">
+            <div class="flex flex-col space-y-2 text-sm font-semibold text-[#118AB2]">
+                <a href="index.html" class="px-4 py-3 rounded-lg hover:bg-brand-lightCyan">
+                    BERANDA
+                </a>
+                <a href="tentang kami.html" class="px-4 py-3 rounded-lg hover:bg-brand-lightCyan">
+                    TENTANG KAMI
+                </a>
+                <div class="border-t border-gray-100 pt-2">
+                    <p class="px-4 py-2 text-xs text-gray-400">
+                        ALAT
+                    </p>
+                    <a href="alat alba.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Alat Alba
+                    </a>
+                    <a href="alat bat.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Alat BAT
+                    </a>
+                    <a href="alat tross.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Alat TROSS
+                    </a>
+                </div>
+
+                <div class="border-t border-gray-100 pt-2">
+                    <p class="px-4 py-2 text-xs text-gray-400">
+                        DATA
+                    </p>
+                    <a href="data pemetaan.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Data Pemetaan
+                    </a>
+                    <a href="data alba.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Data Alba
+                    </a>
+                    <a href="data bat.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Data Bat
+                    </a>
+                    <a href="data tross.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Data Tross
+                    </a>
+                </div>
+            </div>
+        </div>
     </nav>
 
-   <!-- Hero Section -->
-    <section class="bg-brand-tealBg text-white py-28 px-8 sm:px-6 lg:px-8 shadow-inner" style="height: 350px;">
-        <div class="max-w-6xl mx-auto space-y-1">
+
+    <!-- Hero Banner -->
+    <section class="bg-brand-tealBg text-white px-6 sm:px-8 pt-28 pb-10 shadow-inner min-h-[350px]">
+
+        <div class="max-w-6xl mx-auto w-full space-y-4">
 
             <!-- Breadcrumbs -->
-            <nav class="flex items-center space-x-2 text-xs sm:text-sm text-cyan-100 font-medium font-inter">
+            <nav class="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-cyan-100 font-medium font-inter">
+
                 <a href="index.html" class="hover:underline flex items-center gap-1">
-                    <i class="fa-solid fa-house text-xs"></i> Beranda
+                    <i class="fa-solid fa-house text-xs"></i>
+                    Beranda
                 </a>
+
                 <span>&gt;</span>
-                <a href="alat.html" class="hover:underline">Data</a>
+
+                <a href="data.html" class="hover:underline">
+                    Data
+                </a>
+
                 <span>&gt;</span>
-                <span class="text-white font-semibold">Data Alba</span>
+
+                <span class="text-white font-semibold">
+                    Data Alba
+                </span>
+
             </nav>
 
-            <!-- Title & Icon -->
-            <div class="flex items-center space-x-4 pt-4">
-                <!-- Custom SVG Icon -->
-                <div class="text-white flex-shrink-0">
-                   <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Teks Biner (Dibuat rata tengah dengan text-anchor) -->
-                        <text x="32" y="24" fill="white" font-family="'Anta', sans-serif" font-size="20" font-weight="bold" letter-spacing="2" text-anchor="middle">110</text>
-                        <text x="32" y="44" fill="white" font-family="'Anta', sans-serif" font-size="20" font-weight="bold" letter-spacing="2" text-anchor="middle">101</text>
-                        
-                        <!-- Garis Frame Alat -->
-                        <path d="M 12 36 H 8 V 48" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                        <path d="M 8 52 V 56 Q 8 60 12 60 H 52 Q 56 60 56 56 V 44 H 52" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                        
-                        <!-- Titik Indikator -->
-                        <rect x="14" y="52" width="4" height="4" fill="white" rx="1" />
-                    </svg>
-                </div>
+            <!-- Title -->
+            <div class="flex items-center gap-3 pt-2">
+
+                <i class="fa-solid fa-chart-line text-3xl sm:text-4xl"></i>
+
                 <h1 class="text-3xl sm:text-4xl font-bold tracking-wide font-anta">
                     Data Alat Alba
                 </h1>
+
             </div>
 
             <!-- Description -->
             <p class="text-sm sm:text-base text-cyan-50 max-w-3xl leading-relaxed font-normal font-inter">
-                Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data salinitas, kedalaman, kekeruhan, pH, oksigen terlarut (DO), dan suhu.
+
+                Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data salinitas,
+                kedalaman, kekeruhan, pH, oksigen terlarut (DO), dan suhu.
+
             </p>
 
             <!-- Action Badges / Status Pill -->
@@ -187,114 +272,290 @@
                     </div>
                 </div>
             </div>
+
         </div>
+
     </section>
 
-     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow">
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow">
+
         <section class="mt-12 mb-20">
+
             <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold text-brand-darkText font-inter mb-2">Parameter Monitoring Alat Alba</h2>
-                <p class="text-gray-500 font-inter text-sm sm:text-base">Grafik dan visualisasi pengukuran kualitas air secara sistematis</p><br>
+
+                <h2 class="text-3xl font-bold text-brand-darkText font-anta mb-2">
+                    Parameter Monitoring Alat Alba
+                </h2>
+
+                <p class="text-gray-500 font-inter text-sm sm:text-base">
+                    Grafik dan visualisasi pengukuran kualitas air secara sistematis
+                </p>
+
+                <br>
+
             </div>
+
 
             <!-- Grid Container untuk 6 Data -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-                <!-- Card 1: Suhu Air -->
-                <div class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
-                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">Suhu Air</h3>
-                    
-                    <!-- Area Gambar/Grafik -->
-                    <div class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative">
+
+                <!-- ========================================= -->
+                <!-- CARD 1: SUHU AIR -->
+                <!-- ========================================= -->
+
+                <div
+                    class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
+
+                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">
+                        Suhu Air
+                    </h3>
+
+                    <!-- Area Grafik -->
+                    <div
+                        class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative cursor-pointer">
+
                         <canvas id="tampilgrafikSuhu"></canvas>
+
                     </div>
 
                     <!-- Footer Card -->
-                    <div class="flex justify-between items-center mt-auto">
-                        <span id="rataSuhu" class="text-gray-500 text-sm">Rata-rata: 0 °C</span>
+                    <div class="mt-auto">
+
+                        <div class="flex justify-between items-center">
+
+                            <span id="rataSuhu" class="text-gray-500 text-sm">
+                                Rata-rata: 0 °C
+                            </span>
+
+                        </div>
+
+                        <!-- Detail Pengukuran -->
+                        <div id="detailSuhu"
+                            class="hidden mt-3 px-4 py-3 bg-[#e6f7f9] rounded-xl text-sm text-[#2d3757]">
+                        </div>
+
                     </div>
+
                 </div>
-                
-                <!-- Card 2: Data DO -->
-                 <div class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
-                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">Oksigen Terlarut (DO)</h3>
-                    
-                    <!-- Area Gambar/Grafik -->
-                    <div class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative">
+
+
+                <!-- ========================================= -->
+                <!-- CARD 2: DO -->
+                <!-- ========================================= -->
+
+                <div
+                    class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
+
+                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">
+                        Oksigen Terlarut (DO)
+                    </h3>
+
+                    <!-- Area Grafik -->
+                    <div
+                        class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative cursor-pointer">
+
                         <canvas id="tampilgrafikDO"></canvas>
+
                     </div>
 
                     <!-- Footer Card -->
-                    <div class="flex justify-between items-center mt-auto">
-                        <span id="rataDO" class="text-gray-500 text-sm">Rata-rata: 0 mg/L</span>
+                    <div class="mt-auto">
+
+                        <div class="flex justify-between items-center">
+
+                            <span id="rataDO" class="text-gray-500 text-sm">
+                                Rata-rata: 0 mg/L
+                            </span>
+
+                        </div>
+
+                        <!-- Detail Pengukuran -->
+                        <div id="detailDO" class="hidden mt-3 px-4 py-3 bg-[#e6f7f9] rounded-xl text-sm text-[#2d3757]">
+                        </div>
+
                     </div>
+
                 </div>
 
-                <!-- Card 3: Data Kedalaman -->
-                <div class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
-                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">Data Kedalaman</h3>
-                    
-                    <!-- Area Gambar/Grafik -->
-                    <div class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative">
+
+                <!-- ========================================= -->
+                <!-- CARD 3: KEDALAMAN -->
+                <!-- ========================================= -->
+
+                <div
+                    class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
+
+                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">
+                        Data Kedalaman
+                    </h3>
+
+                    <!-- Area Grafik -->
+                    <div
+                        class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative cursor-pointer">
+
                         <canvas id="tampilgrafikKedalaman"></canvas>
+
                     </div>
 
                     <!-- Footer Card -->
-                    <div class="flex justify-between items-center mt-auto">
-                        <span id="rataKedalaman" class="text-gray-500 text-sm">Rata-rata: 0 m</span>
+                    <div class="mt-auto">
+
+                        <div class="flex justify-between items-center">
+
+                            <span id="rataKedalaman" class="text-gray-500 text-sm">
+                                Rata-rata: 0 m
+                            </span>
+
+                        </div>
+
+                        <!-- Detail Pengukuran -->
+                        <div id="detailKedalaman"
+                            class="hidden mt-3 px-4 py-3 bg-[#e6f7f9] rounded-xl text-sm text-[#2d3757]">
+                        </div>
+
                     </div>
+
                 </div>
 
-                <!-- Card 4: Kekeruhan -->
-                <div class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
-                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">Kekeruhan</h3>
-                    
-                    <!-- Area Gambar/Grafik -->
-                    <div class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative">
-                       <canvas id="tampilgrafikKekeruhan"></canvas>
+
+                <!-- ========================================= -->
+                <!-- CARD 4: KEKERUHAN -->
+                <!-- ========================================= -->
+
+                <div
+                    class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
+
+                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">
+                        Kekeruhan
+                    </h3>
+
+                    <!-- Area Grafik -->
+                    <div
+                        class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative cursor-pointer">
+
+                        <canvas id="tampilgrafikKekeruhan"></canvas>
+
                     </div>
 
                     <!-- Footer Card -->
-                    <div class="flex justify-between items-center mt-auto">
-                        <span id="rataKekeruhan" class="text-gray-500 text-sm">Rata-rata: 0 NTU</span>
+                    <div class="mt-auto">
+
+                        <div class="flex justify-between items-center">
+
+                            <span id="rataKekeruhan" class="text-gray-500 text-sm">
+                                Rata-rata: 0 NTU
+                            </span>
+
+                        </div>
+
+                        <!-- Detail Pengukuran -->
+                        <div id="detailKekeruhan"
+                            class="hidden mt-3 px-4 py-3 bg-[#e6f7f9] rounded-xl text-sm text-[#2d3757]">
+                        </div>
+
                     </div>
+
                 </div>
 
-                <!-- Card 5: Data pH -->
-                <div class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
-                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">Data pH</h3>
-                    
-                    <!-- Area Gambar/Grafik -->
-                    <div class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative">
+
+                <!-- ========================================= -->
+                <!-- CARD 5: pH -->
+                <!-- ========================================= -->
+
+                <div
+                    class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
+
+                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">
+                        Data pH
+                    </h3>
+
+                    <!-- Area Grafik -->
+                    <div
+                        class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative cursor-pointer">
+
                         <canvas id="tampilgrafikpH"></canvas>
+
                     </div>
 
                     <!-- Footer Card -->
-                    <div class="flex justify-between items-center mt-auto">
-                        <span id="ratapH" class="text-gray-500 text-sm">Rata-rata: 0</span>
+                    <div class="mt-auto">
+
+                        <div class="flex justify-between items-center">
+
+                            <span id="ratapH" class="text-gray-500 text-sm">
+                                Rata-rata: 0
+                            </span>
+
+                        </div>
+
+                        <!-- Detail Pengukuran -->
+                        <div id="detailpH" class="hidden mt-3 px-4 py-3 bg-[#e6f7f9] rounded-xl text-sm text-[#2d3757]">
+                        </div>
+
                     </div>
+
                 </div>
 
-                <!-- Card 6: Salinitas -->
-                <div class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
-                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">Salinitas Air</h3>
-                    
-                    <!-- Area Gambar/Grafik -->
-                    <div class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative">
-                       <canvas id="tampilgrafikSalinitas"></canvas>
+
+                <!-- ========================================= -->
+                <!-- CARD 6: SALINITAS -->
+                <!-- ========================================= -->
+
+                <div
+                    class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
+
+                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">
+                        Salinitas Air
+                    </h3>
+
+                    <!-- Area Grafik -->
+                    <div
+                        class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative cursor-pointer">
+
+                        <canvas id="tampilgrafikSalinitas"></canvas>
+
                     </div>
 
                     <!-- Footer Card -->
-                    <div class="flex justify-between items-center mt-auto">
-                        <span id="rataSalinitas" class="text-gray-500 text-sm">Rata-rata: 0 ppt</span>
+                    <div class="mt-auto">
+
+                        <div class="flex justify-between items-center">
+
+                            <span id="rataSalinitas" class="text-gray-500 text-sm">
+                                Rata-rata: 0 ppt
+                            </span>
+
+                        </div>
+
+                        <!-- Detail Pengukuran -->
+                        <div id="detailSalinitas"
+                            class="hidden mt-3 px-4 py-3 bg-[#e6f7f9] rounded-xl text-sm text-[#2d3757]">
+                        </div>
+
                     </div>
+
                 </div>
+
             </div>
+
         </section>
+
     </main>
+
+
+    <!-- ========================================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ========================================= -->
+
     <script>
-        // suhu
-        // 1. Buat data dummy statis sebagai pengganti database
+
+        // =====================================================
+        // SUHU AIR
+        // =====================================================
+
         const dataDummy = [
             { Waktu: "2026-10-04 08:00:00", Suhu: 28.5 },
             { Waktu: "2026-10-04 08:15:00", Suhu: 29.0 },
@@ -305,99 +566,211 @@
             { Waktu: "2026-10-04 09:30:00", Suhu: 30.1 }
         ];
 
-        // 2. Olah data dummy tersebut (tanpa perlu .then atau proses asinkronus)
-        // Memotong teks berdasarkan spasi, lalu mengambil bagian jamnya saja
-        // Mengambil jam dan menit saja (misal: "08:15:00" dipotong jadi "08:15")
         const labelWaktu = dataDummy.map(item => {
-            let waktuFull = item.Waktu.split(' ')[1]; // "08:15:00"
-            return waktuFull.substring(0, 5); // Ambil 5 karakter pertama -> "08:15"
+            let waktuFull = item.Waktu.split(' ')[1];
+            return waktuFull.substring(0, 5);
         });
 
-        // Gunakan parseFloat agar nilai string dari dummy/database dipastikan menjadi angka desimal
-        const nilaiSuhu = dataDummy.map(item => parseFloat(item.Suhu)); 
+        const nilaiSuhu = dataDummy.map(item => parseFloat(item.Suhu));
 
-        // 3. Hitung rata-rata
         const totalSuhu = nilaiSuhu.reduce((total, angka) => total + angka, 0);
         const rataRataSuhu = (totalSuhu / nilaiSuhu.length).toFixed(1);
-        document.getElementById('rataSuhu').innerText = 'Rata-rata: ' + rataRataSuhu + ' °C';
 
-        // 4. Render Grafik
-        const ctx = document.getElementById('tampilgrafikSuhu').getContext('2d');
+        document.getElementById('rataSuhu').innerText =
+            'Rata-rata: ' + rataRataSuhu + ' °C';
 
-        // Membuat efek gradasi warna
+
+        const ctx = document
+            .getElementById('tampilgrafikSuhu')
+            .getContext('2d');
+
         let gradient = ctx.createLinearGradient(0, 0, 0, 300);
-        gradient.addColorStop(0, 'rgba(17, 138, 178, 0.4)'); // Warna biru atas
-        gradient.addColorStop(1, 'rgba(17, 138, 178, 0.0)'); // Transparan bawah
+
+        gradient.addColorStop(
+            0,
+            'rgba(17, 138, 178, 0.4)'
+        );
+
+        gradient.addColorStop(
+            1,
+            'rgba(17, 138, 178, 0.0)'
+        );
+
 
         new Chart(ctx, {
+
             type: 'line',
+
             data: {
+
                 labels: labelWaktu,
+
                 datasets: [{
+
                     label: 'Suhu Air',
+
                     data: nilaiSuhu,
-                    backgroundColor: gradient, // Pakai efek gradasi
-                    borderColor: '#FF0000',    // Warna garis utama
-                    borderWidth: 3,            // Garis sedikit lebih tebal
-                    fill: true,                // Mengisi area di bawah garis
-                    tension: 0.4,              // BIKIN GARIS MELENGKUNG (MODERN)
-                    pointBackgroundColor: '#ffffff', // Titik warna putih
-                    pointBorderColor: '#FF0000',     // Pinggiran titik
+
+                    backgroundColor: gradient,
+
+                    borderColor: '#FF0000',
+
+                    borderWidth: 3,
+
+                    fill: true,
+
+                    tension: 0.4,
+
+                    pointBackgroundColor: '#ffffff',
+
+                    pointBorderColor: '#FF0000',
+
                     pointBorderWidth: 2,
-                    pointRadius: 1,            // Titik disembunyikan/kecil saat diam
-                    pointHoverRadius: 6        // Titik membesar saat di-hover mouse
+
+                    pointRadius: 4,
+                    pointHoverRadius: 7,
+                    pointHitRadius: 12,
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderWidth: 2,
+
                 }]
+
             },
+
             options: {
+
                 responsive: true,
-                maintainAspectRatio: false, // Penting agar grafik pas di dalam div 'h-64'
-                plugins: {
-                    legend: {
-                        display: false // Sembunyikan label legend di atas biar clean
-                    },
-                    tooltip: {
-                        backgroundColor: '#FF0000', // Warna background tooltip
-                        titleFont: { family: 'Inter', size: 12 },
-                        bodyFont: { family: 'Inter', size: 14, weight: 'bold' },
-                        padding: 12,
-                        displayColors: false, // Hilangkan kotak warna kecil di tooltip
-                        cornerRadius: 8,
-                        callbacks: {
-                            label: function(context) {
-                                return context.parsed.y + ' °C'; // Tambah teks °C di tooltip
-                            }
-                        }
+
+                maintainAspectRatio: false,
+
+                // KLIK TITIK GRAFIK
+                onClick: function (event, elements) {
+
+                    if (elements.length > 0) {
+
+                        const index = elements[0].index;
+
+                        const waktu = labelWaktu[index];
+
+                        const nilai = nilaiSuhu[index];
+
+                        const detail =
+                            document.getElementById('detailSuhu');
+
+                        detail.innerHTML = `
+                            <div class="font-semibold mb-1">
+                                Detail Pengukuran
+                            </div>
+
+                            <div>
+                                Waktu:
+                                <strong>${waktu}</strong>
+                            </div>
+
+                            <div>
+                                Suhu:
+                                <strong>${nilai} °C</strong>
+                            </div>
+                        `;
+
+                        detail.classList.remove('hidden');
+
                     }
+
                 },
-                scales: {
-                    x: {
-                        grid: {
-                            display: false, // Hilangkan garis vertikal background
-                            drawBorder: false
-                        },
-                        ticks: {
-                            font: { family: 'Inter', size: 11 },
-                            color: '#94a3b8' // Warna abu-abu elegan
-                        }
+
+                plugins: {
+
+                    legend: {
+                        display: false
                     },
-                    y: {
+
+                    tooltip: {
+
+                        backgroundColor: '#FF0000',
+
+                        titleFont: {
+                            family: 'Inter',
+                            size: 12
+                        },
+
+                        bodyFont: {
+                            family: 'Inter',
+                            size: 14,
+                            weight: 'bold'
+                        },
+
+                        padding: 12,
+
+                        displayColors: false,
+
+                        cornerRadius: 8,
+
+                        callbacks: {
+
+                            label: function (context) {
+
+                                return context.parsed.y + ' °C';
+
+                            }
+
+                        }
+
+                    }
+
+                },
+
+                scales: {
+
+                    x: {
+
                         grid: {
-                            color: '#e2e8f0', // Warna garis horizontal samar
-                            borderDash: [5, 5], // Bikin garis putus-putus
+                            display: false,
                             drawBorder: false
                         },
+
                         ticks: {
-                            font: { family: 'Inter', size: 11 },
+                            font: {
+                                family: 'Inter',
+                                size: 11
+                            },
+                            color: '#94a3b8'
+                        }
+
+                    },
+
+                    y: {
+
+                        grid: {
+                            color: '#e2e8f0',
+                            borderDash: [5, 5],
+                            drawBorder: false
+                        },
+
+                        ticks: {
+                            font: {
+                                family: 'Inter',
+                                size: 11
+                            },
                             color: '#94a3b8',
                             padding: 10
                         }
+
                     }
+
                 }
+
             }
+
         });
 
+
+        // =====================================================
         // DO
+        // =====================================================
+
         const dataDummyDO = [
+
             { Waktu: "2026-10-04 08:00:00", DO: 8 },
             { Waktu: "2026-10-04 08:15:00", DO: 8.2 },
             { Waktu: "2026-10-04 08:30:00", DO: 7.5 },
@@ -405,93 +778,213 @@
             { Waktu: "2026-10-04 09:00:00", DO: 9.7 },
             { Waktu: "2026-10-04 09:15:00", DO: 8.2 },
             { Waktu: "2026-10-04 09:30:00", DO: 7.8 }
+
         ];
 
-        const nilaiDO = dataDummyDO.map(item => parseFloat(item.DO)); 
+        const nilaiDO =
+            dataDummyDO.map(item => parseFloat(item.DO));
 
-        // 3. Hitung rata-rata
-        const totalDO = nilaiDO.reduce((total, angka) => total + angka, 0);
-        const rataRataDO = (totalDO / nilaiDO.length).toFixed(1);
-        document.getElementById('rataDO').innerText = 'Rata-rata: ' + rataRataDO + ' mg/L';
+        const totalDO =
+            nilaiDO.reduce((total, angka) => total + angka, 0);
 
-        // 4. Render Grafik
-        const ctxa = document.getElementById('tampilgrafikDO').getContext('2d');
+        const rataRataDO =
+            (totalDO / nilaiDO.length).toFixed(1);
 
-        // Membuat efek gradasi warna
-        let gradienta = ctxa.createLinearGradient(0, 0, 0, 300);
-        gradienta.addColorStop(0, 'rgba(17, 138, 178, 0.4)'); // Warna biru atas
-        gradienta.addColorStop(1, 'rgba(17, 138, 178, 0.0)'); // Transparan bawah
+        document.getElementById('rataDO').innerText =
+            'Rata-rata: ' + rataRataDO + ' mg/L';
+
+
+        const ctxa =
+            document.getElementById('tampilgrafikDO')
+                .getContext('2d');
+
+        let gradienta =
+            ctxa.createLinearGradient(0, 0, 0, 300);
+
+        gradienta.addColorStop(
+            0,
+            'rgba(17, 138, 178, 0.4)'
+        );
+
+        gradienta.addColorStop(
+            1,
+            'rgba(17, 138, 178, 0.0)'
+        );
+
 
         new Chart(ctxa, {
+
             type: 'line',
+
             data: {
+
                 labels: labelWaktu,
+
                 datasets: [{
-                    label: 'Suhu Air',
+
+                    label: 'Oksigen Terlarut (DO)',
+
                     data: nilaiDO,
-                    backgroundColor: gradienta, // Pakai efek gradasi
-                    borderColor: '#008000',    // Warna garis utama
-                    borderWidth: 3,            // Garis sedikit lebih tebal
-                    fill: true,                // Mengisi area di bawah garis
-                    tension: 0.4,              // BIKIN GARIS MELENGKUNG (MODERN)
-                    pointBackgroundColor: '#ffffff', // Titik warna putih
-                    pointBorderColor: '#008000',     // Pinggiran titik
+
+                    backgroundColor: gradienta,
+
+                    borderColor: '#008000',
+
+                    borderWidth: 3,
+
+                    fill: true,
+
+                    tension: 0.4,
+
+                    pointBackgroundColor: '#ffffff',
+
+                    pointBorderColor: '#008000',
+
                     pointBorderWidth: 2,
-                    pointRadius: 1,            // Titik disembunyikan/kecil saat diam
-                    pointHoverRadius: 6        // Titik membesar saat di-hover mouse
+
+                    pointRadius: 4,
+                    pointHoverRadius: 7,
+                    pointHitRadius: 12,
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderWidth: 2,
+
                 }]
+
             },
+
             options: {
+
                 responsive: true,
-                maintainAspectRatio: false, // Penting agar grafik pas di dalam div 'h-64'
-                plugins: {
-                    legend: {
-                        display: false // Sembunyikan label legend di atas biar clean
-                    },
-                    tooltip: {
-                        backgroundColor: '#008000', // Warna background tooltip
-                        titleFont: { family: 'Inter', size: 12 },
-                        bodyFont: { family: 'Inter', size: 14, weight: 'bold' },
-                        padding: 12,
-                        displayColors: false, // Hilangkan kotak warna kecil di tooltip
-                        cornerRadius: 8,
-                        callbacks: {
-                            label: function(context) {
-                                return context.parsed.y + ' mg/L'; // Tambah teks °C di tooltip
-                            }
-                        }
+
+                maintainAspectRatio: false,
+
+                onClick: function (event, elements) {
+
+                    if (elements.length > 0) {
+
+                        const index = elements[0].index;
+
+                        const waktu = labelWaktu[index];
+
+                        const nilai = nilaiDO[index];
+
+                        const detail =
+                            document.getElementById('detailDO');
+
+                        detail.innerHTML = `
+                            <div class="font-semibold mb-1">
+                                Detail Pengukuran
+                            </div>
+
+                            <div>
+                                Waktu:
+                                <strong>${waktu}</strong>
+                            </div>
+
+                            <div>
+                                DO:
+                                <strong>${nilai} mg/L</strong>
+                            </div>
+                        `;
+
+                        detail.classList.remove('hidden');
+
                     }
+
                 },
-                scales: {
-                    x: {
-                        grid: {
-                            display: false, // Hilangkan garis vertikal background
-                            drawBorder: false
-                        },
-                        ticks: {
-                            font: { family: 'Inter', size: 11 },
-                            color: '#94a3b8' // Warna abu-abu elegan
-                        }
+
+                plugins: {
+
+                    legend: {
+                        display: false
                     },
-                    y: {
+
+                    tooltip: {
+
+                        backgroundColor: '#008000',
+
+                        titleFont: {
+                            family: 'Inter',
+                            size: 12
+                        },
+
+                        bodyFont: {
+                            family: 'Inter',
+                            size: 14,
+                            weight: 'bold'
+                        },
+
+                        padding: 12,
+
+                        displayColors: false,
+
+                        cornerRadius: 8,
+
+                        callbacks: {
+
+                            label: function (context) {
+
+                                return context.parsed.y + ' mg/L';
+
+                            }
+
+                        }
+
+                    }
+
+                },
+
+                scales: {
+
+                    x: {
+
                         grid: {
-                            color: '#e2e8f0', // Warna garis horizontal samar
-                            borderDash: [5, 5], // Bikin garis putus-putus
+                            display: false,
                             drawBorder: false
                         },
+
                         ticks: {
-                            font: { family: 'Inter', size: 11 },
+                            font: {
+                                family: 'Inter',
+                                size: 11
+                            },
+                            color: '#94a3b8'
+                        }
+
+                    },
+
+                    y: {
+
+                        grid: {
+                            color: '#e2e8f0',
+                            borderDash: [5, 5],
+                            drawBorder: false
+                        },
+
+                        ticks: {
+                            font: {
+                                family: 'Inter',
+                                size: 11
+                            },
                             color: '#94a3b8',
                             padding: 10
                         }
+
                     }
+
                 }
+
             }
+
         });
 
-        
-        // Kedalaman
-         const dataDummyKed = [
+
+        // =====================================================
+        // KEDALAMAN
+        // =====================================================
+
+        const dataDummyKed = [
+
             { Waktu: "2026-10-04 08:00:00", Ked: 10 },
             { Waktu: "2026-10-04 08:15:00", Ked: 10.2 },
             { Waktu: "2026-10-04 08:30:00", Ked: 10.1 },
@@ -499,92 +992,213 @@
             { Waktu: "2026-10-04 09:00:00", Ked: 9.4 },
             { Waktu: "2026-10-04 09:15:00", Ked: 9.1 },
             { Waktu: "2026-10-04 09:30:00", Ked: 10.2 }
+
         ];
 
-        const nilaiKed = dataDummyKed.map(item => parseFloat(item.Ked)); 
+        const nilaiKed =
+            dataDummyKed.map(item => parseFloat(item.Ked));
 
-        // 3. Hitung rata-rata
-        const totalKed = nilaiKed.reduce((total, angka) => total + angka, 0);
-        const rataRataKed = (totalKed / nilaiKed.length).toFixed(1);
-        document.getElementById('rataKedalaman').innerText = 'Rata-rata: ' + rataRataKed + ' m';
+        const totalKed =
+            nilaiKed.reduce((total, angka) => total + angka, 0);
 
-        // 4. Render Grafik
-        const ctxb = document.getElementById('tampilgrafikKedalaman').getContext('2d');
+        const rataRataKed =
+            (totalKed / nilaiKed.length).toFixed(1);
 
-        // Membuat efek gradasi warna
-        let gradientb = ctxb.createLinearGradient(0, 0, 0, 300);
-        gradientb.addColorStop(0, 'rgba(17, 138, 178, 0.4)'); // Warna biru atas
-        gradientb.addColorStop(1, 'rgba(17, 138, 178, 0.0)'); // Transparan bawah
+        document.getElementById('rataKedalaman').innerText =
+            'Rata-rata: ' + rataRataKed + ' m';
+
+
+        const ctxb =
+            document.getElementById('tampilgrafikKedalaman')
+                .getContext('2d');
+
+        let gradientb =
+            ctxb.createLinearGradient(0, 0, 0, 300);
+
+        gradientb.addColorStop(
+            0,
+            'rgba(17, 138, 178, 0.4)'
+        );
+
+        gradientb.addColorStop(
+            1,
+            'rgba(17, 138, 178, 0.0)'
+        );
+
 
         new Chart(ctxb, {
+
             type: 'line',
+
             data: {
+
                 labels: labelWaktu,
+
                 datasets: [{
-                    label: 'Suhu Air',
+
+                    label: 'Kedalaman',
+
                     data: nilaiKed,
-                    backgroundColor: gradientb, // Pakai efek gradasi
-                    borderColor: '#000080',    // Warna garis utama
-                    borderWidth: 3,            // Garis sedikit lebih tebal
-                    fill: true,                // Mengisi area di bawah garis
-                    tension: 0.4,              // BIKIN GARIS MELENGKUNG (MODERN)
-                    pointBackgroundColor: '#ffffff', // Titik warna putih
-                    pointBorderColor: '#000080',     // Pinggiran titik
+
+                    backgroundColor: gradientb,
+
+                    borderColor: '#000080',
+
+                    borderWidth: 3,
+
+                    fill: true,
+
+                    tension: 0.4,
+
+                    pointBackgroundColor: '#ffffff',
+
+                    pointBorderColor: '#000080',
+
                     pointBorderWidth: 2,
-                    pointRadius: 1,            // Titik disembunyikan/kecil saat diam
-                    pointHoverRadius: 6        // Titik membesar saat di-hover mouse
+
+                    pointRadius: 4,
+                    pointHoverRadius: 7,
+                    pointHitRadius: 12,
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderWidth: 2,
+
                 }]
+
             },
+
             options: {
+
                 responsive: true,
-                maintainAspectRatio: false, // Penting agar grafik pas di dalam div 'h-64'
-                plugins: {
-                    legend: {
-                        display: false // Sembunyikan label legend di atas biar clean
-                    },
-                    tooltip: {
-                        backgroundColor: '#000080', // Warna background tooltip
-                        titleFont: { family: 'Inter', size: 12 },
-                        bodyFont: { family: 'Inter', size: 14, weight: 'bold' },
-                        padding: 12,
-                        displayColors: false, // Hilangkan kotak warna kecil di tooltip
-                        cornerRadius: 8,
-                        callbacks: {
-                            label: function(context) {
-                                return context.parsed.y + ' m'; // Tambah teks °C di tooltip
-                            }
-                        }
+
+                maintainAspectRatio: false,
+
+                onClick: function (event, elements) {
+
+                    if (elements.length > 0) {
+
+                        const index = elements[0].index;
+
+                        const waktu = labelWaktu[index];
+
+                        const nilai = nilaiKed[index];
+
+                        const detail =
+                            document.getElementById('detailKedalaman');
+
+                        detail.innerHTML = `
+                            <div class="font-semibold mb-1">
+                                Detail Pengukuran
+                            </div>
+
+                            <div>
+                                Waktu:
+                                <strong>${waktu}</strong>
+                            </div>
+
+                            <div>
+                                Kedalaman:
+                                <strong>${nilai} m</strong>
+                            </div>
+                        `;
+
+                        detail.classList.remove('hidden');
+
                     }
+
                 },
-                scales: {
-                    x: {
-                        grid: {
-                            display: false, // Hilangkan garis vertikal background
-                            drawBorder: false
-                        },
-                        ticks: {
-                            font: { family: 'Inter', size: 11 },
-                            color: '#94a3b8' // Warna abu-abu elegan
-                        }
+
+                plugins: {
+
+                    legend: {
+                        display: false
                     },
-                    y: {
+
+                    tooltip: {
+
+                        backgroundColor: '#000080',
+
+                        titleFont: {
+                            family: 'Inter',
+                            size: 12
+                        },
+
+                        bodyFont: {
+                            family: 'Inter',
+                            size: 14,
+                            weight: 'bold'
+                        },
+
+                        padding: 12,
+
+                        displayColors: false,
+
+                        cornerRadius: 8,
+
+                        callbacks: {
+
+                            label: function (context) {
+
+                                return context.parsed.y + ' m';
+
+                            }
+
+                        }
+
+                    }
+
+                },
+
+                scales: {
+
+                    x: {
+
                         grid: {
-                            color: '#e2e8f0', // Warna garis horizontal samar
-                            borderDash: [5, 5], // Bikin garis putus-putus
+                            display: false,
                             drawBorder: false
                         },
+
                         ticks: {
-                            font: { family: 'Inter', size: 11 },
+                            font: {
+                                family: 'Inter',
+                                size: 11
+                            },
+                            color: '#94a3b8'
+                        }
+
+                    },
+
+                    y: {
+
+                        grid: {
+                            color: '#e2e8f0',
+                            borderDash: [5, 5],
+                            drawBorder: false
+                        },
+
+                        ticks: {
+                            font: {
+                                family: 'Inter',
+                                size: 11
+                            },
                             color: '#94a3b8',
                             padding: 10
                         }
+
                     }
+
                 }
+
             }
+
         });
-        
-        // Kekeruhan
-         const dataDummyKer = [
+
+
+        // =====================================================
+        // KEKERUHAN
+        // =====================================================
+
+        const dataDummyKer = [
+
             { Waktu: "2026-10-04 08:00:00", Ker: 14 },
             { Waktu: "2026-10-04 08:15:00", Ker: 14.5 },
             { Waktu: "2026-10-04 08:30:00", Ker: 14.7 },
@@ -592,92 +1206,213 @@
             { Waktu: "2026-10-04 09:00:00", Ker: 14.3 },
             { Waktu: "2026-10-04 09:15:00", Ker: 14.2 },
             { Waktu: "2026-10-04 09:30:00", Ker: 15.6 }
+
         ];
 
-        const nilaiKer = dataDummyKer.map(item => parseFloat(item.Ker)); 
+        const nilaiKer =
+            dataDummyKer.map(item => parseFloat(item.Ker));
 
-        // 3. Hitung rata-rata
-        const totalKer = nilaiKer.reduce((total, angka) => total + angka, 0);
-        const rataRataKer = (totalKer / nilaiKer.length).toFixed(1);
-        document.getElementById('rataKekeruhan').innerText = 'Rata-rata: ' + rataRataKer + ' NTU';
+        const totalKer =
+            nilaiKer.reduce((total, angka) => total + angka, 0);
 
-        // 4. Render Grafik
-        const ctxc = document.getElementById('tampilgrafikKekeruhan').getContext('2d');
+        const rataRataKer =
+            (totalKer / nilaiKer.length).toFixed(1);
 
-        // Membuat efek gradasi warna
-        let gradientc = ctxc.createLinearGradient(0, 0, 0, 300);
-        gradientc.addColorStop(0, 'rgba(17, 138, 178, 0.4)'); // Warna biru atas
-        gradientc.addColorStop(1, 'rgba(17, 138, 178, 0.0)'); // Transparan bawah
+        document.getElementById('rataKekeruhan').innerText =
+            'Rata-rata: ' + rataRataKer + ' NTU';
+
+
+        const ctxc =
+            document.getElementById('tampilgrafikKekeruhan')
+                .getContext('2d');
+
+        let gradientc =
+            ctxc.createLinearGradient(0, 0, 0, 300);
+
+        gradientc.addColorStop(
+            0,
+            'rgba(17, 138, 178, 0.4)'
+        );
+
+        gradientc.addColorStop(
+            1,
+            'rgba(17, 138, 178, 0.0)'
+        );
+
 
         new Chart(ctxc, {
+
             type: 'line',
+
             data: {
+
                 labels: labelWaktu,
+
                 datasets: [{
-                    label: 'Suhu Air',
+
+                    label: 'Kekeruhan',
+
                     data: nilaiKer,
-                    backgroundColor: gradientc, // Pakai efek gradasi
-                    borderColor: '#F6BE00',    // Warna garis utama
-                    borderWidth: 3,            // Garis sedikit lebih tebal
-                    fill: true,                // Mengisi area di bawah garis
-                    tension: 0.4,              // BIKIN GARIS MELENGKUNG (MODERN)
-                    pointBackgroundColor: '#ffffff', // Titik warna putih
-                    pointBorderColor: '#F6BE00',     // Pinggiran titik
+
+                    backgroundColor: gradientc,
+
+                    borderColor: '#F6BE00',
+
+                    borderWidth: 3,
+
+                    fill: true,
+
+                    tension: 0.4,
+
+                    pointBackgroundColor: '#ffffff',
+
+                    pointBorderColor: '#F6BE00',
+
                     pointBorderWidth: 2,
-                    pointRadius: 1,            // Titik disembunyikan/kecil saat diam
-                    pointHoverRadius: 6        // Titik membesar saat di-hover mouse
+
+                    pointRadius: 4,
+                    pointHoverRadius: 7,
+                    pointHitRadius: 12,
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderWidth: 2,
+
                 }]
+
             },
+
             options: {
+
                 responsive: true,
-                maintainAspectRatio: false, // Penting agar grafik pas di dalam div 'h-64'
-                plugins: {
-                    legend: {
-                        display: false // Sembunyikan label legend di atas biar clean
-                    },
-                    tooltip: {
-                        backgroundColor: '#F6BE00', // Warna background tooltip
-                        titleFont: { family: 'Inter', size: 12 },
-                        bodyFont: { family: 'Inter', size: 14, weight: 'bold' },
-                        padding: 12,
-                        displayColors: false, // Hilangkan kotak warna kecil di tooltip
-                        cornerRadius: 8,
-                        callbacks: {
-                            label: function(context) {
-                                return context.parsed.y + ' NTU'; // Tambah teks °C di tooltip
-                            }
-                        }
+
+                maintainAspectRatio: false,
+
+                onClick: function (event, elements) {
+
+                    if (elements.length > 0) {
+
+                        const index = elements[0].index;
+
+                        const waktu = labelWaktu[index];
+
+                        const nilai = nilaiKer[index];
+
+                        const detail =
+                            document.getElementById('detailKekeruhan');
+
+                        detail.innerHTML = `
+                            <div class="font-semibold mb-1">
+                                Detail Pengukuran
+                            </div>
+
+                            <div>
+                                Waktu:
+                                <strong>${waktu}</strong>
+                            </div>
+
+                            <div>
+                                Kekeruhan:
+                                <strong>${nilai} NTU</strong>
+                            </div>
+                        `;
+
+                        detail.classList.remove('hidden');
+
                     }
+
                 },
-                scales: {
-                    x: {
-                        grid: {
-                            display: false, // Hilangkan garis vertikal background
-                            drawBorder: false
-                        },
-                        ticks: {
-                            font: { family: 'Inter', size: 11 },
-                            color: '#94a3b8' // Warna abu-abu elegan
-                        }
+
+                plugins: {
+
+                    legend: {
+                        display: false
                     },
-                    y: {
+
+                    tooltip: {
+
+                        backgroundColor: '#F6BE00',
+
+                        titleFont: {
+                            family: 'Inter',
+                            size: 12
+                        },
+
+                        bodyFont: {
+                            family: 'Inter',
+                            size: 14,
+                            weight: 'bold'
+                        },
+
+                        padding: 12,
+
+                        displayColors: false,
+
+                        cornerRadius: 8,
+
+                        callbacks: {
+
+                            label: function (context) {
+
+                                return context.parsed.y + ' NTU';
+
+                            }
+
+                        }
+
+                    }
+
+                },
+
+                scales: {
+
+                    x: {
+
                         grid: {
-                            color: '#e2e8f0', // Warna garis horizontal samar
-                            borderDash: [5, 5], // Bikin garis putus-putus
+                            display: false,
                             drawBorder: false
                         },
+
                         ticks: {
-                            font: { family: 'Inter', size: 11 },
+                            font: {
+                                family: 'Inter',
+                                size: 11
+                            },
+                            color: '#94a3b8'
+                        }
+
+                    },
+
+                    y: {
+
+                        grid: {
+                            color: '#e2e8f0',
+                            borderDash: [5, 5],
+                            drawBorder: false
+                        },
+
+                        ticks: {
+                            font: {
+                                family: 'Inter',
+                                size: 11
+                            },
                             color: '#94a3b8',
                             padding: 10
                         }
+
                     }
+
                 }
+
             }
+
         });
 
+
+        // =====================================================
         // pH
-         const dataDummypH = [
+        // =====================================================
+
+        const dataDummypH = [
+
             { Waktu: "2026-10-04 08:00:00", pH: 7.2 },
             { Waktu: "2026-10-04 08:15:00", pH: 7.4 },
             { Waktu: "2026-10-04 08:30:00", pH: 7.1 },
@@ -685,92 +1420,213 @@
             { Waktu: "2026-10-04 09:00:00", pH: 6.9 },
             { Waktu: "2026-10-04 09:15:00", pH: 7.4 },
             { Waktu: "2026-10-04 09:30:00", pH: 7.1 }
+
         ];
 
-        const nilaipH = dataDummypH.map(item => parseFloat(item.pH)); 
+        const nilaipH =
+            dataDummypH.map(item => parseFloat(item.pH));
 
-        // 3. Hitung rata-rata
-        const totalpH = nilaipH.reduce((total, angka) => total + angka, 0);
-        const rataRatapH = (totalpH / nilaipH.length).toFixed(1);
-        document.getElementById('ratapH').innerText = 'Rata-rata: ' + rataRatapH;
+        const totalpH =
+            nilaipH.reduce((total, angka) => total + angka, 0);
 
-        // 4. Render Grafik
-        const ctxd = document.getElementById('tampilgrafikpH').getContext('2d');
+        const rataRatapH =
+            (totalpH / nilaipH.length).toFixed(1);
 
-        // Membuat efek gradasi warna
-        let gradientd = ctxd.createLinearGradient(0, 0, 0, 300);
-        gradientd.addColorStop(0, 'rgba(17, 138, 178, 0.4)'); // Warna biru atas
-        gradientd.addColorStop(1, 'rgba(17, 138, 178, 0.0)'); // Transparan bawah
+        document.getElementById('ratapH').innerText =
+            'Rata-rata: ' + rataRatapH;
+
+
+        const ctxd =
+            document.getElementById('tampilgrafikpH')
+                .getContext('2d');
+
+        let gradientd =
+            ctxd.createLinearGradient(0, 0, 0, 300);
+
+        gradientd.addColorStop(
+            0,
+            'rgba(17, 138, 178, 0.4)'
+        );
+
+        gradientd.addColorStop(
+            1,
+            'rgba(17, 138, 178, 0.0)'
+        );
+
 
         new Chart(ctxd, {
+
             type: 'line',
+
             data: {
+
                 labels: labelWaktu,
+
                 datasets: [{
-                    label: 'Suhu Air',
+
+                    label: 'pH',
+
                     data: nilaipH,
-                    backgroundColor: gradientd, // Pakai efek gradasi
-                    borderColor: '#A020F0',    // Warna garis utama
-                    borderWidth: 3,            // Garis sedikit lebih tebal
-                    fill: true,                // Mengisi area di bawah garis
-                    tension: 0.4,              // BIKIN GARIS MELENGKUNG (MODERN)
-                    pointBackgroundColor: '#ffffff', // Titik warna putih
-                    pointBorderColor: '#A020F0',     // Pinggiran titik
+
+                    backgroundColor: gradientd,
+
+                    borderColor: '#A020F0',
+
+                    borderWidth: 3,
+
+                    fill: true,
+
+                    tension: 0.4,
+
+                    pointBackgroundColor: '#ffffff',
+
+                    pointBorderColor: '#A020F0',
+
                     pointBorderWidth: 2,
-                    pointRadius: 1,            // Titik disembunyikan/kecil saat diam
-                    pointHoverRadius: 6        // Titik membesar saat di-hover mouse
+
+                    pointRadius: 4,
+                    pointHoverRadius: 7,
+                    pointHitRadius: 12,
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderWidth: 2,
+
                 }]
+
             },
+
             options: {
+
                 responsive: true,
-                maintainAspectRatio: false, // Penting agar grafik pas di dalam div 'h-64'
-                plugins: {
-                    legend: {
-                        display: false // Sembunyikan label legend di atas biar clean
-                    },
-                    tooltip: {
-                        backgroundColor: '#A020F0', // Warna background tooltip
-                        titleFont: { family: 'Inter', size: 12 },
-                        bodyFont: { family: 'Inter', size: 14, weight: 'bold' },
-                        padding: 12,
-                        displayColors: false, // Hilangkan kotak warna kecil di tooltip
-                        cornerRadius: 8,
-                        callbacks: {
-                            label: function(context) {
-                                return context.parsed.y; // Tambah teks °C di tooltip
-                            }
-                        }
+
+                maintainAspectRatio: false,
+
+                onClick: function (event, elements) {
+
+                    if (elements.length > 0) {
+
+                        const index = elements[0].index;
+
+                        const waktu = labelWaktu[index];
+
+                        const nilai = nilaipH[index];
+
+                        const detail =
+                            document.getElementById('detailpH');
+
+                        detail.innerHTML = `
+                            <div class="font-semibold mb-1">
+                                Detail Pengukuran
+                            </div>
+
+                            <div>
+                                Waktu:
+                                <strong>${waktu}</strong>
+                            </div>
+
+                            <div>
+                                pH:
+                                <strong>${nilai}</strong>
+                            </div>
+                        `;
+
+                        detail.classList.remove('hidden');
+
                     }
+
                 },
-                scales: {
-                    x: {
-                        grid: {
-                            display: false, // Hilangkan garis vertikal background
-                            drawBorder: false
-                        },
-                        ticks: {
-                            font: { family: 'Inter', size: 11 },
-                            color: '#94a3b8' // Warna abu-abu elegan
-                        }
+
+                plugins: {
+
+                    legend: {
+                        display: false
                     },
-                    y: {
+
+                    tooltip: {
+
+                        backgroundColor: '#A020F0',
+
+                        titleFont: {
+                            family: 'Inter',
+                            size: 12
+                        },
+
+                        bodyFont: {
+                            family: 'Inter',
+                            size: 14,
+                            weight: 'bold'
+                        },
+
+                        padding: 12,
+
+                        displayColors: false,
+
+                        cornerRadius: 8,
+
+                        callbacks: {
+
+                            label: function (context) {
+
+                                return context.parsed.y;
+
+                            }
+
+                        }
+
+                    }
+
+                },
+
+                scales: {
+
+                    x: {
+
                         grid: {
-                            color: '#e2e8f0', // Warna garis horizontal samar
-                            borderDash: [5, 5], // Bikin garis putus-putus
+                            display: false,
                             drawBorder: false
                         },
+
                         ticks: {
-                            font: { family: 'Inter', size: 11 },
+                            font: {
+                                family: 'Inter',
+                                size: 11
+                            },
+                            color: '#94a3b8'
+                        }
+
+                    },
+
+                    y: {
+
+                        grid: {
+                            color: '#e2e8f0',
+                            borderDash: [5, 5],
+                            drawBorder: false
+                        },
+
+                        ticks: {
+                            font: {
+                                family: 'Inter',
+                                size: 11
+                            },
                             color: '#94a3b8',
                             padding: 10
                         }
+
                     }
+
                 }
+
             }
+
         });
 
-        // Salinitas
-         const dataDummySal = [
+
+        // =====================================================
+        // SALINITAS
+        // =====================================================
+
+        const dataDummySal = [
+
             { Waktu: "2026-10-04 08:00:00", Sal: 28 },
             { Waktu: "2026-10-04 08:15:00", Sal: 27.5 },
             { Waktu: "2026-10-04 08:30:00", Sal: 27.8 },
@@ -778,107 +1634,300 @@
             { Waktu: "2026-10-04 09:00:00", Sal: 27.9 },
             { Waktu: "2026-10-04 09:15:00", Sal: 28 },
             { Waktu: "2026-10-04 09:30:00", Sal: 28.4 }
+
         ];
 
-        const nilaiSal = dataDummySal.map(item => parseFloat(item.Sal)); 
+        const nilaiSal =
+            dataDummySal.map(item => parseFloat(item.Sal));
 
-        // 3. Hitung rata-rata
-        const totalSal = nilaiSal.reduce((total, angka) => total + angka, 0);
-        const rataRataSal = (totalSal / nilaiSal.length).toFixed(1);
-        document.getElementById('rataSalinitas').innerText = 'Rata-rata: ' + rataRataSal + ' ppt';
+        const totalSal =
+            nilaiSal.reduce((total, angka) => total + angka, 0);
 
-        // 4. Render Grafik
-        const ctxe = document.getElementById('tampilgrafikSalinitas').getContext('2d');
+        const rataRataSal =
+            (totalSal / nilaiSal.length).toFixed(1);
 
-        // Membuat efek gradasi warna
-        let gradiente = ctxe.createLinearGradient(0, 0, 0, 300);
-        gradiente.addColorStop(0, 'rgba(17, 138, 178, 0.4)'); // Warna biru atas
-        gradiente.addColorStop(1, 'rgba(17, 138, 178, 0.0)'); // Transparan bawah
+        document.getElementById('rataSalinitas').innerText =
+            'Rata-rata: ' + rataRataSal + ' ppt';
+
+
+        const ctxe =
+            document.getElementById('tampilgrafikSalinitas')
+                .getContext('2d');
+
+        let gradiente =
+            ctxe.createLinearGradient(0, 0, 0, 300);
+
+        gradiente.addColorStop(
+            0,
+            'rgba(17, 138, 178, 0.4)'
+        );
+
+        gradiente.addColorStop(
+            1,
+            'rgba(17, 138, 178, 0.0)'
+        );
+
 
         new Chart(ctxe, {
+
             type: 'line',
+
             data: {
+
                 labels: labelWaktu,
+
                 datasets: [{
-                    label: 'Suhu Air',
+
+                    label: 'Salinitas Air',
+
                     data: nilaiSal,
-                    backgroundColor: gradiente, // Pakai efek gradasi
-                    borderColor: '#118AB2',    // Warna garis utama
-                    borderWidth: 3,            // Garis sedikit lebih tebal
-                    fill: true,                // Mengisi area di bawah garis
-                    tension: 0.4,              // BIKIN GARIS MELENGKUNG (MODERN)
-                    pointBackgroundColor: '#ffffff', // Titik warna putih
-                    pointBorderColor: '#118AB2',     // Pinggiran titik
+
+                    backgroundColor: gradiente,
+
+                    borderColor: '#118AB2',
+
+                    borderWidth: 3,
+
+                    fill: true,
+
+                    tension: 0.4,
+
+                    pointBackgroundColor: '#ffffff',
+
+                    pointBorderColor: '#118AB2',
+
                     pointBorderWidth: 2,
-                    pointRadius: 1,            // Titik disembunyikan/kecil saat diam
-                    pointHoverRadius: 6        // Titik membesar saat di-hover mouse
+
+                    pointRadius: 4,
+                    pointHoverRadius: 7,
+                    pointHitRadius: 12,
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderWidth: 2,
+
                 }]
+
             },
+
             options: {
+
                 responsive: true,
-                maintainAspectRatio: false, // Penting agar grafik pas di dalam div 'h-64'
-                plugins: {
-                    legend: {
-                        display: false // Sembunyikan label legend di atas biar clean
-                    },
-                    tooltip: {
-                        backgroundColor: '#118AB2', // Warna background tooltip
-                        titleFont: { family: 'Inter', size: 12 },
-                        bodyFont: { family: 'Inter', size: 14, weight: 'bold' },
-                        padding: 12,
-                        displayColors: false, // Hilangkan kotak warna kecil di tooltip
-                        cornerRadius: 8,
-                        callbacks: {
-                            label: function(context) {
-                                return context.parsed.y + ' ppt'; // Tambah teks °C di tooltip
-                            }
-                        }
+
+                maintainAspectRatio: false,
+
+                onClick: function (event, elements) {
+
+                    if (elements.length > 0) {
+
+                        const index = elements[0].index;
+
+                        const waktu = labelWaktu[index];
+
+                        const nilai = nilaiSal[index];
+
+                        const detail =
+                            document.getElementById('detailSalinitas');
+
+                        detail.innerHTML = `
+                            <div class="font-semibold mb-1">
+                                Detail Pengukuran
+                            </div>
+
+                            <div>
+                                Waktu:
+                                <strong>${waktu}</strong>
+                            </div>
+
+                            <div>
+                                Salinitas:
+                                <strong>${nilai} ppt</strong>
+                            </div>
+                        `;
+
+                        detail.classList.remove('hidden');
+
                     }
+
                 },
-                scales: {
-                    x: {
-                        grid: {
-                            display: false, // Hilangkan garis vertikal background
-                            drawBorder: false
-                        },
-                        ticks: {
-                            font: { family: 'Inter', size: 11 },
-                            color: '#94a3b8' // Warna abu-abu elegan
-                        }
+
+                plugins: {
+
+                    legend: {
+                        display: false
                     },
-                    y: {
+
+                    tooltip: {
+
+                        backgroundColor: '#118AB2',
+
+                        titleFont: {
+                            family: 'Inter',
+                            size: 12
+                        },
+
+                        bodyFont: {
+                            family: 'Inter',
+                            size: 14,
+                            weight: 'bold'
+                        },
+
+                        padding: 12,
+
+                        displayColors: false,
+
+                        cornerRadius: 8,
+
+                        callbacks: {
+
+                            label: function (context) {
+
+                                return context.parsed.y + ' ppt';
+
+                            }
+
+                        }
+
+                    }
+
+                },
+
+                scales: {
+
+                    x: {
+
                         grid: {
-                            color: '#e2e8f0', // Warna garis horizontal samar
-                            borderDash: [5, 5], // Bikin garis putus-putus
+                            display: false,
                             drawBorder: false
                         },
+
                         ticks: {
-                            font: { family: 'Inter', size: 11 },
+                            font: {
+                                family: 'Inter',
+                                size: 11
+                            },
+                            color: '#94a3b8'
+                        }
+
+                    },
+
+                    y: {
+
+                        grid: {
+                            color: '#e2e8f0',
+                            borderDash: [5, 5],
+                            drawBorder: false
+                        },
+
+                        ticks: {
+                            font: {
+                                family: 'Inter',
+                                size: 11
+                            },
                             color: '#94a3b8',
                             padding: 10
                         }
+
                     }
+
                 }
+
             }
+
         });
+
+        const mobileToggleBtn = document.getElementById('mobile-toggle-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const toggleIcon = document.getElementById('toggle-icon');
+
+        mobileToggleBtn.addEventListener('click', function () {
+
+            mobileMenu.classList.toggle('hidden');
+
+            if (mobileMenu.classList.contains('hidden')) {
+
+                toggleIcon.classList.remove('fa-times');
+                toggleIcon.classList.add('fa-bars');
+
+            } else {
+
+                toggleIcon.classList.remove('fa-bars');
+                toggleIcon.classList.add('fa-times');
+
+            }
+
+        });
+
     </script>
-</body>
-   <footer class="bg-white px-4 py-4 border-t-[2px] border-[#118AB2]">
-        <div>
-            <div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 text-[#118AB2] font-medium">
-                 <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9" class="flex items-center gap-2 hover:text-[#464b71] transition">
-                    <i class="fa-solid fa-location-dot text-xl"></i><span>Maker Space, Lt. Dasar Gedung FPIK, IPB University</span>
+
+
+    <br>
+    <footer class="bg-white px-6 py-10 border-t-[2px] border-[#118AB2]">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+
+            <!-- Kolom 1 (Dibuat lebih lebar/span 2): Lokasi, Email, dan WhatsApp -->
+            <div class="md:col-span-2 flex flex-col gap-4 text-[#118AB2]">
+                <h3 class="font-bold text-xl mb-2">Our Contact</h3>
+
+                <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9"
+                    class="flex items-start gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-solid fa-location-dot text-xl mt-1"></i>
+                    <span class="leading-relaxed">Workshop Instrumentasi dan Robotika Kelautan (Bengkel) ITK,
+                        Babakan, Dramaga, Bogor, Indonesia 16680</span>
                 </a>
-                <a href="https://www.instagram.com/mitr_ipb/" class="flex items-center gap-2 hover:text-[#464b71] transition">
-                    <i class="fa-brands fa-instagram text-xl"></i><span>@mitr_ipb</span>
+
+                <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-regular fa-envelope text-xl"></i>
+                    <span>mitr.ipb@gmail.com</span>
                 </a>
-                <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-2 hover:text-[#464b71] transition">
-                    <i class="fa-regular fa-envelope text-xl"></i><span>mitr.ipb@gmail.com</span>
+
+                <a href="https://wa.me/6283898339620" class="flex items-center gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    <span>+6283898339620 (Deni Rizkiana Anwar Hidayat)</span>
                 </a>
-                <a href="https://wa.me/6285935000474" class="flex items-center gap-2 hover:text-[#464b71] transition">
-                    <i class="fa-brands fa-whatsapp text-xl"></i><span>+6285935000474 (Raras Adinda Wulandari)</span>
+            </div>
+
+            <!-- Kolom 2: Sosial Media -->
+            <div class="flex flex-col gap-4 text-[#118AB2]">
+                <h3 class="font-bold text-xl mb-2">Social Media</h3>
+
+                <a href="https://www.instagram.com/mitr_ipb/"
+                    class="flex items-center gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-brands fa-instagram text-xl"></i>
+                    <span>@mitr_ipb</span>
                 </a>
+                <!-- Kamu bisa tambahkan link LinkedIn atau YouTube di sini jika ada -->
+            </div>
+
+            <!-- Kolom 3: Logo dan Tombol Back to Top -->
+            <div class="flex flex-col items-start gap-6 text-[#118AB2]">
+                <h3 class="font-bold text-xl mb-2">About Us</h3>
+
+                <!-- Tempat untuk Logo MIT+R -->
+                <div class="w-full flex items-center justify-start">
+                    <!-- Ganti "URL_LOGO_KAMU.png" dengan path/link logo yang sebenarnya -->
+                    <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-24   object-contain">
+                </div>
+
+                <!-- Tombol Back to Top -->
+                <div class="w-full flex justify-end mt-auto">
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+                        class="group flex items-center p-3 bg-[#118AB2] text-white rounded-full shadow-md hover:bg-[#0c6b8a] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
+
+                        <!-- Teks yang Muncul Saat Hover (Sekarang di urutan pertama / sebelah kiri) -->
+                        <span
+                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[120px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold">
+                            Back to Top
+                        </span>
+
+                        <!-- Lingkaran Icon Panah (Sekarang di urutan kedua / sebelah kanan) -->
+                        <span
+                            class="flex items-center justify-center w-7 h-7 bg-white text-[#118AB2] rounded-full transition-transform duration-500 group-hover:scale-110 shrink-0">
+                            <i class="fa-solid fa-arrow-up text-sm"></i>
+                        </span>
+                    </button>
+                </div>
             </div>
         </div>
     </footer>
+</body>
+
 </html>
