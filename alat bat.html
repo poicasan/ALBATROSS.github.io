@@ -1,217 +1,698 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alat Bat - Monitoring Kampung Laut</title>
+    <title>Alat BAT - Monitoring Kampung Laut</title>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Quicksand for clean rounded aesthetic matching screenshot -->
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Google Fonts: Anta & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anta&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         brand: {
-                            cyan: '#0c8fae',
+                            cyan: '#008ba3',
                             lightCyan: '#e6f7f9',
-                            darkText: '#2e3859',
-                            borderCyan: '#bae6fd',
-                            tealBg: '#0982a3'
+                            darkText: '#2d3757',
+                            borderCyan: '#b2e3ea',
+                            tealBg: '#0883a4'
                         }
                     },
                     fontFamily: {
-                        sans: ['Quicksand', 'sans-serif'],
+                        anta: ['Anta', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
+
     <style>
         body {
-            font-family: 'Quicksand', sans-serif;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-tech {
+            font-family: 'Anta', sans-serif;
         }
     </style>
 </head>
-<body class="bg-white min-h-screen flex flex-col justify-between text-gray-800 antialiased selection:bg-cyan-100">
 
-    <!-- Top Navigation Bar -->
-    <header class="bg-white border-b border-gray-100 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
-            <!-- Close Button / Icon -->
-            <button class="w-8 h-8 rounded-full bg-gray-200/80 flex items-center justify-center text-gray-700 hover:bg-gray-300 transition duration-200 focus:outline-none" title="Tutup">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
+<body class="bg-gray-50 min-h-screen flex flex-col justify-between text-gray-800 font-inter">
 
-            <!-- Navigation Links -->
-            <nav class="flex items-center space-x-5 sm:space-x-8 text-xs sm:text-sm font-bold tracking-wider text-brand-cyan">
-                <a href="#" class="hover:text-brand-tealBg transition duration-150">BERANDA</a>
-                <a href="#" class="hover:text-brand-tealBg transition duration-150">TENTANG KAMI</a>
-                <a href="#" class="hover:text-brand-tealBg transition duration-150 border-b-2 border-brand-cyan pb-0.5">ALAT</a>
-                <a href="#" class="hover:text-brand-tealBg transition duration-150">DATA</a>
-            </nav>
+    <!-- Navbar -->
+    <nav id="navbar"
+        class="fixed top-0 left-0 w-full z-50 p-4 lg:px-12 transition-all duration-300 bg-white shadow-md text-[#118AB2]">
+
+        <div class="max-w-7xl mx-auto flex justify-between items-center relative">
+
+            <!-- Logo ALBATROSS -->
+            <div class="relative flex items-center justify-center">
+                <!-- Shape Bulat Biru (Ukuran lebih besar, tidak mempengaruhi tinggi header) -->
+                <div class="absolute bg-[#118AB2] rounded-full w-14 h-14 -z-0"></div>
+
+                <!-- Tombol Logo (Tetap menentukan ukuran utama di header) -->
+                <a href="#" id="logo-btn"
+                    class="relative z-10 flex items-center justify-center transition-transform hover:scale-105">
+                    <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="h-12 w-auto object-contain">
+                </a>
+            </div>
+
+            <!-- Container Kanan -->
+            <div class="flex items-center space-x-3">
+
+                <ul id="nav-links"
+                    class="hidden md:flex items-center space-x-2 sm:space-x-3 text-xs sm:text-sm font-semibold tracking-wider sm:tracking-widest uppercase transition-all duration-300 py-1 font-inter">
+
+                    <li>
+                        <a href="index.html"
+                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
+                            BERANDA
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="tentang kami.html"
+                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
+                            TENTANG KAMI
+                        </a>
+                    </li>
+
+                    <!-- Dropdown ALAT -->
+                    <li class="relative group" id="alat-dropdown">
+
+                        <button id="alat-btn" type="button"
+                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+                            ALAT
+                        </button>
+
+                        <div id="alat-menu"
+                            class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
+
+                            <a href="alat alba.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Alat Alba
+                            </a>
+
+                            <a href="alat bat.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Alat Bat
+                            </a>
+
+                            <a href="alat tross.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">
+                                Alat Tross
+                            </a>
+
+                        </div>
+                    </li>
+
+                    <!-- Dropdown DATA -->
+                    <li class="relative group" id="data-dropdown">
+
+                        <button id="data-btn" type="button"
+                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+                            DATA
+                        </button>
+
+                        <div id="data-menu"
+                            class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
+
+
+                             <a href="data pemetaan.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Data Pemetaan
+                            </a>
+
+                            <a href="data alba.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Data Alba
+                            </a>
+
+                            <a href="data bat.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Data Bat
+                            </a>
+
+                            <a href="data tross.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">
+                                Data Tross
+                            </a>
+
+                        </div>
+                    </li>
+
+                </ul>
+
+                <!-- Tombol Mobile -->
+                <button id="mobile-toggle-btn" class="md:hidden text-2xl p-2 transition-colors focus:outline-none"
+                    aria-label="Buka menu navigasi">
+                    <i id="toggle-icon" class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
-    </header>
+
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white mt-4 rounded-xl shadow-lg p-4">
+            <div class="flex flex-col space-y-2 text-sm font-semibold text-[#118AB2]">
+                <a href="index.html" class="px-4 py-3 rounded-lg hover:bg-brand-lightCyan">
+                    BERANDA
+                </a>
+                <a href="tentang kami.html" class="px-4 py-3 rounded-lg hover:bg-brand-lightCyan">
+                    TENTANG KAMI
+                </a>
+                <div class="border-t border-gray-100 pt-2">
+                    <p class="px-4 py-2 text-xs text-gray-400">
+                        ALAT
+                    </p>
+                    <a href="alat alba.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Alat Alba
+                    </a>
+                    <a href="alat bat.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Alat Bat
+                    </a>
+                    <a href="alat tross.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Alat Tross
+                    </a>
+                </div>
+
+                <div class="border-t border-gray-100 pt-2">
+                    <p class="px-4 py-2 text-xs text-gray-400">
+                        DATA
+                    </p>
+                    <a href="data pemetaan.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Data Pemetaan
+                    </a>
+                    <a href="data alba.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Data Alba
+                    </a>
+                    <a href="data bat.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Data Bat
+                    </a>
+                    <a href="data tross.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Data Tross
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
     <!-- Hero Banner -->
-    <section class="bg-brand-tealBg text-white py-8 px-4 sm:px-6 lg:px-8 shadow-sm">
-        <div class="max-w-5xl mx-auto space-y-4">
+    <section class="bg-brand-tealBg text-white py-28 px-8 sm:px-6 lg:px-8 shadow-inner" style="height: 350px;">
+        <div class="max-w-6xl mx-auto space-y-4">
+
             <!-- Breadcrumbs -->
-            <nav class="flex items-center space-x-2 text-xs sm:text-sm text-cyan-100 font-semibold">
-                <a href="#" class="hover:underline flex items-center gap-1.5">
+            <nav class="flex items-center space-x-2 text-xs sm:text-sm text-cyan-100 font-medium font-inter">
+                <a href="index.html" class="hover:underline flex items-center gap-1">
                     <i class="fa-solid fa-house text-xs"></i> Beranda
                 </a>
                 <span>&gt;</span>
-                <a href="#" class="hover:underline">Alat</a>
+                <a href="alat.html" class="hover:underline">Alat</a>
                 <span>&gt;</span>
-                <span class="text-white font-bold" id="current-tool-breadcrumb">Alat Bat</span>
+                <span class="text-white font-semibold">Alat BAT</span>
             </nav>
 
-            <!-- Title with Network/Node Icon -->
-            <div class="flex items-center space-x-3 pt-1">
+            <!-- Title with Network Icon -->
+            <div class="flex items-center space-x-3 pt-2">
                 <div class="text-3xl sm:text-4xl">
-                    <i class="fa-solid fa-diagram-project"></i>
+                    <i class="fa-solid fa-water"></i>
                 </div>
-                <h1 class="text-3xl sm:text-4xl font-bold tracking-tight" id="tool-banner-title">Alat Bat</h1>
-            </div>
-
-            <!-- Tool Switcher Tabs (Bonus Interactive Toggle for Alba/Bat) -->
-            <div class="flex space-x-2 pt-1">
-                <button onclick="switchTool('bat')" id="tab-bat" class="px-3 py-1 rounded-full text-xs font-bold transition bg-white text-brand-tealBg shadow">
-                    Alat Bat
-                </button>
-                <button onclick="switchTool('alba')" id="tab-alba" class="px-3 py-1 rounded-full text-xs font-bold transition bg-cyan-900/40 text-cyan-100 hover:bg-white/20">
-                    Alat Alba
-                </button>
+                <h1 class="text-3xl sm:text-4xl font-bold tracking-wide font-anta">Alat BAT</h1>
             </div>
 
             <!-- Description -->
-            <p class="text-xs sm:text-sm text-cyan-50 max-w-2xl leading-relaxed font-medium" id="tool-description">
-                Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data arus dan GPS.
+            <p class="text-sm sm:text-base text-cyan-50 max-w-3xl leading-relaxed font-normal font-inter">
+                Memantau dinamika arus perairan di kawasan Kampung Laut, Nusakambangan melalui pelacakan posisi River
+                Drifter untuk mendukung analisis arah, kecepatan arus, dan transportasi sedimen.
             </p>
 
-            <!-- Maintenance Action Button -->
+            <!-- Action Button -->
             <div class="pt-2">
-                <button class="inline-flex items-center space-x-2.5 bg-white text-brand-darkText font-bold px-4 py-2 rounded-full text-xs shadow hover:bg-cyan-50 transition duration-200 border border-cyan-100">
-                    <span class="w-5 h-5 rounded-full bg-brand-darkText text-white flex items-center justify-center text-[10px]">
+                <a href="#maintenance"
+                    class="inline-flex items-center space-x-2 bg-white text-brand-darkText font-semibold px-4 py-2 rounded-full text-xs sm:text-sm shadow hover:bg-gray-100 transition duration-200 border border-gray-200 font-inter">
+                    <span
+                        class="w-5 h-5 rounded-full bg-brand-darkText text-white flex items-center justify-center text-[10px]">
                         <i class="fa-solid fa-wrench"></i>
                     </span>
                     <span>Maintenance Alat</span>
-                </button>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Main Content Area -->
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow">
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow">
+
         <!-- Section Heading -->
-        <h2 class="text-2xl sm:text-3xl font-bold text-center text-brand-darkText mb-6" id="main-content-title">
-            Alat Bat
+        <h2 class="text-2xl sm:text-3xl font-bold text-center text-brand-darkText mb-6 font-anta">
+            Alat BAT
         </h2>
 
         <!-- Main Image Card Container -->
-        <div class="bg-white p-2.5 sm:p-3 rounded-2xl border-2 border-brand-borderCyan shadow-xs mb-10 max-w-2xl mx-auto">
-            <div class="overflow-hidden rounded-xl bg-slate-900 aspect-[16/10] flex items-center justify-center relative group">
-                <!-- Underwater Buoy Sensor Image for Alat Bat -->
-                <img id="main-tool-image"
-                     src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80" 
-                     alt="Alat Bat Underwater Buoy Sensor" 
-                     class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500 brightness-90 contrast-110"
-                     onerror="this.onerror=null; this.src='https://placehold.co/800x500/0c8fae/ffffff?text=Alat+Bat+Buoy+Sensor';">
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-60"></div>
+        <div class="bg-white p-3 sm:p-4 rounded-2xl border-2 border-brand-borderCyan shadow-sm mb-10 max-w-3xl mx-auto">
+            <div class="overflow-hidden rounded-xl bg-gray-100 aspect-[16/9] flex items-center justify-center">
+                <img src="BAT.jpg" alt="Alat BAT"
+                    class="w-full h-full object-cover transform hover:scale-105 transition duration-500"
+                    onerror="this.onerror=null; this.src='https://placehold.co/800x450/0883a4/ffffff?text=Alat+BAT';">
             </div>
         </div>
 
-        <!-- Components Grid (Elektro & Mekanik) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-            <!-- Komponen Elektro Box -->
-            <div class="flex flex-col items-center">
-                <h3 class="text-xl sm:text-2xl font-bold text-brand-darkText mb-4">
+        <!-- Grid Container Komponen -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full items-start">
+
+            <!-- KOTAK ELEKTRO (KIRI) -->
+            <div class="flex flex-col items-center w-full">
+                <h3 class="text-xl sm:text-2xl font-bold text-brand-darkText mb-4 font-anta">
                     Komponen Elektro
                 </h3>
-                <div class="w-full bg-white rounded-2xl border-2 border-brand-borderCyan shadow-xs min-h-[480px] p-6 hover:shadow-sm transition duration-200">
-                    <!-- Area Komponen Elektro -->
+
+                <div
+                    class="w-full bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-6 hover:shadow-md transition duration-200 h-full">
+                    <div class="grid grid-cols-2 gap-4">
+
+                        <!-- GPS -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="gps bat.jpg" alt="GPS"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                GPS
+                            </p>
+                        </div>
+
+                        <!-- Antena -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="antena bat.jpg" alt="Antena"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Antena
+                            </p>
+                        </div>
+
+                        <!-- SIM800L -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="sim800l bat.jpg" alt="SIM800L"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                SIM800L
+                            </p>
+                        </div>
+
+                        <!-- RTC -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="rtc bat tross.jpg" alt="RTC"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                RTC
+                            </p>
+                        </div>
+
+                        <!-- Panel Surya (TENGAH BARIS TERAKHIR) -->
+                        <div class="col-span-2 flex justify-center">
+                            <div
+                                class="w-1/2 flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                                <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                    <img src="panel surya bat.jpg" alt="Panel Surya"
+                                        class="max-h-full max-w-full object-contain rounded-lg">
+                                </div>
+                                <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                    Panel Surya
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
-            <!-- Komponen Mekanik Box -->
-            <div class="flex flex-col items-center">
-                <h3 class="text-xl sm:text-2xl font-bold text-brand-darkText mb-4">
+            <!-- KOTAK MEKANIK (KANAN) -->
+            <div class="flex flex-col items-center w-full">
+                <h3 class="text-xl sm:text-2xl font-bold text-brand-darkText mb-4 font-anta">
                     Komponen Mekanik
                 </h3>
-                <div class="w-full bg-white rounded-2xl border-2 border-brand-borderCyan shadow-xs min-h-[480px] p-6 hover:shadow-sm transition duration-200">
-                    <!-- Area Komponen Mekanik -->
+
+                <div
+                    class="w-full bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-6 hover:shadow-md transition duration-200 h-full">
+
+                    <div class="grid grid-cols-2 gap-4">
+
+                        <!-- Komponen 1: Resin -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="resin.jpg" alt="Resin"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Resin
+                            </p>
+                        </div>
+
+                        <!-- Komponen 2: Fiberglass -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="fiberglass.jpg" alt="Fiberglass"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Fiberglass
+                            </p>
+                        </div>
+
+                        <!-- Komponen 3: Dempul -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="dempul.jpg" alt="Dempul"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Dempul
+                            </p>
+                        </div>
+
+                        <!-- Komponen 4: Katalis -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="katalis.jpg" alt="Katalis"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Katalis
+                            </p>
+                        </div>
+
+                        <!-- Komponen 5: Tali Tambang -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="tali tambang.jpg" alt="Tali Tambang"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Tali Tambang
+                            </p>
+                        </div>
+
+                        <!-- Komponen 6: Jaring -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="jaring.jpg" alt="Jaring"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Jaring
+                            </p>
+                        </div>
+
+                    </div>
                 </div>
             </div>
+
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-brand-borderCyan py-3.5 mt-10">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 text-brand-cyan text-xs sm:text-sm font-semibold">
-                <!-- Left Info: Instagram & Email -->
-                <div class="flex items-center space-x-6">
-                    <a href="https://instagram.com/mitr_ipb" target="_blank" class="flex items-center space-x-2 hover:opacity-80 transition">
-                        <i class="fa-solid fa-camera text-base"></i>
-                        <span>@mitr_ipb</span>
-                    </a>
+    <!-- Maintenance Section -->
+    <section id="maintenance" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full scroll-mt-24">
 
-                    <a href="mailto:mitr.ipb@gmail.com" class="flex items-center space-x-2 hover:opacity-80 transition">
-                        <i class="fa-regular fa-envelope text-base"></i>
-                        <span>mitr.ipb@gmail.com</span>
-                    </a>
+        <!-- Section Heading -->
+        <div class="text-center mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-brand-darkText font-anta">
+                Maintenance Alat
+            </h2>
+        </div>
+
+        <!-- Maintenance Card -->
+        <div class="bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-5 sm:p-8">
+
+            <div class="mb-6">
+                <p class="text-sm text-gray-600 leading-relaxed font-inter">
+                    Panduan ini berisi langkah-langkah pemeriksaan dan perawatan
+                    perangkat BAT untuk menjaga kondisi dan kinerja alat selama
+                    proses pemantauan dinamika arus perairan.
+                </p>
+            </div>
+
+            <div class="space-y-4">
+
+                <!-- 1. Pemeriksaan Komponen Elektronik -->
+                <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
+                        <span
+                            class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
+                            <i class="fa-solid fa-microchip text-brand-cyan"></i>
+                            1. Pemeriksaan Komponen Elektronik
+                        </span>
+                        <i
+                            class="fa-solid fa-chevron-down text-brand-cyan transition-transform group-open:rotate-180"></i>
+                    </summary>
+
+                    <div class="p-4 sm:p-5 text-sm text-gray-600 font-inter leading-relaxed">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Memeriksa kondisi kabel, konektor, dan sambungan listrik sebelum dan sesudah
+                                pengoperasian.</li>
+                            <li>Memastikan ESP32, GPS, dan SIM800L terpasang dengan baik dan berfungsi normal.</li>
+                            <li>Memastikan seluruh komponen elektronik terlindungi dari air dan kelembapan.</li>
+                            <li>Memeriksa kondisi fisik komponen untuk mendeteksi kerusakan atau korosi.</li>
+                            <li>Memastikan tidak terdapat kabel yang longgar, terkelupas, atau mengalami kerusakan.</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- 2. Perawatan Sistem Kelistrikan -->
+                <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
+                        <span
+                            class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
+                            <i class="fa-solid fa-battery-full text-brand-cyan"></i>
+                            2. Perawatan Sistem Kelistrikan
+                        </span>
+                        <i
+                            class="fa-solid fa-chevron-down text-brand-cyan transition-transform group-open:rotate-180"></i>
+                    </summary>
+
+                    <div class="p-4 sm:p-5 text-sm text-gray-600 font-inter leading-relaxed">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Memeriksa kondisi fisik baterai LiPo dan memastikan tidak terdapat pembengkakan atau
+                                kerusakan.</li>
+                            <li>Memastikan daya baterai mencukupi sebelum alat digunakan.</li>
+                            <li>Memeriksa sambungan baterai dan modul LM2596 untuk memastikan tidak terdapat koneksi
+                                yang longgar.</li>
+                            <li>Memastikan tegangan keluaran LM2596 sesuai dengan kebutuhan komponen elektronik.</li>
+                            <li>Mengisi daya dan menyimpan baterai sesuai petunjuk produsen ketika alat tidak digunakan.
+                            </li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- 3. Pemeriksaan Sistem GPS dan Komunikasi -->
+                <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
+                        <span
+                            class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
+                            <i class="fa-solid fa-satellite-dish text-brand-cyan"></i>
+                            3. Pemeriksaan Sistem GPS dan Komunikasi
+                        </span>
+                        <i
+                            class="fa-solid fa-chevron-down text-brand-cyan transition-transform group-open:rotate-180"></i>
+                    </summary>
+
+                    <div class="p-4 sm:p-5 text-sm text-gray-600 font-inter leading-relaxed">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Memastikan modul GPS dapat memperoleh koordinat posisi dengan baik sebelum
+                                pengoperasian.</li>
+                            <li>Memeriksa kondisi antena GPS dan memastikan posisinya tidak terhalang.</li>
+                            <li>Memastikan kartu SIM aktif dan memiliki pulsa atau kuota yang mencukupi untuk pengiriman
+                                data.</li>
+                            <li>Memeriksa koneksi jaringan seluler dan memastikan SIM800L dapat mengirimkan data posisi.
+                            </li>
+                            <li>Melakukan pengujian pengiriman data untuk memastikan informasi posisi diterima oleh
+                                sistem monitoring.</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- 4. Perawatan Struktur dan Pelindung Alat -->
+                <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
+                        <span
+                            class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
+                            <i class="fa-solid fa-shield-halved text-brand-cyan"></i>
+                            4. Perawatan Struktur dan Pelindung Alat
+                        </span>
+                        <i
+                            class="fa-solid fa-chevron-down text-brand-cyan transition-transform group-open:rotate-180"></i>
+                    </summary>
+
+                    <div class="p-4 sm:p-5 text-sm text-gray-600 font-inter leading-relaxed">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Membersihkan badan alat dari lumpur, kotoran, dan endapan setelah pengoperasian.</li>
+                            <li>Memeriksa kondisi fisik pelampung dan memastikan tidak terdapat retakan atau kerusakan.
+                            </li>
+                            <li>Memastikan wadah pelindung komponen elektronik tetap rapat dan kedap air.</li>
+                            <li>Memeriksa sambungan dan bagian mekanik untuk mendeteksi kerusakan atau korosi.</li>
+                            <li>Memastikan alat tetap seimbang dan mampu mengapung dengan baik di permukaan air.</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- 5. Pemeriksaan Sebelum dan Sesudah Pengoperasian -->
+                <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
+                        <span
+                            class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
+                            <i class="fa-solid fa-clipboard-check text-brand-cyan"></i>
+                            5. Pemeriksaan Sebelum dan Sesudah Pengoperasian
+                        </span>
+                        <i
+                            class="fa-solid fa-chevron-down text-brand-cyan transition-transform group-open:rotate-180"></i>
+                    </summary>
+
+                    <div class="p-4 sm:p-5 text-sm text-gray-600 font-inter leading-relaxed">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Memastikan seluruh komponen terpasang dengan baik sebelum alat digunakan.</li>
+                            <li>Memeriksa daya baterai, kesiapan GPS, dan koneksi jaringan seluler.</li>
+                            <li>Memastikan sistem dapat membaca dan mengirimkan data posisi secara berkala.</li>
+                            <li>Memeriksa kondisi alat selama pengoperasian untuk memastikan alat tetap mengapung dan
+                                berfungsi normal.</li>
+                            <li>Membersihkan dan mengeringkan bagian luar alat setelah pengoperasian.</li>
+                            <li>Mencatat kerusakan atau kendala yang ditemukan selama penggunaan.</li>
+                            <li>Menyimpan alat di tempat yang kering dan aman setelah selesai digunakan.</li>
+                        </ul>
+                    </div>
+                </details>
+
+            </div>
+        </div>
+    </section>
+
+    <br>
+    <footer class="bg-white px-6 py-10 border-t-[2px] border-[#118AB2]">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+
+            <!-- Kolom 1 (Dibuat lebih lebar/span 2): Lokasi, Email, dan WhatsApp -->
+            <div class="md:col-span-2 flex flex-col gap-4 text-[#118AB2]">
+                <h3 class="font-bold text-xl mb-2">Our Contact</h3>
+
+                <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9"
+                    class="flex items-start gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-solid fa-location-dot text-xl mt-1"></i>
+                    <span class="leading-relaxed">Workshop Instrumentasi dan Robotika Kelautan (Bengkel) ITK, Babakan,
+                        Dramaga, Bogor, Indonesia 16680</span>
+                </a>
+
+                <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-regular fa-envelope text-xl"></i>
+                    <span>mitr.ipb@gmail.com</span>
+                </a>
+
+                <a href="https://wa.me/6283898339620" class="flex items-center gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    <span>+6283898339620 (Deni Rizkiana Anwar Hidayat)</span>
+                </a>
+            </div>
+
+            <!-- Kolom 2: Sosial Media -->
+            <div class="flex flex-col gap-4 text-[#118AB2]">
+                <h3 class="font-bold text-xl mb-2">Social Media</h3>
+
+                <a href="https://www.instagram.com/mitr_ipb/"
+                    class="flex items-center gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-brands fa-instagram text-xl"></i>
+                    <span>@mitr_ipb</span>
+                </a>
+                <!-- Kamu bisa tambahkan link LinkedIn atau YouTube di sini jika ada -->
+            </div>
+
+            <!-- Kolom 3: Logo dan Tombol Back to Top -->
+            <div class="flex flex-col items-start gap-6 text-[#118AB2]">
+                <h3 class="font-bold text-xl mb-2">About Us</h3>
+
+                <!-- Tempat untuk Logo MIT+R -->
+                <div class="w-full flex items-center justify-start">
+                    <!-- Ganti "URL_LOGO_KAMU.png" dengan path/link logo yang sebenarnya -->
+                    <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-24   object-contain">
                 </div>
 
-                <!-- Right Info: Contact Person -->
-                <div>
-                    <a href="tel:085935000474" class="flex items-center space-x-2 hover:opacity-80 transition">
-                        <span>085935000474 (Raras Adinda Wulandari)</span>
-                    </a>
+                <!-- Tombol Back to Top -->
+                <div class="w-full flex justify-end mt-auto">
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+                        class="group flex items-center p-3 bg-[#118AB2] text-white rounded-full shadow-md hover:bg-[#0c6b8a] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
+
+                        <!-- Teks yang Muncul Saat Hover (Sekarang di urutan pertama / sebelah kiri) -->
+                        <span
+                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[120px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold">
+                            Back to Top
+                        </span>
+
+                        <!-- Lingkaran Icon Panah (Sekarang di urutan kedua / sebelah kanan) -->
+                        <span
+                            class="flex items-center justify-center w-7 h-7 bg-white text-[#118AB2] rounded-full transition-transform duration-500 group-hover:scale-110 shrink-0">
+                            <i class="fa-solid fa-arrow-up text-sm"></i>
+                        </span>
+
+                    </button>
                 </div>
             </div>
+
         </div>
     </footer>
 
     <script>
-        // Interactive Switcher to toggle between Alat Bat and Alat Alba
-        const toolData = {
-            bat: {
-                title: "Alat Bat",
-                description: "Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data arus dan GPS.",
-                image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80"
-            },
-            alba: {
-                title: "Alat Alba",
-                description: "Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data salinitas, kedalaman, kekeruhan, pH, oksigen terlarut (DO), dan suhu.",
-                image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1200&q=80"
-            }
-        };
+        const mobileToggleBtn = document.getElementById('mobile-toggle-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const toggleIcon = document.getElementById('toggle-icon');
 
-        function switchTool(toolKey) {
-            const data = toolData[toolKey];
-            if (!data) return;
+        mobileToggleBtn.addEventListener('click', function () {
 
-            document.getElementById('current-tool-breadcrumb').innerText = data.title;
-            document.getElementById('tool-banner-title').innerText = data.title;
-            document.getElementById('main-content-title').innerText = data.title;
-            document.getElementById('tool-description').innerText = data.description;
-            document.getElementById('main-tool-image').src = data.image;
+            mobileMenu.classList.toggle('hidden');
 
-            const batTab = document.getElementById('tab-bat');
-            const albaTab = document.getElementById('tab-alba');
+            if (mobileMenu.classList.contains('hidden')) {
 
-            if (toolKey === 'bat') {
-                batTab.className = "px-3 py-1 rounded-full text-xs font-bold transition bg-white text-brand-tealBg shadow";
-                albaTab.className = "px-3 py-1 rounded-full text-xs font-bold transition bg-cyan-900/40 text-cyan-100 hover:bg-white/20";
+                toggleIcon.classList.remove('fa-times');
+                toggleIcon.classList.add('fa-bars');
+
             } else {
-                albaTab.className = "px-3 py-1 rounded-full text-xs font-bold transition bg-white text-brand-tealBg shadow";
-                batTab.className = "px-3 py-1 rounded-full text-xs font-bold transition bg-cyan-900/40 text-cyan-100 hover:bg-white/20";
+
+                toggleIcon.classList.remove('fa-bars');
+                toggleIcon.classList.add('fa-times');
+
             }
-        }
+
+        });
     </script>
 </body>
 </html>
