@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Albatross - Sistem Pemantauan Perairan</title>
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anta&family=Inter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Anta&family=Inter:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -31,24 +33,31 @@
     </script>
     <style>
         .team-grid {
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-            gap:30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
         }
     </style>
 </head>
 
 <body class="bg-white text-gray-800 font-inter">
-    
+
     <!-- Navbar -->
     <nav id="navbar"
         class="fixed top-0 left-0 w-full z-50 p-4 lg:px-12 transition-all duration-300 bg-white shadow-md text-[#118AB2]">
         <div class="max-w-7xl mx-auto flex justify-between items-center relative">
 
             <!-- Logo ALBATROSS -->
-            <a href="#" id="logo-btn" class="flex items-center transition-transform hover:scale-105">
-                <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="h-12 w-auto object-contain">
-            </a>
+            <div class="relative flex items-center justify-center">
+                <!-- Shape Bulat Biru (Ukuran lebih besar, tidak mempengaruhi tinggi header) -->
+                <div class="absolute bg-[#118AB2] rounded-full w-14 h-14 -z-0"></div>
+
+                <!-- Tombol Logo (Tetap menentukan ukuran utama di header) -->
+                <a href="#" id="logo-btn"
+                    class="relative z-10 flex items-center justify-center transition-transform hover:scale-105">
+                    <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="h-12 w-auto object-contain">
+                </a>
+            </div>
 
             <!-- Container Kanan: Menu Navigasi + Tombol Mobile -->
             <div class="flex items-center space-x-3">
@@ -120,40 +129,41 @@
     <!-- Section Pembimbing & Pembina -->
     <section class="bg-[#118AB2] py-16 md:py-24 px-6 mt-20">
         <div class="max-w-5xl mx-auto text-center">
-            
+
             <!-- Judul Section -->
-            <h1 class="text-white text-4xl md:text-5xl font-anta tracking-wide mb-12">
+            <h1 class="text-white text-3xl sm:text-4xl md:text-5xl font-anta tracking-wide mb-8 md:mb-12 text-center">
                 Pembimbing & Pembina
             </h1>
-            
-            <!-- Container Profil (Flexbox untuk sejajar horizontal di PC, vertikal di HP) -->
-            <div class="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-24">
-                
+
+            <!-- Container Profil: Menggunakan flex-row agar selalu sejajar ke samping dari HP sampai PC -->
+            <div class="flex flex-row justify-center items-start gap-4 sm:gap-8 md:gap-24 px-2">
+
                 <!-- Kartu Profil 1 -->
-                <div class="flex flex-col items-center">
-                    <!-- Ubah src dengan nama file foto asli Anda -->
-                    <img src="prof-indra.jpeg" alt="Prof. Dr. Ir. Indra Jaya" 
-                        class="w-48 h-56 md:w-52 md:h-60 object-cover rounded-2xl shadow-lg mb-5">
-                    
-                    <h3 class="text-white font-inter text-lg md:text-xl mb-2" style="font-size: 20px;">
+                <div class="flex flex-col items-center text-center w-1/2 max-w-[200px] md:max-w-none">
+                    <img src="prof-indra.jpeg" alt="Prof. Dr. Ir. Indra Jaya"
+                        class="w-32 h-40 sm:w-44 sm:h-52 md:w-52 md:h-60 object-cover rounded-2xl shadow-lg mb-3 md:mb-5">
+
+                    <h3 class="text-white font-inter text-sm sm:text-lg md:text-xl font-medium mb-2 leading-tight">
                         Prof. Dr. Ir. Indra Jaya, M.Sc
                     </h3>
-                    
-                    <span class="bg-[#2c6981] text-white text-sm font-bold px-4 py-1.5 rounded-md shadow-sm">
+
+                    <span
+                        class="bg-[#2c6981] text-white text-xs sm:text-sm font-bold px-2.5 py-1 sm:px-4 sm:py-1.5 rounded-md shadow-sm">
                         Pembimbing Akademik
                     </span>
                 </div>
 
                 <!-- Kartu Profil 2 -->
-                <div class="flex flex-col items-center">
-                    <img src="bang-iqbal.jpeg" alt="Muhammad Iqbal" 
-                        class="w-48 h-56 md:w-52 md:h-60 object-cover rounded-2xl shadow-lg mb-5">
-                    
-                    <h3 class="text-white font-inter text-lg md:text-xl mb-2">
+                <div class="flex flex-col items-center text-center w-1/2 max-w-[200px] md:max-w-none">
+                    <img src="bang-iqbal.jpeg" alt="Muhammad Iqbal"
+                        class="w-32 h-40 sm:w-44 sm:h-52 md:w-52 md:h-60 object-cover rounded-2xl shadow-lg mb-3 md:mb-5">
+
+                    <h3 class="text-white font-inter text-sm sm:text-lg md:text-xl font-medium mb-2 leading-tight">
                         Muhammad Iqbal, S.Pi., M.Si.
                     </h3>
-                    
-                    <span class="bg-[#2c6981] text-white text-sm font-bold px-4 py-1.5 rounded-md shadow-sm">
+
+                    <span
+                        class="bg-[#2c6981] text-white text-xs sm:text-sm font-bold px-2.5 py-1 sm:px-4 sm:py-1.5 rounded-md shadow-sm">
                         Pembina
                     </span>
                 </div>
@@ -162,7 +172,7 @@
         </div>
     </section>
 
-<!-- Section Supervisor -->     
+    <!-- Section Supervisor -->
     <section class="bg-white py-16 md:py-24 px-6 text-center">
         <h2 class="text-[#434b6b] text-4xl md:text-5xl font-anta tracking-wide mb-12">
             Supervisor
@@ -170,87 +180,115 @@
 
         <!-- Container Grid Profil (Max lebar 6xl agar muat 4 per baris di PC) -->
         <div class="max-w-6xl mx-auto flex flex-wrap justify-center gap-x-6 gap-y-12">
-            
+
             <!-- ============ BARIS 1 ============ -->
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="vania.jpeg" alt="Vania Siti Fauziah" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8" style="font-size: 15px;">Vania Siti Fauziah</h4>
-                <span class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
+                <img src="vania.jpeg" alt="Vania Siti Fauziah"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8" style="font-size: 15px;">
+                    Vania Siti Fauziah</h4>
+                <span
+                    class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
             </div>
 
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="daffa.jpeg" alt="Daffa Putra Annaba" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <img src="daffa.jpeg" alt="Daffa Putra Annaba"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
                 <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Daffa Putra Annaba</h4>
-                <span class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
+                <span
+                    class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
             </div>
 
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="izzat.jpeg" alt="Izzat Muhammad Athar" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <img src="izzat.jpeg" alt="Izzat Muhammad Athar"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
                 <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Izzat Muhammad Athar</h4>
-                <span class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
+                <span
+                    class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
             </div>
 
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="cipta.jpeg" alt="Cipta Wirya Pratama" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <img src="cipta.jpeg" alt="Cipta Wirya Pratama"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
                 <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Cipta Wirya Pratama</h4>
-                <span class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
+                <span
+                    class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
             </div>
 
             <!-- ============ BARIS 2 ============ -->
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="ghaniya.jpeg" alt="Ghaniya Elmira Qisthi A" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Ghaniya Elmira Qisthi A</h4>
-                <span class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
+                <img src="ghaniya.jpeg" alt="Ghaniya Elmira Qisthi A."
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Ghaniya Elmira Qisthi A.
+                </h4>
+                <span
+                    class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
             </div>
 
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="dzaki.jpeg" alt="Muhammad Dzaki Aulia" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <img src="dzaki.jpeg" alt="Muhammad Dzaki Aulia"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
                 <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Muhammad Dzaki Aulia</h4>
-                <span class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
+                <span
+                    class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
             </div>
 
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="deydra.jpeg" alt="Deydra Alnayra R" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Deydra Alnayra R</h4>
-                <span class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
+                <img src="deydra.jpeg" alt="Deydra Alnayza R."
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Deydra Alnayza R.</h4>
+                <span
+                    class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
             </div>
 
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="salmaa.jpeg" alt="Salmaa Maisuun" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <img src="salmaa.jpeg" alt="Salmaa Maisuun"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
                 <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Salmaa Maisuun</h4>
-                <span class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
+                <span
+                    class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
             </div>
 
             <!-- ============ BARIS 3 ============ -->
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="nopia.jpeg" alt="Nopia Alpina Pratiwi" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <img src="nopia.jpeg" alt="Nopia Alpina Pratiwi"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
                 <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Nopia Alpina Pratiwi</h4>
-                <span class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
+                <span
+                    class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
             </div>
 
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="fitri.jpeg" alt="Fitri Aulia" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Fitri Aulia</h4>
-                <span class="bg-[#e9daf8] text-[#8c5dc4] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Administrasi</span>
+                <img src="fitri.jpeg" alt="Fitri Aulia Nurinsani"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Fitri Aulia Nurinsani</h4>
+                <span
+                    class="bg-[#e9daf8] text-[#8c5dc4] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Administrasi</span>
             </div>
 
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="vebri.jpeg" alt="Vebri Diaz Triyana" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <img src="vebri.jpeg" alt="Vebri Diaz Triyana"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
                 <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Vebri Diaz Triyana</h4>
-                <span class="bg-[#e9daf8] text-[#8c5dc4] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Administrasi</span>
+                <span
+                    class="bg-[#e9daf8] text-[#8c5dc4] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Administrasi</span>
             </div>
 
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="aprilliani.jpeg" alt="Aprilliani Setyaningsih" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Aprilliani Setyaningsih</h4>
-                <span class="bg-[#e9daf8] text-[#8c5dc4] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Administrasi</span>
+                <img src="aprilliani.jpeg" alt="Apriliani Setyaningsih"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Apriliani Setyaningsih</h4>
+                <span
+                    class="bg-[#e9daf8] text-[#8c5dc4] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Administrasi</span>
             </div>
 
             <!-- ============ BARIS 4 (Tengah) ============ -->
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%] mt-4">
-                <img src="zilly.jpeg" alt="Zilly Caesar Ibrahim" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <img src="zilly.jpeg" alt="Zilly Caesar Ibrahim"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
                 <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Zilly Caesar Ibrahim</h4>
-                <span class="bg-[#e0e0e0] text-[#5e5e5e] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Pemrograman</span>
+                <span
+                    class="bg-[#e0e0e0] text-[#5e5e5e] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Pemrograman</span>
             </div>
 
         </div>
@@ -261,112 +299,200 @@
         </h2>
         <div class="max-w-6xl mx-auto flex flex-wrap justify-center gap-x-6 gap-y-12">
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="desma.JPG" alt="Naura Desma Kaisyla" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8" style="font-size: 15px;">Naura Desma Kaisyla</h4>
-                <span class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
+                <img src="desma.jpg" alt="Naura Desma Kaisyla"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8" style="font-size: 15px;">
+                    Naura Desma Kaisyla</h4>
+                <span
+                    class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
             </div>
 
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="sachi.jpg" alt="Sachi Putri Lathifani" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <img src="sachi.jpg" alt="Sachi Putri Lathifani"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
                 <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Sachi Putri Lathifani</h4>
-                <span class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
+                <span
+                    class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
             </div>
 
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="ilham.JPG" alt="Ilham Fauzan nur Arifin" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Ilham Fauzan nur Arifin</h4>
-                <span class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
+                <img src="ilham.jpg" alt="Ilham Fauzan Nur Arifin"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Ilham Fauzan Nur Arifin
+                </h4>
+                <span
+                    class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
             </div>
 
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="kyo.JPG" alt="Rayhan Aliandro Gunawan" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Rayhan Aliandro Gunawan</h4>
-                <span class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
+                <img src="kyo.jpg" alt="Rayhan Aliandro Gunawan"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Rayhan Aliandro Gunawan
+                </h4>
+                <span
+                    class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
             </div>
 
             <!-- ============ BARIS 2 ============ -->
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="niko.JPG" alt="Niko Resnuputra" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <img src="niko.jpg" alt="Niko Resnuputra"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
                 <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Niko Resnuputra</h4>
-                <span class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
+                <span
+                    class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
             </div>
 
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="eko.JPG" alt="Eko Ardiansyah Sipi" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <img src="eko.jpg" alt="Eko Ardiansyah Sipi"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
                 <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Eko Ardiansyah Sipi</h4>
-                <span class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
+                <span
+                    class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
             </div>
 
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="ramen.JPG" alt="Rahmania Ardiesty Dewi" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <img src="ramen.jpg" alt="Rahmania Ardiesty Dewi"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
                 <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Rahmania Ardiesty Dewi</h4>
-                <span class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
+                <span
+                    class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
             </div>
 
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="lintang.JPG" alt="Lintang Zalya Safira" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <img src="lintang.jpg" alt="Lintang Zalya Safira"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
                 <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Lintang Zalya Safira</h4>
-                <span class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
+                <span
+                    class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
             </div>
 
             <!-- ============ BARIS 3 ============ -->
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="deni.JPG" alt="Deni Rizkiana Anwar H." class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <img src="deni.jpg" alt="Deni Rizkiana Anwar H."
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
                 <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Deni Rizkiana Anwar H.</h4>
-                <span class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
+                <span
+                    class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
             </div>
 
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="dion.JPG" alt="Christian Dion" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Christian Dion</h4>
-                <span class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
+                <img src="dion.jpg" alt="Cristian Dion"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Cristian Dion</h4>
+                <span
+                    class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
             </div>
 
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="alya.JPG" alt="Hanifa Rahmaliya" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <img src="alya.jpg" alt="Hanifa Rahmaliya"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
                 <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Hanifa Rahmaliya</h4>
-                <span class="bg-[#e9daf8] text-[#8c5dc4] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Administrasi</span>
+                <span
+                    class="bg-[#e9daf8] text-[#8c5dc4] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Administrasi</span>
             </div>
 
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="jesin.JPG" alt="Josephin Olga MT." class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Josephin Olga MT.</h4>
-                <span class="bg-[#e9daf8] text-[#8c5dc4] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Administrasi</span>
+                <img src="jesin.jpg" alt="Josephin Olga M. T."
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Josephin Olga M. T.</h4>
+                <span
+                    class="bg-[#e9daf8] text-[#8c5dc4] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Administrasi</span>
             </div>
 
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="raras.JPG" alt="Raras Adinda Wulandari" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <img src="Raras.jpg" alt="Raras Adinda Wulandari"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
                 <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Raras Adinda Wulandari</h4>
-                <span class="bg-[#e0e0e0] text-[#5e5e5e] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Pemrograman</span>
+                <span
+                    class="bg-[#e0e0e0] text-[#5e5e5e] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Pemrograman</span>
             </div>
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="cherrys.JPG" alt="Azqia Cherrys Audia" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Azqia Cherrys Audia</h4>
-                <span class="bg-[#e0e0e0] text-[#5e5e5e] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Pemrograman</span>
+                <img src="cherrys.jpg" alt="Azqia Cherrys Audya"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Azqia Cherrys Audya</h4>
+                <span
+                    class="bg-[#e0e0e0] text-[#5e5e5e] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Pemrograman</span>
             </div>
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
-                <img src="arkan.JPG" alt="Muhamad Alifian Arkan" class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
+                <img src="arkan.jpg" alt="Muhamad Alifian Arkan"
+                    class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
                 <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Muhamad Alifian Arkan</h4>
-                <span class="bg-[#e0e0e0] text-[#5e5e5e] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Pemrograman</span>
+                <span
+                    class="bg-[#e0e0e0] text-[#5e5e5e] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Pemrograman</span>
             </div>
         </div>
     </section>
 
-<!-- Footer -->
-    <footer class="bg-white border-t border-brand-borderCyan py-4 mt-0 font-inter">
-        <div>
-            <div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 text-[#118AB2] font-medium">
-                <a href="#" class="flex items-center gap-2 hover:text-blue-800 transition">
-                    <i class="fa-brands fa-instagram text-xl"></i><span>@mitr_ipb</span>
+    <footer class="bg-white px-6 py-10 border-t-[2px] border-[#118AB2]">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+
+            <!-- Kolom 1 (Dibuat lebih lebar/span 2): Lokasi, Email, dan WhatsApp -->
+            <div class="md:col-span-2 flex flex-col gap-4 text-[#118AB2]">
+                <h3 class="font-bold text-xl mb-2">Our Contact</h3>
+
+                <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9"
+                    class="flex items-start gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-solid fa-location-dot text-xl mt-1"></i>
+                    <span class="leading-relaxed">Workshop Instrumentasi dan Robotika Kelautan (Bengkel) ITK, Babakan,
+                        Dramaga, Bogor, Indonesia 16680</span>
                 </a>
-                <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-2 hover:text-blue-800 transition">
-                    <i class="fa-regular fa-envelope text-xl"></i><span>mitr.ipb@gmail.com</span>
+
+                <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-regular fa-envelope text-xl"></i>
+                    <span>mitr.ipb@gmail.com</span>
                 </a>
-                <a href="#" class="flex items-center gap-2 hover:text-blue-800 transition">
-                    <i class="fa-brands fa-whatsapp text-xl"></i><span>085935000474 (Raras Adinda Wulandari)</span>
+
+                <a href="https://wa.me/6283898339620" class="flex items-center gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    <span>+6283898339620 (Deni Rizkiana Anwar Hidayat)</span>
                 </a>
             </div>
+
+            <!-- Kolom 2: Sosial Media -->
+            <div class="flex flex-col gap-4 text-[#118AB2]">
+                <h3 class="font-bold text-xl mb-2">Social Media</h3>
+
+                <a href="https://www.instagram.com/mitr_ipb/"
+                    class="flex items-center gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-brands fa-instagram text-xl"></i>
+                    <span>@mitr_ipb</span>
+                </a>
+                <!-- Kamu bisa tambahkan link LinkedIn atau YouTube di sini jika ada -->
+            </div>
+
+            <!-- Kolom 3: Logo dan Tombol Back to Top -->
+            <div class="flex flex-col items-start gap-6 text-[#118AB2]">
+                <h3 class="font-bold text-xl mb-2">About Us</h3>
+
+                <!-- Tempat untuk Logo MIT+R -->
+                <div class="w-full flex items-center justify-start">
+                    <!-- Ganti "URL_LOGO_KAMU.png" dengan path/link logo yang sebenarnya -->
+                    <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-24   object-contain">
+                </div>
+
+                <!-- Tombol Back to Top -->
+                <div class="w-full flex justify-end mt-auto">
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+                        class="group flex items-center p-3 bg-[#118AB2] text-white rounded-full shadow-md hover:bg-[#0c6b8a] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
+
+                        <!-- Teks yang Muncul Saat Hover (Sekarang di urutan pertama / sebelah kiri) -->
+                        <span
+                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[120px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold">
+                            Back to Top
+                        </span>
+
+                        <!-- Lingkaran Icon Panah (Sekarang di urutan kedua / sebelah kanan) -->
+                        <span
+                            class="flex items-center justify-center w-7 h-7 bg-white text-[#118AB2] rounded-full transition-transform duration-500 group-hover:scale-110 shrink-0">
+                            <i class="fa-solid fa-arrow-up text-sm"></i>
+                        </span>
+
+                    </button>
+                </div>
+            </div>
+
         </div>
     </footer>
 </body>
+
 </html>
