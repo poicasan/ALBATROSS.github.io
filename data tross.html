@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monitoring Alat & Data Kampung Laut</title>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
+
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Google Fonts: Quicksand & Outfit -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Google Fonts: Anta & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anta&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -19,893 +25,589 @@
                 extend: {
                     colors: {
                         brand: {
-                            cyan: '#0284C7',
-                            darkCyan: '#0369A1',
-                            teal: '#0891B2',
-                            border: '#BAE6FD',
-                            bgSoft: '#F0F9FF',
-                            navy: '#1E293B',
-                            purpleText: '#2E1065',
-                            accent: '#22D3EE'
+                            cyan: '#008ba3',
+                            lightCyan: '#e6f7f9',
+                            darkText: '#2d3757',
+                            borderCyan: '#b2e3ea',
+                            tealBg: '#0883a4'
                         }
                     },
                     fontFamily: {
-                        sans: ['Quicksand', 'sans-serif'],
-                        heading: ['Outfit', 'sans-serif']
+                        anta: ['Anta', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                        heading: ['Anta', 'sans-serif']
                     }
                 }
             }
         }
     </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-tech {
+            font-family: 'Anta', sans-serif;
+        }
+
+        /* Menyembunyikan scrollbar bawaan tapi tetap bisa discroll */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
 </head>
-<body class="bg-slate-50 min-h-screen text-slate-800 font-sans flex flex-col justify-between antialiased">
 
+<body class="bg-white min-h-screen flex flex-col justify-between text-gray-800 antialiased selection:bg-cyan-100">
     <div>
-        <!-- Top Navbar Header -->
-        <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-                <!-- Close / Home Button -->
-                <button onclick="switchTab('alba')" class="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition text-slate-700 font-bold border border-slate-300">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
+        <!-- Navbar -->
+        <nav id="navbar"
+        class="fixed top-0 left-0 w-full z-50 p-4 lg:px-12 transition-all duration-300 bg-white shadow-md text-[#118AB2]">
 
-                <!-- Navigation Links -->
-                <nav class="flex items-center space-x-4 sm:space-x-8 text-xs sm:text-sm font-bold tracking-wider uppercase">
-                    <button onclick="switchTab('alba')" class="text-cyan-600 hover:text-cyan-800 transition">BERANDA</button>
-                    <button onclick="showToast('Halaman Tentang Kami')" class="text-cyan-600 hover:text-cyan-800 transition">TENTANG KAMI</button>
-                    <button onclick="switchTab('alba')" class="text-cyan-600 hover:text-cyan-800 transition">ALAT</button>
-                    <button onclick="switchTab('data-alba')" class="text-cyan-600 hover:text-cyan-800 transition">DATA</button>
-                </nav>
+        <div class="max-w-7xl mx-auto flex justify-between items-center relative">
+
+            <!-- Logo ALBATROSS -->
+            <div class="relative flex items-center justify-center">
+                <!-- Shape Bulat Biru (Ukuran lebih besar, tidak mempengaruhi tinggi header) -->
+                <div class="absolute bg-[#118AB2] rounded-full w-14 h-14 -z-0"></div>
+
+                <!-- Tombol Logo (Tetap menentukan ukuran utama di header) -->
+                <a href="#" id="logo-btn"
+                    class="relative z-10 flex items-center justify-center transition-transform hover:scale-105">
+                    <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="h-12 w-auto object-contain">
+                </a>
             </div>
-        </header>
 
-        <!-- Main Banner Header -->
-        <section class="bg-gradient-to-r from-cyan-600 to-sky-700 text-white py-8 px-4 sm:px-8 shadow-inner relative overflow-hidden">
-            <div class="max-w-6xl mx-auto relative z-10">
+            <!-- Container Kanan -->
+            <div class="flex items-center space-x-3">
+
+                <ul id="nav-links"
+                    class="hidden md:flex items-center space-x-2 sm:space-x-3 text-xs sm:text-sm font-semibold tracking-wider sm:tracking-widest uppercase transition-all duration-300 py-1 font-inter">
+
+                    <li>
+                        <a href="index.html"
+                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
+                            BERANDA
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="tentang kami.html"
+                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
+                            TENTANG KAMI
+                        </a>
+                    </li>
+
+                    <!-- Dropdown ALAT -->
+                    <li class="relative group" id="alat-dropdown">
+
+                        <button id="alat-btn" type="button"
+                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+                            ALAT
+                        </button>
+
+                        <div id="alat-menu"
+                            class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
+
+                            <a href="alat alba.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Alat Alba
+                            </a>
+
+                            <a href="alat bat.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Alat Bat
+                            </a>
+
+                            <a href="alat tross.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">
+                                Alat Tross
+                            </a>
+
+                        </div>
+                    </li>
+
+                    <!-- Dropdown DATA -->
+                    <li class="relative group" id="data-dropdown">
+
+                        <button id="data-btn" type="button"
+                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+                            DATA
+                        </button>
+
+                        <div id="data-menu"
+                            class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
+
+                            <a href="data pemetaan.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Data Pemetaan
+                            </a>
+
+                            <a href="data alba.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Data Alba
+                            </a>
+
+                            <a href="data bat.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Data Bat
+                            </a>
+
+                            <a href="data tross.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">
+                                Data Tross
+                            </a>
+
+                        </div>
+                    </li>
+
+                </ul>
+
+                <!-- Tombol Mobile -->
+                <button id="mobile-toggle-btn" class="md:hidden text-2xl p-2 transition-colors focus:outline-none"
+                    aria-label="Buka menu navigasi">
+                    <i id="toggle-icon" class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white mt-4 rounded-xl shadow-lg p-4">
+            <div class="flex flex-col space-y-2 text-sm font-semibold text-[#118AB2]">
+                <a href="index.html" class="px-4 py-3 rounded-lg hover:bg-brand-lightCyan">
+                    BERANDA
+                </a>
+                <a href="tentang kami.html" class="px-4 py-3 rounded-lg hover:bg-brand-lightCyan">
+                    TENTANG KAMI
+                </a>
+                <div class="border-t border-gray-100 pt-2">
+                    <p class="px-4 py-2 text-xs text-gray-400">
+                        ALAT
+                    </p>
+                    <a href="alat alba.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Alat Alba
+                    </a>
+                    <a href="alat bat.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Alat BAT
+                    </a>
+                    <a href="alat tross.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Alat TROSS
+                    </a>
+                </div>
+
+                <div class="border-t border-gray-100 pt-2">
+                    <p class="px-4 py-2 text-xs text-gray-400">
+                        DATA
+                    </p>
+                    <a href="data pemetaan.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Data Pemetaan
+                    </a>
+                    <a href="data alba.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Data Alba
+                    </a>
+                    <a href="data bat.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Data Bat
+                    </a>
+                    <a href="data tross.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Data Tross
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+        <!-- Hero Banner -->
+        <section class="bg-brand-tealBg text-white py-28 px-8 sm:px-6 lg:px-8 shadow-inner" style="height: 350px;">
+            <div class="max-w-6xl mx-auto space-y-4">
+
                 <!-- Breadcrumbs -->
-                <div class="flex items-center space-x-2 text-xs sm:text-sm text-cyan-100 mb-3 font-semibold">
-                    <button onclick="switchTab('alba')" class="hover:underline flex items-center gap-1">
+                <nav class="flex items-center space-x-2 text-xs sm:text-sm text-cyan-100 font-medium font-inter">
+                    <a href="index.html" class="hover:underline flex items-center gap-1">
                         <i class="fa-solid fa-house text-xs"></i> Beranda
-                    </button>
+                    </a>
                     <span>&gt;</span>
-                    <span id="breadcrumb-category">Alat</span>
+                    <a href="data.html" class="hover:underline">Data</a>
                     <span>&gt;</span>
-                    <span id="breadcrumb-current" class="text-white font-bold">Alat Alba</span>
-                </div>
+                    <span class="text-white font-semibold">Data TROSS</span>
+                </nav>
 
-                <!-- Page Header Title & Info -->
-                <div class="flex items-start gap-4 mb-4">
-                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/10 backdrop-blur border border-white/20 flex items-center justify-center text-cyan-200 text-2xl sm:text-3xl shrink-0">
-                        <i id="hero-icon" class="fa-solid fa-diagram-project"></i>
+                <!-- Title with Camera Icon -->
+                <div class="flex items-center space-x-3 pt-2">
+                    <div class="text-3xl sm:text-4xl">
+                        <i class="fa-solid fa-camera"></i>
                     </div>
-                    <div>
-                        <h1 id="hero-title" class="text-3xl sm:text-4xl font-extrabold tracking-tight font-heading">
-                            Alat Alba
-                        </h1>
-                        <p id="hero-desc" class="text-cyan-100 text-xs sm:text-sm max-w-2xl mt-1 leading-relaxed">
-                            Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data salinitas, kedalaman, kekeruhan, pH, oksigen terlarut (DO), dan suhu.
-                        </p>
+                    <h1 class="text-3xl sm:text-4xl font-bold tracking-wide font-anta">
+                        Data TROSS
+                    </h1>
+                </div>
+
+                <!-- Description -->
+                <p class="text-sm sm:text-base text-cyan-50 max-w-3xl leading-relaxed font-normal font-inter">
+                    Dokumentasi foto dan video yang ter-update secara otomatis pada saat terdapat pergerakan yang
+                    terdeteksi.
+                </p>
+
+                <!-- Action Badges / Status Pill -->
+                <div class="pt-4">
+                    <div
+                        class="inline-flex items-center bg-white rounded-full py-1.5 px-2 shadow-sm border-[1.5px] border-[#434b6e]">
+                        <!-- Status Kiri -->
+                        <div class="flex items-center space-x-2 px-3">
+                            <!-- Container relatif untuk posisi bulatan kedap-kedip -->
+                            <div class="relative flex h-3 w-3 items-center justify-center">
+                                <!-- Bulatan luar yang mengembang (Ping effect) -->
+                                <span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#118AB2] opacity-75"></span>
+                                <!-- Bulatan inti di tengah -->
+                                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#118AB2]"></span>
+                            </div>
+                            <span class="font-bold text-[#434b6e] text-sm">Online</span>
+                        </div>
+
+                        <!-- Status Kanan -->
+                        <div class="flex items-center space-x-2 pr-4 pl-2">
+                            <div class="w-5 h-5 rounded-full bg-[#434b6e] flex items-center justify-center">
+                                <i class="fa-solid fa-chart-line text-white text-[10px]"></i>
+                            </div>
+                            <span class="font-bold text-[#434b6e] text-sm">Data <i>real-time</i></span>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Hero Action Badges / Buttons -->
-                <div id="hero-actions" class="flex flex-wrap items-center gap-3 mt-4">
-                    <button onclick="toggleMaintenance()" class="inline-flex items-center gap-2 bg-white text-slate-800 hover:bg-slate-100 font-bold text-xs sm:text-sm px-4 py-2 rounded-full shadow-md transition border border-slate-200">
-                        <span class="w-5 h-5 rounded-full bg-slate-200 text-slate-700 text-xs flex items-center justify-center font-bold">N</span>
-                        <span id="btn-maint-text">Maintenance Alat</span>
-                    </button>
-                </div>
-
-                <!-- Device Selector Quick Switcher Tabs -->
-                <div class="mt-6 pt-4 border-t border-white/20 flex flex-wrap gap-2 text-xs font-semibold">
-                    <span class="text-cyan-100 self-center mr-2">Pilih Tampilan:</span>
-                    <button onclick="switchTab('alba')" id="btn-tab-alba" class="px-3 py-1.5 rounded-lg bg-white/20 hover:bg-white/30 text-white transition backdrop-blur border border-white/30">Alat Alba</button>
-                    <button onclick="switchTab('bat')" id="btn-tab-bat" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-cyan-100 transition">Alat Bat</button>
-                    <button onclick="switchTab('tross')" id="btn-tab-tross" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-cyan-100 transition">Alat Tross</button>
-                    <button onclick="switchTab('data-alba')" id="btn-tab-data-alba" class="px-3 py-1.5 rounded-lg bg-amber-400/30 hover:bg-amber-400/40 text-amber-100 transition font-bold border border-amber-300/40">Data Alba</button>
-                    <button onclick="switchTab('data-bat')" id="btn-tab-data-bat" class="px-3 py-1.5 rounded-lg bg-emerald-400/30 hover:bg-emerald-400/40 text-emerald-100 transition font-bold border border-emerald-300/40">Data Bat</button>
-                    <button onclick="switchTab('data-tross')" id="btn-tab-data-tross" class="px-3 py-1.5 rounded-lg bg-purple-400/30 hover:bg-purple-400/40 text-purple-100 transition font-bold border border-purple-300/40">Data Tross</button>
                 </div>
             </div>
         </section>
 
-        <!-- Dynamic Content Body Container -->
+        <!-- Main Content: Slot Foto & Video Terbaru -->
         <main class="max-w-6xl mx-auto px-4 sm:px-8 py-8">
-            
-            <!-- SECTION 1: ALAT VIEWS (ALBA, BAT, TROSS) -->
-            <div id="view-device" class="block space-y-10">
-                <div class="text-center">
-                    <h2 id="device-title" class="text-2xl sm:text-3xl font-extrabold text-slate-800 font-heading">
-                        Alat Alba
-                    </h2>
-                </div>
-
-                <!-- Main Device Photo Frame Card -->
-                <div class="max-w-3xl mx-auto bg-white p-3 sm:p-4 rounded-2xl border-2 border-sky-200 shadow-md">
-                    <div class="relative aspect-video w-full overflow-hidden rounded-xl bg-slate-900 group">
-                        <img id="device-img" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80" alt="Alat" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
-                            <span id="device-badge" class="text-white text-xs font-semibold bg-cyan-600/80 px-3 py-1 rounded-full backdrop-blur">Unmanned Surface Vehicle (USV)</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Component Sections Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 pt-4">
-                    <!-- Electro Components Card -->
-                    <div class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-6 flex flex-col justify-between hover:shadow-md transition">
-                        <div>
-                            <h3 class="text-xl font-extrabold text-slate-800 mb-4 flex items-center gap-3 border-b border-sky-100 pb-3 font-heading">
-                                <i class="fa-solid fa-microchip text-cyan-600"></i>
-                                Komponen Elektro
-                            </h3>
-                            <div id="list-electro" class="space-y-3 min-h-[220px]">
-                                <!-- Dynamic List Inserted via JS -->
-                            </div>
-                        </div>
-                        <button onclick="showComponentDetail('Elektro')" class="mt-6 w-full py-2.5 bg-sky-50 hover:bg-sky-100 text-sky-700 font-bold text-xs rounded-xl border border-sky-200 transition">
-                            Lihat Detail Rangkaian Elektro
-                        </button>
-                    </div>
-
-                    <!-- Mechanic Components Card -->
-                    <div class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-6 flex flex-col justify-between hover:shadow-md transition">
-                        <div>
-                            <h3 class="text-xl font-extrabold text-slate-800 mb-4 flex items-center gap-3 border-b border-sky-100 pb-3 font-heading">
-                                <i class="fa-solid fa-gears text-cyan-600"></i>
-                                Komponen Mekanik
-                            </h3>
-                            <div id="list-mechanic" class="space-y-3 min-h-[220px]">
-                                <!-- Dynamic List Inserted via JS -->
-                            </div>
-                        </div>
-                        <button onclick="showComponentDetail('Mekanik')" class="mt-6 w-full py-2.5 bg-sky-50 hover:bg-sky-100 text-sky-700 font-bold text-xs rounded-xl border border-sky-200 transition">
-                            Lihat Spesifikasi Mekanik
-                        </button>
-                    </div>
-                </div>
+            <div class="text-center mb-8">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-800 font-anta">Dokumentasi Terkini</h2>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1 font-inter">Menampilkan tangkapan foto dan rekaman
+                    video paling
+                    baru dari sensor Trapcam</p>
             </div>
 
+            <!-- Container 2 Slot Placeholder -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 font-inter">
 
-            <!-- SECTION 2: DATA ALAT ALBA VIEW -->
-            <div id="view-data-alba" class="hidden space-y-8">
-                <div class="text-center mb-6">
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-800 font-heading">
-                        Parameter Monitoring Alat Alba
-                    </h2>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-                    <!-- 1. Salinitas Air -->
-                    <div class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-5 hover:shadow-md transition flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold text-slate-800 text-center mb-4 font-heading">
-                                Salinitas Air
+                <!-- SLOT 1: CAROUSEL FOTO DETEKSI -->
+                <div
+                    class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-5 flex flex-col justify-between relative group">
+                    <div>
+                        <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
+                            <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2 font-anta">
+                                <i class="fa-solid fa-images text-cyan-600"></i> Galeri Foto Deteksi
                             </h3>
-                            <div class="bg-slate-50 rounded-xl p-3 border border-slate-100 flex items-center justify-center min-h-[260px]">
-                                <canvas id="chartSalinitas" class="max-h-[240px]"></canvas>
-                            </div>
+                            <span id="badge-photo-status"
+                                class="text-[10px] bg-slate-100 text-slate-500 font-bold px-2 py-1 rounded">MENUNGGU
+                                DETEKSI</span>
                         </div>
-                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                            <span>Rata-rata: <strong>28.4 PSU</strong></span>
-                            <button onclick="openChartModal('Salinitas Air')" class="text-cyan-600 font-bold hover:underline">Detail & Interactive &rarr;</button>
-                        </div>
-                    </div>
 
-                    <!-- 2. Data Kedalaman -->
-                    <div class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-5 hover:shadow-md transition flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold text-slate-800 text-center mb-4 font-heading">
-                                Data Kedalaman
-                            </h3>
-                            <div class="bg-slate-900 rounded-xl p-4 border border-slate-800 flex flex-col items-center justify-center min-h-[260px] text-white">
-                                <div class="w-full max-w-[280px] bg-slate-800 border-2 border-slate-700 rounded-lg p-3 text-center shadow-inner relative">
-                                    <div class="flex justify-between items-center text-[10px] text-cyan-400 font-mono mb-2">
-                                        <span>SAMYUNG ECHO SOUNDER</span>
-                                        <span>SES-1000</span>
-                                    </div>
-                                    <div class="grid grid-cols-2 gap-2 my-2 bg-black/60 p-2 rounded border border-slate-800">
-                                        <div class="border-r border-slate-800 pr-2">
-                                            <span class="text-[9px] text-slate-400 block">DEPTH (M)</span>
-                                            <span class="text-2xl font-black text-amber-400 font-mono">5.6</span>
-                                        </div>
-                                        <div class="pl-2">
-                                            <span class="text-[9px] text-slate-400 block">SONAR (M)</span>
-                                            <span class="text-2xl font-black text-emerald-400 font-mono">5.6</span>
-                                        </div>
-                                    </div>
-                                    <div class="h-20 bg-gradient-to-b from-blue-900 via-indigo-950 to-slate-950 rounded relative overflow-hidden flex items-end">
-                                        <div class="w-full h-1/2 bg-amber-800/40 border-t-2 border-amber-500"></div>
-                                        <span class="absolute inset-x-0 bottom-1 text-[8px] text-cyan-200/60 font-mono">ECHO PROFILE DISPLAY</span>
-                                    </div>
+                        <!-- Area Display Carousel Foto -->
+                        <div class="relative w-full rounded-xl bg-slate-900 overflow-hidden">
+                            <!-- Container Scroll Foto -->
+                            <div id="photo-carousel-container"
+                                class="flex overflow-x-auto snap-x snap-mandatory no-scrollbar scroll-smooth w-full aspect-video">
+
+                                <!-- Placeholder Kosong Foto (Akan disembunyikan saat foto pertama masuk) -->
+                                <div id="slot-photo-placeholder"
+                                    class="w-full flex-shrink-0 snap-center flex flex-col items-center justify-center p-4 text-center">
+                                    <i class="fa-solid fa-camera text-4xl text-slate-600 mb-2"></i>
+                                    <p class="text-xs text-slate-400">Belum ada tangkapan foto dari Trapcam</p>
                                 </div>
+
                             </div>
-                        </div>
-                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                            <span>Sensors: <strong>Acoustic Sonar</strong></span>
-                            <button onclick="showToast('Modul Kedalaman Aktif')" class="text-cyan-600 font-bold hover:underline">Detail & Interactive &rarr;</button>
+
+                            <!-- Tombol Navigasi Geser Kiri & Kanan -->
+                            <button id="btn-prev-photo" onclick="scrollPhotoCarousel(-1)"
+                                class="hidden absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white w-8 h-8 rounded-full items-center justify-center backdrop-blur transition z-10">
+                                <i class="fa-solid fa-chevron-left text-xs"></i>
+                            </button>
+                            <button id="btn-next-photo" onclick="scrollPhotoCarousel(1)"
+                                class="hidden absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white w-8 h-8 rounded-full items-center justify-center backdrop-blur transition z-10">
+                                <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
                         </div>
                     </div>
 
-                    <!-- 3. Kekeruhan -->
-                    <div class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-5 hover:shadow-md transition flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold text-slate-800 text-center mb-4 font-heading">
-                                Kekeruhan
+                    <!-- Metadata Foto -->
+                    <div
+                        class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <span id="photo-cam-name" class="font-medium">Kamera: -</span>
+                        <span id="photo-time" class="text-slate-400">Waktu: -</span>
+                    </div>
+                </div>
+
+                <!-- SLOT 2: VIDEO TERBARU -->
+                <div class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
+                            <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2 font-anta">
+                                <i class="fa-solid fa-video text-red-600"></i> Rekaman Video Terbaru
                             </h3>
-                            <div class="bg-slate-50 rounded-xl p-3 border border-slate-100 flex items-center justify-center min-h-[260px]">
-                                <canvas id="chartKekeruhan" class="max-h-[240px]"></canvas>
-                            </div>
+                            <span id="badge-video-status"
+                                class="text-[10px] bg-slate-100 text-slate-500 font-bold px-2 py-1 rounded">MENUNGGU
+                                DETEKSI</span>
                         </div>
-                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                            <span>Regresi: <strong>y = -0.0005x + 4.1026</strong></span>
-                            <button onclick="openChartModal('Kekeruhan (Turbidity)')" class="text-cyan-600 font-bold hover:underline">Detail & Interactive &rarr;</button>
+
+                        <!-- Tampilan Video -->
+                        <div
+                            class="relative aspect-video w-full rounded-xl bg-slate-900 overflow-hidden flex items-center justify-center">
+                            <video id="slot-video-player" controls class="hidden w-full h-full object-cover">
+                                <source id="slot-video-source" src="" type="video/mp4">
+                                Browser Anda tidak mendukung elemen video.
+                            </video>
+
+                            <!-- Placeholder Kosong Video -->
+                            <div id="slot-video-placeholder" class="text-center p-4">
+                                <i class="fa-solid fa-film text-4xl text-slate-600 mb-2"></i>
+                                <p class="text-xs text-slate-400">Belum ada rekaman video dari Trapcam</p>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- 4. Data pH -->
-                    <div class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-5 hover:shadow-md transition flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold text-slate-800 text-center mb-4 font-heading">
-                                Data pH
-                            </h3>
-                            <div class="bg-slate-50 rounded-xl p-3 border border-slate-100 flex items-center justify-center min-h-[260px]">
-                                <canvas id="chartPH" class="max-h-[240px]"></canvas>
-                            </div>
-                        </div>
-                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                            <span>Kisaran pH: <strong>6.8 - 7.2 (Normal)</strong></span>
-                            <button onclick="openChartModal('Data pH Air')" class="text-cyan-600 font-bold hover:underline">Detail & Interactive &rarr;</button>
-                        </div>
-                    </div>
-
-                    <!-- 5. Oksigen Terlarut -->
-                    <div class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-5 hover:shadow-md transition flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold text-slate-800 text-center mb-4 font-heading">
-                                Oksigen Terlarut
-                            </h3>
-                            <div class="bg-slate-50 rounded-xl p-3 border border-slate-100 flex items-center justify-center min-h-[260px]">
-                                <canvas id="chartDO" class="max-h-[240px]"></canvas>
-                            </div>
-                        </div>
-                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                            <span>Stasiun: <strong>CdA Station C5</strong></span>
-                            <button onclick="openChartModal('Oksigen Terlarut (DO)')" class="text-cyan-600 font-bold hover:underline">Detail & Interactive &rarr;</button>
-                        </div>
-                    </div>
-
-                    <!-- 6. Suhu Air -->
-                    <div class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-5 hover:shadow-md transition flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold text-slate-800 text-center mb-4 font-heading">
-                                Suhu Air
-                            </h3>
-                            <div class="bg-slate-50 rounded-xl p-3 border border-slate-100 flex items-center justify-center min-h-[260px]">
-                                <canvas id="chartSuhu" class="max-h-[240px]"></canvas>
-                            </div>
-                        </div>
-                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                            <span>Suhu Rata-rata: <strong>28.5°C</strong></span>
-                            <button onclick="openChartModal('Suhu Air')" class="text-cyan-600 font-bold hover:underline">Detail & Interactive &rarr;</button>
-                        </div>
+                    <!-- Metadata Video -->
+                    <div
+                        class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <span id="video-cam-name" class="font-medium">Kamera: -</span>
+                        <span id="video-time" class="text-slate-400">Waktu: -</span>
                     </div>
                 </div>
             </div>
-
-
-            <!-- SECTION 3: DATA ALAT BAT VIEW -->
-            <div id="view-data-bat" class="hidden space-y-8">
-                <!-- 1. Kecepatan Arus Card -->
-                <div class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-6 relative hover:shadow-md transition">
-                    <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-3xl font-extrabold text-slate-800 tracking-wide font-heading uppercase">
-                            KECEPATAN ARUS
-                        </h2>
-                        <div class="w-12 h-12 rounded-xl bg-sky-100 text-cyan-600 flex items-center justify-center text-xl shadow-inner border border-sky-200">
-                            <i class="fa-solid fa-water"></i>
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col items-center">
-                        <span class="text-[11px] font-bold tracking-wider text-slate-700 uppercase mb-3">
-                            PREDIKSI TINGGI ELEVASI PASANG SURUT MUKA LAUT 29 JUNI 2021
-                        </span>
-                        
-                        <div class="w-full h-72 sm:h-80">
-                            <canvas id="chartKecepatanArus"></canvas>
-                        </div>
-
-                        <div class="flex flex-wrap justify-center gap-6 mt-4 text-xs font-bold text-slate-700">
-                            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-blue-600 inline-block"></span> GILIMANUK</span>
-                            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-orange-500 inline-block"></span> DARI SAMUDERA HINDIA</span>
-                            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span> LAUT BALI</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2. GPS Card -->
-                <div class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-6 relative hover:shadow-md transition">
-                    <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-3xl font-extrabold text-slate-800 tracking-wide font-heading uppercase">
-                            GPS
-                        </h2>
-                        <div class="w-12 h-12 rounded-xl bg-sky-100 text-cyan-600 flex items-center justify-center text-xl shadow-inner border border-sky-200">
-                            <i class="fa-solid fa-map-location-dot"></i>
-                        </div>
-                    </div>
-
-                    <div class="relative w-full h-80 sm:h-96 rounded-2xl overflow-hidden border border-slate-300 shadow-inner bg-slate-100">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31671.309489246377!2d108.9100!3d-7.6800!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e650c822e118f6f%3A0x4027a76e352e460!2sKampung%20Laut%2C%20Cilacap%20Regency%2C%20Central%20Java!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid" 
-                            width="100%" 
-                            height="100%" 
-                            style="border:0;" 
-                            allowfullscreen="" 
-                            loading="lazy">
-                        </iframe>
-
-                        <div class="absolute bottom-4 left-4 bg-white/95 backdrop-blur px-4 py-2 rounded-xl shadow-lg border border-slate-200 text-xs font-semibold flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                            <span>Lokasi Real-time: -7.6800, 108.9100 (Kampung Laut)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- SECTION 4: DATA ALAT TROSS VIEW (NEW FROM IMAGE) -->
-            <div id="view-data-tross" class="hidden space-y-8">
-                <div class="text-center mb-4">
-                    <h2 class="text-3xl font-extrabold text-slate-800 font-heading">
-                        Dokumentasi
-                    </h2>
-                </div>
-
-                <!-- Documentation Camera Viewer Frame -->
-                <div class="max-w-3xl mx-auto bg-white rounded-3xl border-2 border-sky-200 p-4 sm:p-6 shadow-md relative">
-                    <!-- Image Showcase Window -->
-                    <div class="relative w-full aspect-[4/3] sm:aspect-video rounded-2xl overflow-hidden bg-slate-950 border border-slate-200 shadow-inner group">
-                        
-                        <img id="tross-doc-img" 
-                             src="https://images.unsplash.com/photo-1516214104703-d870798883c5?auto=format&fit=crop&w=1200&q=80" 
-                             alt="Dokumentasi Kamera Tross" 
-                             class="w-full h-full object-cover filter grayscale contrast-125 transition duration-500">
-
-                        <!-- Infrared Night-Vision Overlay Badge -->
-                        <div class="absolute top-4 left-4 bg-black/60 backdrop-blur text-emerald-400 font-mono text-xs px-3 py-1.5 rounded-lg border border-emerald-500/30 flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-                            <i class="fa-solid fa-camera text-xs"></i>
-                            <span id="tross-img-time">2026-10-02 02:14:32 IR-CAM</span>
-                        </div>
-
-                        <!-- Previous / Next Image Arrow Controls -->
-                        <button onclick="prevTrossImage()" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center transition border border-white/20 opacity-0 group-hover:opacity-100">
-                            <i class="fa-solid fa-chevron-left"></i>
-                        </button>
-                        <button onclick="nextTrossImage()" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center transition border border-white/20 opacity-0 group-hover:opacity-100">
-                            <i class="fa-solid fa-chevron-right"></i>
-                        </button>
-
-                        <!-- Bottom Dots Navigation Inside Image Frame -->
-                        <div class="absolute bottom-4 inset-x-0 flex justify-center items-center gap-2">
-                            <button onclick="setTrossImage(0)" id="dot-0" class="w-3 h-3 rounded-full bg-white transition shadow-md"></button>
-                            <button onclick="setTrossImage(1)" id="dot-1" class="w-3 h-3 rounded-full bg-white/50 hover:bg-white/80 transition shadow-md"></button>
-                            <button onclick="setTrossImage(2)" id="dot-2" class="w-3 h-3 rounded-full bg-white/50 hover:bg-white/80 transition shadow-md"></button>
-                            <button onclick="setTrossImage(3)" id="dot-3" class="w-3 h-3 rounded-full bg-white/50 hover:bg-white/80 transition shadow-md"></button>
-                        </div>
-                    </div>
-
-                    <!-- Photo Description Footer Info -->
-                    <div class="mt-4 flex flex-wrap items-center justify-between text-xs font-semibold text-slate-600 px-2">
-                        <span id="tross-caption">Dokumentasi Hutan Mangrove & Satwa Nusakambangan (PIR Activated)</span>
-                        <button onclick="showToast('Mengunduh foto dokumentasi HD...')" class="text-cyan-600 hover:text-cyan-800 font-bold flex items-center gap-1">
-                            <i class="fa-solid fa-download text-xs"></i> Unduh Foto HD
-                        </button>
-                    </div>
-                </div>
-            </div>
-
         </main>
     </div>
 
-    <!-- Footer Bar -->
-    <footer class="bg-white border-t border-sky-200 py-4 px-4 sm:px-8 mt-12">
-        <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-4 text-xs sm:text-sm text-cyan-600 font-medium">
-            <a href="https://instagram.com" target="_blank" class="flex items-center gap-2 hover:text-cyan-800 transition">
-                <i class="fa-regular fa-square-minus text-base"></i>
-                <i class="fa-brands fa-instagram text-base"></i>
-                <span>@mitr_ipb</span>
-            </a>
-
-            <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-2 hover:text-cyan-800 transition">
-                <i class="fa-regular fa-envelope text-base"></i>
-                <span>mitr.ipb@gmail.com</span>
-            </a>
-
-            <div class="text-cyan-700 font-semibold">
-                <span>085935000474 (Raras Adinda Wulandari)</span>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Toast Notification Overlay -->
-    <div id="toast" class="fixed bottom-6 right-6 bg-slate-900 text-white text-xs font-semibold px-4 py-3 rounded-xl shadow-xl transition transform translate-y-20 opacity-0 z-50 flex items-center gap-2 border border-slate-700">
-        <i class="fa-solid fa-circle-info text-cyan-400"></i>
+    <!-- Toast Notification Element -->
+    <div id="toast"
+        class="fixed bottom-5 right-5 bg-slate-800 text-white text-xs px-4 py-3 rounded-xl shadow-2xl transition-all duration-300 transform translate-y-20 opacity-0 z-50 flex items-center gap-2">
+        <i class="fa-solid fa-bell text-cyan-400"></i>
         <span id="toast-msg">Notifikasi</span>
     </div>
 
-    <!-- Modal Dialog Interactive -->
-    <div id="modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-sky-100 space-y-4">
-            <div class="flex items-center justify-between border-b pb-3">
-                <h3 id="modal-title" class="text-lg font-bold text-slate-800 font-heading">Detail Informasi</h3>
-                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 text-lg">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div id="modal-body" class="text-xs sm:text-sm text-slate-600 space-y-2 leading-relaxed">
-            </div>
-            <div class="flex justify-end pt-2">
-                <button onclick="closeModal()" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow">
-                    Tutup
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Application Script Logic -->
+    <!-- Script Logika Update Real-Time & Simulasi Carousel -->
     <script>
-        // Data Store for Devices
-        const deviceData = {
-            alba: {
-                title: "Alat Alba",
-                breadcrumbCat: "Alat",
-                breadcrumbCurrent: "Alat Alba",
-                heroIcon: "fa-diagram-project",
-                heroDesc: "Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data salinitas, kedalaman, kekeruhan, pH, oksigen terlarut (DO), dan suhu.",
-                badge: "Unmanned Surface Vehicle (USV)",
-                img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80",
-                electro: [
-                    "Microcontroller ESP32 Mainboard",
-                    "Sensor Salinitas & Konduktivitas",
-                    "Sensor pH Digital Hydro-Probe",
-                    "Sensor Dissolved Oxygen (DO)",
-                    "Modul GPS & Telemetri LoRa 915MHz",
-                    "Sistem Daya Baterai LiFePO4 12V 20Ah"
-                ],
-                mechanic: [
-                    "Lambung Katamaran Fiber Glass Waterproof",
-                    "Dual Thruster Brushless Motor 12V",
-                    "Kemudi Servo Water-Resistant 25kg",
-                    "Mounting Bracket Sensor Stainless Steel 316",
-                    "Box Panel Komponen IP67 Waterproof",
-                    "Baling-baling Pelindung Anti-Gulma"
-                ]
-            },
-            bat: {
-                title: "Alat Bat",
-                breadcrumbCat: "Alat",
-                breadcrumbCurrent: "Alat Bat",
-                heroIcon: "fa-water",
-                heroDesc: "Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data arus dan GPS.",
-                badge: "Underwater Acoustic / Current Meter",
-                img: "https://images.unsplash.com/photo-1682687220063-4742bd7fd538?auto=format&fit=crop&w=1200&q=80",
-                electro: [
-                    "Sensor Arus Water Flow Meter Acoustic",
-                    "Modul GPS High Precision Neo-M8N",
-                    "Microcontroller STM32 Ultra-Low Power",
-                    "Transceiver Gelombang Radio Telemetri",
-                    "Baterai Cadangan Solar Powered 6V"
-                ],
-                mechanic: [
-                    "Pelampung Buoy Oranye/Biru High-Visibility",
-                    "Kabel Tambat Rantai Baja Tahan Karat",
-                    "Pemberat Jangkar Dasar Laut 15kg",
-                    "Chassis Pelindung Sensor Bawah Air",
-                    "Segel Waterproof O-Ring Double Layer"
-                ]
-            },
-            tross: {
-                title: "Alat Tross",
-                breadcrumbCat: "Alat",
-                breadcrumbCurrent: "Alat Tross",
-                heroIcon: "fa-camera",
-                heroDesc: "Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan memberikan dokumentasi secara real-time.",
-                badge: "Wild-Cam & Environmental Tracker",
-                img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
-                electro: [
-                    "Kamera Trail Motion Detector Infra Red",
-                    "Modul Transmitter Komunikasi NRF24L01",
-                    "Sensor Suhu & Kelembaban Udara DHT22",
-                    "Power Management System 18650 Solar",
-                    "SD Card Logger Data Storage 64GB"
-                ],
-                mechanic: [
-                    "Casing Pelindung Kamuflase Anti-Air IP66",
-                    "Rantai Pengikat Pohon Heavy-Duty Lock",
-                    "Engsel Bracket Adjustable Angle 360",
-                    "Kaca Kamera Anti-Embun & Goresan"
-                ]
-            }
-        };
+        const SERVER_URL = 'http://localhost:3000';
+        let isFirstPhotoAdded = false;
 
-        // Images gallery for Tross Documentation
-        const trossGallery = [
-            {
-                url: "https://images.unsplash.com/photo-1516214104703-d870798883c5?auto=format&fit=crop&w=1200&q=80",
-                time: "2026-10-02 02:14:32 IR-CAM",
-                caption: "Tangkapan Malam: Hutan Mangrove Sektor Utara Nusakambangan"
-            },
-            {
-                url: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
-                time: "2026-10-01 21:40:05 IR-CAM",
-                caption: "Aktivitas Vegetasi Dangkal & Pergerakan Air Surut"
-            },
-            {
-                url: "https://images.unsplash.com/photo-1511497584788-876761c11969?auto=format&fit=crop&w=1200&q=80",
-                time: "2026-10-01 18:22:11 IR-CAM",
-                caption: "Monitoring Area Pesisir Kampung Laut - Sinar Infra Red"
-            },
-            {
-                url: "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1200&q=80",
-                time: "2026-10-01 14:05:50 DAY-CAM",
-                caption: "Dokumentasi Siang Hari: Area Rimbun Akar Mangrove"
-            }
-        ];
-        let currentTrossIdx = 0;
+        // FUNGSI UTAMA: Update Slot Foto / Video Saat Ada Gerakan Terdeteksi
+        function updateTrapcamData(data) {
+            const isVideo = data.type === 'video' || (data.imageUrl && data.imageUrl.match(/\.(mp4|webm|ogg)$/i));
+            const fileUrl = data.imageUrl.startsWith('http') ? data.imageUrl : SERVER_URL + data.imageUrl;
+            const cameraName = data.cameraId || 'Trapcam #1';
+            const timeString = data.timestamp || new Date().toLocaleTimeString('id-ID');
 
-        function setTrossImage(index) {
-            currentTrossIdx = index;
-            const imgEl = document.getElementById('tross-doc-img');
-            const timeEl = document.getElementById('tross-img-time');
-            const capEl = document.getElementById('tross-caption');
+            if (isVideo) {
+                // --- Update Slot Video ---
+                const videoPlayer = document.getElementById('slot-video-player');
+                const videoSource = document.getElementById('slot-video-source');
+                const videoPlaceholder = document.getElementById('slot-video-placeholder');
+                const badgeVideo = document.getElementById('badge-video-status');
 
-            if (imgEl && trossGallery[index]) {
-                imgEl.src = trossGallery[index].url;
-                timeEl.innerText = trossGallery[index].time;
-                capEl.innerText = trossGallery[index].caption;
+                videoSource.src = fileUrl;
+                videoPlayer.load();
+                videoPlayer.classList.remove('hidden');
+                videoPlaceholder.classList.add('hidden');
 
-                for (let i = 0; i < 4; i++) {
-                    const dot = document.getElementById('dot-' + i);
-                    if (dot) {
-                        if (i === index) {
-                            dot.className = "w-3 h-3 rounded-full bg-white transition shadow-md scale-110";
-                        } else {
-                            dot.className = "w-3 h-3 rounded-full bg-white/50 hover:bg-white/80 transition shadow-md";
-                        }
-                    }
+                badgeVideo.innerText = 'TERBARU (REKAMAN)';
+                badgeVideo.className = 'text-[10px] bg-red-100 text-red-600 font-bold px-2 py-1 rounded animate-pulse';
+
+                document.getElementById('video-cam-name').innerText = `Kamera: ${cameraName}`;
+                document.getElementById('video-time').innerText = `Deteksi: ${timeString}`;
+
+                showToast(`🎥 Rekaman video baru terdeteksi oleh ${cameraName}!`);
+
+            } else {
+                // --- Update Slot Foto (Carousel / Multi-Foto) ---
+                const carousel = document.getElementById('photo-carousel-container');
+                const placeholder = document.getElementById('slot-photo-placeholder');
+                const badgePhoto = document.getElementById('badge-photo-status');
+                const btnPrev = document.getElementById('btn-prev-photo');
+                const btnNext = document.getElementById('btn-next-photo');
+
+                // Sembunyikan placeholder pertama kali foto masuk
+                if (!isFirstPhotoAdded) {
+                    if (placeholder) placeholder.remove();
+                    btnPrev.classList.remove('hidden');
+                    btnPrev.classList.add('flex');
+                    btnNext.classList.remove('hidden');
+                    btnNext.classList.add('flex');
+                    isFirstPhotoAdded = true;
                 }
+
+                // Buat elemen slide foto baru
+                const newSlide = document.createElement('div');
+                newSlide.className = 'w-full h-full flex-shrink-0 snap-center relative';
+                newSlide.dataset.camera = cameraName;
+                newSlide.dataset.time = timeString;
+
+                newSlide.innerHTML = `
+                    <img src="${fileUrl}" alt="Foto Deteksi Trapcam" class="w-full h-full object-cover">
+                    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded backdrop-blur">
+                        Baru
+                    </span>
+                `;
+
+                // Sisipkan foto terbaru ke posisi paling depan (paling kiri)
+                carousel.insertBefore(newSlide, carousel.firstChild);
+
+                // Scroll otomatis ke posisi foto paling baru
+                carousel.scrollTo({ left: 0, behavior: 'smooth' });
+
+                // Update Badge dan Info Metadata Foto Pertama
+                badgePhoto.innerText = 'TERBARU (FOTO)';
+                badgePhoto.className = 'text-[10px] bg-cyan-100 text-cyan-700 font-bold px-2 py-1 rounded animate-pulse';
+
+                updatePhotoMetadata(cameraName, timeString);
+                showToast(`📸 Foto deteksi baru ditangkap oleh ${cameraName}!`);
             }
         }
 
-        function nextTrossImage() {
-            let next = (currentTrossIdx + 1) % trossGallery.length;
-            setTrossImage(next);
+        // Fungsi Geser Carousel Foto Kiri / Kanan
+        function scrollPhotoCarousel(direction) {
+            const carousel = document.getElementById('photo-carousel-container');
+            const scrollAmount = carousel.clientWidth; // Geser sejauh lebar container
+            carousel.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
         }
 
-        function prevTrossImage() {
-            let prev = (currentTrossIdx - 1 + trossGallery.length) % trossGallery.length;
-            setTrossImage(prev);
-        }
+        // Event Listener untuk meng-update Metadata saat foto di-scroll manual oleh user
+        document.getElementById('photo-carousel-container').addEventListener('scroll', () => {
+            const carousel = document.getElementById('photo-carousel-container');
+            const slides = carousel.querySelectorAll('.snap-center');
 
-        let currentActiveTab = 'alba';
+            slides.forEach(slide => {
+                const rect = slide.getBoundingClientRect();
+                const carouselRect = carousel.getBoundingClientRect();
 
-        function switchTab(tabKey) {
-            currentActiveTab = tabKey;
-
-            const viewDevice = document.getElementById('view-device');
-            const viewDataAlba = document.getElementById('view-data-alba');
-            const viewDataBat = document.getElementById('view-data-bat');
-            const viewDataTross = document.getElementById('view-data-tross');
-            const heroActions = document.getElementById('hero-actions');
-
-            // Reset Tab Styles
-            ['alba', 'bat', 'tross', 'data-alba', 'data-bat', 'data-tross'].forEach(k => {
-                const b = document.getElementById('btn-tab-' + k);
-                if (b) {
-                    if (k === tabKey) {
-                        b.className = "px-3 py-1.5 rounded-lg bg-white/30 text-white font-bold transition backdrop-blur border border-white/50 shadow-sm";
-                    } else {
-                        b.className = "px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-cyan-100 transition";
+                // Cek slide mana yang paling banyak terlihat di viewport
+                if (Math.abs(rect.left - carouselRect.left) < carouselRect.width / 2) {
+                    if (slide.dataset.camera && slide.dataset.time) {
+                        updatePhotoMetadata(slide.dataset.camera, slide.dataset.time);
                     }
                 }
             });
+        });
 
-            if (tabKey === 'data-alba') {
-                viewDevice.classList.add('hidden');
-                viewDataBat.classList.add('hidden');
-                viewDataTross.classList.add('hidden');
-                viewDataAlba.classList.remove('hidden');
-
-                document.getElementById('breadcrumb-category').innerText = "Data";
-                document.getElementById('breadcrumb-current').innerText = "Data Alba";
-                document.getElementById('hero-title').innerText = "Data Alat Alba";
-                document.getElementById('hero-icon').className = "fa-solid fa-chart-line";
-                document.getElementById('hero-desc').innerText = "Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data salinitas, kedalaman, kekeruhan, pH, oksigen terlarut (DO), dan suhu.";
-
-                heroActions.innerHTML = `
-                    <span class="inline-flex items-center gap-1.5 bg-white/20 text-white font-semibold text-xs px-3 py-1.5 rounded-full border border-white/30 backdrop-blur">
-                        <span class="w-2.5 h-2.5 rounded-full bg-slate-300"></span> Tidak online
-                    </span>
-                    <span class="inline-flex items-center gap-1.5 bg-white/20 text-white font-semibold text-xs px-3 py-1.5 rounded-full border border-white/30 backdrop-blur">
-                        <span class="w-4 h-4 rounded-full bg-indigo-900/60 text-white text-[9px] flex items-center justify-center font-bold">N</span> Data non-real-time
-                    </span>
-                `;
-
-                setTimeout(initCharts, 100);
-
-            } else if (tabKey === 'data-bat') {
-                viewDevice.classList.add('hidden');
-                viewDataAlba.classList.add('hidden');
-                viewDataTross.classList.add('hidden');
-                viewDataBat.classList.remove('hidden');
-
-                document.getElementById('breadcrumb-category').innerText = "Data";
-                document.getElementById('breadcrumb-current').innerText = "Data Bat";
-                document.getElementById('hero-title').innerText = "Data Alat Bat";
-                document.getElementById('hero-icon').className = "fa-solid fa-water";
-                document.getElementById('hero-desc').innerText = "Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data arus dan GPS secara real-time.";
-
-                heroActions.innerHTML = `
-                    <span class="inline-flex items-center gap-1.5 bg-emerald-500/80 text-white font-semibold text-xs px-3 py-1.5 rounded-full border border-emerald-400 backdrop-blur">
-                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-200 animate-ping"></span> Online
-                    </span>
-                    <span class="inline-flex items-center gap-1.5 bg-white/20 text-white font-semibold text-xs px-3 py-1.5 rounded-full border border-white/30 backdrop-blur">
-                        <span class="w-4 h-4 rounded-full bg-purple-900/60 text-white text-[9px] flex items-center justify-center font-bold">N</span> Lorem
-                    </span>
-                `;
-
-                setTimeout(initDataBatChart, 100);
-
-            } else if (tabKey === 'data-tross') {
-                viewDevice.classList.add('hidden');
-                viewDataAlba.classList.add('hidden');
-                viewDataBat.classList.add('hidden');
-                viewDataTross.classList.remove('hidden');
-
-                document.getElementById('breadcrumb-category').innerText = "Data";
-                document.getElementById('breadcrumb-current').innerText = "Data Tross";
-                document.getElementById('hero-title').innerText = "Data Alat Tross";
-                document.getElementById('hero-icon').className = "fa-solid fa-camera";
-                document.getElementById('hero-desc').innerText = "Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan memberikan dokumentasi secara real-time.";
-
-                heroActions.innerHTML = `
-                    <span class="inline-flex items-center gap-1.5 bg-emerald-500/80 text-white font-semibold text-xs px-3 py-1.5 rounded-full border border-emerald-400 backdrop-blur">
-                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-200 animate-ping"></span> Online
-                    </span>
-                    <span class="inline-flex items-center gap-1.5 bg-white/20 text-white font-semibold text-xs px-3 py-1.5 rounded-full border border-white/30 backdrop-blur">
-                        <span class="w-4 h-4 rounded-full bg-purple-900/60 text-white text-[9px] flex items-center justify-center font-bold">N</span> Data real-time
-                    </span>
-                `;
-
-                setTrossImage(0);
-
-            } else {
-                viewDevice.classList.remove('hidden');
-                viewDataAlba.classList.add('hidden');
-                viewDataBat.classList.add('hidden');
-                viewDataTross.classList.add('hidden');
-
-                const data = deviceData[tabKey];
-                if (!data) return;
-
-                document.getElementById('breadcrumb-category').innerText = data.breadcrumbCat;
-                document.getElementById('breadcrumb-current').innerText = data.breadcrumbCurrent;
-                document.getElementById('hero-title').innerText = data.title;
-                document.getElementById('hero-icon').className = "fa-solid " + data.heroIcon;
-                document.getElementById('hero-desc').innerText = data.heroDesc;
-                document.getElementById('device-title').innerText = data.title;
-                document.getElementById('device-badge').innerText = data.badge;
-                document.getElementById('device-img').src = data.img;
-
-                heroActions.innerHTML = `
-                    <button onclick="toggleMaintenance()" class="inline-flex items-center gap-2 bg-white text-slate-800 hover:bg-slate-100 font-bold text-xs sm:text-sm px-4 py-2 rounded-full shadow-md transition border border-slate-200">
-                        <span class="w-5 h-5 rounded-full bg-slate-200 text-slate-700 text-xs flex items-center justify-center font-bold">N</span>
-                        <span id="btn-maint-text">Maintenance Alat</span>
-                    </button>
-                `;
-
-                const listEl = document.getElementById('list-electro');
-                listEl.innerHTML = data.electro.map(item => `
-                    <div class="flex items-start gap-3 text-xs sm:text-sm text-slate-700 p-2.5 rounded-xl bg-slate-50 border border-slate-100 hover:bg-sky-50/50 transition">
-                        <i class="fa-solid fa-circle-check text-cyan-600 mt-0.5 text-xs"></i>
-                        <span>${item}</span>
-                    </div>
-                `).join('');
-
-                const listMech = document.getElementById('list-mechanic');
-                listMech.innerHTML = data.mechanic.map(item => `
-                    <div class="flex items-start gap-3 text-xs sm:text-sm text-slate-700 p-2.5 rounded-xl bg-slate-50 border border-slate-100 hover:bg-sky-50/50 transition">
-                        <i class="fa-solid fa-gear text-sky-600 mt-0.5 text-xs"></i>
-                        <span>${item}</span>
-                    </div>
-                `).join('');
-            }
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Helper Update Teks Metadata Foto
+        function updatePhotoMetadata(camera, time) {
+            document.getElementById('photo-cam-name').innerText = `Kamera: ${camera}`;
+            document.getElementById('photo-time').innerText = `Deteksi: ${time}`;
         }
 
-        function toggleMaintenance() {
-            showToast("Status Maintenance diperbarui untuk " + document.getElementById('hero-title').innerText);
+        // Mendengarkan data real-time dari Socket.IO (Jika Backend terhubung)
+        try {
+            const socket = io(SERVER_URL);
+            socket.on('new_detection', (data) => {
+                updateTrapcamData(data);
+            });
+        } catch (e) {
+            console.log('Mode Offline / Socket server belum dinyalakan.');
         }
 
+        // Helper Toast Notifikasi
         function showToast(msg) {
             const toast = document.getElementById('toast');
             document.getElementById('toast-msg').innerText = msg;
             toast.classList.remove('translate-y-20', 'opacity-0');
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 3000);
+            setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 3000);
         }
 
-        function showComponentDetail(type) {
-            const title = `${type} - ${document.getElementById('hero-title').innerText}`;
-            const modalTitle = document.getElementById('modal-title');
-            const modalBody = document.getElementById('modal-body');
+        const mobileToggleBtn = document.getElementById('mobile-toggle-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const toggleIcon = document.getElementById('toggle-icon');
 
-            modalTitle.innerText = title;
-            modalBody.innerHTML = `
-                <p>Berikut adalah spesifikasi mendalam untuk rincian sistem <strong>${type}</strong> pada perangkat ini:</p>
-                <ul class="list-disc pl-5 space-y-1 font-semibold text-slate-700 mt-2">
-                    <li>Tegangan Kerja: 12V DC / 5V Regulated</li>
-                    <li>Suhu Operasional: 10°C - 45°C</li>
-                    <li>Sertifikasi Ketahanan Air: IP67 Enclosure Standard</li>
-                    <li>Interval Logging: Every 15 Minutes</li>
-                </ul>
-            `;
-            document.getElementById('modal').classList.remove('hidden');
-        }
+        mobileToggleBtn.addEventListener('click', function () {
 
-        function openChartModal(paramName) {
-            const modalTitle = document.getElementById('modal-title');
-            const modalBody = document.getElementById('modal-body');
+            mobileMenu.classList.toggle('hidden');
 
-            modalTitle.innerText = "Data Detail: " + paramName;
-            modalBody.innerHTML = `
-                <p>Menampilkan riwayat data pengukuran untuk parameter <strong>${paramName}</strong> pada stasiun Kampung Laut.</p>
-                <button onclick="showToast('Mengunduh dataset .CSV...')" class="mt-2 text-xs font-bold text-cyan-600 underline">Unduh Data CSV (2.4 MB)</button>
-            `;
-            document.getElementById('modal').classList.remove('hidden');
-        }
+            if (mobileMenu.classList.contains('hidden')) {
 
-        function closeModal() {
-            document.getElementById('modal').classList.add('hidden');
-        }
+                toggleIcon.classList.remove('fa-times');
+                toggleIcon.classList.add('fa-bars');
 
-        // Data Bat Current Speed Chart Init
-        let batChartInstance = null;
-        function initDataBatChart() {
-            if (batChartInstance) return;
+            } else {
 
-            const ctx = document.getElementById('chartKecepatanArus').getContext('2d');
-            batChartInstance = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['10:00:00', '03:00:00', '06:00:00', '09:00:00', '12:00:00', '15:00:00', '18:00:00', '21:00:00', '00'],
-                    datasets: [
-                        {
-                            label: 'GILIMANUK',
-                            data: [0.3, 0.4, 0.3, 0.4, 0.6, 0.7, 0.5, 0.2, 0.4],
-                            borderColor: '#2563eb',
-                            backgroundColor: '#2563eb',
-                            borderWidth: 2,
-                            tension: 0.4,
-                            pointRadius: 4
-                        },
-                        {
-                            label: 'DARI SAMUDERA HINDIA',
-                            data: [0.8, 0.3, 0.1, 0.5, 0.9, 0.8, 0.3, 0.0, 0.3],
-                            borderColor: '#f97316',
-                            backgroundColor: '#f97316',
-                            borderWidth: 2,
-                            tension: 0.4,
-                            pointRadius: 4
-                        },
-                        {
-                            label: 'LAUT BALI',
-                            data: [0.2, 0.3, 0.2, 0.3, 0.5, 0.6, 0.4, 0.1, 0.3],
-                            borderColor: '#10b981',
-                            backgroundColor: '#10b981',
-                            borderWidth: 2,
-                            tension: 0.4,
-                            pointRadius: 4
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
-                    scales: {
-                        y: {
-                            min: 0,
-                            max: 1.2,
-                            ticks: { stepSize: 0.2 }
-                        }
-                    }
-                }
-            });
-        }
+                toggleIcon.classList.remove('fa-bars');
+                toggleIcon.classList.add('fa-times');
 
-        // Data Alba Charts
-        let chartsInitialized = false;
-        function initCharts() {
-            if (chartsInitialized) return;
-            chartsInitialized = true;
+            }
 
-            const commonOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { labels: { font: { family: 'Quicksand', size: 10 } } } }
-            };
-
-            new Chart(document.getElementById('chartSalinitas'), {
-                type: 'line',
-                data: {
-                    labels: ['0m', '200m', '400m', '600m', '800m', '1000m'],
-                    datasets: [
-                        { label: 'Suhu (°C)', data: [29, 22, 12, 8, 5, 4], borderColor: '#ef4444', tension: 0.4 },
-                        { label: 'Salinitas (PSU)', data: [34, 34.5, 34.8, 34.6, 34.5, 34.6], borderColor: '#0284c7', tension: 0.4 }
-                    ]
-                },
-                options: commonOptions
-            });
-
-            new Chart(document.getElementById('chartKekeruhan'), {
-                type: 'scatter',
-                data: {
-                    datasets: [{
-                        label: 'Tegangan (V) vs NTU',
-                        data: [{x: 100, y: 4.1}, {x: 500, y: 3.8}, {x: 1000, y: 3.5}, {x: 1500, y: 3.2}, {x: 2000, y: 3.0}, {x: 2500, y: 2.7}, {x: 3000, y: 2.3}],
-                        backgroundColor: '#0284c7'
-                    }]
-                },
-                options: commonOptions
-            });
-
-            new Chart(document.getElementById('chartPH'), {
-                type: 'bar',
-                data: {
-                    labels: ['7-Apr-25', '14-Apr-25', '21-Apr-25', '28-Apr-25'],
-                    datasets: [
-                        { label: 'pH GKW Batri', data: [6.8, 6.9, 7.0, 7.1], backgroundColor: '#3b82f6' },
-                        { label: 'pH Palu', data: [7.2, 7.0, 7.3, 7.1], backgroundColor: '#ef4444' }
-                    ]
-                },
-                options: commonOptions
-            });
-
-            new Chart(document.getElementById('chartDO'), {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Mar', 'May', 'Jul', 'Sept', 'Nov'],
-                    datasets: [
-                        { label: 'Surface (1-5m)', data: [11.5, 11, 10, 8.5, 8.2, 11], borderColor: '#b91c1c' },
-                        { label: 'Bottom (14-17m)', data: [11, 10, 9.2, 6, 5.2, 10.2], borderColor: '#1e3a8a' }
-                    ]
-                },
-                options: commonOptions
-            });
-
-            new Chart(document.getElementById('chartSuhu'), {
-                type: 'line',
-                data: {
-                    labels: ['1950', '1960', '1970', '1980', '1990', '2000', '2010', '2020'],
-                    datasets: [
-                        { label: 'Land Surface', data: [-0.2, -0.1, 0, 0.2, 0.5, 0.8, 1.2, 1.6], borderColor: '#dc2626' },
-                        { label: 'Ocean Surface', data: [-0.1, -0.1, 0, 0.1, 0.3, 0.4, 0.6, 0.8], borderColor: '#2563eb' }
-                    ]
-                },
-                options: commonOptions
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            switchTab('data-tross');
         });
     </script>
+
+    <br>
+    <footer class="bg-white px-6 py-10 border-t-[2px] border-[#118AB2]">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+
+            <!-- Kolom 1 (Dibuat lebih lebar/span 2): Lokasi, Email, dan WhatsApp -->
+            <div class="md:col-span-2 flex flex-col gap-4 text-[#118AB2]">
+                <h3 class="font-bold text-xl mb-2">Our Contact</h3>
+
+                <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9"
+                    class="flex items-start gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-solid fa-location-dot text-xl mt-1"></i>
+                    <span class="leading-relaxed">Workshop Instrumentasi dan Robotika Kelautan (Bengkel) ITK, Babakan,
+                        Dramaga, Bogor, Indonesia 16680</span>
+                </a>
+
+                <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-regular fa-envelope text-xl"></i>
+                    <span>mitr.ipb@gmail.com</span>
+                </a>
+
+                <a href="https://wa.me/6283898339620" class="flex items-center gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    <span>+6283898339620 (Deni Rizkiana Anwar Hidayat)</span>
+                </a>
+            </div>
+
+            <!-- Kolom 2: Sosial Media -->
+            <div class="flex flex-col gap-4 text-[#118AB2]">
+                <h3 class="font-bold text-xl mb-2">Social Media</h3>
+
+                <a href="https://www.instagram.com/mitr_ipb/"
+                    class="flex items-center gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-brands fa-instagram text-xl"></i>
+                    <span>@mitr_ipb</span>
+                </a>
+                <!-- Kamu bisa tambahkan link LinkedIn atau YouTube di sini jika ada -->
+            </div>
+
+            <!-- Kolom 3: Logo dan Tombol Back to Top -->
+            <div class="flex flex-col items-start gap-6 text-[#118AB2]">
+                <h3 class="font-bold text-xl mb-2">About Us</h3>
+
+                <!-- Tempat untuk Logo MIT+R -->
+                <div class="w-full flex items-center justify-start">
+                    <!-- Ganti "URL_LOGO_KAMU.png" dengan path/link logo yang sebenarnya -->
+                    <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-24   object-contain">
+                </div>
+
+                <!-- Tombol Back to Top -->
+                <div class="w-full flex justify-end mt-auto">
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+                        class="group flex items-center p-3 bg-[#118AB2] text-white rounded-full shadow-md hover:bg-[#0c6b8a] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
+
+                        <!-- Teks yang Muncul Saat Hover (Sekarang di urutan pertama / sebelah kiri) -->
+                        <span
+                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[120px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold">
+                            Back to Top
+                        </span>
+
+                        <!-- Lingkaran Icon Panah (Sekarang di urutan kedua / sebelah kanan) -->
+                        <span
+                            class="flex items-center justify-center w-7 h-7 bg-white text-[#118AB2] rounded-full transition-transform duration-500 group-hover:scale-110 shrink-0">
+                            <i class="fa-solid fa-arrow-up text-sm"></i>
+                        </span>
+
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </footer>
 </body>
+
 </html>
