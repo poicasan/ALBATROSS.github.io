@@ -1,407 +1,717 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alat Tross - Monitoring Kampung Laut</title>
+    <title>Alat TROSS - Monitoring Kampung Laut</title>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Quicksand for exact match to layout typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
-    
+
+    <!-- Google Fonts: Anta & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anta&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         brand: {
-                            cyan: '#0c8fae',
+                            cyan: '#008ba3',
                             lightCyan: '#e6f7f9',
-                            darkText: '#2e3859',
-                            borderCyan: '#bae6fd',
-                            tealBg: '#0982a3',
-                            hoverBg: '#087391'
+                            darkText: '#2d3757',
+                            borderCyan: '#b2e3ea',
+                            tealBg: '#0883a4'
                         }
                     },
                     fontFamily: {
-                        sans: ['Quicksand', 'sans-serif'],
+                        anta: ['Anta', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
+
     <style>
         body {
-            font-family: 'Quicksand', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
-        /* Custom scrollbar for smooth rendering */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #0c8fae;
-            border-radius: 4px;
+
+        .font-tech {
+            font-family: 'Anta', sans-serif;
         }
     </style>
 </head>
-<body class="bg-white min-h-screen flex flex-col justify-between text-gray-800 antialiased selection:bg-cyan-100">
 
-    <header class="bg-white border-b border-gray-100 sticky top-0 z-40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
-            <!-- Close Button / Icon (Matching Screenshot Top-Left X) -->
-            <button onclick="showToast('Menu tertutup')" class="w-8 h-8 rounded-full bg-gray-200/80 flex items-center justify-center text-gray-700 hover:bg-gray-300 transition duration-200 focus:outline-none" title="Tutup">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
+<body class="bg-gray-50 min-h-screen flex flex-col justify-between text-gray-800 font-inter">
 
-            <!-- Navigation Links Top-Right -->
-            <nav class="flex items-center space-x-4 sm:space-x-8 text-xs sm:text-sm font-bold tracking-wider text-brand-cyan">
-                <a href="#beranda" onclick="setActiveNav(this)" class="hover:text-brand-tealBg transition duration-150">BERANDA</a>
-                <a href="#tentang" onclick="setActiveNav(this)" class="hover:text-brand-tealBg transition duration-150">TENTANG KAMI</a>
-                <a href="#alat" onclick="setActiveNav(this)" class="hover:text-brand-tealBg transition duration-150 border-b-2 border-brand-cyan pb-0.5">ALAT</a>
-                <a href="#data" onclick="setActiveNav(this)" class="hover:text-brand-tealBg transition duration-150">DATA</a>
-            </nav>
+    <!-- Navbar -->
+    <nav id="navbar"
+        class="fixed top-0 left-0 w-full z-50 p-4 lg:px-12 transition-all duration-300 bg-white shadow-md text-[#118AB2]">
+
+        <div class="max-w-7xl mx-auto flex justify-between items-center relative">
+
+            <!-- Logo ALBATROSS -->
+            <div class="relative flex items-center justify-center">
+                <!-- Shape Bulat Biru (Ukuran lebih besar, tidak mempengaruhi tinggi header) -->
+                <div class="absolute bg-[#118AB2] rounded-full w-14 h-14 -z-0"></div>
+
+                <!-- Tombol Logo (Tetap menentukan ukuran utama di header) -->
+                <a href="#" id="logo-btn"
+                    class="relative z-10 flex items-center justify-center transition-transform hover:scale-105">
+                    <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="h-12 w-auto object-contain">
+                </a>
+            </div>
+
+            <!-- Container Kanan -->
+            <div class="flex items-center space-x-3">
+
+                <ul id="nav-links"
+                    class="hidden md:flex items-center space-x-2 sm:space-x-3 text-xs sm:text-sm font-semibold tracking-wider sm:tracking-widest uppercase transition-all duration-300 py-1 font-inter">
+
+                    <li>
+                        <a href="index.html"
+                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
+                            BERANDA
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="tentang kami.html"
+                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
+                            TENTANG KAMI
+                        </a>
+                    </li>
+
+                    <!-- Dropdown ALAT -->
+                    <li class="relative group" id="alat-dropdown">
+
+                        <button id="alat-btn" type="button"
+                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+                            ALAT
+                        </button>
+
+                        <div id="alat-menu"
+                            class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
+
+                            <a href="alat alba.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Alat Alba
+                            </a>
+
+                            <a href="alat bat.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Alat Bat
+                            </a>
+
+                            <a href="alat tross.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">
+                                Alat Tross
+                            </a>
+
+                        </div>
+                    </li>
+
+                    <!-- Dropdown DATA -->
+                    <li class="relative group" id="data-dropdown">
+
+                        <button id="data-btn" type="button"
+                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+                            DATA
+                        </button>
+
+                        <div id="data-menu"
+                            class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
+
+
+                             <a href="data pemetaan.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Data Pemetaan
+                            </a>
+
+                            <a href="data alba.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Data Alba
+                            </a>
+
+                            <a href="data bat.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                Data Bat
+                            </a>
+
+                            <a href="data tross.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">
+                                Data Tross
+                            </a>
+
+                        </div>
+                    </li>
+
+                </ul>
+
+                <!-- Tombol Mobile -->
+                <button id="mobile-toggle-btn" class="md:hidden text-2xl p-2 transition-colors focus:outline-none"
+                    aria-label="Buka menu navigasi">
+                    <i id="toggle-icon" class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
-    </header>
 
-    <section class="bg-brand-tealBg text-white py-8 px-4 sm:px-6 lg:px-8 shadow-sm transition-all duration-300">
-        <div class="max-w-5xl mx-auto space-y-4">
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white mt-4 rounded-xl shadow-lg p-4">
+            <div class="flex flex-col space-y-2 text-sm font-semibold text-[#118AB2]">
+                <a href="index.html" class="px-4 py-3 rounded-lg hover:bg-brand-lightCyan">
+                    BERANDA
+                </a>
+                <a href="tentang kami.html" class="px-4 py-3 rounded-lg hover:bg-brand-lightCyan">
+                    TENTANG KAMI
+                </a>
+                <div class="border-t border-gray-100 pt-2">
+                    <p class="px-4 py-2 text-xs text-gray-400">
+                        ALAT
+                    </p>
+                    <a href="alat alba.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Alat Alba
+                    </a>
+                    <a href="alat bat.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Alat Bat
+                    </a>
+                    <a href="alat tross.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Alat Tross
+                    </a>
+                </div>
+
+                <div class="border-t border-gray-100 pt-2">
+                    <p class="px-4 py-2 text-xs text-gray-400">
+                        DATA
+                    </p>
+                    <a href="data pemetaan.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Data Pemetaan
+                    </a>
+                    <a href="data alba.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Data Alba
+                    </a>
+                    <a href="data bat.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Data Bat
+                    </a>
+                    <a href="data tross.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                        Data Tross
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="bg-brand-tealBg text-white py-28 px-8 sm:px-6 lg:px-8 shadow-inner" style="height: 350px;">
+        <div class="max-w-6xl mx-auto space-y-4">
+
             <!-- Breadcrumbs -->
-            <nav class="flex items-center space-x-2 text-xs sm:text-sm text-cyan-100 font-semibold">
-                <a href="index.html" class="hover:underline flex items-center gap-1.5">
+            <nav class="flex items-center space-x-2 text-xs sm:text-sm text-cyan-100 font-medium font-inter">
+                <a href="index.html" class="hover:underline flex items-center gap-1">
                     <i class="fa-solid fa-house text-xs"></i> Beranda
                 </a>
                 <span>&gt;</span>
-                <a href="alat tross.html" class="hover:underline">Alat</a>
+                <a href="alat.html" class="hover:underline">Alat</a>
                 <span>&gt;</span>
-                <span class="text-white font-bold" id="current-tool-breadcrumb">Alat Tross</span>
+                <span class="text-white font-semibold">Alat TROSS</span>
             </nav>
 
-            <!-- Title with Network/Node Icon -->
-            <div class="flex items-center space-x-3 pt-1">
-                <div class="text-3xl sm:text-4xl text-cyan-100">
-                    <i class="fa-solid fa-diagram-project"></i>
+            <!-- Title with Camera Icon -->
+            <div class="flex items-center space-x-3 pt-2">
+                <div class="text-3xl sm:text-4xl">
+                    <i class="fa-solid fa-camera"></i>
                 </div>
-                <h1 class="text-3xl sm:text-4xl font-bold tracking-tight" id="tool-banner-title">Alat Tross</h1>
+                <h1 class="text-3xl sm:text-4xl font-bold tracking-wide font-anta">
+                    Alat TROSS
+                </h1>
             </div>
 
-            <!-- Dynamic Tool Switcher Navigation Tabs -->
-            <div class="flex flex-wrap gap-2 pt-1">
-                <button onclick="switchTool('alba')" id="tab-alba" class="px-4 py-1.5 rounded-full text-xs font-bold transition duration-200 bg-cyan-900/40 text-cyan-100 hover:bg-white/20">
-                    Alat Alba
-                </button>
-                <button onclick="switchTool('bat')" id="tab-bat" class="px-4 py-1.5 rounded-full text-xs font-bold transition duration-200 bg-cyan-900/40 text-cyan-100 hover:bg-white/20">
-                    Alat Bat
-                </button>
-                <button onclick="switchTool('tross')" id="tab-tross" class="px-4 py-1.5 rounded-full text-xs font-bold transition duration-200 bg-white text-brand-tealBg shadow">
-                    Alat Tross
-                </button>
-            </div>
-
-            <!-- Tool Description -->
-            <p class="text-xs sm:text-sm text-cyan-50 max-w-2xl leading-relaxed font-medium" id="tool-description">
-                Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data arus dan GPS.
+            <!-- Description -->
+            <p class="text-sm sm:text-base text-cyan-50 max-w-3xl leading-relaxed font-normal font-inter">
+                Memantau keberadaan fauna di kawasan mangrove Kampung Laut, Nusakambangan melalui sistem kamera
+                otomatis berbasis sensor gerak untuk mendukung pengamatan kondisi ekosistem.
             </p>
 
-            <!-- Maintenance Action Button -->
+            <!-- Action Button -->
             <div class="pt-2">
-                <button onclick="openMaintenanceModal()" class="inline-flex items-center space-x-2.5 bg-white text-brand-darkText font-bold px-4 py-2 rounded-full text-xs shadow hover:bg-cyan-50 transition duration-200 border border-cyan-100 cursor-pointer">
-                    <span class="w-5 h-5 rounded-full bg-brand-darkText text-white flex items-center justify-center text-[10px]">
+                <a href="#maintenance"
+                    class="inline-flex items-center space-x-2 bg-white text-brand-darkText font-semibold px-4 py-2 rounded-full text-xs sm:text-sm shadow hover:bg-gray-100 transition duration-200 border border-gray-200 font-inter">
+                    <span
+                        class="w-5 h-5 rounded-full bg-brand-darkText text-white flex items-center justify-center text-[10px]">
                         <i class="fa-solid fa-wrench"></i>
                     </span>
                     <span>Maintenance Alat</span>
-                </button>
+                </a>
             </div>
         </div>
     </section>
 
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow">
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow">
+
         <!-- Section Heading -->
-        <h2 class="text-2xl sm:text-3xl font-bold text-center text-brand-darkText mb-6" id="main-content-title">
-            Alat Tross
+        <h2 class="text-2xl sm:text-3xl font-bold text-center text-brand-darkText mb-6 font-anta">
+            Alat TROSS
         </h2>
 
-        <!-- Main Image Card Container (Tree Camera Trap / Buoy / USV Boat) -->
-        <div class="bg-white p-2.5 sm:p-3 rounded-2xl border-2 border-brand-borderCyan shadow-xs mb-10 max-w-2xl mx-auto transition-all duration-300">
-            <div class="overflow-hidden rounded-xl bg-slate-900 aspect-[16/10] flex items-center justify-center relative group">
-                <img id="main-tool-image"
-                     src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80" 
-                     alt="Alat Tross Trail Camera on Tree Trunk" 
-                     class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500 brightness-95 contrast-105"
-                     onerror="this.onerror=null; this.src='https://placehold.co/800x500/0c8fae/ffffff?text=Alat+Tross+Camera+Trap';">
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent opacity-60"></div>
-                <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-white text-[11px] px-3 py-1 rounded-full font-medium flex items-center gap-1.5">
-                    <i class="fa-solid fa-circle text-emerald-400 text-[8px] animate-pulse"></i> Status: Aktif
-                </div>
+        <!-- Main Image Card Container -->
+        <div class="bg-white p-3 sm:p-4 rounded-2xl border-2 border-brand-borderCyan shadow-sm mb-10 max-w-3xl mx-auto">
+            <div class="overflow-hidden rounded-xl bg-gray-100 aspect-[16/9] flex items-center justify-center">
+                <img src="TROSS.jpg" alt="Alat TROSS"
+                    class="w-full h-full object-cover transform hover:scale-105 transition duration-500"
+                    onerror="this.onerror=null; this.src='https://placehold.co/800x450/0883a4/ffffff?text=Alat+TROSS';">
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-            <!-- Komponen Elektro Box -->
-            <div class="flex flex-col items-center">
-                <h3 class="text-xl sm:text-2xl font-bold text-brand-darkText mb-4">
+        <!-- Grid Container Komponen -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full items-start">
+
+            <!-- KOTAK ELEKTRO (KIRI) -->
+            <div class="flex flex-col items-center w-full">
+
+                <h3 class="text-xl sm:text-2xl font-bold text-brand-darkText mb-4 font-anta">
                     Komponen Elektro
                 </h3>
-                <div id="electro-container" class="w-full bg-white rounded-2xl border-2 border-brand-borderCyan shadow-xs min-h-[480px] p-6 hover:border-brand-cyan hover:shadow-md transition duration-300 flex flex-col justify-between">
-                    <div id="electro-content" class="space-y-4 text-xs sm:text-sm text-gray-600">
-                        <!-- Dynamic Elektro Specs Load Here -->
+
+                <div class="w-full bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-6 h-full">
+
+                    <div class="grid grid-cols-2 gap-4">
+
+                        <!-- LED Infrared -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="led infrared tross.jpg" alt="LED Infrared"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                LED Infrared
+                            </p>
+                        </div>
+
+                        <!-- Kamera OV2640 -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="kamera ov2640 tross.jpg" alt="Kamera OV2640"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Kamera OV2640
+                            </p>
+                        </div>
+
+                        <!-- Panel Surya -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="panel surya tross.jpg" alt="Panel Surya"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Panel Surya
+                            </p>
+                        </div>
+
+                        <!-- Sensor PIR -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="sensor pir tross.jpg" alt="Sensor PIR"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Sensor PIR
+                            </p>
+                        </div>
+
+                        <!-- RTC -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="rtc bat tross.jpg" alt="RTC"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                RTC
+                            </p>
+                        </div>
+
+                        <!-- Modem -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="modem tross.jpg" alt="Modem"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Modem
+                            </p>
+                        </div>
+
                     </div>
-                    <button onclick="openComponentDetail('Elektro')" class="mt-6 w-full py-2 bg-brand-lightCyan text-brand-cyan font-bold rounded-xl text-xs hover:bg-brand-cyan hover:text-white transition duration-200">
-                        Lihat Detail Elektro
-                    </button>
                 </div>
             </div>
 
-            <!-- Komponen Mekanik Box -->
-            <div class="flex flex-col items-center">
-                <h3 class="text-xl sm:text-2xl font-bold text-brand-darkText mb-4">
+            <!-- KOTAK MEKANIK (KANAN) -->
+            <div class="flex flex-col items-center w-full">
+
+                <h3 class="text-xl sm:text-2xl font-bold text-brand-darkText mb-4 font-anta">
                     Komponen Mekanik
                 </h3>
-                <div id="mechanic-container" class="w-full bg-white rounded-2xl border-2 border-brand-borderCyan shadow-xs min-h-[480px] p-6 hover:border-brand-cyan hover:shadow-md transition duration-300 flex flex-col justify-between">
-                    <div id="mechanic-content" class="space-y-4 text-xs sm:text-sm text-gray-600">
-                        <!-- Dynamic Mekanik Specs Load Here -->
+
+                <div class="w-full bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-6 h-full">
+
+                    <div class="grid grid-cols-2 gap-4">
+
+                        <!-- Junction Box -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="junction box.jpg" alt="Junction Box"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Junction Box
+                            </p>
+                        </div>
+
+                        <!-- Besi Hollow -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="besi.jpg" alt="Besi Hollow"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Besi Hollow
+                            </p>
+                        </div>
+
+                        <!-- Pipa Galvanis -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="pipa galvanis.jpg" alt="Pipa Galvanis"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Pipa Galvanis
+                            </p>
+                        </div>
+
+                        <!-- Klem Pipa Besi -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="klem pipa besi.jpg" alt="Klem Pipa Besi"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
+                            </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Klem Pipa Besi
+                            </p>
+                        </div>
+
                     </div>
-                    <button onclick="openComponentDetail('Mekanik')" class="mt-6 w-full py-2 bg-brand-lightCyan text-brand-cyan font-bold rounded-xl text-xs hover:bg-brand-cyan hover:text-white transition duration-200">
-                        Lihat Detail Mekanik
-                    </button>
                 </div>
             </div>
+
         </div>
     </main>
 
-    <footer class="bg-white border-t border-brand-borderCyan py-3.5 mt-10">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 text-brand-cyan text-xs sm:text-sm font-semibold">
-                <!-- Left Info: Instagram & Email -->
-                <div class="flex items-center space-x-6">
-                    <a href="https://instagram.com/mitr_ipb" target="_blank" class="flex items-center space-x-2 hover:opacity-80 transition">
-                        <i class="fa-solid fa-camera text-base"></i>
-                        <span>@mitr_ipb</span>
-                    </a>
+    <!-- Maintenance Section -->
+    <section id="maintenance" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full scroll-mt-24">
 
-                    <a href="mailto:mitr.ipb@gmail.com" class="flex items-center space-x-2 hover:opacity-80 transition">
-                        <i class="fa-regular fa-envelope text-base"></i>
-                        <span>mitr.ipb@gmail.com</span>
-                    </a>
+        <!-- Section Heading -->
+        <div class="text-center mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-brand-darkText font-anta">
+                Maintenance Alat
+            </h2>
+        </div>
+
+        <!-- Maintenance Card -->
+        <div class="bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-5 sm:p-8">
+
+            <div class="mb-6">
+                <p class="text-sm text-gray-600 leading-relaxed font-inter">
+                    Panduan ini berisi langkah-langkah pemeriksaan dan perawatan perangkat TROSS untuk menjaga
+                    kondisi dan kinerja alat selama proses pemantauan fauna di kawasan mangrove.
+                </p>
+            </div>
+
+            <div class="space-y-4">
+
+                <!-- 1. Pemeriksaan Komponen Elektronik -->
+                <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
+                        <span
+                            class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
+                            <i class="fa-solid fa-microchip text-brand-cyan"></i>
+                            1. Pemeriksaan Komponen Elektronik
+                        </span>
+                        <i
+                            class="fa-solid fa-chevron-down text-brand-cyan transition-transform group-open:rotate-180"></i>
+                    </summary>
+
+                    <div class="p-4 sm:p-5 text-sm text-gray-600 font-inter leading-relaxed">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Memeriksa kondisi kabel, konektor, dan sambungan listrik sebelum dan sesudah
+                                pengoperasian.</li>
+                            <li>Memastikan kamera OV2640, sensor PIR, RTC, dan modem terpasang dengan baik serta
+                                berfungsi normal.</li>
+                            <li>Memeriksa kondisi LED infrared untuk memastikan pencahayaan berfungsi saat diperlukan.
+                            </li>
+                            <li>Memastikan seluruh komponen elektronik terlindungi dari air dan kelembapan.</li>
+                            <li>Memeriksa kondisi fisik komponen untuk mendeteksi kerusakan atau korosi.</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- 2. Perawatan Sistem Kelistrikan -->
+                <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
+                        <span
+                            class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
+                            <i class="fa-solid fa-battery-full text-brand-cyan"></i>
+                            2. Perawatan Sistem Kelistrikan
+                        </span>
+                        <i
+                            class="fa-solid fa-chevron-down text-brand-cyan transition-transform group-open:rotate-180"></i>
+                    </summary>
+
+                    <div class="p-4 sm:p-5 text-sm text-gray-600 font-inter leading-relaxed">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Memeriksa kondisi fisik baterai dan memastikan tidak terdapat pembengkakan atau
+                                kerusakan.</li>
+                            <li>Memastikan daya baterai mencukupi sebelum alat digunakan.</li>
+                            <li>Memeriksa sambungan baterai dan memastikan tidak terdapat koneksi yang longgar.</li>
+                            <li>Memastikan panel surya berada dalam kondisi baik dan dapat digunakan untuk mengisi daya.
+                            </li>
+                            <li>Memeriksa sambungan kelistrikan untuk menghindari korsleting atau gangguan daya.</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- 3. Pemeriksaan Kamera dan Sensor -->
+                <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
+                        <span
+                            class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
+                            <i class="fa-solid fa-camera text-brand-cyan"></i>
+                            3. Pemeriksaan Kamera dan Sensor
+                        </span>
+                        <i
+                            class="fa-solid fa-chevron-down text-brand-cyan transition-transform group-open:rotate-180"></i>
+                    </summary>
+
+                    <div class="p-4 sm:p-5 text-sm text-gray-600 font-inter leading-relaxed">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Memastikan kamera dapat mengambil gambar dengan baik saat sistem diaktifkan.</li>
+                            <li>Membersihkan lensa kamera dari debu, lumpur, atau kotoran yang dapat mengganggu hasil
+                                pengamatan.</li>
+                            <li>Memastikan sensor PIR dapat mendeteksi pergerakan objek sesuai kebutuhan sistem.</li>
+                            <li>Memeriksa fungsi LED infrared untuk mendukung pengambilan gambar dalam kondisi minim
+                                cahaya.</li>
+                            <li>Melakukan pengujian sistem secara berkala untuk memastikan kamera dan sensor bekerja
+                                secara bersamaan.</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- 4. Perawatan Struktur dan Pelindung Alat -->
+                <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
+                        <span
+                            class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
+                            <i class="fa-solid fa-shield-halved text-brand-cyan"></i>
+                            4. Perawatan Struktur dan Pelindung Alat
+                        </span>
+                        <i
+                            class="fa-solid fa-chevron-down text-brand-cyan transition-transform group-open:rotate-180"></i>
+                    </summary>
+
+                    <div class="p-4 sm:p-5 text-sm text-gray-600 font-inter leading-relaxed">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Membersihkan bagian luar alat dari lumpur, kotoran, dan endapan setelah pengoperasian.
+                            </li>
+                            <li>Memeriksa kondisi junction box dan memastikan wadah pelindung komponen elektronik tetap
+                                rapat.</li>
+                            <li>Memeriksa kondisi besi hollow dan pipa galvanis untuk mendeteksi kerusakan atau korosi.
+                            </li>
+                            <li>Memastikan klem pipa besi terpasang dengan kuat dan tidak mengalami kelonggaran.</li>
+                            <li>Memastikan struktur alat tetap kokoh dan seluruh komponen terpasang dengan aman.</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- 5. Pemeriksaan Sistem Komunikasi dan Penyimpanan Data -->
+                <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
+                        <span
+                            class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
+                            <i class="fa-solid fa-wifi text-brand-cyan"></i>
+                            5. Pemeriksaan Sistem Komunikasi dan Data
+                        </span>
+                        <i
+                            class="fa-solid fa-chevron-down text-brand-cyan transition-transform group-open:rotate-180"></i>
+                    </summary>
+
+                    <div class="p-4 sm:p-5 text-sm text-gray-600 font-inter leading-relaxed">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Memastikan modem dapat terhubung dengan jaringan yang digunakan untuk pengiriman data.
+                            </li>
+                            <li>Memeriksa koneksi jaringan dan memastikan proses pengiriman data berjalan dengan baik.
+                            </li>
+                            <li>Memastikan RTC menunjukkan waktu yang sesuai agar waktu pengambilan gambar tercatat
+                                dengan benar.</li>
+                            <li>Memeriksa hasil gambar yang tersimpan untuk memastikan file dapat dibuka dan tidak
+                                mengalami kerusakan.</li>
+                            <li>Memastikan data hasil pengamatan dapat diterima dan diakses melalui sistem monitoring.
+                            </li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- 6. Pemeriksaan Sebelum dan Sesudah Pengoperasian -->
+                <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
+                        <span
+                            class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
+                            <i class="fa-solid fa-clipboard-check text-brand-cyan"></i>
+                            6. Pemeriksaan Sebelum dan Sesudah Pengoperasian
+                        </span>
+                        <i
+                            class="fa-solid fa-chevron-down text-brand-cyan transition-transform group-open:rotate-180"></i>
+                    </summary>
+
+                    <div class="p-4 sm:p-5 text-sm text-gray-600 font-inter leading-relaxed">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Memastikan seluruh komponen terpasang dengan baik sebelum alat digunakan.</li>
+                            <li>Memeriksa daya baterai, fungsi kamera, sensor PIR, dan koneksi jaringan.</li>
+                            <li>Memastikan sistem dapat mengambil dan menyimpan gambar secara otomatis.</li>
+                            <li>Memeriksa kondisi alat selama pengoperasian untuk memastikan perangkat tetap berfungsi
+                                normal.</li>
+                            <li>Membersihkan dan mengeringkan bagian luar alat setelah pengoperasian.</li>
+                            <li>Mencatat kerusakan atau kendala yang ditemukan selama penggunaan.</li>
+                            <li>Menyimpan alat di tempat yang kering dan aman setelah selesai digunakan.</li>
+                        </ul>
+                    </div>
+                </details>
+
+            </div>
+        </div>
+    </section>
+
+    <br>
+    <footer class="bg-white px-6 py-10 border-t-[2px] border-[#118AB2]">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+
+            <!-- Kolom 1 (Dibuat lebih lebar/span 2): Lokasi, Email, dan WhatsApp -->
+            <div class="md:col-span-2 flex flex-col gap-4 text-[#118AB2]">
+                <h3 class="font-bold text-xl mb-2">Our Contact</h3>
+
+                <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9"
+                    class="flex items-start gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-solid fa-location-dot text-xl mt-1"></i>
+                    <span class="leading-relaxed">Workshop Instrumentasi dan Robotika Kelautan (Bengkel) ITK, Babakan,
+                        Dramaga, Bogor, Indonesia 16680</span>
+                </a>
+
+                <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-regular fa-envelope text-xl"></i>
+                    <span>mitr.ipb@gmail.com</span>
+                </a>
+
+                <a href="https://wa.me/6283898339620" class="flex items-center gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    <span>+6283898339620 (Deni Rizkiana Anwar Hidayat)</span>
+                </a>
+            </div>
+
+            <!-- Kolom 2: Sosial Media -->
+            <div class="flex flex-col gap-4 text-[#118AB2]">
+                <h3 class="font-bold text-xl mb-2">Social Media</h3>
+
+                <a href="https://www.instagram.com/mitr_ipb/"
+                    class="flex items-center gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-brands fa-instagram text-xl"></i>
+                    <span>@mitr_ipb</span>
+                </a>
+                <!-- Kamu bisa tambahkan link LinkedIn atau YouTube di sini jika ada -->
+            </div>
+
+            <!-- Kolom 3: Logo dan Tombol Back to Top -->
+            <div class="flex flex-col items-start gap-6 text-[#118AB2]">
+                <h3 class="font-bold text-xl mb-2">About Us</h3>
+
+                <!-- Tempat untuk Logo MIT+R -->
+                <div class="w-full flex items-center justify-start">
+                    <!-- Ganti "URL_LOGO_KAMU.png" dengan path/link logo yang sebenarnya -->
+                    <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-24   object-contain">
                 </div>
 
-                <!-- Right Info: Contact Person -->
-                <div>
-                    <a href="tel:085935000474" class="flex items-center space-x-2 hover:opacity-80 transition">
-                        <span>085935000474 (Raras Adinda Wulandari)</span>
-                    </a>
+                <!-- Tombol Back to Top -->
+                <div class="w-full flex justify-end mt-auto">
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+                        class="group flex items-center p-3 bg-[#118AB2] text-white rounded-full shadow-md hover:bg-[#0c6b8a] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
+
+                        <!-- Teks yang Muncul Saat Hover (Sekarang di urutan pertama / sebelah kiri) -->
+                        <span
+                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[120px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold">
+                            Back to Top
+                        </span>
+
+                        <!-- Lingkaran Icon Panah (Sekarang di urutan kedua / sebelah kanan) -->
+                        <span
+                            class="flex items-center justify-center w-7 h-7 bg-white text-[#118AB2] rounded-full transition-transform duration-500 group-hover:scale-110 shrink-0">
+                            <i class="fa-solid fa-arrow-up text-sm"></i>
+                        </span>
+
+                    </button>
                 </div>
             </div>
+
         </div>
     </footer>
 
-    <!-- Maintenance Modal Popup -->
-    <div id="maintenance-modal" class="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 z-50 hidden opacity-0 transition-opacity duration-200">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border-2 border-brand-borderCyan transform scale-95 transition-transform duration-200" id="modal-box">
-            <div class="flex items-center justify-between border-b pb-3 mb-4">
-                <h3 class="font-bold text-lg text-brand-darkText flex items-center gap-2">
-                    <i class="fa-solid fa-wrench text-brand-cyan"></i> Status Maintenance
-                </h3>
-                <button onclick="closeMaintenanceModal()" class="text-gray-400 hover:text-gray-600">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-            </div>
-            <div class="space-y-3 text-xs sm:text-sm text-gray-600">
-                <p class="font-semibold text-brand-darkText" id="modal-tool-name">Alat Tross</p>
-                <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-800 text-xs flex items-center gap-2">
-                    <i class="fa-solid fa-circle-check text-sm"></i>
-                    <span>Sistem beroperasi normal tanpa kendala kritis.</span>
-                </div>
-                <ul class="space-y-1.5 pl-2 text-xs">
-                    <li>• <strong>Kalibrasi Terakhir:</strong> 24 September 2026</li>
-                    <li>• <strong>Status Baterai/Power:</strong> 92% (Solar Hybrid)</li>
-                    <li>• <strong>Konektivitas GPS & Arus:</strong> Terhubung (4G/LoRa)</li>
-                </ul>
-            </div>
-            <div class="mt-6 flex justify-end gap-2">
-                <button onclick="closeMaintenanceModal()" class="px-4 py-2 bg-brand-cyan text-white text-xs font-bold rounded-xl hover:bg-brand-tealBg transition">
-                    Tutup
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Notification Toast -->
-    <div id="toast" class="fixed bottom-5 right-5 bg-brand-darkText text-white px-4 py-2.5 rounded-xl shadow-lg text-xs font-semibold flex items-center gap-2 opacity-0 pointer-events-none transition-all duration-300 z-50">
-        <i class="fa-solid fa-circle-info text-brand-cyan"></i>
-        <span id="toast-message">Notifikasi</span>
-    </div>
-
     <script>
-        // Centralized Tool Database
-        const toolData = {
-            tross: {
-                title: "Alat Tross",
-                description: "Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data arus dan GPS.",
-                breadcrumb: "Alat Tross",
-                image: "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80",
-                electroSpecs: [
-                    { title: "Kamera Trap HD Motion Sensor", desc: "Infrared Night Vision & Motion Trigger (PIR)" },
-                    { title: "GPS & Current Sensor Node", desc: "Transmisi Real-time LoRa / Seluler" },
-                    { title: "Power Supply", desc: "Baterai Li-ion 12V + Panel Surya 20W" },
-                    { title: "Microcontroller", desc: "ESP32 Low Power Monitoring System" }
-                ],
-                mechanicSpecs: [
-                    { title: "Casing Camouflage Weatherproof", desc: "Bahan ABS IP66 Tahan Cuaca Hutan & Hujan" },
-                    { title: "Sistem Pengunci Rantai Baja", desc: "Anti-pencurian & Pemasangan Kokoh pada Batang Pohon" },
-                    { title: "Mounting Bracket Adjustable", desc: "Sudut Kemiringan Kamera Fleksibel" },
-                    { title: "Pelindung Lensa Anti-Embun", desc: "Coating Hydrophobic Tahan Kelembapan Tinggi" }
-                ]
-            },
-            bat: {
-                title: "Alat Bat",
-                description: "Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data arus dan GPS.",
-                breadcrumb: "Alat Bat",
-                image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80",
-                electroSpecs: [
-                    { title: "Sensor Arus Laut", desc: "Acoustic Doppler / Magnetic Flow Meter" },
-                    { title: "Modul GPS Submersible", desc: "Pelacakan Geospasial Bawah Air & Permukaan" },
-                    { title: "Baterai Underwater Grade", desc: "Sealed Lead Acid 12V 20Ah" },
-                    { title: "Datalogger", desc: "SD Card Storage + Telemetri Wireless" }
-                ],
-                mechanicSpecs: [
-                    { title: "Pelampung Buoy Bawah Air", desc: "Material Fiberglass Tahan Korosi Air Laut" },
-                    { title: "Kabel Penambat High-Tensile", desc: "Kabel Baja Berlapis Selang Sintetis" },
-                    { title: "Pemberat / Anchor System", desc: "Anker Besi Cor Anti-Geser Arus Deras" },
-                    { title: "Seal O-Ring Ganda", desc: "Proteksi Kedap Air Hingga Kedalaman 15 Meter" }
-                ]
-            },
-            alba: {
-                title: "Alat Alba",
-                description: "Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data salinitas, kedalaman, kekeruhan, pH, oksigen terlarut (DO), dan suhu.",
-                breadcrumb: "Alat Alba",
-                image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1200&q=80",
-                electroSpecs: [
-                    { title: "Sensor Salinitas & Suhu", desc: "Conductivity probe berpresisi tinggi" },
-                    { title: "Sensor pH & Oksigen Terlarut (DO)", desc: "Optical DO Sensor real-time" },
-                    { title: "Sensor Kekeruhan (Turbidity)", desc: "Nephelometric Turbidity Unit (NTU)" },
-                    { title: "Main Controller USV", desc: "Pixhawk Autopilot + Telemetri 915MHz" }
-                ],
-                mechanicSpecs: [
-                    { title: "Lambung Kapal Katamaran (Hull)", desc: "Material Molded Fiberglass Ringan & Stabil" },
-                    { title: "Motor Pendorong Waterjet/Propeller", desc: "Dual Brushless Motor Waterproof IP68" },
-                    { title: "Rangka Dudukan Sensor (Rack)", desc: "Alumunium Anodized Tahan Karat" },
-                    { title: "Penutup Kedap Kompartemen", desc: "Akrilik Transparan dengan Pengunci Quick-Release" }
-                ]
+        const mobileToggleBtn = document.getElementById('mobile-toggle-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const toggleIcon = document.getElementById('toggle-icon');
+
+        mobileToggleBtn.addEventListener('click', function () {
+
+            mobileMenu.classList.toggle('hidden');
+
+            if (mobileMenu.classList.contains('hidden')) {
+
+                toggleIcon.classList.remove('fa-times');
+                toggleIcon.classList.add('fa-bars');
+
+            } else {
+
+                toggleIcon.classList.remove('fa-bars');
+                toggleIcon.classList.add('fa-times');
+
             }
-        };
 
-        let currentToolKey = 'tross';
-
-        // Switch Active Tool Function
-        function switchTool(toolKey) {
-            const data = toolData[toolKey];
-            if (!data) return;
-
-            currentToolKey = toolKey;
-
-            // Update Text Content
-            document.getElementById('current-tool-breadcrumb').innerText = data.breadcrumb;
-            document.getElementById('tool-banner-title').innerText = data.title;
-            document.getElementById('main-content-title').innerText = data.title;
-            document.getElementById('tool-description').innerText = data.description;
-            document.title = `${data.title} - Monitoring Kampung Laut`;
-
-            // Update Image
-            const imgEl = document.getElementById('main-tool-image');
-            imgEl.src = data.image;
-
-            // Update Active Tab Styles
-            ['alba', 'bat', 'tross'].forEach(key => {
-                const tab = document.getElementById(`tab-${key}`);
-                if (key === toolKey) {
-                    tab.className = "px-4 py-1.5 rounded-full text-xs font-bold transition duration-200 bg-white text-brand-tealBg shadow";
-                } else {
-                    tab.className = "px-4 py-1.5 rounded-full text-xs font-bold transition duration-200 bg-cyan-900/40 text-cyan-100 hover:bg-white/20";
-                }
-            });
-
-            // Render Specs
-            renderSpecs(data);
-        }
-
-        // Render Specification Details for Cards
-        function renderSpecs(data) {
-            const electroContent = document.getElementById('electro-content');
-            const mechanicContent = document.getElementById('mechanic-content');
-
-            electroContent.innerHTML = data.electroSpecs.map(item => `
-                <div class="p-3 rounded-xl bg-cyan-50/50 border border-cyan-100/80 hover:bg-cyan-50 transition">
-                    <p class="font-bold text-brand-darkText flex items-center gap-1.5">
-                        <i class="fa-solid fa-bolt text-brand-cyan text-xs"></i> ${item.title}
-                    </p>
-                    <p class="text-xs text-gray-500 mt-1">${item.desc}</p>
-                </div>
-            `).join('');
-
-            mechanicContent.innerHTML = data.mechanicSpecs.map(item => `
-                <div class="p-3 rounded-xl bg-cyan-50/50 border border-cyan-100/80 hover:bg-cyan-50 transition">
-                    <p class="font-bold text-brand-darkText flex items-center gap-1.5">
-                        <i class="fa-solid fa-gears text-brand-cyan text-xs"></i> ${item.title}
-                    </p>
-                    <p class="text-xs text-gray-500 mt-1">${item.desc}</p>
-                </div>
-            `).join('');
-        }
-
-        // Modal Controls
-        function openMaintenanceModal() {
-            const modal = document.getElementById('maintenance-modal');
-            const box = document.getElementById('modal-box');
-            document.getElementById('modal-tool-name').innerText = toolData[currentToolKey].title;
-            
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                box.classList.remove('scale-95');
-            }, 10);
-        }
-
-        function closeMaintenanceModal() {
-            const modal = document.getElementById('maintenance-modal');
-            const box = document.getElementById('modal-box');
-            modal.classList.add('opacity-0');
-            box.classList.add('scale-95');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 200);
-        }
-
-        function openComponentDetail(type) {
-            showToast(`Menampilkan detail ${type} untuk ${toolData[currentToolKey].title}`);
-        }
-
-        // Toast Helper
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toast-message').innerText = msg;
-            toast.classList.remove('opacity-0', 'pointer-events-none');
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'pointer-events-none');
-            }, 3000);
-        }
-
-        // Navigation Highlight Helper
-        function setActiveNav(element) {
-            document.querySelectorAll('nav a').forEach(el => {
-                el.classList.remove('border-b-2', 'border-brand-cyan', 'pb-0.5');
-            });
-            element.classList.add('border-b-2', 'border-brand-cyan', 'pb-0.5');
-        }
-
-        // Initialize Default State on Load
-        window.onload = function() {
-            switchTool('tross');
-        };
+        });
     </script>
 </body>
 </html>
