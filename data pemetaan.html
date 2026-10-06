@@ -97,7 +97,7 @@
         }
 
 
-        /* Marker angka */
+        /* Marker batimetri */
 
         .batimetri-marker {
             width: 28px;
@@ -160,23 +160,27 @@
         <div class="max-w-7xl mx-auto flex justify-between items-center relative">
 
 
-            <!-- Logo -->
+            <!-- Logo ALBATROSS -->
 
-            <a href="index.html"
-                id="logo-btn"
-                class="flex items-center transition-transform hover:scale-105">
+            <div class="relative flex items-center justify-center">
 
-                <img src="logo ALBATROSS.png"
-                    alt="LOGO ALBATROSS"
-                    class="h-12 w-auto object-contain">
+                <div class="absolute bg-[#118AB2] rounded-full w-14 h-14 -z-0"></div>
 
-            </a>
+                <a href="index.html" id="logo-btn"
+                    class="relative z-10 flex items-center justify-center transition-transform hover:scale-105">
+
+                    <img src="logo ALBATROSS.png"
+                        alt="LOGO ALBATROSS"
+                        class="h-12 w-auto object-contain">
+
+                </a>
+
+            </div>
 
 
-            <!-- Container kanan -->
+            <!-- Container Kanan -->
 
             <div class="flex items-center space-x-3">
-
 
                 <ul id="nav-links"
                     class="hidden md:flex items-center space-x-2 sm:space-x-3 text-xs sm:text-sm font-semibold tracking-wider sm:tracking-widest uppercase transition-all duration-300 py-1 font-inter">
@@ -214,8 +218,7 @@
 
                     <li class="relative group">
 
-                        <button
-                            type="button"
+                        <button type="button"
                             class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
 
                             ALAT
@@ -250,6 +253,7 @@
 
                             </a>
 
+
                         </div>
 
                     </li>
@@ -259,9 +263,8 @@
 
                     <li class="relative group">
 
-                        <button
-                            type="button"
-                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+                        <button type="button"
+                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
 
                             DATA
 
@@ -270,6 +273,16 @@
 
                         <div
                             class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
+
+
+                            <!-- PEMETAAN PALING ATAS -->
+
+                            <a href="data pemetaan.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+
+                                Data Pemetaan
+
+                            </a>
 
 
                             <a href="data alba.html"
@@ -295,6 +308,7 @@
 
                             </a>
 
+
                         </div>
 
                     </li>
@@ -302,15 +316,13 @@
                 </ul>
 
 
-                <!-- Mobile -->
+                <!-- Tombol Mobile -->
 
                 <button id="mobile-toggle-btn"
                     class="md:hidden text-2xl p-2 transition-colors focus:outline-none"
                     aria-label="Buka menu navigasi">
 
-                    <i id="toggle-icon"
-                        class="fas fa-bars">
-                    </i>
+                    <i id="toggle-icon" class="fas fa-bars"></i>
 
                 </button>
 
@@ -319,11 +331,10 @@
         </div>
 
 
-        <!-- MOBILE MENU -->
+        <!-- Menu Mobile -->
 
         <div id="mobile-menu"
             class="hidden md:hidden bg-white mt-4 rounded-xl shadow-lg p-4">
-
 
             <div class="flex flex-col space-y-2 text-sm font-semibold text-[#118AB2]">
 
@@ -347,8 +358,11 @@
                 <div class="border-t border-gray-100 pt-2">
 
                     <p class="px-4 py-2 text-xs text-gray-400">
+
                         ALAT
+
                     </p>
+
 
                     <a href="alat alba.html"
                         class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
@@ -357,12 +371,14 @@
 
                     </a>
 
+
                     <a href="alat bat.html"
                         class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
 
                         Alat BAT
 
                     </a>
+
 
                     <a href="alat tross.html"
                         class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
@@ -377,8 +393,19 @@
                 <div class="border-t border-gray-100 pt-2">
 
                     <p class="px-4 py-2 text-xs text-gray-400">
+
                         DATA
+
                     </p>
+
+
+                    <a href="data pemetaan.html"
+                        class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+
+                        Data Pemetaan
+
+                    </a>
+
 
                     <a href="data alba.html"
                         class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
@@ -387,17 +414,19 @@
 
                     </a>
 
+
                     <a href="data bat.html"
                         class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
 
-                        Data BAT
+                        Data Bat
 
                     </a>
+
 
                     <a href="data tross.html"
                         class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
 
-                        Data TROSS
+                        Data Tross
 
                     </a>
 
@@ -413,20 +442,18 @@
 
     <!-- =====================================================
          HERO BANNER
+         SAMA DENGAN DATA BAT
     ====================================================== -->
 
-    <section
-        class="bg-brand-tealBg text-white px-6 sm:px-8 pt-28 pb-10 shadow-inner min-h-[350px]">
-
+    <section class="bg-brand-tealBg text-white px-6 sm:px-8 pt-28 pb-10 shadow-inner min-h-[350px]">
 
         <div class="max-w-6xl mx-auto w-full space-y-4">
 
 
-            <!-- Breadcrumb -->
+            <!-- Breadcrumbs -->
 
             <nav
                 class="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-cyan-100 font-medium font-inter">
-
 
                 <a href="index.html"
                     class="hover:underline flex items-center gap-1">
@@ -454,7 +481,7 @@
 
                 <span class="text-white font-semibold">
 
-                    Pemetaan
+                    Data Pemetaan
 
                 </span>
 
@@ -465,14 +492,11 @@
 
             <div class="flex items-center gap-3 pt-2">
 
-
                 <i class="fa-solid fa-map-location-dot text-3xl sm:text-4xl"></i>
 
+                <h1 class="text-3xl sm:text-4xl font-bold tracking-wide font-anta">
 
-                <h1
-                    class="text-3xl sm:text-4xl font-bold tracking-wide font-anta">
-
-                    Pemetaan
+                    Data Pemetaan
 
                 </h1>
 
@@ -489,45 +513,49 @@
             </p>
 
 
-            <!-- Status -->
+            <!-- Status Pill -->
 
-            <div class="flex flex-wrap items-center gap-2 pt-1">
+            <div class="pt-4">
 
-
-                <!-- Data Kedalaman -->
-
-                <span
-                    class="inline-flex items-center gap-1.5 bg-white/20 text-white font-semibold text-xs px-3 py-1.5 rounded-full border border-white/30 backdrop-blur">
-
-                    <i class="fa-solid fa-water text-xs"></i>
-
-                    Data kedalaman
-
-                </span>
+                <div
+                    class="inline-flex items-center bg-white rounded-full py-1.5 px-2 shadow-sm border-[1.5px] border-[#434b6e]">
 
 
-                <!-- Pemetaan Batimetri -->
+                    <!-- Status Kiri -->
 
-                <span
-                    class="inline-flex items-center gap-1.5 bg-white/20 text-white font-semibold text-xs px-3 py-1.5 rounded-full border border-white/30 backdrop-blur">
+                    <div class="flex items-center space-x-2 px-3">
 
-                    <i class="fa-solid fa-map text-xs"></i>
+                        <div class="w-4 h-4 rounded-full bg-gray-400"></div>
 
-                    Pemetaan batimetri
+                        <span class="font-bold text-[#434b6e] text-sm">
 
-                </span>
+                            Tidak online
+
+                        </span>
+
+                    </div>
 
 
-                <!-- Non real-time -->
+                    <!-- Status Kanan -->
 
-                <span
-                    class="inline-flex items-center gap-1.5 bg-white/20 text-white font-semibold text-xs px-3 py-1.5 rounded-full border border-white/30 backdrop-blur">
+                    <div class="flex items-center space-x-2 pr-4 pl-2">
 
-                    <i class="fa-solid fa-clock text-xs"></i>
+                        <div
+                            class="w-5 h-5 rounded-full bg-[#434b6e] flex items-center justify-center">
 
-                    Data non-real-time
+                            <i class="fa-solid fa-map text-white text-[10px]"></i>
 
-                </span>
+                        </div>
+
+                        <span class="font-bold text-[#434b6e] text-sm">
+
+                            Data non-real-time
+
+                        </span>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -545,26 +573,31 @@
         class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow">
 
 
-        <!-- =================================================
-             JUDUL
-        ================================================== -->
+        <!-- Peta Batimetri -->
 
-        <section class="mb-8">
+        <section class="mb-12">
 
-            <div class="text-center">
+            <div class="text-center mb-8">
 
-                <h2
-                    class="text-2xl sm:text-3xl font-bold text-brand-darkText font-anta">
+                <div class="flex items-center justify-center gap-3">
 
-                    Peta Batimetri
+                    <i class="fa-solid fa-map-location-dot text-xl text-brand-cyan"></i>
 
-                </h2>
+                    <h2
+                        class="text-2xl sm:text-3xl font-bold text-brand-darkText font-anta">
+
+                        Peta Batimetri
+
+                    </h2>
+
+                </div>
 
 
                 <p
                     class="text-sm text-gray-500 mt-2 max-w-2xl mx-auto leading-relaxed">
 
-                    Titik-titik pada peta menunjukkan lokasi pengamatan yang digunakan untuk merepresentasikan data kedalaman perairan.
+                    Titik-titik pada peta menunjukkan lokasi pengamatan yang digunakan
+                    untuk merepresentasikan data kedalaman perairan.
 
                 </p>
 
@@ -574,31 +607,30 @@
 
 
 
-        <!-- =================================================
+        <!-- =====================================================
              PETA
-        ================================================== -->
+        ====================================================== -->
 
         <section class="mb-10">
-
 
             <div
                 class="bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-3 sm:p-5">
 
 
-                <!-- LEGENDA -->
+                <!-- Legenda -->
 
                 <div
-                    class="flex flex-wrap items-center gap-x-6 gap-y-3 px-2 py-3 text-xs sm:text-sm text-gray-600">
+                    class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-4 text-xs sm:text-sm">
 
 
                     <div class="flex items-center gap-2">
 
-                        <span
-                            class="w-3 h-3 rounded-full bg-[#008ba3] border-2 border-white shadow">
-                        </span>
+                        <span class="w-3 h-3 rounded-full bg-[#008ba3]"></span>
 
-                        <span>
+                        <span class="text-gray-600">
+
                             Titik pengamatan
+
                         </span>
 
                     </div>
@@ -606,12 +638,12 @@
 
                     <div class="flex items-center gap-2">
 
-                        <span
-                            class="w-3 h-3 rounded-full bg-[#22c55e] border-2 border-white shadow">
-                        </span>
+                        <span class="w-3 h-3 rounded-full bg-green-500"></span>
 
-                        <span>
+                        <span class="text-gray-600">
+
                             Titik awal
+
                         </span>
 
                     </div>
@@ -619,24 +651,26 @@
 
                     <div class="flex items-center gap-2">
 
-                        <span
-                            class="w-3 h-3 rounded-full bg-[#ef4444] border-2 border-white shadow">
-                        </span>
+                        <span class="w-3 h-3 rounded-full bg-red-500"></span>
 
-                        <span>
+                        <span class="text-gray-600">
+
                             Titik akhir
+
                         </span>
 
                     </div>
+
 
                 </div>
 
 
-                <!-- MAP -->
+                <!-- Peta -->
 
                 <div id="batimetri-map"
                     class="w-full h-[450px] sm:h-[550px] rounded-xl overflow-hidden border border-gray-200">
                 </div>
+
 
             </div>
 
@@ -644,9 +678,9 @@
 
 
 
-        <!-- =================================================
+        <!-- =====================================================
              INFORMASI PEMETAAN
-        ================================================== -->
+        ====================================================== -->
 
         <section
             class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
@@ -656,44 +690,45 @@
 
             <div class="info-card p-5">
 
-
-                <div class="flex items-center gap-3 mb-3">
-
+                <div class="flex items-start gap-4">
 
                     <div
-                        class="w-11 h-11 rounded-xl bg-brand-lightCyan flex items-center justify-center text-brand-cyan text-lg">
+                        class="w-11 h-11 rounded-xl bg-brand-lightCyan text-brand-cyan flex items-center justify-center flex-shrink-0">
 
-                        <i class="fa-solid fa-water"></i>
+                        <i class="fa-solid fa-water text-lg"></i>
 
                     </div>
 
 
                     <div>
 
+                        <p
+                            class="text-xs font-semibold text-brand-cyan uppercase tracking-wide">
+
+                            Data batimetri
+
+                        </p>
+
+
                         <h3
-                            class="font-bold text-brand-darkText">
+                            class="font-bold text-brand-darkText mt-1">
 
                             Kedalaman Perairan
 
                         </h3>
 
-                        <p class="text-xs text-gray-400">
 
-                            Data batimetri
+                        <p
+                            class="text-sm text-gray-500 mt-2 leading-relaxed">
+
+                            Menampilkan informasi hasil pengukuran kedalaman
+                            pada lokasi pengamatan.
 
                         </p>
 
                     </div>
 
                 </div>
-
-
-                <p
-                    class="text-sm text-gray-600 leading-relaxed">
-
-                    Data kedalaman digunakan untuk menggambarkan kondisi dasar perairan pada lokasi pengamatan.
-
-                </p>
 
             </div>
 
@@ -703,44 +738,45 @@
 
             <div class="info-card p-5">
 
-
-                <div class="flex items-center gap-3 mb-3">
-
+                <div class="flex items-start gap-4">
 
                     <div
-                        class="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 text-lg">
+                        class="w-11 h-11 rounded-xl bg-brand-lightCyan text-brand-cyan flex items-center justify-center flex-shrink-0">
 
-                        <i class="fa-solid fa-location-dot"></i>
+                        <i class="fa-solid fa-location-dot text-lg"></i>
 
                     </div>
 
 
                     <div>
 
+                        <p
+                            class="text-xs font-semibold text-brand-cyan uppercase tracking-wide">
+
+                            Koordinat GPS
+
+                        </p>
+
+
                         <h3
-                            class="font-bold text-brand-darkText">
+                            class="font-bold text-brand-darkText mt-1">
 
                             Posisi Pengukuran
 
                         </h3>
 
-                        <p class="text-xs text-gray-400">
 
-                            Koordinat GPS
+                        <p
+                            class="text-sm text-gray-500 mt-2 leading-relaxed">
+
+                            Menunjukkan posisi geografis setiap lokasi
+                            pengukuran pada peta.
 
                         </p>
 
                     </div>
 
                 </div>
-
-
-                <p
-                    class="text-sm text-gray-600 leading-relaxed">
-
-                    Setiap titik pada peta memiliki koordinat GPS yang menunjukkan lokasi pengamatan data batimetri.
-
-                </p>
 
             </div>
 
@@ -750,30 +786,39 @@
 
             <div class="info-card p-5">
 
-
-                <div class="flex items-center gap-3 mb-3">
-
+                <div class="flex items-start gap-4">
 
                     <div
-                        class="w-11 h-11 rounded-xl bg-green-50 flex items-center justify-center text-green-600 text-lg">
+                        class="w-11 h-11 rounded-xl bg-brand-lightCyan text-brand-cyan flex items-center justify-center flex-shrink-0">
 
-                        <i class="fa-solid fa-map-location-dot"></i>
+                        <i class="fa-solid fa-map-location-dot text-lg"></i>
 
                     </div>
 
 
                     <div>
 
+                        <p
+                            class="text-xs font-semibold text-brand-cyan uppercase tracking-wide">
+
+                            Visualisasi spasial
+
+                        </p>
+
+
                         <h3
-                            class="font-bold text-brand-darkText">
+                            class="font-bold text-brand-darkText mt-1">
 
                             Pemetaan Batimetri
 
                         </h3>
 
-                        <p class="text-xs text-gray-400">
 
-                            Visualisasi spasial
+                        <p
+                            class="text-sm text-gray-500 mt-2 leading-relaxed">
+
+                            Memvisualisasikan sebaran lokasi pengukuran
+                            batimetri pada wilayah pengamatan.
 
                         </p>
 
@@ -781,33 +826,24 @@
 
                 </div>
 
-
-                <p
-                    class="text-sm text-gray-600 leading-relaxed">
-
-                    Persebaran titik pengukuran membantu menunjukkan lokasi data kedalaman dalam wilayah pengamatan.
-
-                </p>
-
             </div>
 
         </section>
 
 
 
-        <!-- =================================================
+        <!-- =====================================================
              INFORMASI DATA
-        ================================================== -->
+        ====================================================== -->
 
         <section
             class="bg-brand-lightCyan rounded-2xl border border-brand-borderCyan p-5 sm:p-6 mb-4">
 
 
-            <div class="flex items-start gap-3">
-
+            <div class="flex items-start gap-4">
 
                 <div
-                    class="w-10 h-10 shrink-0 rounded-xl bg-white flex items-center justify-center text-brand-cyan">
+                    class="w-10 h-10 rounded-xl bg-white text-brand-cyan flex items-center justify-center flex-shrink-0 shadow-sm">
 
                     <i class="fa-solid fa-circle-info"></i>
 
@@ -816,8 +852,7 @@
 
                 <div>
 
-                    <h3
-                        class="font-bold text-brand-darkText mb-2">
+                    <h3 class="font-bold text-brand-darkText">
 
                         Informasi Peta
 
@@ -825,9 +860,11 @@
 
 
                     <p
-                        class="text-sm text-gray-600 leading-relaxed">
+                        class="text-sm text-gray-600 mt-1 leading-relaxed">
 
-                        Klik salah satu titik pada peta untuk melihat informasi lokasi pengamatan, waktu pencatatan, koordinat GPS, dan data kedalaman.
+                        Klik salah satu titik pada peta untuk melihat informasi
+                        lokasi pengamatan, waktu pencatatan, koordinat GPS,
+                        dan data kedalaman.
 
                     </p>
 
@@ -841,65 +878,165 @@
 
 
 
+    <br>
+
+
     <!-- =====================================================
          FOOTER
+         SAMA DENGAN DATA BAT
     ====================================================== -->
 
-    <footer
-        class="bg-white px-4 py-4 border-t-[2px] border-[#118AB2]">
+    <footer class="bg-white px-6 py-10 border-t-[2px] border-[#118AB2]">
 
-        <div>
+        <div
+            class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+
+
+            <!-- Kolom 1 -->
 
             <div
-                class="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 text-[#118AB2] font-medium">
+                class="md:col-span-2 flex flex-col gap-4 text-[#118AB2]">
+
+                <h3 class="font-bold text-xl mb-2">
+
+                    Our Contact
+
+                </h3>
 
 
                 <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9"
-                    class="flex items-center gap-2 hover:text-[#464b71] transition">
+                    class="flex items-start gap-3 hover:text-[#464b71] transition">
 
-                    <i class="fa-solid fa-location-dot text-xl"></i>
+                    <i class="fa-solid fa-location-dot text-xl mt-1"></i>
 
-                    <span>
-                        Maker Space, Lt. Dasar Gedung FPIK, IPB University
-                    </span>
+                    <span class="leading-relaxed">
 
-                </a>
+                        Workshop Instrumentasi dan Robotika Kelautan (Bengkel) ITK,
+                        Babakan, Dramaga, Bogor, Indonesia 16680
 
-
-                <a href="https://www.instagram.com/mitr_ipb/"
-                    class="flex items-center gap-2 hover:text-[#464b71] transition">
-
-                    <i class="fa-brands fa-instagram text-xl"></i>
-
-                    <span>
-                        @mitr_ipb
                     </span>
 
                 </a>
 
 
                 <a href="mailto:mitr.ipb@gmail.com"
-                    class="flex items-center gap-2 hover:text-[#464b71] transition">
+                    class="flex items-center gap-3 hover:text-[#464b71] transition">
 
                     <i class="fa-regular fa-envelope text-xl"></i>
 
                     <span>
+
                         mitr.ipb@gmail.com
+
                     </span>
 
                 </a>
 
 
-                <a href="https://wa.me/6285935000474"
-                    class="flex items-center gap-2 hover:text-[#464b71] transition">
+                <a href="https://wa.me/6283898339620"
+                    class="flex items-center gap-3 hover:text-[#464b71] transition">
 
                     <i class="fa-brands fa-whatsapp text-xl"></i>
 
                     <span>
-                        +6285935000474 (Raras Adinda Wulandari)
+
+                        +6283898339620 (Deni Rizkiana Anwar Hidayat)
+
                     </span>
 
                 </a>
+
+            </div>
+
+
+
+            <!-- Kolom 2 -->
+
+            <div
+                class="flex flex-col gap-4 text-[#118AB2]">
+
+                <h3 class="font-bold text-xl mb-2">
+
+                    Social Media
+
+                </h3>
+
+
+                <a href="https://www.instagram.com/mitr_ipb/"
+                    class="flex items-center gap-3 hover:text-[#464b71] transition">
+
+                    <i class="fa-brands fa-instagram text-xl"></i>
+
+                    <span>
+
+                        @mitr_ipb
+
+                    </span>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- Kolom 3 -->
+
+            <div
+                class="flex flex-col items-start gap-6 text-[#118AB2]">
+
+                <h3 class="font-bold text-xl mb-2">
+
+                    About Us
+
+                </h3>
+
+
+                <!-- Logo -->
+
+                <div
+                    class="w-full flex items-center justify-start">
+
+                    <div
+                        class="relative w-28 h-28 rounded-full bg-[#118AB2] flex items-center justify-center overflow-hidden shadow-md">
+
+                        <img src="logo ALBATROSS.png"
+                            alt="Logo Albatross"
+                            class="h-24 object-contain">
+
+                    </div>
+
+                </div>
+
+
+                <!-- Back to Top -->
+
+                <div
+                    class="w-full flex justify-end mt-auto">
+
+                    <button
+                        onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+                        class="group flex items-center p-3 bg-[#118AB2] text-white rounded-full shadow-md hover:bg-[#0c6b8a] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
+
+
+                        <span
+                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[120px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold">
+
+                            Back to Top
+
+                        </span>
+
+
+                        <span
+                            class="flex items-center justify-center w-7 h-7 bg-white text-[#118AB2] rounded-full transition-transform duration-500 group-hover:scale-110 shrink-0">
+
+                            <i class="fa-solid fa-arrow-up text-sm"></i>
+
+                        </span>
+
+
+                    </button>
+
+                </div>
 
             </div>
 
@@ -919,12 +1056,16 @@
 
 
 
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
     <script>
 
 
-        /* =====================================================
-           NAVBAR MOBILE
-        ===================================================== */
+        // ==========================================
+        // NAVBAR MOBILE
+        // ==========================================
 
         const mobileToggleBtn =
             document.getElementById('mobile-toggle-btn');
@@ -944,11 +1085,13 @@
             if (mobileMenu.classList.contains('hidden')) {
 
                 toggleIcon.classList.remove('fa-times');
+
                 toggleIcon.classList.add('fa-bars');
 
             } else {
 
                 toggleIcon.classList.remove('fa-bars');
+
                 toggleIcon.classList.add('fa-times');
 
             }
@@ -957,17 +1100,9 @@
 
 
 
-        /* =====================================================
-           DATA TITIK BAT
-           
-           Koordinat ini berasal dari data BAT.
-           
-           Fungsinya di halaman ini:
-           sebagai titik lokasi pada peta batimetri.
-
-           BUKAN sebagai data arus BAT.
-        ===================================================== */
-
+        // ==========================================
+        // DATA BATIMETRI
+        // ==========================================
 
         const batimetriPoints = [
 
@@ -1095,17 +1230,17 @@
 
 
 
-        /* =====================================================
-           INISIALISASI PETA
-        ===================================================== */
+        // ==========================================
+        // INISIALISASI PETA
+        // ==========================================
 
         const map =
             L.map('batimetri-map');
 
 
-        /* =====================================================
-           CITRA SATELIT ESRI
-        ===================================================== */
+        // ==========================================
+        // CITRA SATELIT
+        // ==========================================
 
         const satelliteLayer =
             L.tileLayer(
@@ -1121,9 +1256,9 @@
 
 
 
-        /* =====================================================
-           MARKER TITIK PENGAMATAN
-        ===================================================== */
+        // ==========================================
+        // MARKER TITIK
+        // ==========================================
 
         batimetriPoints.forEach(
             (point, index) => {
@@ -1156,9 +1291,7 @@
 
 
 
-                /* =============================================
-                   ICON MARKER
-                ============================================= */
+                // ICON MARKER
 
                 const pointIcon =
                     L.divIcon({
@@ -1195,9 +1328,7 @@
 
 
 
-                /* =============================================
-                   STATUS TITIK
-                ============================================= */
+                // STATUS
 
                 let status;
 
@@ -1239,9 +1370,7 @@
 
 
 
-                /* =============================================
-                   DATA KEDALAMAN
-                ============================================= */
+                // DATA KEDALAMAN
 
                 let depthInformation;
 
@@ -1290,9 +1419,7 @@
 
 
 
-                /* =============================================
-                   POPUP
-                ============================================= */
+                // POPUP
 
                 marker.bindPopup(`
 
@@ -1382,9 +1509,7 @@
 
 
 
-                /* =============================================
-                   LABEL
-                ============================================= */
+                // LABEL
 
                 marker.bindTooltip(
                     `Titik ${point.id}`,
@@ -1405,9 +1530,9 @@
 
 
 
-        /* =====================================================
-           MENYESUAIKAN PETA DENGAN SEMUA TITIK
-        ===================================================== */
+        // ==========================================
+        // FIT MAP
+        // ==========================================
 
         const allCoordinates =
             batimetriPoints.map(
