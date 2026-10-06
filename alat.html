@@ -301,74 +301,88 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#118AB2] px-4 sm:px-6 py-8 sm:py-10 border-t-[2px] border-[#118AB2]">
+    <footer class="bg-[#118AB2] px-4 sm:px-6 py-10 border-t-[2px] border-[#118AB2]">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
 
-            <!-- Kolom 1: Kontak -->
-            <div class="md:col-span-2 flex flex-col gap-3 sm:gap-4 text-white">
-                <h3 class="font-bold text-lg sm:text-xl mb-1 sm:mb-2">Kontak Kami</h3>
+            <!-- Kolom 1 (Dibuat lebih lebar/span 2): Lokasi, Email, dan WhatsApp -->
+            <div class="md:col-span-2 flex flex-col gap-4 text-white">
+                <h3 class="font-bold text-xl mb-2">Kontak Kami</h3>
 
-                <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9" target="_blank"
-                    class="flex items-start gap-3 hover:text-cyan-200 transition text-sm sm:text-base">
-                    <i class="fa-solid fa-location-dot text-lg sm:text-xl mt-1 shrink-0"></i>
-                    <span class="leading-relaxed">Workshop Instrumentasi dan Robotika Kelautan (Bengkel) ITK, Babakan,
-                        Dramaga, Bogor, Indonesia 16680</span>
+                <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9"
+                    class="flex items-start gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-solid fa-location-dot text-xl mt-1"></i>
+                    <span class="leading-relaxed break-words">
+                        Workshop Instrumentasi dan Robotika Kelautan (Bengkel) ITK, Babakan,
+                        Dramaga, Bogor, Indonesia 16680
+                    </span>
                 </a>
 
-                <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-3 hover:text-cyan-200 transition text-sm sm:text-base">
-                    <i class="fa-regular fa-envelope text-lg sm:text-xl shrink-0"></i>
-                    <span class="break-all">mitr.ipb@gmail.com</span>
+                <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-regular fa-envelope text-xl"></i>
+                    <span>mitr.ipb@gmail.com</span>
                 </a>
 
-                <a href="https://wa.me/6283898339620" target="_blank" class="flex items-center gap-3 hover:text-cyan-200 transition text-sm sm:text-base">
-                    <i class="fa-brands fa-whatsapp text-lg sm:text-xl shrink-0"></i>
-                    <span>+6283898339620 (Deni Rizkiana)</span>
+                <a href="https://wa.me/6283898339620" class="flex items-center gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    <span class="break-words">+6283898339620 (Deni Rizkiana Anwar Hidayat)</span>
                 </a>
             </div>
 
-            <!-- Kolom 2: Media Sosial -->
-            <div class="flex flex-col gap-3 sm:gap-4 text-white">
-                <h3 class="font-bold text-lg sm:text-xl mb-1 sm:mb-2">Media Sosial</h3>
+            <!-- Kolom 2: Sosial Media -->
+            <div class="flex flex-col gap-4 text-white">
+                <h3 class="font-bold text-xl mb-2">Media Sosial</h3>
 
-                <a href="https://www.instagram.com/dmitr6teen/" target="_blank"
-                    class="flex items-center gap-3 hover:text-cyan-200 transition text-sm sm:text-base">
-                    <i class="fa-brands fa-instagram text-lg sm:text-xl shrink-0"></i>
+                <a href="https://www.instagram.com/dmitr6teen/"
+                    class="flex items-center gap-3 hover:text-[#464b71] transition">
+                    <i class="fa-brands fa-instagram text-xl"></i>
                     <span>@dmitr16teen</span>
                 </a>
+                <!-- Kamu bisa tambahkan link LinkedIn atau YouTube di sini jika ada -->
             </div>
 
             <!-- Kolom 3: Logo dan Tombol Back to Top -->
-            <div class="flex flex-col items-start sm:items-end md:items-start justify-between gap-6 text-white">
+            <div class="flex flex-col items-start gap-7 text-white">
+                <!-- Tempat untuk Logo MIT+R -->
                 <div class="w-full flex items-center justify-start">
-                    <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-32 sm:h-44 md:h-56 object-contain">
+                    <!-- Ganti "URL_LOGO_KAMU.png" dengan path/link logo yang sebenarnya -->
+                    <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-40 sm:h-56 object-contain">
                 </div>
 
                 <!-- Tombol Back to Top -->
-                <div class="w-full flex justify-end">
+                <div class="w-full flex justify-end mt-auto">
                     <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-                        class="group flex items-center p-2.5 sm:p-3 bg-white text-[#118AB2] rounded-full shadow-md hover:bg-[#0c6b8a] hover:text-white hover:shadow-xl transition-all duration-300 ease-in-out cursor-pointer">
+                        class="group flex items-center p-3 bg-white text-white rounded-full shadow-md hover:bg-[#0c6b8a] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
 
-                        <span class="whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out max-w-0 opacity-0 group-hover:max-w-[160px] group-hover:opacity-100 group-hover:mr-2 group-hover:pl-2 font-semibold text-xs sm:text-sm">
+                        <!-- Teks yang Muncul Saat Hover (Sekarang di urutan pertama / sebelah kiri) -->
+                        <span
+                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[160px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold">
                             Kembali ke Atas
                         </span>
 
-                        <span class="flex items-center justify-center w-7 h-7 bg-[#118AB2] text-white group-hover:bg-white group-hover:text-[#118AB2] rounded-full transition-all duration-300 shrink-0">
-                            <i class="fa-solid fa-arrow-up text-xs sm:text-sm"></i>
+                        <!-- Lingkaran Icon Panah (Sekarang di urutan kedua / sebelah kanan) -->
+                        <span
+                            class="flex items-center justify-center w-7 h-7 bg-white text-[#118AB2] rounded-full transition-transform duration-500 group-hover:scale-110 shrink-0">
+                            <i class="fa-solid fa-arrow-up text-sm"></i>
                         </span>
+
                     </button>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Copyright Bar -->
-    <div class="w-full relative bg-[#E2F0F3] py-4 px-4 sm:px-6 border-t-[1px] border-[#118AB2] overflow-hidden">
+    <!-- Tambahan kotak/bar kuning diletakkan di LUAR tag footer aslimu -->
+    <div class="w-full relative bg-[#E2F0F3] py-4 px-6 border-t-[1px] border-[#118AB2] overflow-hidden">
+
+        <!-- Pola Pattern di Background -->
         <div class="absolute inset-0 opacity-15 pointer-events-none"
             style="background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0l15 15-15 15-15-15zm0 30l15 15-15 15-15-15z' fill='%23118AB2' fill-opacity='0.4' fill-rule='evenodd' /%3E%3C/svg%3E&quot;); background-size: 30px 30px;">
         </div>
 
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center md:justify-end gap-2 relative z-10">
-            <div class="text-[#403100] font-semibold text-xs sm:text-sm text-center md:text-right">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
+
+            <!-- Teks/Hak Cipta di sebelah Kanan -->
+            <div class="text-[#403100] font-semibold text-sm text-center md:text-right">
                 © 2026 Diklat MIT+R 16. All Rights Reserved.
             </div>
         </div>
