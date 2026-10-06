@@ -417,38 +417,48 @@
             const navbar = document.getElementById('navbar');
             const navItems = document.querySelectorAll('.nav-item');
             const mobileBtn = document.getElementById('mobile-toggle-btn');
-            const logoCircle = document.getElementById('logo-bg-circle'); // 1. Ambil elemen lingkaran
+
+            // NAMA ID SUDAH DISESUAIKAN DENGAN HTML-MU
+            const logoCircle = document.getElementById('logo-circle');
 
             if (window.scrollY > 50) {
+                // Navbar jadi putih
                 navbar.classList.remove('bg-transparent', 'text-white');
                 navbar.classList.add('bg-white', 'shadow-md');
 
+                // Teks menu jadi biru
                 navItems.forEach(link => {
                     link.classList.remove('text-white');
                     link.classList.add('text-[#118AB2]');
                 });
 
-                mobileBtn.classList.add('text-gray-800');
+                // Warna tombol mobile
+                if (mobileBtn) mobileBtn.classList.add('text-gray-800');
 
-                // 2. Tampilkan lingkaran biru saat discroll
+                // LINGKARAN MUNCUL BERSAMAAN (Fade In + Membesar)
                 if (logoCircle) {
-                    logoCircle.classList.remove('hidden');
+                    logoCircle.classList.remove('opacity-0', 'scale-75');
+                    logoCircle.classList.add('opacity-100', 'scale-100');
                 }
 
             } else {
+                // Navbar kembali transparan
                 navbar.classList.add('bg-transparent', 'text-white');
                 navbar.classList.remove('bg-white', 'shadow-md');
 
+                // Teks menu kembali putih
                 navItems.forEach(link => {
                     link.classList.remove('text-[#118AB2]');
                     link.classList.add('text-white');
                 });
 
-                mobileBtn.classList.remove('text-gray-800');
+                // Warna tombol mobile kembali normal
+                if (mobileBtn) mobileBtn.classList.remove('text-gray-800');
 
-                // 3. Sembunyikan lingkaran biru saat di posisi paling atas
+                // LINGKARAN HILANG BERSAMAAN (Fade Out + Mengecil)
                 if (logoCircle) {
-                    logoCircle.classList.add('hidden');
+                    logoCircle.classList.remove('opacity-100', 'scale-100');
+                    logoCircle.classList.add('opacity-0', 'scale-75');
                 }
             }
         });
@@ -861,7 +871,6 @@
                     <button data-index="${comment.originalIndex}"
                         class="btn-delete-comment text-gray-400 hover:text-red-500 transition text-xs p-1"
                         title="Hapus Komentar">
-                        <i class="fa-solid fa-trash"></i>
                     </button>
                 </div>
             </div>
@@ -1005,12 +1014,14 @@
                     commentsList.insertAdjacentHTML('beforeend', html);
                 });
             }
-            // Event Listener untuk Menghapus Komentar
+
+            // HANYA SATU Event Listener untuk Menghapus Komentar
             commentsList.addEventListener('click', (e) => {
                 const deleteBtn = e.target.closest('.btn-delete-comment');
                 if (deleteBtn) {
-                    const index = deleteBtn.getAttribute('data-index');
-                    if (index !== null) {
+                    // Gunakan parseInt untuk memastikan indeks berupa angka
+                    const index = parseInt(deleteBtn.getAttribute('data-index'), 10);
+                    if (!isNaN(index)) {
                         // Hapus data dari array berdasarkan indeks asli
                         comments.splice(index, 1);
                         // Simpan perubahan ke LocalStorage
@@ -1021,10 +1032,10 @@
                 }
             });
 
+            // HANYA SATU Event Listener untuk Mengirim Komentar
             submitCommentBtn.addEventListener('click', () => {
                 const text = commentInput.value.trim();
                 if (text) {
-                    // Tambahkan 'id' unik menggunakan timestamp
                     comments.push({
                         id: Date.now(),
                         text: text,
@@ -1036,19 +1047,9 @@
                 }
             });
 
-            // Event Delegation untuk Menghapus Komentar
-            commentsList.addEventListener('click', (e) => {
-                const deleteBtn = e.target.closest('.btn-delete-comment');
-                if (deleteBtn) {
-                    const index = deleteBtn.getAttribute('data-index');
-                    if (index !== null) {
-                        // Hapus item dari array asli
-                        comments.splice(index, 1);
-                        // Simpan kembali array yang sudah diperbarui ke LocalStorage
-                        localStorage.setItem('albatross_comments', JSON.stringify(comments));
-                        // Rendernya kembali UI
-                        renderComments();
-                    }
+            commentInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    submitCommentBtn.click();
                 }
             });
 
@@ -1064,24 +1065,6 @@
                 currentSort = 'teratas';
                 updateButtonStyles();
                 renderComments();
-            });
-
-            // Aksi saat tombol kirim diklik
-            submitCommentBtn.addEventListener('click', () => {
-                const text = commentInput.value.trim();
-                if (text) {
-                    comments.push({ text: text, timestamp: new Date().getTime() });
-                    localStorage.setItem('albatross_comments', JSON.stringify(comments));
-
-                    commentInput.value = '';
-                    renderComments();
-                }
-            });
-
-            commentInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    submitCommentBtn.click();
-                }
             });
 
             // Eksekusi tampilan awal
@@ -1172,21 +1155,25 @@
         });
     </script>
 
-    <footer class="bg-white px-6 py-10 border-t-[2px] border-[#118AB2]">
+    <footer class="bg-[#118AB2] px-6 py-10 border-t-[2px] border-[#118AB2]">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+
             <!-- Kolom 1 (Dibuat lebih lebar/span 2): Lokasi, Email, dan WhatsApp -->
-            <div class="md:col-span-2 flex flex-col gap-4 text-[#118AB2]">
-                <h3 class="font-bold text-xl mb-2">Our Contact</h3>
+            <div class="md:col-span-2 flex flex-col gap-4 text-white">
+                <h3 class="font-bold text-xl mb-2">Kontak Kami</h3>
+
                 <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9"
                     class="flex items-start gap-3 hover:text-[#464b71] transition">
                     <i class="fa-solid fa-location-dot text-xl mt-1"></i>
                     <span class="leading-relaxed">Workshop Instrumentasi dan Robotika Kelautan (Bengkel) ITK, Babakan,
                         Dramaga, Bogor, Indonesia 16680</span>
                 </a>
+
                 <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-3 hover:text-[#464b71] transition">
                     <i class="fa-regular fa-envelope text-xl"></i>
                     <span>mitr.ipb@gmail.com</span>
                 </a>
+
                 <a href="https://wa.me/6283898339620" class="flex items-center gap-3 hover:text-[#464b71] transition">
                     <i class="fa-brands fa-whatsapp text-xl"></i>
                     <span>+6283898339620 (Deni Rizkiana Anwar Hidayat)</span>
@@ -1194,42 +1181,34 @@
             </div>
 
             <!-- Kolom 2: Sosial Media -->
-            <div class="flex flex-col gap-4 text-[#118AB2]">
-                <h3 class="font-bold text-xl mb-2">Social Media</h3>
-                <a href="https://www.instagram.com/mitr_ipb/"
+            <div class="flex flex-col gap-4 text-white">
+                <h3 class="font-bold text-xl mb-2">Media Sosial</h3>
+
+                <a href="https://www.instagram.com/dmitr6teen/"
                     class="flex items-center gap-3 hover:text-[#464b71] transition">
                     <i class="fa-brands fa-instagram text-xl"></i>
-                    <span>@mitr_ipb</span>
+                    <span>@dmitr16teen</span>
                 </a>
+                <!-- Kamu bisa tambahkan link LinkedIn atau YouTube di sini jika ada -->
             </div>
 
             <!-- Kolom 3: Logo dan Tombol Back to Top -->
-            <div class="flex flex-col items-start gap-6 text-[#118AB2]">
-                <h3 class="font-bold text-xl mb-2">About Us</h3>
-
+            <div class="flex flex-col items-start gap-7 text-white">
                 <!-- Tempat untuk Logo MIT+R -->
                 <div class="w-full flex items-center justify-start">
-                    <!-- Kontainer Lingkaran Background -->
-                    <!-- Atur w-* dan h-* di bawah untuk mengubah ukuran lingkaran -->
-                    <div
-                        class="relative w-28 h-28 rounded-full bg-[#118AB2] flex items-center justify-center overflow-hidden shadow-md">
-
-                        <!-- Logo -->
-                        <!-- Atur h-* / w-* untuk ukuran logo, serta inset / top / left / translate jika ingin geser posisi -->
-                        <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-24 object-contain">
-
-                    </div>
+                    <!-- Ganti "URL_LOGO_KAMU.png" dengan path/link logo yang sebenarnya -->
+                    <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-56 object-contain">
                 </div>
 
                 <!-- Tombol Back to Top -->
                 <div class="w-full flex justify-end mt-auto">
                     <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-                        class="group flex items-center p-3 bg-[#118AB2] text-white rounded-full shadow-md hover:bg-[#0c6b8a] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
+                        class="group flex items-center p-3 bg-white text-white rounded-full shadow-md hover:bg-[#0c6b8a] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
 
                         <!-- Teks yang Muncul Saat Hover (Sekarang di urutan pertama / sebelah kiri) -->
                         <span
-                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[120px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold">
-                            Back to Top
+                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[160px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold">
+                            Kembali ke Atas
                         </span>
 
                         <!-- Lingkaran Icon Panah (Sekarang di urutan kedua / sebelah kanan) -->
@@ -1241,9 +1220,25 @@
                     </button>
                 </div>
             </div>
-
         </div>
     </footer>
+
+    <!-- Tambahan kotak/bar kuning diletakkan di LUAR tag footer aslimu -->
+    <div class="w-full relative bg-[#E2F0F3] py-4 px-6 border-t-[1px] border-[#118AB2] overflow-hidden">
+
+        <!-- Pola Pattern di Background -->
+        <div class="absolute inset-0 opacity-15 pointer-events-none"
+            style="background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0l15 15-15 15-15-15zm0 30l15 15-15 15-15-15z' fill='%23118AB2' fill-opacity='0.4' fill-rule='evenodd' /%3E%3C/svg%3E&quot;); background-size: 30px 30px;">
+        </div>
+
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
+
+            <!-- Teks/Hak Cipta di sebelah Kanan -->
+            <div class="text-[#403100] font-semibold text-sm text-center md:text-right">
+                © 2026 Diklat MIT+R 16. All Rights Reserved.
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
