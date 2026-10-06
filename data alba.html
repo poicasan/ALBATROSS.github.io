@@ -8,14 +8,15 @@
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anta&family=Inter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anta&family=Inter:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -131,6 +132,7 @@
             box-shadow:
                 0 10px 22px rgba(17, 138, 178, 0.10);
         }
+
         .batimetri-marker {
             color: white;
             border-radius: 50%;
@@ -140,29 +142,35 @@
             font-size: 10px;
             font-weight: bold;
             border: 2px solid white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
             /* INI KUNCI EFEKNYA */
-            opacity: 0.4; /* Titik pudar 40% */
-            transform: scale(0.6); /* Ukuran titik menyusut jadi 60% */
-            transition: all 0.3s ease-in-out; /* Animasi halus */
+            opacity: 0.4;
+            /* Titik pudar 40% */
+            transform: scale(0.6);
+            /* Ukuran titik menyusut jadi 60% */
+            transition: all 0.3s ease-in-out;
+            /* Animasi halus */
             cursor: pointer;
         }
 
         /* Gaya saat kursor mendekat (Hover) */
         .batimetri-marker:hover {
-            opacity: 1 !important; /* Muncul 100% jelas */
-            transform: scale(1.3) !important; /* Membesar 130% */
-            z-index: 9999 !important; /* Memaksa titik tampil paling depan menutupi titik lain */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            opacity: 1 !important;
+            /* Muncul 100% jelas */
+            transform: scale(1.3) !important;
+            /* Membesar 130% */
+            z-index: 9999 !important;
+            /* Memaksa titik tampil paling depan menutupi titik lain */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         }
-        
+
         /* Menyembunyikan Label (Tooltip) permanen agar tidak menuh-menuhin layar */
         .leaflet-tooltip.data-point-label {
             opacity: 0 !important;
             transition: opacity 0.3s;
         }
-        
+
         /* Memunculkan Label hanya saat marker di-hover */
         .leaflet-marker-icon:hover .leaflet-tooltip.data-point-label {
             opacity: 1 !important;
@@ -173,7 +181,7 @@
 <body class="bg-white text-gray-800 font-inter">
 
     <!-- Navbar -->
-   <nav id="navbar"
+    <nav id="navbar"
         class="fixed top-0 left-0 w-full z-50 p-4 lg:px-12 transition-all duration-300 bg-white shadow-md text-[#118AB2]">
 
         <div class="max-w-7xl mx-auto flex justify-between items-center relative">
@@ -251,7 +259,7 @@
                             class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
 
 
-                             <a href="data pemetaan.html"
+                            <a href="data pemetaan.html"
                                 class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
                                 Data Pemetaan
                             </a>
@@ -355,7 +363,8 @@
     <section class="bg-brand-tealBg text-white px-6 sm:px-8 pt-28 pb-10 shadow-inner min-h-[366px]">
         <div class="max-w-6xl mx-auto w-full space-y-4">
             <nav class="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-cyan-100 font-medium font-inter">
-                <a href="index.html" class="hover:underline flex items-center gap-1"><i class="fa-solid fa-house text-xs"></i> Beranda</a>
+                <a href="index.html" class="hover:underline flex items-center gap-1"><i
+                        class="fa-solid fa-house text-xs"></i> Beranda</a>
                 <span>&gt;</span>
                 <a href="data.html" class="hover:underline">Data</a>
                 <span>&gt;</span>
@@ -366,7 +375,8 @@
                 <h1 class="text-3xl sm:text-4xl font-bold tracking-wide font-anta">Data ALBA</h1>
             </div>
             <p class="text-sm sm:text-base text-cyan-50 max-w-3xl leading-relaxed font-normal font-inter">
-                Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data salinitas, kedalaman, kekeruhan, pH, oksigen terlarut (DO), dan suhu.
+                Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data salinitas, kedalaman, kekeruhan, pH,
+                oksigen terlarut (DO), dan suhu.
             </p>
             <div class="pt-4">
 
@@ -378,17 +388,16 @@
                     <div class="flex items-center space-x-2 px-3">
                         <div class="w-4 h-4 rounded-full bg-gray-400"></div>
                         <span class="font-bold text-[#434b6e] text-sm">
-                            Tidak online
+                            Tidak aktif
                         </span>
                     </div>
                     <!-- Status Kanan -->
                     <div class="flex items-center space-x-2 pr-4 pl-2">
-                        <div
-                            class="w-5 h-5 rounded-full bg-[#434b6e] flex items-center justify-center">
+                        <div class="w-5 h-5 rounded-full bg-[#434b6e] flex items-center justify-center">
                             <i class="fa-solid fa-chart-line text-xs"></i>
                         </div>
                         <span class="font-bold text-[#434b6e] text-sm">
-                            Data non-real-time
+                            Data <i>non-real-time</i>
                         </span>
                     </div>
                 </div>
@@ -403,13 +412,12 @@
         ================================================== -->
         <section class="mb-8">
             <div class="text-center">
-                <h2
-                    class="text-2xl sm:text-3xl font-bold text-brand-darkText font-anta">
+                <h2 class="text-2xl sm:text-3xl font-bold text-brand-darkText font-anta">
                     Peta Data ALBA
                 </h2>
-                <p
-                    class="text-sm text-gray-500 mt-2 max-w-2xl mx-auto leading-relaxed">
-                    Titik-titik pada peta menunjukkan lokasi pengamatan yang digunakan untuk merepresentasikan data kondisi perairan.
+                <p class="text-sm text-gray-500 mt-2 max-w-2xl mx-auto leading-relaxed">
+                    Titik-titik pada peta menunjukkan lokasi pengamatan yang digunakan untuk merepresentasikan data
+                    kondisi perairan.
                 </p>
             </div>
         </section>
@@ -418,14 +426,11 @@
         ================================================== -->
 
         <section class="mb-10">
-            <div
-                class="bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-3 sm:p-5">
+            <div class="bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-3 sm:p-5">
                 <!-- LEGENDA -->
-                <div
-                    class="flex flex-wrap items-center gap-x-6 gap-y-3 px-2 py-3 text-xs sm:text-sm text-gray-600">
+                <div class="flex flex-wrap items-center gap-x-6 gap-y-3 px-2 py-3 text-xs sm:text-sm text-gray-600">
                     <div class="flex items-center gap-2">
-                        <span
-                            class="w-3 h-3 rounded-full bg-[#008ba3] border-2 border-white shadow">
+                        <span class="w-3 h-3 rounded-full bg-[#008ba3] border-2 border-white shadow">
                         </span>
 
                         <span>
@@ -435,8 +440,7 @@
 
 
                     <div class="flex items-center gap-2">
-                        <span
-                            class="w-3 h-3 rounded-full bg-[#22c55e] border-2 border-white shadow">
+                        <span class="w-3 h-3 rounded-full bg-[#22c55e] border-2 border-white shadow">
                         </span>
                         <span>
                             Titik awal
@@ -446,8 +450,7 @@
 
 
                     <div class="flex items-center gap-2">
-                        <span
-                            class="w-3 h-3 rounded-full bg-[#ef4444] border-2 border-white shadow">
+                        <span class="w-3 h-3 rounded-full bg-[#ef4444] border-2 border-white shadow">
                         </span>
                         <span>
                             Titik akhir
@@ -472,9 +475,10 @@
                     Indikator Kualitas Perairan
                 </h2>
                 <p class="text-sm text-gray-500 mt-2">
-                    Evaluasi nilai rata-rata parameter kualitas air per zona (5 titik pengamatan) berdasarkan kriteria baku mutu lingkungan
+                    Evaluasi nilai rata-rata parameter kualitas air per zona (5 titik pengamatan) berdasarkan kriteria
+                    baku mutu lingkungan
                 </p>
-                
+
                 <!-- Legenda Status -->
                 <div class="flex flex-wrap gap-4 mt-4 text-xs">
                     <div class="flex items-center gap-2">
@@ -499,9 +503,8 @@
         <!-- =================================================
              INFORMASI PEMETAAN ALBA
         ================================================== -->
-        <section
-            class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
-            
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
+
             <!-- Card 1: Multi-Parameter -->
             <div class="info-card p-5">
                 <div class="flex items-center gap-3 mb-3">
@@ -511,8 +514,7 @@
                         <i class="fa-solid fa-droplet"></i>
                     </div>
                     <div>
-                        <h3
-                            class="font-bold text-brand-darkText">
+                        <h3 class="font-bold text-brand-darkText">
                             Parameter Lingkungan
                         </h3>
                         <p class="text-xs text-gray-400">
@@ -522,21 +524,20 @@
                 </div>
 
                 <p class="text-sm text-gray-600 leading-relaxed">
-                    Wahana ALBA mencatat data kedalaman, suhu, kekeruhan, pH, DO, dan salinitas secara terintegrasi pada setiap lokasi.
+                    Wahana ALBA mencatat data kedalaman, suhu, kekeruhan, pH, DO, dan salinitas secara terintegrasi pada
+                    setiap lokasi.
                 </p>
             </div>
 
             <!-- Card 2: Titik Koordinat (Waypoint) -->
             <div class="info-card p-5">
                 <div class="flex items-center gap-3 mb-3">
-                    <div
-                        class="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 text-lg">
+                    <div class="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 text-lg">
                         <!-- Menggunakan target/crosshairs untuk nuansa navigasi otonom/waypoint -->
                         <i class="fa-solid fa-location-crosshairs"></i>
                     </div>
                     <div>
-                        <h3
-                            class="font-bold text-brand-darkText">
+                        <h3 class="font-bold text-brand-darkText">
                             Posisi Pengukuran
                         </h3>
                         <p class="text-xs text-gray-400">
@@ -545,9 +546,9 @@
                     </div>
                 </div>
 
-                <p
-                    class="text-sm text-gray-600 leading-relaxed">
-                    Setiap titik pada peta menunjukkan lokasi presisi secara spasial saat ALBA melakukan pembacaan parameter kualitas air.
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    Setiap titik pada peta menunjukkan lokasi presisi secara spasial saat ALBA melakukan pembacaan
+                    parameter kualitas air.
                 </p>
             </div>
 
@@ -559,8 +560,7 @@
                         <i class="fa-solid fa-map-location-dot"></i>
                     </div>
                     <div>
-                        <h3
-                            class="font-bold text-brand-darkText">
+                        <h3 class="font-bold text-brand-darkText">
                             Pemetaan Kondisi Air
                         </h3>
                         <p class="text-xs text-gray-400">
@@ -569,9 +569,9 @@
                     </div>
                 </div>
 
-                <p
-                    class="text-sm text-gray-600 leading-relaxed">
-                    Persebaran titik membantu memvisualisasikan zonasi kondisi air untuk memudahkan analisis kelayakan dan kualitas suatu wilayah perairan.
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    Persebaran titik membantu memvisualisasikan zonasi kondisi air untuk memudahkan analisis kelayakan
+                    dan kualitas suatu wilayah perairan.
                 </p>
             </div>
         </section>
@@ -579,38 +579,35 @@
         <!-- =================================================
              INFORMASI DATA
         ================================================== -->
-        <section
-            class="bg-brand-lightCyan rounded-2xl border border-brand-borderCyan p-5 sm:p-6 mb-4">
+        <section class="bg-brand-lightCyan rounded-2xl border border-brand-borderCyan p-5 sm:p-6 mb-4">
             <div class="flex items-start gap-3">
-                <div
-                    class="w-10 h-10 shrink-0 rounded-xl bg-white flex items-center justify-center text-brand-cyan">
+                <div class="w-10 h-10 shrink-0 rounded-xl bg-white flex items-center justify-center text-brand-cyan">
                     <i class="fa-solid fa-circle-info"></i>
                 </div>
                 <div>
-                    <h3
-                        class="font-bold text-brand-darkText mb-2">
+                    <h3 class="font-bold text-brand-darkText mb-2">
                         Informasi Parameter Titik Pengamatan
                     </h3>
-                    <p
-                        class="text-sm text-gray-600 leading-relaxed">
-                        Klik salah satu titik pada peta untuk melihat informasi lokasi, waktu pencatatan, dan 6 parameter data pengamatan (Suhu, DO, Kedalaman, Kekeruhan, pH, dan Salinitas).
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Klik salah satu titik pada peta untuk melihat informasi lokasi, waktu pencatatan, dan 6
+                        parameter data pengamatan (Suhu, DO, Kedalaman, Kekeruhan, pH, dan Salinitas).
                     </p>
                 </div>
             </div>
         </section>
-    
+
     </main>
 
     <!-- =====================================================
          FOOTER
     ====================================================== -->
 
-    <footer class="bg-white px-6 py-10 border-t-[2px] border-[#118AB2]">
+    <footer class="bg-[#118AB2] px-6 py-10 border-t-[2px] border-[#118AB2]">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
 
             <!-- Kolom 1 (Dibuat lebih lebar/span 2): Lokasi, Email, dan WhatsApp -->
-            <div class="md:col-span-2 flex flex-col gap-4 text-[#118AB2]">
-                <h3 class="font-bold text-xl mb-2">Our Contact</h3>
+            <div class="md:col-span-2 flex flex-col gap-4 text-white">
+                <h3 class="font-bold text-xl mb-2">Kontak Kami</h3>
 
                 <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9"
                     class="flex items-start gap-3 hover:text-[#464b71] transition">
@@ -631,44 +628,34 @@
             </div>
 
             <!-- Kolom 2: Sosial Media -->
-            <div class="flex flex-col gap-4 text-[#118AB2]">
-                <h3 class="font-bold text-xl mb-2">Social Media</h3>
+            <div class="flex flex-col gap-4 text-white">
+                <h3 class="font-bold text-xl mb-2">Media Sosial</h3>
 
-                <a href="https://www.instagram.com/mitr_ipb/"
+                <a href="https://www.instagram.com/dmitr6teen/"
                     class="flex items-center gap-3 hover:text-[#464b71] transition">
                     <i class="fa-brands fa-instagram text-xl"></i>
-                    <span>@mitr_ipb</span>
+                    <span>@dmitr16teen</span>
                 </a>
                 <!-- Kamu bisa tambahkan link LinkedIn atau YouTube di sini jika ada -->
             </div>
 
             <!-- Kolom 3: Logo dan Tombol Back to Top -->
-            <div class="flex flex-col items-start gap-6 text-[#118AB2]">
-                <h3 class="font-bold text-xl mb-2">About Us</h3>
-
+            <div class="flex flex-col items-start gap-7 text-white">
                 <!-- Tempat untuk Logo MIT+R -->
                 <div class="w-full flex items-center justify-start">
-                    <!-- Kontainer Lingkaran Background -->
-                    <!-- Atur w-* dan h-* di bawah untuk mengubah ukuran lingkaran -->
-                    <div
-                        class="relative w-28 h-28 rounded-full bg-[#118AB2] flex items-center justify-center overflow-hidden shadow-md">
-
-                        <!-- Logo -->
-                        <!-- Atur h-* / w-* untuk ukuran logo, serta inset / top / left / translate jika ingin geser posisi -->
-                        <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-24 object-contain">
-
-                    </div>
+                    <!-- Ganti "URL_LOGO_KAMU.png" dengan path/link logo yang sebenarnya -->
+                    <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-56 object-contain">
                 </div>
 
                 <!-- Tombol Back to Top -->
                 <div class="w-full flex justify-end mt-auto">
                     <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-                        class="group flex items-center p-3 bg-[#118AB2] text-white rounded-full shadow-md hover:bg-[#0c6b8a] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
+                        class="group flex items-center p-3 bg-white text-white rounded-full shadow-md hover:bg-[#0c6b8a] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
 
                         <!-- Teks yang Muncul Saat Hover (Sekarang di urutan pertama / sebelah kiri) -->
                         <span
-                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[120px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold">
-                            Back to Top
+                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[160px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold">
+                            Kembali ke Atas
                         </span>
 
                         <!-- Lingkaran Icon Panah (Sekarang di urutan kedua / sebelah kanan) -->
@@ -680,33 +667,48 @@
                     </button>
                 </div>
             </div>
-
         </div>
     </footer>
-    
+
+    <!-- Tambahan kotak/bar kuning diletakkan di LUAR tag footer aslimu -->
+    <div class="w-full relative bg-[#E2F0F3] py-4 px-6 border-t-[1px] border-[#118AB2] overflow-hidden">
+
+        <!-- Pola Pattern di Background -->
+        <div class="absolute inset-0 opacity-15 pointer-events-none"
+            style="background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0l15 15-15 15-15-15zm0 30l15 15-15 15-15-15z' fill='%23118AB2' fill-opacity='0.4' fill-rule='evenodd' /%3E%3C/svg%3E&quot;); background-size: 30px 30px;">
+        </div>
+
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
+
+            <!-- Teks/Hak Cipta di sebelah Kanan -->
+            <div class="text-[#403100] font-semibold text-sm text-center md:text-right">
+                © 2026 Diklat MIT+R 16. All Rights Reserved.
+            </div>
+        </div>
+    </div>
+
     <!-- =====================================================
          LEAFLET JS
     ====================================================== -->
 
-    <script
-        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
     </script>
 
 
 
     <script>
-        
+
         const batimetriPoints = [
-            {id: 1, time: "08:00", lat: -7.675694, lng: 108.819542, data: {kedalaman: 5.2, suhu: 28.5, salinitas: 32, kekeruhan: 12.4, ph: 8.1, do: 6.5}},
-            {id: 2, time: "08:05", lat: -7.669228, lng: 108.826683, data: {kedalaman: 5.4, suhu: 28.6, salinitas: 32.3, kekeruhan: 12.1, ph: 8.0, do: 6.4}},
-            {id: 3, time: "08:10", lat: -7.666444, lng: 108.830939, data: {kedalaman: 5.1, suhu: 28.6, kekeruhan: 13.0, ph: 8.1, do: 6.2, salinitas: 30.5 }},
-            {id: 4, time: "08:15", lat: -7.665309, lng: 108.835494, data: {kedalaman: 4.8, suhu: 28.8, kekeruhan: 14.2, ph: 7.9, do: 6.0, salinitas: 31.0 }},
-            {id: 5, time: "08:20", lat: -7.663216, lng: 108.841502, data: {kedalaman: 4.5, suhu: 28.9, kekeruhan: 15.1, ph: 7.9, do: 5.8, salinitas: 31.2 }},
-            {id: 6, time: "08:25", lat: -7.661267, lng: 108.848828, data: { kedalaman: 4.6, suhu: 29.1, kekeruhan: 15.5, ph: 7.8, do: 5.7, salinitas: 31.5 }},
-            {id: 7, time: "08:30", lat: -7.662660, lng: 108.857311, data: { kedalaman: 4.9, suhu: 29.2, kekeruhan: 16.0, ph: 7.8, do: 5.6, salinitas: 32.0 }},
-            {id: 8, time: "08:35", lat: -7.668329, lng: 108.862923, data: { kedalaman: 5.3, suhu: 29.0, kekeruhan: 14.8, ph: 8.0, do: 5.9, salinitas: 31.8 }},
-            {id: 9, time: "08:40", lat: -7.677056, lng: 108.868661, data: { kedalaman: 5.7, suhu: 28.8, kekeruhan: 13.5, ph: 8.1, do: 6.1, salinitas: 31.1 }},
-            {id: 10, time: "08:45", lat: -7.683345, lng: 108.868088, data: { kedalaman: 6.1, suhu: 28.6, kekeruhan: 12.0, ph: 8.2, do: 6.3, salinitas: 30.8 }},
+            { id: 1, time: "08:00", lat: -7.675694, lng: 108.819542, data: { kedalaman: 5.2, suhu: 28.5, salinitas: 32, kekeruhan: 12.4, ph: 8.1, do: 6.5 } },
+            { id: 2, time: "08:05", lat: -7.669228, lng: 108.826683, data: { kedalaman: 5.4, suhu: 28.6, salinitas: 32.3, kekeruhan: 12.1, ph: 8.0, do: 6.4 } },
+            { id: 3, time: "08:10", lat: -7.666444, lng: 108.830939, data: { kedalaman: 5.1, suhu: 28.6, kekeruhan: 13.0, ph: 8.1, do: 6.2, salinitas: 30.5 } },
+            { id: 4, time: "08:15", lat: -7.665309, lng: 108.835494, data: { kedalaman: 4.8, suhu: 28.8, kekeruhan: 14.2, ph: 7.9, do: 6.0, salinitas: 31.0 } },
+            { id: 5, time: "08:20", lat: -7.663216, lng: 108.841502, data: { kedalaman: 4.5, suhu: 28.9, kekeruhan: 15.1, ph: 7.9, do: 5.8, salinitas: 31.2 } },
+            { id: 6, time: "08:25", lat: -7.661267, lng: 108.848828, data: { kedalaman: 4.6, suhu: 29.1, kekeruhan: 15.5, ph: 7.8, do: 5.7, salinitas: 31.5 } },
+            { id: 7, time: "08:30", lat: -7.662660, lng: 108.857311, data: { kedalaman: 4.9, suhu: 29.2, kekeruhan: 16.0, ph: 7.8, do: 5.6, salinitas: 32.0 } },
+            { id: 8, time: "08:35", lat: -7.668329, lng: 108.862923, data: { kedalaman: 5.3, suhu: 29.0, kekeruhan: 14.8, ph: 8.0, do: 5.9, salinitas: 31.8 } },
+            { id: 9, time: "08:40", lat: -7.677056, lng: 108.868661, data: { kedalaman: 5.7, suhu: 28.8, kekeruhan: 13.5, ph: 8.1, do: 6.1, salinitas: 31.1 } },
+            { id: 10, time: "08:45", lat: -7.683345, lng: 108.868088, data: { kedalaman: 6.1, suhu: 28.6, kekeruhan: 12.0, ph: 8.2, do: 6.3, salinitas: 30.8 } },
         ];
 
         /* =====================================================
@@ -749,7 +751,7 @@
                 if (isFirst) {
                     markerColor = '#22c55e';
                 } else if (isLast) {
-                    markerColor = '#ef4444';    
+                    markerColor = '#ef4444';
                 } else {
                     markerColor = '#008ba3';
                 }
@@ -940,9 +942,9 @@
             }
 
             let status = "Baik";
-            
+
             // Contoh aturan ambang batas (Threshold)
-           if (paramName === 'suhu') {
+            if (paramName === 'suhu') {
                 if (value < 25 || value > 32) status = "Tidak Baik";
                 else if (value < 27 || value > 30) status = "Kurang Baik";
             } else if (paramName === 'ph') {
@@ -955,12 +957,12 @@
                 if (value > 30) status = "Tidak Baik";
                 else if (value > 15) status = "Kurang Baik";
             } else if (paramName === 'salinitas') {
-                if (value < 5 || value > 36) status = "Tidak Baik"; 
-                else if (value > 34) status = "Kurang Baik";        
+                if (value < 5 || value > 36) status = "Tidak Baik";
+                else if (value > 34) status = "Kurang Baik";
             }
 
             // Menentukan warna badge berdasarkan Tailwind CSS
-            let badgeClass = "bg-green-100 text-green-700 border-green-200"; 
+            let badgeClass = "bg-green-100 text-green-700 border-green-200";
             if (status === "Kurang Baik") {
                 badgeClass = "bg-yellow-100 text-yellow-700 border-yellow-200";
             } else if (status === "Tidak Baik") {
@@ -996,7 +998,7 @@
             }
 
             let status = "Baik";
-            
+
             // Ambang batas baku mutu
             if (paramName === 'suhu') {
                 if (value < 25 || value > 32) status = "Tidak Baik";
@@ -1016,7 +1018,7 @@
             }
 
             // Styling Badge Tailwind
-            let badgeClass = "bg-green-100 text-green-700 border-green-200"; 
+            let badgeClass = "bg-green-100 text-green-700 border-green-200";
             if (status === "Kurang Baik") {
                 badgeClass = "bg-yellow-100 text-yellow-700 border-yellow-200";
             } else if (status === "Tidak Baik") {
@@ -1041,7 +1043,7 @@
 
         // 3. Render Tabel Rata-rata
         const tableContainer = document.getElementById('table-indikator-container');
-        
+
         let tableHTML = `
             <div class="overflow-x-auto bg-white rounded-xl border-2 border-gray-100 shadow-sm">
                 <table class="w-full text-sm text-left whitespace-nowrap">
@@ -1059,13 +1061,13 @@
                     <tbody class="divide-y divide-gray-100">
         `;
 
-        const chunkSize = 5; 
+        const chunkSize = 5;
         for (let i = 0; i < batimetriPoints.length; i += chunkSize) {
             const chunk = batimetriPoints.slice(i, i + chunkSize);
-            
+
             const startId = chunk[0].id;
             const endId = chunk[chunk.length - 1].id;
-            
+
             // Hitung rata-rata per parameter
             const avgSuhu = getAverage(chunk, 'suhu');
             const avgDo = getAverage(chunk, 'do');
@@ -1101,4 +1103,5 @@
         }
     </script>
 </body>
+
 </html>
