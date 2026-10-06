@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data BAT - Monitoring Kampung Laut</title>
+    <title>Monitoring Alat & Data Kampung Laut</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -18,12 +18,6 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Anta&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
-
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
         tailwind.config = {
@@ -41,6 +35,7 @@
                     fontFamily: {
                         anta: ['Anta', 'sans-serif'],
                         inter: ['Inter', 'sans-serif'],
+                        heading: ['Anta', 'sans-serif']
                     }
                 }
             }
@@ -56,726 +51,491 @@
             font-family: 'Anta', sans-serif;
         }
 
-        .leaflet-container {
-            font-family: 'Inter', sans-serif;
-            z-index: 1;
-        }
-
-        .leaflet-popup-content-wrapper {
-            border-radius: 12px;
-        }
-
-        .leaflet-popup-content {
-            font-family: 'Inter', sans-serif;
-            font-size: 12px;
-            line-height: 1.6;
-        }
-
-        /* Label titik pada peta */
-        .data-point-label {
-            background: rgba(45, 55, 72, 0.9);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 3px 6px;
-            font-size: 11px;
-            font-weight: 600;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .data-point-label::before {
+        /* Menyembunyikan scrollbar bawaan tapi tetap bisa discroll */
+        .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
 
-        /* ==========================================
-           KARTU RINGKASAN DATA
-        ========================================== */
-
-        .stat-card {
-            position: relative;
-            overflow: hidden;
-            background: #ffffff;
-            border: 1px solid #d5eaf0;
-            border-radius: 18px;
-            box-shadow: 0 4px 12px rgba(17, 138, 178, 0.06);
-
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease,
-                border-color 0.25s ease;
-        }
-
-        /* Garis aksen tumbuh dari bawah ke atas */
-        .stat-card::before {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--accent-color);
-
-            transform: scaleY(0);
-            transform-origin: bottom;
-            transition: transform 0.3s ease;
-        }
-
-        /* Efek hover kartu */
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-color);
-            box-shadow: 0 12px 25px var(--accent-shadow);
-        }
-
-        .stat-card:hover::before {
-            transform: scaleY(1);
-        }
-
-        /* Ikon kartu */
-        .stat-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            background: var(--accent-light);
-            color: var(--accent-color);
-            font-size: 20px;
-
-            transition:
-                background-color 0.25s ease,
-                color 0.25s ease,
-                transform 0.25s ease;
-        }
-
-        .stat-card:hover .stat-icon {
-            background: var(--accent-color);
-            color: #ffffff;
-            transform: scale(1.06);
-        }
-
-        /* Angka ringkasan */
-        .stat-value {
-            color: #2d3757;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-
-        /* Label kategori mengikuti warna aksen */
-        .stat-card>div:first-child>span {
-            color: var(--accent-color);
-            background: var(--accent-light);
-        }
-
-        /* Warna aksen masing-masing kartu */
-
-        /* Durasi: Biru */
-        .stat-duration {
-            --accent-color: #3b82f6;
-            --accent-light: #eff6ff;
-            --accent-shadow: rgba(59, 130, 246, 0.13);
-        }
-
-        /* Jarak: Oranye */
-        .stat-distance {
-            --accent-color: #f97316;
-            --accent-light: #fff7ed;
-            --accent-shadow: rgba(249, 115, 22, 0.13);
-        }
-
-        /* Kecepatan: Hijau */
-        .stat-speed {
-            --accent-color: #16a34a;
-            --accent-light: #f0fdf4;
-            --accent-shadow: rgba(22, 163, 74, 0.13);
-        }
-
-        /* Titik pengamatan: Merah */
-        .stat-points {
-            --accent-color: #ef4444;
-            --accent-light: #fef2f2;
-            --accent-shadow: rgba(239, 68, 68, 0.13);
-        }
-
-        /* Aksesibilitas */
-        @media (prefers-reduced-motion: reduce) {
-
-            .stat-card,
-            .stat-card::before,
-            .stat-icon {
-                transition: none;
-            }
-
-            .stat-card:hover {
-                transform: none;
-            }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
-
 </head>
 
-<body class="bg-gray-50 min-h-screen flex flex-col justify-between text-gray-800 font-inter">
+<body class="bg-white min-h-screen flex flex-col justify-between text-gray-800 antialiased selection:bg-cyan-100">
+    <div>
+        <!-- Navbar -->
+        <nav id="navbar"
+            class="fixed top-0 left-0 w-full z-50 p-4 lg:px-12 transition-all duration-300 bg-white shadow-md text-[#118AB2]">
 
-    <!-- Navbar -->
-    <nav id="navbar"
-        class="fixed top-0 left-0 w-full z-50 p-4 lg:px-12 transition-all duration-300 bg-white shadow-md text-[#118AB2]">
+            <div class="max-w-7xl mx-auto flex justify-between items-center relative">
 
-        <div class="max-w-7xl mx-auto flex justify-between items-center relative">
+                <!-- Logo ALBATROSS -->
+                <div class="relative flex items-center justify-center">
+                    <!-- Shape Bulat Biru (Ukuran lebih besar, tidak mempengaruhi tinggi header) -->
+                    <div class="absolute bg-[#118AB2] rounded-full w-14 h-14 -z-0"></div>
 
-            <!-- Logo ALBATROSS -->
-            <div class="relative flex items-center justify-center">
-                <!-- Shape Bulat Biru (Ukuran lebih besar, tidak mempengaruhi tinggi header) -->
-                <div class="absolute bg-[#118AB2] rounded-full w-14 h-14 -z-0"></div>
+                    <!-- Tombol Logo (Tetap menentukan ukuran utama di header) -->
+                    <a href="#" id="logo-btn"
+                        class="relative z-10 flex items-center justify-center transition-transform hover:scale-105">
+                        <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="h-12 w-auto object-contain">
+                    </a>
+                </div>
 
-                <!-- Tombol Logo (Tetap menentukan ukuran utama di header) -->
-                <a href="#" id="logo-btn"
-                    class="relative z-10 flex items-center justify-center transition-transform hover:scale-105">
-                    <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="h-12 w-auto object-contain">
-                </a>
+                <!-- Container Kanan -->
+                <div class="flex items-center space-x-3">
+
+                    <ul id="nav-links"
+                        class="hidden md:flex items-center space-x-2 sm:space-x-3 text-xs sm:text-sm font-semibold tracking-wider sm:tracking-widest uppercase transition-all duration-300 py-1 font-inter">
+
+                        <li>
+                            <a href="index.html"
+                                class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
+                                BERANDA
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="tentang kami.html"
+                                class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
+                                TENTANG KAMI
+                            </a>
+                        </li>
+
+                        <!-- Dropdown ALAT -->
+                        <li class="relative group" id="alat-dropdown">
+
+                            <button id="alat-btn" type="button"
+                                class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+                                ALAT
+                            </button>
+
+                            <div id="alat-menu"
+                                class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
+
+                                <a href="alat alba.html"
+                                    class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                    Alat Alba
+                                </a>
+
+                                <a href="alat bat.html"
+                                    class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                    Alat Bat
+                                </a>
+
+                                <a href="alat tross.html"
+                                    class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">
+                                    Alat Tross
+                                </a>
+
+                            </div>
+                        </li>
+
+                        <!-- Dropdown DATA -->
+                        <li class="relative group" id="data-dropdown">
+
+                            <button id="data-btn" type="button"
+                                class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+                                DATA
+                            </button>
+
+                            <div id="data-menu"
+                                class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
+
+                                <a href="data pemetaan.html"
+                                    class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                    Data Pemetaan
+                                </a>
+
+                                <a href="data alba.html"
+                                    class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                    Data Alba
+                                </a>
+
+                                <a href="data bat.html"
+                                    class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                    Data Bat
+                                </a>
+
+                                <a href="data tross.html"
+                                    class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">
+                                    Data Tross
+                                </a>
+
+                            </div>
+                        </li>
+
+                    </ul>
+
+                    <!-- Tombol Mobile -->
+                    <button id="mobile-toggle-btn" class="md:hidden text-2xl p-2 transition-colors focus:outline-none"
+                        aria-label="Buka menu navigasi">
+                        <i id="toggle-icon" class="fas fa-bars"></i>
+                    </button>
+                </div>
             </div>
 
-            <!-- Container Kanan -->
-            <div class="flex items-center space-x-3">
-
-                <ul id="nav-links"
-                    class="hidden md:flex items-center space-x-2 sm:space-x-3 text-xs sm:text-sm font-semibold tracking-wider sm:tracking-widest uppercase transition-all duration-300 py-1 font-inter">
-
-                    <li>
-                        <a href="index.html"
-                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
-                            BERANDA
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="tentang kami.html"
-                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
-                            TENTANG KAMI
-                        </a>
-                    </li>
-
-                    <!-- Dropdown ALAT -->
-                    <li class="relative group" id="alat-dropdown">
-
-                        <button id="alat-btn" type="button"
-                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+            <!-- Menu Mobile -->
+            <div id="mobile-menu" class="hidden md:hidden bg-white mt-4 rounded-xl shadow-lg p-4">
+                <div class="flex flex-col space-y-2 text-sm font-semibold text-[#118AB2]">
+                    <a href="index.html" class="px-4 py-3 rounded-lg hover:bg-brand-lightCyan">
+                        BERANDA
+                    </a>
+                    <a href="tentang kami.html" class="px-4 py-3 rounded-lg hover:bg-brand-lightCyan">
+                        TENTANG KAMI
+                    </a>
+                    <div class="border-t border-gray-100 pt-2">
+                        <p class="px-4 py-2 text-xs text-gray-400">
                             ALAT
-                        </button>
+                        </p>
+                        <a href="alat alba.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                            Alat Alba
+                        </a>
+                        <a href="alat bat.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                            Alat BAT
+                        </a>
+                        <a href="alat tross.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                            Alat TROSS
+                        </a>
+                    </div>
 
-                        <div id="alat-menu"
-                            class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
-
-                            <a href="alat alba.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
-                                Alat Alba
-                            </a>
-
-                            <a href="alat bat.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
-                                Alat Bat
-                            </a>
-
-                            <a href="alat tross.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">
-                                Alat Tross
-                            </a>
-
-                        </div>
-                    </li>
-
-                    <!-- Dropdown DATA -->
-                    <li class="relative group" id="data-dropdown">
-
-                        <button id="data-btn" type="button"
-                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+                    <div class="border-t border-gray-100 pt-2">
+                        <p class="px-4 py-2 text-xs text-gray-400">
                             DATA
-                        </button>
-
-                        <div id="data-menu"
-                            class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
-
-                            <a href="data pemetaan.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
-                                Data Pemetaan
-                            </a>
-
-                            <a href="data alba.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
-                                Data Alba
-                            </a>
-
-                            <a href="data bat.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
-                                Data Bat
-                            </a>
-
-                            <a href="data tross.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">
-                                Data Tross
-                            </a>
-
-                        </div>
-                    </li>
-
-                </ul>
-
-                <!-- Tombol Mobile -->
-                <button id="mobile-toggle-btn" class="md:hidden text-2xl p-2 transition-colors focus:outline-none"
-                    aria-label="Buka menu navigasi">
-                    <i id="toggle-icon" class="fas fa-bars"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Menu Mobile -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white mt-4 rounded-xl shadow-lg p-4">
-            <div class="flex flex-col space-y-2 text-sm font-semibold text-[#118AB2]">
-                <a href="index.html" class="px-4 py-3 rounded-lg hover:bg-brand-lightCyan">
-                    BERANDA
-                </a>
-                <a href="tentang kami.html" class="px-4 py-3 rounded-lg hover:bg-brand-lightCyan">
-                    TENTANG KAMI
-                </a>
-                <div class="border-t border-gray-100 pt-2">
-                    <p class="px-4 py-2 text-xs text-gray-400">
-                        ALAT
-                    </p>
-                    <a href="alat alba.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Alat Alba
-                    </a>
-                    <a href="alat bat.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Alat BAT
-                    </a>
-                    <a href="alat tross.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Alat TROSS
-                    </a>
-                </div>
-
-                <div class="border-t border-gray-100 pt-2">
-                    <p class="px-4 py-2 text-xs text-gray-400">
-                        DATA
-                    </p>
-                    <a href="data pemetaan.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Data Pemetaan
-                    </a>
-                    <a href="data alba.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Data Alba
-                    </a>
-                    <a href="data bat.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Data Bat
-                    </a>
-                    <a href="data tross.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Data Tross
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-
-
-    <!-- Hero Banner -->
-    <section class="bg-brand-tealBg text-white px-6 sm:px-8 pt-28 pb-10 shadow-inner min-h-[350px]">
-
-        <div class="max-w-6xl mx-auto w-full space-y-4">
-
-            <!-- Breadcrumbs -->
-            <nav class="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-cyan-100 font-medium font-inter">
-
-                <a href="index.html" class="hover:underline flex items-center gap-1">
-                    <i class="fa-solid fa-house text-xs"></i>
-                    Beranda
-                </a>
-
-                <span>&gt;</span>
-
-                <a href="data.html" class="hover:underline">
-                    Data
-                </a>
-
-                <span>&gt;</span>
-
-                <span class="text-white font-semibold">
-                    Data BAT
-                </span>
-
-            </nav>
-
-            <!-- Title -->
-            <div class="flex items-center gap-3 pt-2">
-
-                <i class="fa-solid fa-chart-line text-3xl sm:text-4xl"></i>
-
-                <h1 class="text-3xl sm:text-4xl font-bold tracking-wide font-anta">
-                    Data BAT
-                </h1>
-
-            </div>
-
-            <!-- Description -->
-            <p class="text-sm sm:text-base text-cyan-50 max-w-3xl leading-relaxed font-normal font-inter">
-
-                Visualisasi pergerakan River Drifter untuk menggambarkan estimasi kecepatan dan arah arus permukaan
-                berdasarkan perubahan posisi terhadap waktu.
-
-            </p>
-
-            <!-- Action Badges / Status Pill -->
-            <div class="pt-4">
-                <div class="inline-flex items-center bg-white rounded-full py-1.5 px-2 shadow-sm border-[1.5px] border-[#434b6e]">
-                    <!-- Status Kiri -->
-                    <div class="flex items-center space-x-2 px-3">
-                        <div class="w-4 h-4 rounded-full bg-gray-400"></div>
-                        <span class="font-bold text-[#434b6e] text-sm">Tidak online</span>
-                    </div>
-                    <!-- Status Kanan -->
-                    <div class="flex items-center space-x-2 pr-4 pl-2">
-                        <div class="w-5 h-5 rounded-full bg-[#434b6e] flex items-center justify-center">
-                            <i class="fa-solid fa-chart-line text-white text-[10px]"></i>
-                        </div>
-                        <span class="font-bold text-[#434b6e] text-sm">Data non-real-time</span>
+                        </p>
+                        <a href="data pemetaan.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                            Data Pemetaan
+                        </a>
+                        <a href="data alba.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                            Data Alba
+                        </a>
+                        <a href="data bat.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                            Data Bat
+                        </a>
+                        <a href="data tross.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                            Data Tross
+                        </a>
                     </div>
                 </div>
             </div>
+        </nav>
 
-        </div>
+        <!-- Hero Banner -->
+        <section class="bg-brand-tealBg text-white py-28 px-8 sm:px-6 lg:px-8 shadow-inner" style="height: 350px;">
+            <div class="max-w-6xl mx-auto space-y-4">
 
-    </section>
+                <!-- Breadcrumbs -->
+                <nav class="flex items-center space-x-2 text-xs sm:text-sm text-cyan-100 font-medium font-inter">
+                    <a href="index.html" class="hover:underline flex items-center gap-1">
+                        <i class="fa-solid fa-house text-xs"></i> Beranda
+                    </a>
+                    <span>&gt;</span>
+                    <a href="data.html" class="hover:underline">Data</a>
+                    <span>&gt;</span>
+                    <span class="text-white font-semibold">Data TROSS</span>
+                </nav>
 
+                <!-- Title with Camera Icon -->
+                <div class="flex items-center space-x-3 pt-2">
+                    <div class="text-3xl sm:text-4xl">
+                        <i class="fa-solid fa-camera"></i>
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl font-bold tracking-wide font-anta">
+                        Data TROSS
+                    </h1>
+                </div>
 
+                <!-- Description -->
+                <p class="text-sm sm:text-base text-cyan-50 max-w-3xl leading-relaxed font-normal font-inter">
+                    Dokumentasi foto dan video yang ter-update secara otomatis pada saat terdapat pergerakan yang
+                    terdeteksi.
+                </p>
 
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow">
+                <!-- Action Badges / Status Pill -->
+                <div class="pt-4">
+                    <div
+                        class="inline-flex items-center bg-white rounded-full py-1.5 px-2 shadow-sm border-[1.5px] border-[#434b6e]">
+                        <!-- Status Kiri -->
+                        <div class="flex items-center space-x-2 px-3">
+                            <!-- Container relatif untuk posisi bulatan kedap-kedip -->
+                            <div class="relative flex h-3 w-3 items-center justify-center">
+                                <!-- Bulatan luar yang mengembang (Ping effect) -->
+                                <span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#118AB2] opacity-75"></span>
+                                <!-- Bulatan inti di tengah -->
+                                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#118AB2]"></span>
+                            </div>
+                            <span class="font-bold text-[#434b6e] text-sm">Online</span>
+                        </div>
 
-        <!-- Ringkasan Data -->
-        <section class="mb-12">
-
-            <div class="text-center mb-8">
-
-                <h2 class="text-2xl sm:text-3xl font-bold text-brand-darkText font-anta">
-                    Ringkasan Data
-                </h2>
-
+                        <!-- Status Kanan -->
+                        <div class="flex items-center space-x-2 pr-4 pl-2">
+                            <div class="w-5 h-5 rounded-full bg-[#434b6e] flex items-center justify-center">
+                                <i class="fa-solid fa-chart-line text-white text-[10px]"></i>
+                            </div>
+                            <span class="font-bold text-[#434b6e] text-sm">Data <i>real-time</i></span>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-
-                <!-- Durasi Pengamatan -->
-                <div class="stat-card stat-duration p-6">
-
-                    <div class="flex items-center justify-between mb-4">
-
-                        <div class="stat-icon">
-                            <i class="fa-regular fa-clock"></i>
-                        </div>
-
-                        <span class="text-xs font-semibold px-3 py-1 rounded-full">
-                            Durasi
-                        </span>
-
-                    </div>
-
-                    <p class="text-sm text-gray-500 mb-1">
-                        Durasi Pengamatan
-                    </p>
-
-                    <p id="duration-value" class="stat-value text-2xl">
-                        2 jam 00 menit
-                    </p>
-
-                </div>
-
-
-
-                <!-- Jarak Tempuh -->
-                <div class="stat-card stat-distance p-6">
-
-                    <div class="flex items-center justify-between mb-4">
-
-                        <div class="stat-icon">
-                            <i class="fa-solid fa-route"></i>
-                        </div>
-
-                        <span class="text-xs font-semibold px-3 py-1 rounded-full">
-                            Jarak
-                        </span>
-
-                    </div>
-
-                    <p class="text-sm text-gray-500 mb-1">
-                        Total Jarak Tempuh
-                    </p>
-
-                    <p id="distance-value" class="stat-value text-2xl">
-                        1,25 km
-                    </p>
-
-                </div>
-
-
-
-                <!-- Kecepatan Rata-rata -->
-                <div class="stat-card stat-speed p-6">
-
-                    <div class="flex items-center justify-between mb-4">
-
-                        <div class="stat-icon">
-                            <i class="fa-solid fa-gauge-high"></i>
-                        </div>
-
-                        <span class="text-xs font-semibold px-3 py-1 rounded-full">
-                            Kecepatan
-                        </span>
-
-                    </div>
-
-                    <p class="text-sm text-gray-500 mb-1">
-                        Kecepatan Rata-rata
-                    </p>
-
-                    <p id="average-value" class="stat-value text-2xl">
-                        0,17 m/s
-                    </p>
-
-                </div>
-
-
-
-                <!-- Titik Pengamatan -->
-                <div class="stat-card stat-points p-6">
-
-                    <div class="flex items-center justify-between mb-4">
-
-                        <div class="stat-icon">
-                            <i class="fa-solid fa-location-dot"></i>
-                        </div>
-
-                        <span class="text-xs font-semibold px-3 py-1 rounded-full">
-                            Rekaman
-                        </span>
-
-                    </div>
-
-                    <p class="text-sm text-gray-500 mb-1">
-                        Jumlah Titik Pengamatan
-                    </p>
-
-                    <p id="points-value" class="stat-value text-2xl">
-                        25 titik
-                    </p>
-
-                </div>
-
-            </div>
-
         </section>
 
-
-
-        <!-- Pemetaan Jalur Drifter -->
-        <section class="mb-12">
-
+        <!-- Main Content: Slot Foto & Video Terbaru -->
+        <main class="max-w-6xl mx-auto px-4 sm:px-8 py-8">
             <div class="text-center mb-8">
-
-                <h2 class="text-2xl sm:text-3xl font-bold text-brand-darkText font-anta">
-                    Pemetaan Jalur Drifter
-                </h2>
-
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-800 font-anta">Dokumentasi Terkini</h2>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1 font-inter">Menampilkan tangkapan foto dan rekaman
+                    video paling
+                    baru dari sensor Trapcam</p>
             </div>
 
-            <div class="bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-3 sm:p-5">
+            <!-- Container 2 Slot Placeholder -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 font-inter">
 
-                <!-- Legenda Peta -->
-                <div class="flex flex-wrap items-center gap-x-6 gap-y-3 px-2 py-3 text-xs sm:text-sm text-gray-600">
+                <!-- SLOT 1: CAROUSEL FOTO DETEKSI -->
+                <div
+                    class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-5 flex flex-col justify-between relative group">
+                    <div>
+                        <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
+                            <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2 font-anta">
+                                <i class="fa-solid fa-images text-cyan-600"></i> Galeri Foto Deteksi
+                            </h3>
+                            <span id="badge-photo-status"
+                                class="text-[10px] bg-slate-100 text-slate-500 font-bold px-2 py-1 rounded">MENUNGGU
+                                DETEKSI</span>
+                        </div>
 
-                    <div class="flex items-center gap-2">
+                        <!-- Area Display Carousel Foto -->
+                        <div class="relative w-full rounded-xl bg-slate-900 overflow-hidden">
+                            <!-- Container Scroll Foto -->
+                            <div id="photo-carousel-container"
+                                class="flex overflow-x-auto snap-x snap-mandatory no-scrollbar scroll-smooth w-full aspect-video">
 
-                        <span class="w-3 h-3 rounded-full bg-green-500 border-2 border-white shadow"></span>
+                                <!-- Placeholder Kosong Foto (Akan disembunyikan saat foto pertama masuk) -->
+                                <div id="slot-photo-placeholder"
+                                    class="w-full flex-shrink-0 snap-center flex flex-col items-center justify-center p-4 text-center">
+                                    <i class="fa-solid fa-camera text-4xl text-slate-600 mb-2"></i>
+                                    <p class="text-xs text-slate-400">Belum ada tangkapan foto dari Trapcam</p>
+                                </div>
 
-                        <span>Titik deploy</span>
+                            </div>
 
+                            <!-- Tombol Navigasi Geser Kiri & Kanan -->
+                            <button id="btn-prev-photo" onclick="scrollPhotoCarousel(-1)"
+                                class="hidden absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white w-8 h-8 rounded-full items-center justify-center backdrop-blur transition z-10">
+                                <i class="fa-solid fa-chevron-left text-xs"></i>
+                            </button>
+                            <button id="btn-next-photo" onclick="scrollPhotoCarousel(1)"
+                                class="hidden absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white w-8 h-8 rounded-full items-center justify-center backdrop-blur transition z-10">
+                                <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+                        </div>
                     </div>
 
-                    <div class="flex items-center gap-2">
-
-                        <span class="w-3 h-3 rounded-full bg-red-500 border-2 border-white shadow"></span>
-
-                        <span>Posisi terakhir</span>
-
+                    <!-- Metadata Foto -->
+                    <div
+                        class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <span id="photo-cam-name" class="font-medium">Kamera: -</span>
+                        <span id="photo-time" class="text-slate-400">Waktu: -</span>
                     </div>
-
-                    <div class="flex items-center gap-2">
-
-                        <span class="w-7 h-1 rounded-full bg-[#008ba3]"></span>
-
-                        <span>Jalur simulasi</span>
-
-                    </div>
-
                 </div>
 
-                <!-- Peta -->
-                <div id="drifter-map"
-                    class="w-full h-[400px] sm:h-[500px] rounded-xl overflow-hidden border border-gray-200">
-                </div>
+                <!-- SLOT 2: VIDEO TERBARU -->
+                <div class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
+                            <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2 font-anta">
+                                <i class="fa-solid fa-video text-red-600"></i> Rekaman Video Terbaru
+                            </h3>
+                            <span id="badge-video-status"
+                                class="text-[10px] bg-slate-100 text-slate-500 font-bold px-2 py-1 rounded">MENUNGGU
+                                DETEKSI</span>
+                        </div>
 
+                        <!-- Tampilan Video -->
+                        <div
+                            class="relative aspect-video w-full rounded-xl bg-slate-900 overflow-hidden flex items-center justify-center">
+                            <video id="slot-video-player" controls class="hidden w-full h-full object-cover">
+                                <source id="slot-video-source" src="" type="video/mp4">
+                                Browser Anda tidak mendukung elemen video.
+                            </video>
+
+                            <!-- Placeholder Kosong Video -->
+                            <div id="slot-video-placeholder" class="text-center p-4">
+                                <i class="fa-solid fa-film text-4xl text-slate-600 mb-2"></i>
+                                <p class="text-xs text-slate-400">Belum ada rekaman video dari Trapcam</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Metadata Video -->
+                    <div
+                        class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <span id="video-cam-name" class="font-medium">Kamera: -</span>
+                        <span id="video-time" class="text-slate-400">Waktu: -</span>
+                    </div>
+                </div>
             </div>
+        </main>
+    </div>
 
-        </section>
+    <!-- Toast Notification Element -->
+    <div id="toast"
+        class="fixed bottom-5 right-5 bg-slate-800 text-white text-xs px-4 py-3 rounded-xl shadow-2xl transition-all duration-300 transform translate-y-20 opacity-0 z-50 flex items-center gap-2">
+        <i class="fa-solid fa-bell text-cyan-400"></i>
+        <span id="toast-msg">Notifikasi</span>
+    </div>
 
+    <!-- Script Logika Update Real-Time & Simulasi Carousel -->
+    <script>
+        const SERVER_URL = 'http://localhost:3000';
+        let isFirstPhotoAdded = false;
 
+        // FUNGSI UTAMA: Update Slot Foto / Video Saat Ada Gerakan Terdeteksi
+        function updateTrapcamData(data) {
+            const isVideo = data.type === 'video' || (data.imageUrl && data.imageUrl.match(/\.(mp4|webm|ogg)$/i));
+            const fileUrl = data.imageUrl.startsWith('http') ? data.imageUrl : SERVER_URL + data.imageUrl;
+            const cameraName = data.cameraId || 'Trapcam #1';
+            const timeString = data.timestamp || new Date().toLocaleTimeString('id-ID');
 
-        <!-- Grafik Kecepatan dan Metode Pengamatan -->
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-4 items-stretch">
+            if (isVideo) {
+                // --- Update Slot Video ---
+                const videoPlayer = document.getElementById('slot-video-player');
+                const videoSource = document.getElementById('slot-video-source');
+                const videoPlaceholder = document.getElementById('slot-video-placeholder');
+                const badgeVideo = document.getElementById('badge-video-status');
 
-            <!-- Grafik Kecepatan -->
-            <div
-                class="bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-4 sm:p-5 h-full flex flex-col">
+                videoSource.src = fileUrl;
+                videoPlayer.load();
+                videoPlayer.classList.remove('hidden');
+                videoPlaceholder.classList.add('hidden');
 
-                <div class="text-center mb-5">
+                badgeVideo.innerText = 'TERBARU (REKAMAN)';
+                badgeVideo.className = 'text-[10px] bg-red-100 text-red-600 font-bold px-2 py-1 rounded animate-pulse';
 
-                    <h2 class="text-xl sm:text-2xl font-bold text-brand-darkText font-anta">
-                        Grafik Kecepatan Pergerakan Drifter
-                    </h2>
+                document.getElementById('video-cam-name').innerText = `Kamera: ${cameraName}`;
+                document.getElementById('video-time').innerText = `Deteksi: ${timeString}`;
 
-                </div>
+                showToast(`🎥 Rekaman video baru terdeteksi oleh ${cameraName}!`);
 
-                <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+            } else {
+                // --- Update Slot Foto (Carousel / Multi-Foto) ---
+                const carousel = document.getElementById('photo-carousel-container');
+                const placeholder = document.getElementById('slot-photo-placeholder');
+                const badgePhoto = document.getElementById('badge-photo-status');
+                const btnPrev = document.getElementById('btn-prev-photo');
+                const btnNext = document.getElementById('btn-next-photo');
 
-                    <div class="flex items-center gap-2 text-sm font-semibold text-brand-darkText">
+                // Sembunyikan placeholder pertama kali foto masuk
+                if (!isFirstPhotoAdded) {
+                    if (placeholder) placeholder.remove();
+                    btnPrev.classList.remove('hidden');
+                    btnPrev.classList.add('flex');
+                    btnNext.classList.remove('hidden');
+                    btnNext.classList.add('flex');
+                    isFirstPhotoAdded = true;
+                }
 
-                        <span class="w-3 h-3 rounded-full bg-brand-cyan"></span>
+                // Buat elemen slide foto baru
+                const newSlide = document.createElement('div');
+                newSlide.className = 'w-full h-full flex-shrink-0 snap-center relative';
+                newSlide.dataset.camera = cameraName;
+                newSlide.dataset.time = timeString;
 
-                        Kecepatan (m/s)
-
-                    </div>
-
-                    <span class="text-xs text-gray-400">
-                        Interval: 5 menit
+                newSlide.innerHTML = `
+                    <img src="${fileUrl}" alt="Foto Deteksi Trapcam" class="w-full h-full object-cover">
+                    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded backdrop-blur">
+                        Baru
                     </span>
+                `;
 
-                </div>
+                // Sisipkan foto terbaru ke posisi paling depan (paling kiri)
+                carousel.insertBefore(newSlide, carousel.firstChild);
 
-                <div class="relative w-full flex-1 min-h-[260px] sm:min-h-[300px]">
+                // Scroll otomatis ke posisi foto paling baru
+                carousel.scrollTo({ left: 0, behavior: 'smooth' });
 
-                    <canvas id="speedChart"></canvas>
+                // Update Badge dan Info Metadata Foto Pertama
+                badgePhoto.innerText = 'TERBARU (FOTO)';
+                badgePhoto.className = 'text-[10px] bg-cyan-100 text-cyan-700 font-bold px-2 py-1 rounded animate-pulse';
 
-                </div>
+                updatePhotoMetadata(cameraName, timeString);
+                showToast(`📸 Foto deteksi baru ditangkap oleh ${cameraName}!`);
+            }
+        }
 
-            </div>
+        // Fungsi Geser Carousel Foto Kiri / Kanan
+        function scrollPhotoCarousel(direction) {
+            const carousel = document.getElementById('photo-carousel-container');
+            const scrollAmount = carousel.clientWidth; // Geser sejauh lebar container
+            carousel.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        }
 
+        // Event Listener untuk meng-update Metadata saat foto di-scroll manual oleh user
+        document.getElementById('photo-carousel-container').addEventListener('scroll', () => {
+            const carousel = document.getElementById('photo-carousel-container');
+            const slides = carousel.querySelectorAll('.snap-center');
 
+            slides.forEach(slide => {
+                const rect = slide.getBoundingClientRect();
+                const carouselRect = carousel.getBoundingClientRect();
 
-            <!-- Metode Pengamatan -->
-            <div
-                class="bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-4 sm:p-5 h-full flex flex-col">
+                // Cek slide mana yang paling banyak terlihat di viewport
+                if (Math.abs(rect.left - carouselRect.left) < carouselRect.width / 2) {
+                    if (slide.dataset.camera && slide.dataset.time) {
+                        updatePhotoMetadata(slide.dataset.camera, slide.dataset.time);
+                    }
+                }
+            });
+        });
 
-                <div class="text-center mb-6">
+        // Helper Update Teks Metadata Foto
+        function updatePhotoMetadata(camera, time) {
+            document.getElementById('photo-cam-name').innerText = `Kamera: ${camera}`;
+            document.getElementById('photo-time').innerText = `Deteksi: ${time}`;
+        }
 
-                    <h2 class="text-xl sm:text-2xl font-bold text-brand-darkText font-anta">
-                        Metode Pengamatan
-                    </h2>
+        // Mendengarkan data real-time dari Socket.IO (Jika Backend terhubung)
+        try {
+            const socket = io(SERVER_URL);
+            socket.on('new_detection', (data) => {
+                updateTrapcamData(data);
+            });
+        } catch (e) {
+            console.log('Mode Offline / Socket server belum dinyalakan.');
+        }
 
-                </div>
+        // Helper Toast Notifikasi
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 3000);
+        }
 
-                <!-- Pendekatan Lagrangian -->
-                <div class="flex items-start gap-3">
+        const mobileToggleBtn = document.getElementById('mobile-toggle-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const toggleIcon = document.getElementById('toggle-icon');
 
-                    <div
-                        class="w-11 h-11 shrink-0 rounded-xl bg-brand-lightCyan flex items-center justify-center text-brand-cyan text-lg">
+        mobileToggleBtn.addEventListener('click', function () {
 
-                        <i class="fa-solid fa-water"></i>
+            mobileMenu.classList.toggle('hidden');
 
-                    </div>
+            if (mobileMenu.classList.contains('hidden')) {
 
-                    <div>
+                toggleIcon.classList.remove('fa-times');
+                toggleIcon.classList.add('fa-bars');
 
-                        <h3 class="text-base font-bold text-brand-darkText mb-2">
-                            Pendekatan Lagrangian
-                        </h3>
+            } else {
 
-                        <p class="text-sm text-gray-600 leading-relaxed text-justify">
+                toggleIcon.classList.remove('fa-bars');
+                toggleIcon.classList.add('fa-times');
 
-                            River Drifter dilepaskan pada titik deploy dan dibiarkan bergerak mengikuti aliran perairan
-                            secara alami. Pergerakannya diamati melalui perekaman koordinat GPS secara berkala untuk
-                            mengetahui perubahan posisi, jarak perpindahan, dan estimasi kecepatan.
+            }
 
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- Perekaman Data -->
-                <div class="flex items-start gap-3 mt-5">
-
-                    <div
-                        class="w-11 h-11 shrink-0 rounded-xl bg-brand-lightCyan flex items-center justify-center text-brand-cyan text-lg">
-
-                        <i class="fa-solid fa-location-dot"></i>
-
-                    </div>
-
-                    <div>
-
-                        <h3 class="text-base font-bold text-brand-darkText mb-2">
-                            Perekaman Posisi GPS
-                        </h3>
-
-                        <p class="text-sm text-gray-600 leading-relaxed text-justify">
-
-                            Data posisi direkam setiap 5 menit. Perubahan koordinat antarperekaman digunakan untuk
-                            menghitung jarak perpindahan drifter selama pengamatan.
-
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- Rumus Kecepatan -->
-                <div class="bg-brand-lightCyan rounded-xl p-4 mt-6">
-
-                    <h4 class="text-sm font-semibold text-brand-darkText text-center mb-3">
-                        Perhitungan Kecepatan
-                    </h4>
-
-                    <p class="text-lg sm:text-xl font-bold text-brand-darkText text-center py-2">
-                        v = Δs / Δt
-                    </p>
-
-                    <div class="border-t border-brand-cyan/20 pt-3 mt-2">
-
-                        <p class="text-xs text-gray-600 text-center leading-relaxed">
-
-                            <span class="font-semibold">v</span> = Kecepatan (m/s)
-
-                            <span class="mx-1">•</span>
-
-                            <span class="font-semibold">Δs</span> = Jarak perpindahan (m)
-
-                            <span class="mx-1">•</span>
-
-                            <span class="font-semibold">Δt</span> = Selang waktu (s)
-
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
+        });
+    </script>
 
     <br>
     <footer class="bg-white px-6 py-10 border-t-[2px] border-[#118AB2]">
@@ -821,8 +581,16 @@
 
                 <!-- Tempat untuk Logo MIT+R -->
                 <div class="w-full flex items-center justify-start">
-                    <!-- Ganti "URL_LOGO_KAMU.png" dengan path/link logo yang sebenarnya -->
-                    <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-24   object-contain">
+                    <!-- Kontainer Lingkaran Background -->
+                    <!-- Atur w-* dan h-* di bawah untuk mengubah ukuran lingkaran -->
+                    <div
+                        class="relative w-28 h-28 rounded-full bg-[#118AB2] flex items-center justify-center overflow-hidden shadow-md">
+
+                        <!-- Logo -->
+                        <!-- Atur h-* / w-* untuk ukuran logo, serta inset / top / left / translate jika ingin geser posisi -->
+                        <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-24 object-contain">
+
+                    </div>
                 </div>
 
                 <!-- Tombol Back to Top -->
@@ -848,625 +616,6 @@
 
         </div>
     </footer>
-
-
-
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-
-
-    <script>
-
-        // ==========================================
-        // NAVBAR MOBILE
-        // ==========================================
-
-        const mobileToggleBtn = document.getElementById('mobile-toggle-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const toggleIcon = document.getElementById('toggle-icon');
-
-        mobileToggleBtn.addEventListener('click', function () {
-
-            mobileMenu.classList.toggle('hidden');
-
-            if (mobileMenu.classList.contains('hidden')) {
-
-                toggleIcon.classList.remove('fa-times');
-                toggleIcon.classList.add('fa-bars');
-
-            } else {
-
-                toggleIcon.classList.remove('fa-bars');
-                toggleIcon.classList.add('fa-times');
-
-            }
-
-        });
-
-
-
-
-
-        // ==========================================
-        // DATA SIMULASI DRIFTER
-        // ==========================================
-
-        /*
-            Koordinat deploy Stasiun 1 ALBA:
-            7°40'32.50" LS
-            108°49'10.35" BT
-
-            Data di bawah merupakan koordinat simulasi.
-            Ganti dengan koordinat GPS hasil pengamatan
-            ketika data asli sudah tersedia.
-        */
-
-        const drifterData = [
-            {
-                time: "08:00",
-                lat: -7.675694,
-                lng: 108.819542
-            },
-            {
-                time: "08:05",
-                lat: -7.669228,
-                lng: 108.826683
-            },
-            {
-                time: "08:10",
-                lat: -7.666444,
-                lng: 108.830939
-            },
-            {
-                time: "08:15",
-                lat: -7.665309,
-                lng: 108.835494
-            },
-            {
-                time: "08:20",
-                lat: -7.663216,
-                lng: 108.841502
-            },
-            {
-                time: "08:25",
-                lat: -7.661267,
-                lng: 108.848828
-            },
-            {
-                time: "08:30",
-                lat: -7.662660,
-                lng: 108.857311
-            },
-            {
-                time: "08:35",
-                lat: -7.668329,
-                lng: 108.862923
-            },
-            {
-                time: "08:40",
-                lat: -7.677056,
-                lng: 108.868661
-            },
-            {
-                time: "08:45",
-                lat: -7.683345,
-                lng: 108.868088
-            },
-            {
-                time: "08:50",
-                lat: -7.688700,
-                lng: 108.868558
-            },
-            {
-                time: "08:55",
-                lat: -7.691153,
-                lng: 108.870114
-            },
-            {
-                time: "09:00",
-                lat: -7.694920,
-                lng: 108.875014
-            },
-            {
-                time: "09:05",
-                lat: -7.696842,
-                lng: 108.880679
-            },
-            {
-                time: "09:10",
-                lat: -7.696344,
-                lng: 108.884753
-            }
-        ];
-
-
-
-
-
-        // ==========================================
-        // PERHITUNGAN JARAK DAN KECEPATAN
-        // ==========================================
-
-        function calculateDistance(lat1, lon1, lat2, lon2) {
-
-            const R = 6371000;
-
-            const toRad = degree => degree * Math.PI / 180;
-
-            const dLat = toRad(lat2 - lat1);
-            const dLon = toRad(lon2 - lon1);
-
-            const a =
-                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
-                Math.sin(dLon / 2) * Math.sin(dLon / 2);
-
-            const c = 2 * Math.atan2(
-                Math.sqrt(a),
-                Math.sqrt(1 - a)
-            );
-
-            return R * c;
-
-        }
-
-
-
-
-
-        const intervalMinutes = 5;
-        const intervalSeconds = intervalMinutes * 60;
-
-        const speeds = [];
-        let totalDistance = 0;
-
-        for (let i = 1; i < drifterData.length; i++) {
-
-            const previous = drifterData[i - 1];
-            const current = drifterData[i];
-
-            const distance = calculateDistance(
-                previous.lat,
-                previous.lng,
-                current.lat,
-                current.lng
-            );
-
-            const speed = distance / intervalSeconds;
-
-            totalDistance += distance;
-            speeds.push(speed);
-
-        }
-
-
-
-
-
-        const averageSpeed = totalDistance /
-            ((drifterData.length - 1) * intervalSeconds);
-
-        const totalMinutes =
-            (drifterData.length - 1) * intervalMinutes;
-
-        const hours = Math.floor(totalMinutes / 60);
-        const minutes = totalMinutes % 60;
-
-
-
-
-
-        // ==========================================
-        // MEMPERBARUI KARTU RINGKASAN
-        // ==========================================
-
-        document.getElementById('duration-value').textContent =
-            `${hours} jam ${String(minutes).padStart(2, '0')} menit`;
-
-        document.getElementById('distance-value').textContent =
-            `${(totalDistance / 1000).toFixed(2).replace('.', ',')} km`;
-
-        document.getElementById('average-value').textContent =
-            `${averageSpeed.toFixed(2).replace('.', ',')} m/s`;
-
-        document.getElementById('points-value').textContent =
-            `${drifterData.length} titik`;
-
-
-
-
-
-        // ==========================================
-        // PETA INTERAKTIF LEAFLET
-        // ==========================================
-
-        const map = L.map('drifter-map').setView(
-            [-7.68488, 108.82915],
-            13
-        );
-
-
-
-
-
-        // Citra satelit Esri World Imagery
-        const satelliteLayer = L.tileLayer(
-            'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-            {
-                attribution: 'Tiles &copy; Esri',
-                maxZoom: 19
-            }
-        );
-
-
-
-
-
-        // Tampilkan citra satelit
-        satelliteLayer.addTo(map);
-
-
-
-
-
-        // ==========================================
-        // PENANDA TITIK DEPLOY DAN POSISI TERAKHIR
-        // ==========================================
-
-        // Ikon titik deploy
-        const deployIcon = L.divIcon({
-
-            className: '',
-
-            html: `
-                <div style="
-                    width: 18px;
-                    height: 18px;
-                    background: #22c55e;
-                    border: 3px solid white;
-                    border-radius: 50%;
-                    box-shadow: 0 2px 6px rgba(0,0,0,0.35);
-                "></div>
-            `,
-
-            iconSize: [18, 18],
-            iconAnchor: [9, 9]
-
-        });
-
-
-
-
-
-        // Ikon titik terakhir
-        const lastIcon = L.divIcon({
-
-            className: '',
-
-            html: `
-                <div style="
-                    width: 18px;
-                    height: 18px;
-                    background: #ef4444;
-                    border: 3px solid white;
-                    border-radius: 50%;
-                    box-shadow: 0 2px 6px rgba(0,0,0,0.35);
-                "></div>
-            `,
-
-            iconSize: [18, 18],
-            iconAnchor: [9, 9]
-
-        });
-
-
-
-
-
-        const startPoint = drifterData[0];
-        const endPoint = drifterData[drifterData.length - 1];
-
-
-
-
-
-        // Marker titik deploy
-        L.marker(
-            [startPoint.lat, startPoint.lng],
-            { icon: deployIcon }
-        )
-            .addTo(map)
-            .bindPopup(`
-                <strong>Titik Deploy</strong><br>
-                Stasiun 1 ALBA<br>
-                Waktu: ${startPoint.time}
-            `);
-
-
-
-
-
-        // Marker posisi terakhir
-        L.marker(
-            [endPoint.lat, endPoint.lng],
-            { icon: lastIcon }
-        )
-            .addTo(map)
-            .bindPopup(`
-                <strong>Posisi Terakhir</strong><br>
-                Waktu: ${endPoint.time}<br>
-                Data simulasi
-            `);
-
-
-
-
-
-        // ==========================================
-        // JALUR PERGERAKAN DRIFTER
-        // ==========================================
-
-        const routeCoordinates = drifterData.map(point => [
-            point.lat,
-            point.lng
-        ]);
-
-
-
-
-
-        const routeLine = L.polyline(routeCoordinates, {
-
-            color: '#008ba3',
-            weight: 4,
-            opacity: 0.85,
-            lineCap: 'round',
-            lineJoin: 'round'
-
-        }).addTo(map);
-
-
-
-
-
-        // ==========================================
-        // MARKER TITIK PENGAMBILAN DATA
-        // ==========================================
-
-        drifterData.forEach((point, index) => {
-
-            const dataMarker = L.circleMarker(
-                [point.lat, point.lng],
-                {
-                    radius: 6,
-                    color: '#ffffff',
-                    weight: 2,
-                    fillColor: '#facc15',
-                    fillOpacity: 1
-                }
-            ).addTo(map);
-
-            dataMarker.bindPopup(`
-                <div style="font-family: Arial, sans-serif; line-height: 1.6;">
-                    <strong>Titik Pengambilan Data ${index + 1}</strong><br>
-                    Waktu: ${point.time}<br>
-                    Latitude: ${point.lat}<br>
-                    Longitude: ${point.lng}<br>
-                    <span style="color: #16a34a; font-weight: bold;">
-                        Data berhasil disimulasikan
-                    </span>
-                </div>
-            `);
-
-            dataMarker.bindTooltip(`Titik ${index + 1}`, {
-                permanent: true,
-                direction: 'top',
-                offset: [0, -7],
-                className: 'data-point-label'
-            });
-
-        });
-
-
-
-
-
-        // Menyesuaikan tampilan peta dengan jalur
-        map.fitBounds(routeLine.getBounds(), {
-            padding: [35, 35]
-        });
-
-
-
-
-
-        // ==========================================
-        // GRAFIK KECEPATAN
-        // ==========================================
-
-        const speedLabels = drifterData
-            .slice(1)
-            .map(point => point.time);
-
-
-
-
-
-        const speedValues = speeds.map(speed =>
-            Number(speed.toFixed(3))
-        );
-
-
-
-
-
-        const chartContext = document
-            .getElementById('speedChart')
-            .getContext('2d');
-
-
-
-
-
-        new Chart(chartContext, {
-
-            type: 'line',
-
-            data: {
-
-                labels: speedLabels,
-
-                datasets: [{
-
-                    label: 'Kecepatan (m/s)',
-                    data: speedValues,
-
-                    borderColor: '#008ba3',
-                    backgroundColor: 'rgba(0, 139, 163, 0.12)',
-
-                    borderWidth: 2.5,
-
-                    pointRadius: 3,
-                    pointHoverRadius: 6,
-
-                    pointBackgroundColor: '#008ba3',
-                    pointBorderColor: '#ffffff',
-                    pointBorderWidth: 1.5,
-
-                    fill: true,
-                    tension: 0.35
-
-                }]
-
-            },
-
-            options: {
-
-                responsive: true,
-                maintainAspectRatio: false,
-
-                interaction: {
-                    intersect: false,
-                    mode: 'index'
-                },
-
-                plugins: {
-
-                    legend: {
-                        display: false
-                    },
-
-                    tooltip: {
-
-                        backgroundColor: '#2d3757',
-
-                        titleFont: {
-                            family: 'Inter',
-                            size: 12
-                        },
-
-                        bodyFont: {
-                            family: 'Inter',
-                            size: 12
-                        },
-
-                        padding: 12,
-                        displayColors: false,
-
-                        callbacks: {
-
-                            label: function (context) {
-
-                                return `Kecepatan: ${context.parsed.y.toFixed(3)} m/s`;
-
-                            }
-
-                        }
-
-                    }
-
-                },
-
-                scales: {
-
-                    x: {
-
-                        title: {
-
-                            display: true,
-                            text: 'Waktu Pengamatan',
-                            color: '#6b7280',
-
-                            font: {
-                                family: 'Inter',
-                                size: 12,
-                                weight: '600'
-                            }
-
-                        },
-
-                        grid: {
-                            display: false
-                        },
-
-                        ticks: {
-
-                            color: '#6b7280',
-                            maxTicksLimit: 8,
-
-                            font: {
-                                family: 'Inter',
-                                size: 11
-                            }
-
-                        }
-
-                    },
-
-                    y: {
-
-                        beginAtZero: true,
-
-                        title: {
-
-                            display: true,
-                            text: 'Kecepatan (m/s)',
-                            color: '#6b7280',
-
-                            font: {
-                                family: 'Inter',
-                                size: 12,
-                                weight: '600'
-                            }
-
-                        },
-
-                        grid: {
-                            color: '#edf2f7'
-                        },
-
-                        ticks: {
-
-                            color: '#6b7280',
-
-                            font: {
-                                family: 'Inter',
-                                size: 11
-                            }
-
-                        }
-
-                    }
-
-                }
-
-            }
-
-        });
-
-    </script>
-
 </body>
 
 </html>
