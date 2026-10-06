@@ -496,12 +496,12 @@
         </div>
     </section>
 
-    <footer class="bg-white px-6 py-10 border-t-[2px] border-[#118AB2]">
+   <footer class="bg-[#118AB2] px-6 py-10 border-t-[2px] border-[#118AB2]">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
 
             <!-- Kolom 1 (Dibuat lebih lebar/span 2): Lokasi, Email, dan WhatsApp -->
-            <div class="md:col-span-2 flex flex-col gap-4 text-[#118AB2]">
-                <h3 class="font-bold text-xl mb-2">Our Contact</h3>
+            <div class="md:col-span-2 flex flex-col gap-4 text-white">
+                <h3 class="font-bold text-xl mb-2">Kontak Kami</h3>
 
                 <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9"
                     class="flex items-start gap-3 hover:text-[#464b71] transition">
@@ -522,44 +522,34 @@
             </div>
 
             <!-- Kolom 2: Sosial Media -->
-            <div class="flex flex-col gap-4 text-[#118AB2]">
-                <h3 class="font-bold text-xl mb-2">Social Media</h3>
+            <div class="flex flex-col gap-4 text-white">
+                <h3 class="font-bold text-xl mb-2">Media Sosial</h3>
 
-                <a href="https://www.instagram.com/mitr_ipb/"
+                <a href="https://www.instagram.com/dmitr6teen/"
                     class="flex items-center gap-3 hover:text-[#464b71] transition">
                     <i class="fa-brands fa-instagram text-xl"></i>
-                    <span>@mitr_ipb</span>
+                    <span>@dmitr16teen</span>
                 </a>
                 <!-- Kamu bisa tambahkan link LinkedIn atau YouTube di sini jika ada -->
             </div>
 
             <!-- Kolom 3: Logo dan Tombol Back to Top -->
-            <div class="flex flex-col items-start gap-6 text-[#118AB2]">
-                <h3 class="font-bold text-xl mb-2">About Us</h3>
-
+            <div class="flex flex-col items-start gap-7 text-white">
                 <!-- Tempat untuk Logo MIT+R -->
                 <div class="w-full flex items-center justify-start">
-                    <!-- Kontainer Lingkaran Background -->
-                    <!-- Atur w-* dan h-* di bawah untuk mengubah ukuran lingkaran -->
-                    <div
-                        class="relative w-28 h-28 rounded-full bg-[#118AB2] flex items-center justify-center overflow-hidden shadow-md">
-
-                        <!-- Logo -->
-                        <!-- Atur h-* / w-* untuk ukuran logo, serta inset / top / left / translate jika ingin geser posisi -->
-                        <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-24 object-contain">
-
-                    </div>
+                    <!-- Ganti "URL_LOGO_KAMU.png" dengan path/link logo yang sebenarnya -->
+                    <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-56 object-contain">
                 </div>
 
                 <!-- Tombol Back to Top -->
                 <div class="w-full flex justify-end mt-auto">
                     <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-                        class="group flex items-center p-3 bg-[#118AB2] text-white rounded-full shadow-md hover:bg-[#0c6b8a] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
+                        class="group flex items-center p-3 bg-white text-white rounded-full shadow-md hover:bg-[#0c6b8a] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
 
                         <!-- Teks yang Muncul Saat Hover (Sekarang di urutan pertama / sebelah kiri) -->
                         <span
-                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[120px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold">
-                            Back to Top
+                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[160px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold">
+                            Kembali ke Atas
                         </span>
 
                         <!-- Lingkaran Icon Panah (Sekarang di urutan kedua / sebelah kanan) -->
@@ -571,9 +561,25 @@
                     </button>
                 </div>
             </div>
-
         </div>
     </footer>
+
+    <!-- Tambahan kotak/bar kuning diletakkan di LUAR tag footer aslimu -->
+    <div class="w-full relative bg-[#E2F0F3] py-4 px-6 border-t-[1px] border-[#118AB2] overflow-hidden">
+
+        <!-- Pola Pattern di Background -->
+        <div class="absolute inset-0 opacity-15 pointer-events-none"
+            style="background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0l15 15-15 15-15-15zm0 30l15 15-15 15-15-15z' fill='%23118AB2' fill-opacity='0.4' fill-rule='evenodd' /%3E%3C/svg%3E&quot;); background-size: 30px 30px;">
+        </div>
+
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
+
+            <!-- Teks/Hak Cipta di sebelah Kanan -->
+            <div class="text-[#403100] font-semibold text-sm text-center md:text-right">
+                © 2026 Diklat MIT+R 16. All Rights Reserved.
+            </div>
+        </div>
+    </div>
     <script>
         const mobileToggleBtn = document.getElementById('mobile-toggle-btn');
         const mobileMenu = document.getElementById('mobile-menu');
