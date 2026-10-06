@@ -133,7 +133,7 @@
                             class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
 
 
-                             <a href="data pemetaan.html"
+                            <a href="data pemetaan.html"
                                 class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
                                 Data Pemetaan
                             </a>
@@ -270,8 +270,6 @@
                     onerror="this.onerror=null; this.src='https://placehold.co/800x450/0883a4/ffffff?text=Alat+Alba+Boat';">
             </div>
         </div>
-
-        <!-- Grid Container Komponen -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full items-start">
 
             <!-- KOTAK ELEKTRO (KIRI) -->
@@ -282,126 +280,257 @@
 
                 <div
                     class="w-full bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-6 hover:shadow-md transition duration-200 h-full">
+                    <!-- Grid 2 Kolom Kebawah Dinamis -->
                     <div class="grid grid-cols-2 gap-4">
 
                         <!-- Item 1 -->
-                        <div
-                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
-                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
-                                <img src="raspberry.png" alt="Raspberry Pi 4"
-                                    class="max-h-full max-w-full object-contain rounded-lg">
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
+                            tabindex="0">
+                            <img src="raspberry.png" alt="Raspberry Pi 4"
+                                class="max-h-full max-w-full object-contain p-1">
+
+                            <div
+                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
+                                <div
+                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    <p
+                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                        Raspberry Pi 4<br><span class="text-gray-500 font-normal">Model B RAM 4GB</span>
+                                    </p>
+                                    <span
+                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        Single Board Computer (SBC)
+                                    </span>
+                                </div>
+                                <div
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                </div>
                             </div>
-                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
-                                Raspberry Pi 4<br><span class="text-gray-500 font-normal">Model B RAM 4GB</span>
-                            </p>
                         </div>
 
                         <!-- Item 2 -->
-                        <div
-                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
-                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
-                                <img src="sipeed.png" alt="Sipeed Maixcam2"
-                                    class="max-h-full max-w-full object-contain rounded-lg">
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
+                            tabindex="0">
+                            <img src="sipeed.png" alt="Sipeed Maixcam2"
+                                class="max-h-full max-w-full object-contain p-1">
+
+                            <div
+                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
+                                <div
+                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    <p
+                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                        Sipeed Maixcam2 4K AI Visual Camera
+                                    </p>
+                                    <span
+                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        Kamera AI / Modul Visi
+                                    </span>
+                                </div>
+                                <div
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                </div>
                             </div>
-                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
-                                Sipeed Maixcam2 4K AI Visual Camera
-                            </p>
                         </div>
 
                         <!-- Item 3 -->
-                        <div
-                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
-                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
-                                <img src="echo.png" alt="Echo Sounder Mini"
-                                    class="max-h-full max-w-full object-contain rounded-lg">
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
+                            tabindex="0">
+                            <img src="echo.png" alt="Echo Sounder Mini"
+                                class="max-h-full max-w-full object-contain p-1">
+
+                            <div
+                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
+                                <div
+                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    <p
+                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                        <i>Echo Sounder Mini</i><br><span
+                                            class="text-gray-500 font-normal">(A01NYUB)</span>
+                                    </p>
+                                    <span
+                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        Sensor Ultrasonik Jarak
+                                    </span>
+                                </div>
+                                <div
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                </div>
                             </div>
-                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
-                                <i>Echo Sounder Mini</i><br><span class="text-[#118AB2] font-normal">(A01NYUB)</span>
-                            </p>
                         </div>
 
                         <!-- Item 4 -->
-                        <div
-                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
-                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
-                                <img src="turbi.png" alt="Turbidity Sensor"
-                                    class="max-h-full max-w-full object-contain rounded-lg">
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
+                            tabindex="0">
+                            <img src="turbi.png" alt="Turbidity Sensor"
+                                class="max-h-full max-w-full object-contain p-1">
+
+                            <div
+                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
+                                <div
+                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    <p
+                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                        RS485 Water Quality Turbidity Sensor
+                                    </p>
+                                    <span
+                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        Sensor Kekeruhan Air
+                                    </span>
+                                </div>
+                                <div
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                </div>
                             </div>
-                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
-                                RS485 Industrial Water Quality Turbidity Sensor
-                            </p>
                         </div>
 
                         <!-- Item 5 -->
-                        <div
-                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
-                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
-                                <img src="ph.png" alt="pH Sensor"
-                                    class="max-h-full max-w-full object-contain rounded-lg">
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
+                            tabindex="0">
+                            <img src="ph.png" alt="pH Sensor" class="max-h-full max-w-full object-contain p-1">
+
+                            <div
+                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
+                                <div
+                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    <p
+                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                        RS485 Water Quality pH Sensor (IP68)
+                                    </p>
+                                    <span
+                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        Sensor Keasaman (pH)
+                                    </span>
+                                </div>
+                                <div
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                </div>
                             </div>
-                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
-                                RS485 Modbus Water Quality pH Sensor (IP68)
-                            </p>
                         </div>
 
                         <!-- Item 6 -->
-                        <div
-                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
-                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
-                                <img src="salinitas.png" alt="Electrical Conductivity Sensor"
-                                    class="max-h-full max-w-full object-contain rounded-lg">
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
+                            tabindex="0">
+                            <img src="salinitas.png" alt="Electrical Conductivity Sensor"
+                                class="max-h-full max-w-full object-contain p-1">
+
+                            <div
+                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
+                                <div
+                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    <p
+                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                        RS485 Electrical Conductivity Sensor
+                                    </p>
+                                    <span
+                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        Sensor Konduktivitas / Salinitas
+                                    </span>
+                                </div>
+                                <div
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                </div>
                             </div>
-                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
-                                RS485 Industrial-Grade Electrical Conductivity Sensor
-                            </p>
                         </div>
 
                         <!-- Item 7 -->
-                        <div
-                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
-                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
-                                <img src="do.png" alt="Dissolved Oxygen Sensor"
-                                    class="max-h-full max-w-full object-contain rounded-lg">
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
+                            tabindex="0">
+                            <img src="do.png" alt="Electrical Conductivity Sensor"
+                                class="max-h-full max-w-full object-contain p-1">
+
+                            <div
+                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
+                                <div
+                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    <p
+                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                        DFROBOT RS485 Dissolved Oxygen Sensor Sea Water
+                                    </p>
+                                    <span
+                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        Sensor Oksigen Terlarut
+                                    </span>
+                                </div>
+                                <div
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                </div>
                             </div>
-                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
-                                DFROBOT RS485 Dissolved Oxygen Sensor Sea Water
-                            </p>
                         </div>
 
                         <!-- Item 8 -->
-                        <div
-                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
-                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
-                                <img src="suhu.png" alt="DS18B20 Sensor Suhu"
-                                    class="max-h-full max-w-full object-contain rounded-lg">
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
+                            tabindex="0">
+                            <img src="suhu.png" alt="Electrical Conductivity Sensor"
+                                class="max-h-full max-w-full object-contain p-1">
+
+                            <div
+                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
+                                <div
+                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    <p
+                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                        DS18B20 waterproof
+                                    </p>
+                                    <span
+                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        Sensor Suhu
+                                    </span>
+                                </div>
+                                <div
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                </div>
                             </div>
-                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
-                                DS18B20 <i>waterproof</i>
-                            </p>
                         </div>
 
                         <!-- Item 9 -->
-                        <div
-                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
-                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
-                                <img src="arduino.png" alt="Arduino Mega"
-                                    class="max-h-full max-w-full object-contain rounded-lg">
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
+                            tabindex="0">
+                            <img src="arduino.png" alt="Electrical Conductivity Sensor"
+                                class="max-h-full max-w-full object-contain p-1">
+
+                            <div
+                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
+                                <div
+                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    <p
+                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                        Arduino Mega 2560
+                                    </p>
+                                    <span
+                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        Papan Sirkuit Mikrokontrole
+                                    </span>
+                                </div>
+                                <div
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                </div>
                             </div>
-                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
-                                Arduino Mega
-                            </p>
                         </div>
 
                         <!-- Item 10 -->
-                        <div
-                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
-                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
-                                <img src="pixhawk.png" alt="Pixhawk 6X"
-                                    class="max-h-full max-w-full object-contain rounded-lg">
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
+                            tabindex="0">
+                            <img src="pixhawk.png" alt="Electrical Conductivity Sensor"
+                                class="max-h-full max-w-full object-contain p-1">
+
+                            <div
+                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
+                                <div
+                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    <p
+                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                        Pixhawk 6X M10N GPS 20294
+                                    </p>
+                                    <span
+                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        Pengendali Penerbangan
+                                    </span>
+                                </div>
+                                <div
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                </div>
                             </div>
-                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
-                                Pixhawk 6X M10N GPS 20294
-                            </p>
                         </div>
 
                     </div>
@@ -416,77 +545,103 @@
 
                 <div
                     class="w-full bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-6 hover:shadow-md transition duration-200 h-full">
+                    <!-- Grid 2 Kolom Kebawah Dinamis -->
                     <div class="grid grid-cols-2 gap-4">
 
                         <!-- Resin -->
-                        <div
-                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
-                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
-                                <img src="resin.jpg" alt="Resin"
-                                    class="max-h-full max-w-full object-contain rounded-lg">
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
+                            tabindex="0">
+                            <img src="resin.jpg" alt="Resin" class="max-h-full max-w-full object-contain p-1">
+
+                            <div
+                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
+                                <div
+                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    <p
+                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                        Resin
+                                    </p>
+                                    <span
+                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        Ukuran: 23 Kilogram
+                                    </span>
+                                </div>
+                                <div
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                </div>
                             </div>
-                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
-                                Resin
-                            </p>
                         </div>
 
                         <!-- Dempul -->
-                        <div
-                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
-                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
-                                <img src="dempul.jpg" alt="Dempul"
-                                    class="max-h-full max-w-full object-contain rounded-lg">
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
+                            tabindex="0">
+                            <img src="dempul.jpg" alt="Dempul" class="max-h-full max-w-full object-contain p-1">
+
+                            <div
+                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
+                                <div
+                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    <p
+                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                        Dempul
+                                    </p>
+                                    <span
+                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        Ukuran: 3 Bungkus
+                                    </span>
+                                </div>
+                                <div
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                </div>
                             </div>
-                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
-                                Dempul
-                            </p>
                         </div>
 
                         <!-- Fiberglass -->
-                        <div
-                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
-                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
-                                <img src="fiberglass.jpg" alt="Fiberglass"
-                                    class="max-h-full max-w-full object-contain rounded-lg">
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
+                            tabindex="0">
+                            <img src="fiberglass.jpg" alt="Fiberglass" class="max-h-full max-w-full object-contain p-1">
+
+                            <div
+                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
+                                <div
+                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    <p
+                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                        Fiberglass
+                                    </p>
+                                    <span
+                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        Dimensi: 4x2 Meter
+                                    </span>
+                                </div>
+                                <div
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                </div>
                             </div>
-                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
-                                Fiberglass
-                            </p>
                         </div>
 
                         <!-- Tripleks -->
-                        <div
-                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
-                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
-                                <img src="tripleks.jpg" alt="Tripleks"
-                                    class="max-h-full max-w-full object-contain rounded-lg">
-                            </div>
-                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
-                                Tripleks
-                            </p>
-                        </div>
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
+                            tabindex="0">
+                            <img src="tripleks.jpg" alt="Tripleks" class="max-h-full max-w-full object-contain p-1">
 
-                        <!-- Besi -->
-                        <div
-                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
-                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
-                                <img src="besi.jpg" alt="Besi" class="max-h-full max-w-full object-contain rounded-lg">
+                            <div
+                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
+                                <div
+                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    <p
+                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                        Tripleks
+                                    </p>
+                                    <span
+                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        Ukuran: 4,2 x 2,2 Meter (0,9 Centimeter) 
+                                    </span>
+                                </div>
+                                <div
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                </div>
                             </div>
-                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
-                                Besi
-                            </p>
-                        </div>
-
-                        <!-- Katalis -->
-                        <div
-                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
-                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
-                                <img src="katalis.jpg" alt="Katalis"
-                                    class="max-h-full max-w-full object-contain rounded-lg">
-                            </div>
-                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
-                                Katalis
-                            </p>
                         </div>
 
                     </div>
@@ -750,4 +905,5 @@
         });
     </script>
 </body>
+
 </html>
