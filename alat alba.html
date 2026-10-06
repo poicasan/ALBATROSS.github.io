@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alat Alba - Monitoring Kampung Laut</title>
+    <title>Alat TROSS - Monitoring Kampung Laut</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -133,7 +133,7 @@
                             class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
 
 
-                            <a href="data pemetaan.html"
+                             <a href="data pemetaan.html"
                                 class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
                                 Data Pemetaan
                             </a>
@@ -223,21 +223,23 @@
                 <span>&gt;</span>
                 <a href="alat.html" class="hover:underline">Alat</a>
                 <span>&gt;</span>
-                <span class="text-white font-semibold">Alat Alba</span>
+                <span class="text-white font-semibold">Alat TROSS</span>
             </nav>
 
-            <!-- Title with Network Icon -->
+            <!-- Title with Camera Icon -->
             <div class="flex items-center space-x-3 pt-2">
                 <div class="text-3xl sm:text-4xl">
-                    <i class="fa-solid fa-ship"></i>
+                    <i class="fa-solid fa-camera"></i>
                 </div>
-                <h1 class="text-3xl sm:text-4xl font-bold tracking-wide font-anta">Alat Alba</h1>
+                <h1 class="text-3xl sm:text-4xl font-bold tracking-wide font-anta">
+                    Alat TROSS
+                </h1>
             </div>
 
             <!-- Description -->
             <p class="text-sm sm:text-base text-cyan-50 max-w-3xl leading-relaxed font-normal font-inter">
-                Memantau kondisi perairan di kawasan Kampung Laut, Nusakambangan melalui pengukuran salinitas,
-                kedalaman, kecepatan arus, kekeruhan, pH, oksigen terlarut (DO), dan suhu secara otomatis.
+                Memantau keberadaan fauna di kawasan mangrove Kampung Laut, Nusakambangan melalui sistem kamera
+                otomatis berbasis sensor gerak untuk mendukung pengamatan kondisi ekosistem.
             </p>
 
             <!-- Action Button -->
@@ -259,278 +261,102 @@
 
         <!-- Section Heading -->
         <h2 class="text-2xl sm:text-3xl font-bold text-center text-brand-darkText mb-6 font-anta">
-            Alat Alba
+            Alat TROSS
         </h2>
 
         <!-- Main Image Card Container -->
         <div class="bg-white p-3 sm:p-4 rounded-2xl border-2 border-brand-borderCyan shadow-sm mb-10 max-w-3xl mx-auto">
             <div class="overflow-hidden rounded-xl bg-gray-100 aspect-[16/9] flex items-center justify-center">
-                <img src="Alba.jpe" alt="Alat Alba"
+                <img src="tross.jpeg" alt="Alat TROSS"
                     class="w-full h-full object-cover transform hover:scale-105 transition duration-500"
-                    onerror="this.onerror=null; this.src='https://placehold.co/800x450/0883a4/ffffff?text=Alat+Alba+Boat';">
+                    onerror="this.onerror=null; this.src='https://placehold.co/800x450/0883a4/ffffff?text=Alat+TROSS';">
             </div>
         </div>
+
+        <!-- Grid Container Komponen -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full items-start">
 
             <!-- KOTAK ELEKTRO (KIRI) -->
             <div class="flex flex-col items-center w-full">
+
                 <h3 class="text-xl sm:text-2xl font-bold text-brand-darkText mb-4 font-anta">
                     Komponen Elektro
                 </h3>
 
-                <div
-                    class="w-full bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-6 hover:shadow-md transition duration-200 h-full">
-                    <!-- Grid 2 Kolom Kebawah Dinamis -->
+                <div class="w-full bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-6 h-full">
+
                     <div class="grid grid-cols-2 gap-4">
 
-                        <!-- Item 1 -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="raspberry.png" alt="Raspberry Pi 4"
-                                class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        Raspberry Pi 4<br><span class="text-gray-500 font-normal">Model B RAM 4GB</span>
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Single Board Computer (SBC)
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
+                        <!-- LED Infrared -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="led infrared tross.jpg" alt="LED Infrared"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
                             </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                LED Infrared
+                            </p>
                         </div>
 
-                        <!-- Item 2 -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="sipeed.png" alt="Sipeed Maixcam2"
-                                class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        Sipeed Maixcam2 4K AI Visual Camera
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Kamera AI / Modul Visi
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
+                        <!-- Kamera OV2640 -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="kamera ov2640 tross.jpg" alt="Kamera OV2640"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
                             </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Kamera OV2640
+                            </p>
                         </div>
 
-                        <!-- Item 3 -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="echo.png" alt="Echo Sounder Mini"
-                                class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        <i>Echo Sounder Mini</i><br><span
-                                            class="text-gray-500 font-normal">(A01NYUB)</span>
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Sensor Ultrasonik Jarak
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
+                        <!-- Panel Surya -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="panel surya tross.jpg" alt="Panel Surya"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
                             </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Panel Surya
+                            </p>
                         </div>
 
-                        <!-- Item 4 -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="turbi.png" alt="Turbidity Sensor"
-                                class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        RS485 Water Quality Turbidity Sensor
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Sensor Kekeruhan Air
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
+                        <!-- Sensor PIR -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="sensor pir tross.jpg" alt="Sensor PIR"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
                             </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Sensor PIR
+                            </p>
                         </div>
 
-                        <!-- Item 5 -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="ph.png" alt="pH Sensor" class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        RS485 Water Quality pH Sensor (IP68)
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Sensor Keasaman (pH)
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
+                        <!-- RTC -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="rtc bat tross.jpg" alt="RTC"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
                             </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                RTC
+                            </p>
                         </div>
 
-                        <!-- Item 6 -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="salinitas.png" alt="Electrical Conductivity Sensor"
-                                class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        RS485 Electrical Conductivity Sensor
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Sensor Konduktivitas / Salinitas
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
+                        <!-- Modem -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="modem tross.jpg" alt="Modem"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
                             </div>
-                        </div>
-
-                        <!-- Item 7 -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="do.png" alt="Electrical Conductivity Sensor"
-                                class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        DFROBOT RS485 Dissolved Oxygen Sensor Sea Water
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Sensor Oksigen Terlarut
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Item 8 -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="suhu.png" alt="Electrical Conductivity Sensor"
-                                class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        DS18B20 waterproof
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Sensor Suhu
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Item 9 -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="arduino.png" alt="Electrical Conductivity Sensor"
-                                class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        Arduino Mega 2560
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Papan Sirkuit Mikrokontrole
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Item 10 -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="pixhawk.png" alt="Electrical Conductivity Sensor"
-                                class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        Pixhawk 6X M10N GPS 20294
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Pengendali Penerbangan
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
-                            </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Modem
+                            </p>
                         </div>
 
                     </div>
@@ -539,109 +365,61 @@
 
             <!-- KOTAK MEKANIK (KANAN) -->
             <div class="flex flex-col items-center w-full">
+
                 <h3 class="text-xl sm:text-2xl font-bold text-brand-darkText mb-4 font-anta">
                     Komponen Mekanik
                 </h3>
 
-                <div
-                    class="w-full bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-6 hover:shadow-md transition duration-200 h-full">
-                    <!-- Grid 2 Kolom Kebawah Dinamis -->
+                <div class="w-full bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-6 h-full">
+
                     <div class="grid grid-cols-2 gap-4">
 
-                        <!-- Resin -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="resin.jpg" alt="Resin" class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        Resin
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Ukuran: 23 Kilogram
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
+                        <!-- Junction Box -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="junction box.jpg" alt="Junction Box"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
                             </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Junction Box
+                            </p>
                         </div>
 
-                        <!-- Dempul -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="dempul.jpg" alt="Dempul" class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        Dempul
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Ukuran: 3 Bungkus
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
+                        <!-- Besi Hollow -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="besi.jpg" alt="Besi Hollow"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
                             </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Besi Hollow
+                            </p>
                         </div>
 
-                        <!-- Fiberglass -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="fiberglass.jpg" alt="Fiberglass" class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        Fiberglass
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Dimensi: 4x2 Meter
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
+                        <!-- Pipa Galvanis -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="pipa galvanis.jpg" alt="Pipa Galvanis"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
                             </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Pipa Galvanis
+                            </p>
                         </div>
 
-                        <!-- Tripleks -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="tripleks.jpg" alt="Tripleks" class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        Tripleks
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Ukuran: 4,2 x 2,2 Meter (0,9 Centimeter) 
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
+                        <!-- Klem Pipa Besi -->
+                        <div
+                            class="flex flex-col items-center justify-between p-3 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all text-center">
+                            <div class="w-full h-32 sm:h-36 flex items-center justify-center p-2 mb-2">
+                                <img src="klem pipa besi.jpg" alt="Klem Pipa Besi"
+                                    class="max-h-full max-w-full object-contain rounded-lg">
                             </div>
+                            <p class="text-xs sm:text-sm text-[#118AB2] font-medium font-inter leading-tight">
+                                Klem Pipa Besi
+                            </p>
                         </div>
 
                     </div>
@@ -666,9 +444,8 @@
 
             <div class="mb-6">
                 <p class="text-sm text-gray-600 leading-relaxed font-inter">
-                    Panduan ini berisi langkah-langkah pemeriksaan dan perawatan
-                    perangkat ALBA untuk menjaga kondisi dan kinerja alat selama
-                    proses pemantauan perairan.
+                    Panduan ini berisi langkah-langkah pemeriksaan dan perawatan perangkat TROSS untuk menjaga
+                    kondisi dan kinerja alat selama proses pemantauan fauna di kawasan mangrove.
                 </p>
             </div>
 
@@ -691,22 +468,24 @@
                         <ul class="list-disc pl-5 space-y-2">
                             <li>Memeriksa kondisi kabel, konektor, dan sambungan listrik sebelum dan sesudah
                                 pengoperasian.</li>
-                            <li>Memastikan komponen elektronik terlindungi dari air dan kelembapan.</li>
-                            <li>Memeriksa kondisi fisik baterai dan memastikan tidak terdapat kerusakan.</li>
-                            <li>Memastikan Raspberry Pi, Arduino, dan Pixhawk berfungsi dengan baik.</li>
-                            <li>Memastikan tidak terdapat kabel yang longgar, terkelupas, atau mengalami kerusakan.</li>
+                            <li>Memastikan kamera OV2640, sensor PIR, RTC, dan modem terpasang dengan baik serta
+                                berfungsi normal.</li>
+                            <li>Memeriksa kondisi LED infrared untuk memastikan pencahayaan berfungsi saat diperlukan.
+                            </li>
+                            <li>Memastikan seluruh komponen elektronik terlindungi dari air dan kelembapan.</li>
+                            <li>Memeriksa kondisi fisik komponen untuk mendeteksi kerusakan atau korosi.</li>
                         </ul>
                     </div>
                 </details>
 
-                <!-- 2. Pembersihan dan Perawatan Sensor -->
+                <!-- 2. Perawatan Sistem Kelistrikan -->
                 <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
                     <summary
                         class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
                         <span
                             class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
-                            <i class="fa-solid fa-water text-brand-cyan"></i>
-                            2. Pembersihan dan Perawatan Sensor
+                            <i class="fa-solid fa-battery-full text-brand-cyan"></i>
+                            2. Perawatan Sistem Kelistrikan
                         </span>
                         <i
                             class="fa-solid fa-chevron-down text-brand-cyan transition-transform group-open:rotate-180"></i>
@@ -714,24 +493,25 @@
 
                     <div class="p-4 sm:p-5 text-sm text-gray-600 font-inter leading-relaxed">
                         <ul class="list-disc pl-5 space-y-2">
-                            <li>Membilas sensor yang bersentuhan dengan air menggunakan air bersih setelah
-                                pengoperasian.</li>
-                            <li>Membersihkan bagian sensor dari lumpur, kotoran, atau endapan yang menempel.</li>
-                            <li>Memeriksa kondisi fisik sensor dan kabel penghubung.</li>
-                            <li>Memastikan bagian sensor tidak mengalami kerusakan atau korosi.</li>
-                            <li>Menyimpan sensor sesuai petunjuk produsen ketika tidak digunakan.</li>
+                            <li>Memeriksa kondisi fisik baterai dan memastikan tidak terdapat pembengkakan atau
+                                kerusakan.</li>
+                            <li>Memastikan daya baterai mencukupi sebelum alat digunakan.</li>
+                            <li>Memeriksa sambungan baterai dan memastikan tidak terdapat koneksi yang longgar.</li>
+                            <li>Memastikan panel surya berada dalam kondisi baik dan dapat digunakan untuk mengisi daya.
+                            </li>
+                            <li>Memeriksa sambungan kelistrikan untuk menghindari korsleting atau gangguan daya.</li>
                         </ul>
                     </div>
                 </details>
 
-                <!-- 3. Perawatan Sistem Penggerak -->
+                <!-- 3. Pemeriksaan Kamera dan Sensor -->
                 <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
                     <summary
                         class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
                         <span
                             class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
-                            <i class="fa-solid fa-gear text-brand-cyan"></i>
-                            3. Perawatan Sistem Penggerak
+                            <i class="fa-solid fa-camera text-brand-cyan"></i>
+                            3. Pemeriksaan Kamera dan Sensor
                         </span>
                         <i
                             class="fa-solid fa-chevron-down text-brand-cyan transition-transform group-open:rotate-180"></i>
@@ -739,23 +519,26 @@
 
                     <div class="p-4 sm:p-5 text-sm text-gray-600 font-inter leading-relaxed">
                         <ul class="list-disc pl-5 space-y-2">
-                            <li>Memeriksa kondisi motor dan baling-baling sebelum dan sesudah pengoperasian.</li>
-                            <li>Membersihkan baling-baling dari sampah, tali, atau material yang tersangkut.</li>
-                            <li>Memeriksa kekencangan baut dan sambungan mekanik.</li>
-                            <li>Memastikan motor dan ESC tidak mengalami panas berlebih atau kerusakan.</li>
-                            <li>Memastikan sistem penggerak dapat beroperasi dengan normal sebelum alat digunakan.</li>
+                            <li>Memastikan kamera dapat mengambil gambar dengan baik saat sistem diaktifkan.</li>
+                            <li>Membersihkan lensa kamera dari debu, lumpur, atau kotoran yang dapat mengganggu hasil
+                                pengamatan.</li>
+                            <li>Memastikan sensor PIR dapat mendeteksi pergerakan objek sesuai kebutuhan sistem.</li>
+                            <li>Memeriksa fungsi LED infrared untuk mendukung pengambilan gambar dalam kondisi minim
+                                cahaya.</li>
+                            <li>Melakukan pengujian sistem secara berkala untuk memastikan kamera dan sensor bekerja
+                                secara bersamaan.</li>
                         </ul>
                     </div>
                 </details>
 
-                <!-- 4. Perawatan Struktur Mekanik -->
+                <!-- 4. Perawatan Struktur dan Pelindung Alat -->
                 <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
                     <summary
                         class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
                         <span
                             class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
-                            <i class="fa-solid fa-screwdriver-wrench text-brand-cyan"></i>
-                            4. Perawatan Struktur Mekanik
+                            <i class="fa-solid fa-shield-halved text-brand-cyan"></i>
+                            4. Perawatan Struktur dan Pelindung Alat
                         </span>
                         <i
                             class="fa-solid fa-chevron-down text-brand-cyan transition-transform group-open:rotate-180"></i>
@@ -763,23 +546,55 @@
 
                     <div class="p-4 sm:p-5 text-sm text-gray-600 font-inter leading-relaxed">
                         <ul class="list-disc pl-5 space-y-2">
-                            <li>Membersihkan badan kapal dari lumpur dan kotoran setelah digunakan.</li>
-                            <li>Memeriksa permukaan fiberglass dari retakan, pengelupasan, atau kerusakan.</li>
-                            <li>Memeriksa sambungan, baut, dan bagian besi untuk mendeteksi korosi.</li>
-                            <li>Memastikan struktur kapal tetap kokoh dan tidak mengalami kebocoran.</li>
-                            <li>Memeriksa kondisi lapisan pelindung badan kapal secara berkala.</li>
+                            <li>Membersihkan bagian luar alat dari lumpur, kotoran, dan endapan setelah pengoperasian.
+                            </li>
+                            <li>Memeriksa kondisi junction box dan memastikan wadah pelindung komponen elektronik tetap
+                                rapat.</li>
+                            <li>Memeriksa kondisi besi hollow dan pipa galvanis untuk mendeteksi kerusakan atau korosi.
+                            </li>
+                            <li>Memastikan klem pipa besi terpasang dengan kuat dan tidak mengalami kelonggaran.</li>
+                            <li>Memastikan struktur alat tetap kokoh dan seluruh komponen terpasang dengan aman.</li>
                         </ul>
                     </div>
                 </details>
 
-                <!-- 5. Pemeriksaan Sebelum dan Sesudah Pengoperasian -->
+                <!-- 5. Pemeriksaan Sistem Komunikasi dan Penyimpanan Data -->
+                <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
+                        <span
+                            class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
+                            <i class="fa-solid fa-wifi text-brand-cyan"></i>
+                            5. Pemeriksaan Sistem Komunikasi dan Data
+                        </span>
+                        <i
+                            class="fa-solid fa-chevron-down text-brand-cyan transition-transform group-open:rotate-180"></i>
+                    </summary>
+
+                    <div class="p-4 sm:p-5 text-sm text-gray-600 font-inter leading-relaxed">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Memastikan modem dapat terhubung dengan jaringan yang digunakan untuk pengiriman data.
+                            </li>
+                            <li>Memeriksa koneksi jaringan dan memastikan proses pengiriman data berjalan dengan baik.
+                            </li>
+                            <li>Memastikan RTC menunjukkan waktu yang sesuai agar waktu pengambilan gambar tercatat
+                                dengan benar.</li>
+                            <li>Memeriksa hasil gambar yang tersimpan untuk memastikan file dapat dibuka dan tidak
+                                mengalami kerusakan.</li>
+                            <li>Memastikan data hasil pengamatan dapat diterima dan diakses melalui sistem monitoring.
+                            </li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- 6. Pemeriksaan Sebelum dan Sesudah Pengoperasian -->
                 <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
                     <summary
                         class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
                         <span
                             class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
                             <i class="fa-solid fa-clipboard-check text-brand-cyan"></i>
-                            5. Pemeriksaan Sebelum dan Sesudah Pengoperasian
+                            6. Pemeriksaan Sebelum dan Sesudah Pengoperasian
                         </span>
                         <i
                             class="fa-solid fa-chevron-down text-brand-cyan transition-transform group-open:rotate-180"></i>
@@ -788,9 +603,11 @@
                     <div class="p-4 sm:p-5 text-sm text-gray-600 font-inter leading-relaxed">
                         <ul class="list-disc pl-5 space-y-2">
                             <li>Memastikan seluruh komponen terpasang dengan baik sebelum alat digunakan.</li>
-                            <li>Memeriksa daya baterai dan kesiapan sistem navigasi.</li>
-                            <li>Memastikan sensor dapat membaca data dengan normal.</li>
-                            <li>Melakukan pemeriksaan ulang dan membersihkan alat setelah pengoperasian.</li>
+                            <li>Memeriksa daya baterai, fungsi kamera, sensor PIR, dan koneksi jaringan.</li>
+                            <li>Memastikan sistem dapat mengambil dan menyimpan gambar secara otomatis.</li>
+                            <li>Memeriksa kondisi alat selama pengoperasian untuk memastikan perangkat tetap berfungsi
+                                normal.</li>
+                            <li>Membersihkan dan mengeringkan bagian luar alat setelah pengoperasian.</li>
                             <li>Mencatat kerusakan atau kendala yang ditemukan selama penggunaan.</li>
                             <li>Menyimpan alat di tempat yang kering dan aman setelah selesai digunakan.</li>
                         </ul>
@@ -905,5 +722,4 @@
         });
     </script>
 </body>
-
 </html>
