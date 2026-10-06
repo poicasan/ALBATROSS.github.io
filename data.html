@@ -217,7 +217,7 @@
     <main class="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 pt-28 pb-16">
 
         <!-- Judul -->
-        <div class="text-center mb-16">
+        <div class="text-center mb-10 sm:mb-16">
             <h1 class="font-tech text-4xl md:text-5xl font-bold text-[#445b73]">
                 DATA ALBATROSS
             </h1>
@@ -227,7 +227,7 @@
         </div>
 
         <!-- Grid 4 Kotak (2x2 pada layar sm/md) -->
-        <div class="w-full max-w-5xl grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-14 items-start">
+        <div class="w-full max-w-5xl grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10 sm:gap-y-14 items-start">
 
             <!-- 1. Kotak Pemetaan -->
             <a href="data pemetaan.html" class="block w-full max-w-[512px] mx-auto">
@@ -246,7 +246,7 @@
                         <div class="p-1">
                             <div class="overflow-hidden rounded-2xl w-full">
                                 <img src="pemetaan.jpe" alt="Data Pemetaan"
-                                    class="w-full h-[280px] object-cover rounded-2xl block"
+                                    class="w-full h-[220px] sm:h-[280px] object-cover rounded-2xl block"
                                     onerror="this.onerror=null; this.src='https://placehold.co/800x450/0883a4/ffffff?text=Data+Pemetaan';">
                             </div>
                         </div>
@@ -268,10 +268,11 @@
                         </div>
 
                         <!-- GRID PARAMETER DATA -->
-                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 p-1 h-[280px] content-center">
+                        <div
+                            class="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 p-1 h-auto sm:h-[280px] items-center">
                             <!-- 1. Suhu -->
                             <div
-                                class="bg-white/95 hover:bg-white p-2 rounded-2xl flex flex-col items-center justify-center text-center shadow-sm transition-all hover:shadow-md border border-sky-100 h-full">
+                                class="bg-white/95 hover:bg-white p-2 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center shadow-sm transition-all hover:shadow-md border border-sky-100 h-full">
                                 <div
                                     class="p-2 bg-red-50 text-red-500 rounded-xl mb-1 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10">
                                     <i class="fa-solid fa-temperature-three-quarters text-base sm:text-xl"></i>
@@ -283,7 +284,7 @@
 
                             <!-- 2. DO (Dissolved Oxygen) -->
                             <div
-                                class="bg-white/95 hover:bg-white p-2 rounded-2xl flex flex-col items-center justify-center text-center shadow-sm transition-all hover:shadow-md border border-sky-100 h-full">
+                                class="bg-white/95 hover:bg-white p-2 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center shadow-sm transition-all hover:shadow-md border border-sky-100 h-full">
                                 <div
                                     class="p-2 bg-blue-50 text-blue-500 rounded-xl mb-1 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10">
                                     <i class="fa-solid fa-wind text-base sm:text-xl"></i>
@@ -295,7 +296,7 @@
 
                             <!-- 3. Kedalaman -->
                             <div
-                                class="bg-white/95 hover:bg-white p-2 rounded-2xl flex flex-col items-center justify-center text-center shadow-sm transition-all hover:shadow-md border border-sky-100 h-full">
+                                class="bg-white/95 hover:bg-white p-2 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center shadow-sm transition-all hover:shadow-md border border-sky-100 h-full">
                                 <div
                                     class="p-2 bg-cyan-50 text-cyan-600 rounded-xl mb-1 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10">
                                     <i class="fa-solid fa-ruler-vertical text-base sm:text-xl"></i>
@@ -307,7 +308,7 @@
 
                             <!-- 4. Kekeruhan (Turbidity) -->
                             <div
-                                class="bg-white/95 hover:bg-white p-2 rounded-2xl flex flex-col items-center justify-center text-center shadow-sm transition-all hover:shadow-md border border-sky-100 h-full">
+                                class="bg-white/95 hover:bg-white p-2 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center shadow-sm transition-all hover:shadow-md border border-sky-100 h-full">
                                 <div
                                     class="p-2 bg-amber-50 text-amber-600 rounded-xl mb-1 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10">
                                     <i class="fa-solid fa-smog text-base sm:text-xl"></i>
@@ -319,7 +320,7 @@
 
                             <!-- 5. pH -->
                             <div
-                                class="bg-white/95 hover:bg-white p-2 rounded-2xl flex flex-col items-center justify-center text-center shadow-sm transition-all hover:shadow-md border border-sky-100 h-full">
+                                class="bg-white/95 hover:bg-white p-2 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center shadow-sm transition-all hover:shadow-md border border-sky-100 h-full">
                                 <div
                                     class="p-2 bg-emerald-50 text-emerald-500 rounded-xl mb-1 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10">
                                     <i class="fa-solid fa-vial text-base sm:text-xl"></i>
@@ -331,7 +332,7 @@
 
                             <!-- 6. Salinitas -->
                             <div
-                                class="bg-white/95 hover:bg-white p-2 rounded-2xl flex flex-col items-center justify-center text-center shadow-sm transition-all hover:shadow-md border border-sky-100 h-full">
+                                class="bg-white/95 hover:bg-white p-2 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center shadow-sm transition-all hover:shadow-md border border-sky-100 h-full">
                                 <div
                                     class="p-2 bg-indigo-50 text-indigo-500 rounded-xl mb-1 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10">
                                     <i class="fa-solid fa-water text-base sm:text-xl"></i>
@@ -360,7 +361,7 @@
 
                         <!-- ISI DATA BAT -->
                         <div class="p-1">
-                            <div class="grid grid-cols-3 gap-2 sm:gap-3 w-full h-[280px] items-center">
+                            <div class="grid grid-cols-3 gap-2 sm:gap-3 w-full h-auto sm:h-[280px] items-center">
                                 <!-- 1. Jarak -->
                                 <div
                                     class="bg-white/95 hover:bg-white p-2 sm:p-3 rounded-2xl flex flex-col items-center justify-center text-center shadow-sm transition-all hover:shadow-md border border-sky-100 h-full">
@@ -419,7 +420,7 @@
                         <div class="p-1">
                             <div class="overflow-hidden rounded-2xl w-full">
                                 <img src="data tross.jpg" alt="Data Tross"
-                                    class="w-full h-[280px] object-cover rounded-2xl block"
+                                    class="w-full h-[220px] sm:h-[280px] object-cover rounded-2xl block"
                                     onerror="this.onerror=null; this.src='https://placehold.co/800x450/0883a4/ffffff?text=Data+Tross';">
                             </div>
                         </div>
@@ -535,7 +536,7 @@
     </script>
 
     <br>
-    <footer class="bg-[#118AB2] px-6 py-10 border-t-[2px] border-[#118AB2]">
+    <footer class="bg-[#118AB2] px-4 sm:px-6 py-10 border-t-[2px] border-[#118AB2]">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
 
             <!-- Kolom 1 (Dibuat lebih lebar/span 2): Lokasi, Email, dan WhatsApp -->
@@ -545,8 +546,10 @@
                 <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9"
                     class="flex items-start gap-3 hover:text-[#464b71] transition">
                     <i class="fa-solid fa-location-dot text-xl mt-1"></i>
-                    <span class="leading-relaxed">Workshop Instrumentasi dan Robotika Kelautan (Bengkel) ITK, Babakan,
-                        Dramaga, Bogor, Indonesia 16680</span>
+                    <span class="leading-relaxed break-words">
+                        Workshop Instrumentasi dan Robotika Kelautan (Bengkel) ITK, Babakan,
+                        Dramaga, Bogor, Indonesia 16680
+                    </span>
                 </a>
 
                 <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-3 hover:text-[#464b71] transition">
@@ -556,7 +559,7 @@
 
                 <a href="https://wa.me/6283898339620" class="flex items-center gap-3 hover:text-[#464b71] transition">
                     <i class="fa-brands fa-whatsapp text-xl"></i>
-                    <span>+6283898339620 (Deni Rizkiana Anwar Hidayat)</span>
+                    <span class="break-words">+6283898339620 (Deni Rizkiana Anwar Hidayat)</span>
                 </a>
             </div>
 
@@ -577,7 +580,7 @@
                 <!-- Tempat untuk Logo MIT+R -->
                 <div class="w-full flex items-center justify-start">
                     <!-- Ganti "URL_LOGO_KAMU.png" dengan path/link logo yang sebenarnya -->
-                    <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-56 object-contain">
+                    <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-40 sm:h-56 object-contain">
                 </div>
 
                 <!-- Tombol Back to Top -->
