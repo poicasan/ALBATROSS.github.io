@@ -161,14 +161,19 @@
 
             <!-- Logo ALBATROSS -->
             <div class="relative flex items-center justify-center">
-                <!-- Shape Bulat Biru (Ukuran lebih besar, tidak mempengaruhi tinggi header) -->
-                <div class="absolute bg-[#118AB2] rounded-full w-14 h-14 -z-0"></div>
 
-                <!-- Tombol Logo (Tetap menentukan ukuran utama di header) -->
+                <!-- 1. TAMBAHKAN / UBAH DIV BULAT DI SINI -->
+                <!-- Tambahkan id="logo-circle", opacity-0, scale-75, dan transition-all duration-300 -->
+                <div id="logo-circle"
+                    class="absolute bg-[#118AB2] rounded-full w-14 h-14 -z-0 opacity-0 scale-75 transition-all duration-300">
+                </div>
+
+                <!-- 2. Tombol Logo (Tetap seperti semula) -->
                 <a href="#" id="logo-btn"
                     class="relative z-10 flex items-center justify-center transition-transform hover:scale-105">
                     <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="h-12 w-auto object-contain">
                 </a>
+
             </div>
 
             <!-- Container Kanan -->
@@ -232,7 +237,7 @@
                             class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
 
 
-                             <a href="data pemetaan.html"
+                            <a href="data pemetaan.html"
                                 class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
                                 Data Pemetaan
                             </a>
@@ -1147,6 +1152,20 @@
         slider.addEventListener('lostpointercapture', stopDragging);
 
         requestAnimationFrame(animate);
+
+        const logoCircle = document.getElementById('logo-circle');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                // Muncul saat di-scroll ke bawah
+                logoCircle.classList.remove('opacity-0', 'scale-75');
+                logoCircle.classList.add('opacity-100', 'scale-100');
+            } else {
+                // Sembunyi kembali saat posisi paling atas
+                logoCircle.classList.remove('opacity-100', 'scale-100');
+                logoCircle.classList.add('opacity-0', 'scale-75');
+            }
+        });
     </script>
 
     <footer class="bg-white px-6 py-10 border-t-[2px] border-[#118AB2]">
@@ -1185,17 +1204,17 @@
                 <h3 class="font-bold text-xl mb-2">About Us</h3>
 
                 <!-- Tempat untuk Logo MIT+R -->
-                <div class="relative flex items-center justify-center">
-                    <!-- Bulatan Biru: Opacity 0 & Scale 75 saat di atas -->
-                    <div id="logo-bg-circle"
-                        class="opacity-0 scale-75 absolute bg-[#118AB2] rounded-full w-20 h-20 -z-0 transition-all duration-300 ease-in-out pointer-events-none">
-                    </div>
+                <div class="w-full flex items-center justify-start">
+                    <!-- Kontainer Lingkaran Background -->
+                    <!-- Atur w-* dan h-* di bawah untuk mengubah ukuran lingkaran -->
+                    <div
+                        class="relative w-28 h-28 rounded-full bg-[#118AB2] flex items-center justify-center overflow-hidden shadow-md">
 
-                    <!-- Tombol Logo Utama -->
-                    <a href="#" id="logo-btn"
-                        class="relative z-10 flex items-center justify-center transition-transform hover:scale-105">
-                        <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="h-12 w-auto object-contain">
-                    </a>
+                        <!-- Logo -->
+                        <!-- Atur h-* / w-* untuk ukuran logo, serta inset / top / left / translate jika ingin geser posisi -->
+                        <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-24 object-contain">
+
+                    </div>
                 </div>
 
                 <!-- Tombol Back to Top -->
