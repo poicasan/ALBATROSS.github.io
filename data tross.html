@@ -222,8 +222,8 @@
         </nav>
 
         <!-- Hero Banner -->
-        <section class="bg-brand-tealBg text-white py-28 px-8 sm:px-6 lg:px-8 shadow-inner" style="height: 350px;">
-            <div class="max-w-6xl mx-auto space-y-4">
+        <section class="bg-brand-tealBg text-white px-6 sm:px-8 pt-28 pb-10 shadow-inner min-h-[350px]">
+            <div class="max-w-6xl mx-auto w-full space-y-4">
 
                 <!-- Breadcrumbs -->
                 <nav class="flex items-center space-x-2 text-xs sm:text-sm text-cyan-100 font-medium font-inter">
@@ -282,20 +282,25 @@
         </section>
 
         <!-- Main Content: Slot Foto & Video Terbaru -->
-        <main class="max-w-6xl mx-auto px-4 sm:px-8 py-8">
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow">
             <div class="text-center mb-8">
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-800 font-anta">Dokumentasi Terkini</h2>
-                <p class="text-xs sm:text-sm text-slate-500 mt-1 font-inter">Menampilkan tangkapan foto dan rekaman
-                    video paling
-                    baru dari sensor Trapcam</p>
+
+                <h2 class="text-2xl sm:text-3xl font-bold text-brand-darkText font-anta">
+                    Dokumentasi Terkini
+                </h2>
+
+                <p class="text-xs sm:text-sm text-gray-500 mt-1 font-inter">
+                    Menampilkan tangkapan foto dan rekaman video paling baru dari sensor Trapcam
+                </p>
+
             </div>
 
             <!-- Container 2 Slot Placeholder -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 font-inter">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-4 font-inter">
 
                 <!-- SLOT 1: CAROUSEL FOTO DETEKSI -->
                 <div
-                    class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-5 flex flex-col justify-between relative group">
+                    class="bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-4 sm:p-5 flex flex-col justify-between relative group">
                     <div>
                         <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
                             <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2 font-anta">
@@ -342,7 +347,8 @@
                 </div>
 
                 <!-- SLOT 2: VIDEO TERBARU -->
-                <div class="bg-white rounded-2xl border-2 border-sky-200 shadow-sm p-5 flex flex-col justify-between">
+                <div
+                    class="bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-4 sm:p-5 flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
                             <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2 font-anta">
