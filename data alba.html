@@ -4,20 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data - Albatross</title>
+    <title>Data ALBA - Albatross</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anta&family=Inter:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anta&family=Inter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- LEAFLET CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
     <script>
         tailwind.config = {
@@ -49,14 +53,127 @@
         .font-tech {
             font-family: 'Anta', sans-serif;
         }
-    </style>
 
+        .leaflet-container {
+            font-family: 'Inter', sans-serif;
+            z-index: 1;
+        }
+
+        .leaflet-popup-content-wrapper {
+            border-radius: 14px;
+        }
+
+        .leaflet-popup-content {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* Label titik pada peta */
+
+        .data-point-label {
+            background: rgba(45, 55, 72, 0.92);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 3px 7px;
+            font-size: 10px;
+            font-weight: 700;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+        }
+
+        .data-point-label::before {
+            display: none;
+        }
+
+
+        /* Marker angka */
+
+        .batimetri-marker {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #008ba3;
+            color: white;
+
+            border: 3px solid white;
+
+            font-size: 10px;
+            font-weight: 800;
+
+            box-shadow: 0 2px 7px rgba(0, 0, 0, 0.35);
+        }
+
+
+        /* Kartu informasi */
+
+        .info-card {
+            background: white;
+            border: 1px solid #d5eaf0;
+            border-radius: 18px;
+
+            box-shadow:
+                0 4px 12px rgba(17, 138, 178, 0.06);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 10px 22px rgba(17, 138, 178, 0.10);
+        }
+        .batimetri-marker {
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            
+            /* INI KUNCI EFEKNYA */
+            opacity: 0.4; /* Titik pudar 40% */
+            transform: scale(0.6); /* Ukuran titik menyusut jadi 60% */
+            transition: all 0.3s ease-in-out; /* Animasi halus */
+            cursor: pointer;
+        }
+
+        /* Gaya saat kursor mendekat (Hover) */
+        .batimetri-marker:hover {
+            opacity: 1 !important; /* Muncul 100% jelas */
+            transform: scale(1.3) !important; /* Membesar 130% */
+            z-index: 9999 !important; /* Memaksa titik tampil paling depan menutupi titik lain */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+        
+        /* Menyembunyikan Label (Tooltip) permanen agar tidak menuh-menuhin layar */
+        .leaflet-tooltip.data-point-label {
+            opacity: 0 !important;
+            transition: opacity 0.3s;
+        }
+        
+        /* Memunculkan Label hanya saat marker di-hover */
+        .leaflet-marker-icon:hover .leaflet-tooltip.data-point-label {
+            opacity: 1 !important;
+        }
+    </style>
 </head>
 
 <body class="bg-white text-gray-800 font-inter">
 
     <!-- Navbar -->
-    <nav id="navbar"
+   <nav id="navbar"
         class="fixed top-0 left-0 w-full z-50 p-4 lg:px-12 transition-all duration-300 bg-white shadow-md text-[#118AB2]">
 
         <div class="max-w-7xl mx-auto flex justify-between items-center relative">
@@ -132,14 +249,18 @@
 
                         <div id="data-menu"
                             class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
-                            <a href="data pemetaan.html"
+
+
+                             <a href="data pemetaan.html"
                                 class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
                                 Data Pemetaan
                             </a>
+
                             <a href="data alba.html"
                                 class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
                                 Data Alba
                             </a>
+
                             <a href="data bat.html"
                                 class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
                                 Data Bat
@@ -198,1642 +319,16 @@
                         Data Alba
                     </a>
                     <a href="data bat.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Data Bat
+                        Data BAT
                     </a>
                     <a href="data tross.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Data Tross
+                        Data TROSS
                     </a>
                 </div>
             </div>
         </div>
     </nav>
-
-
-    <!-- Hero Banner -->
-    <section class="bg-brand-tealBg text-white px-6 sm:px-8 pt-28 pb-10 shadow-inner min-h-[350px]">
-
-        <div class="max-w-6xl mx-auto w-full space-y-4">
-
-            <!-- Breadcrumbs -->
-            <nav class="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-cyan-100 font-medium font-inter">
-
-                <a href="index.html" class="hover:underline flex items-center gap-1">
-                    <i class="fa-solid fa-house text-xs"></i>
-                    Beranda
-                </a>
-
-                <span>&gt;</span>
-
-                <a href="data.html" class="hover:underline">
-                    Data
-                </a>
-
-                <span>&gt;</span>
-
-                <span class="text-white font-semibold">
-                    Data Alba
-                </span>
-
-            </nav>
-
-            <!-- Title -->
-            <div class="flex items-center gap-3 pt-2">
-
-                <i class="fa-solid fa-chart-line text-3xl sm:text-4xl"></i>
-
-                <h1 class="text-3xl sm:text-4xl font-bold tracking-wide font-anta">
-                    Data Alat Alba
-                </h1>
-
-            </div>
-
-            <!-- Description -->
-            <p class="text-sm sm:text-base text-cyan-50 max-w-3xl leading-relaxed font-normal font-inter">
-
-                Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data salinitas,
-                kedalaman, kekeruhan, pH, oksigen terlarut (DO), dan suhu.
-
-            </p>
-
-            <!-- Action Badges / Status Pill -->
-            <div class="pt-4">
-                <div class="inline-flex items-center bg-white rounded-full py-1.5 px-2 shadow-sm border-[1.5px] border-[#434b6e]">
-                    <!-- Status Kiri -->
-                    <div class="flex items-center space-x-2 px-3">
-                        <div class="w-4 h-4 rounded-full bg-gray-400"></div>
-                        <span class="font-bold text-[#434b6e] text-sm">Tidak online</span>
-                    </div>
-                    <!-- Status Kanan -->
-                    <div class="flex items-center space-x-2 pr-4 pl-2">
-                        <div class="w-5 h-5 rounded-full bg-[#434b6e] flex items-center justify-center">
-                            <i class="fa-solid fa-chart-line text-white text-[10px]"></i>
-                        </div>
-                        <span class="font-bold text-[#434b6e] text-sm">Data non-real-time</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow">
-
-        <section class="mt-12 mb-20">
-
-            <div class="text-center mb-10">
-
-                <h2 class="text-3xl font-bold text-brand-darkText font-anta mb-2">
-                    Parameter Monitoring Alat Alba
-                </h2>
-
-                <p class="text-gray-500 font-inter text-sm sm:text-base">
-                    Grafik dan visualisasi pengukuran kualitas air secara sistematis
-                </p>
-
-                <br>
-
-            </div>
-
-
-            <!-- Grid Container untuk 6 Data -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-
-                <!-- ========================================= -->
-                <!-- CARD 1: SUHU AIR -->
-                <!-- ========================================= -->
-
-                <div
-                    class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
-
-                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">
-                        Suhu Air
-                    </h3>
-
-                    <!-- Area Grafik -->
-                    <div
-                        class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative cursor-pointer">
-
-                        <canvas id="tampilgrafikSuhu"></canvas>
-
-                    </div>
-
-                    <!-- Footer Card -->
-                    <div class="mt-auto">
-
-                        <div class="flex justify-between items-center">
-
-                            <span id="rataSuhu" class="text-gray-500 text-sm">
-                                Rata-rata: 0 °C
-                            </span>
-
-                        </div>
-
-                        <!-- Detail Pengukuran -->
-                        <div id="detailSuhu"
-                            class="hidden mt-3 px-4 py-3 bg-[#e6f7f9] rounded-xl text-sm text-[#2d3757]">
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- ========================================= -->
-                <!-- CARD 2: DO -->
-                <!-- ========================================= -->
-
-                <div
-                    class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
-
-                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">
-                        Oksigen Terlarut (DO)
-                    </h3>
-
-                    <!-- Area Grafik -->
-                    <div
-                        class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative cursor-pointer">
-
-                        <canvas id="tampilgrafikDO"></canvas>
-
-                    </div>
-
-                    <!-- Footer Card -->
-                    <div class="mt-auto">
-
-                        <div class="flex justify-between items-center">
-
-                            <span id="rataDO" class="text-gray-500 text-sm">
-                                Rata-rata: 0 mg/L
-                            </span>
-
-                        </div>
-
-                        <!-- Detail Pengukuran -->
-                        <div id="detailDO" class="hidden mt-3 px-4 py-3 bg-[#e6f7f9] rounded-xl text-sm text-[#2d3757]">
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- ========================================= -->
-                <!-- CARD 3: KEDALAMAN -->
-                <!-- ========================================= -->
-
-                <div
-                    class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
-
-                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">
-                        Data Kedalaman
-                    </h3>
-
-                    <!-- Area Grafik -->
-                    <div
-                        class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative cursor-pointer">
-
-                        <canvas id="tampilgrafikKedalaman"></canvas>
-
-                    </div>
-
-                    <!-- Footer Card -->
-                    <div class="mt-auto">
-
-                        <div class="flex justify-between items-center">
-
-                            <span id="rataKedalaman" class="text-gray-500 text-sm">
-                                Rata-rata: 0 m
-                            </span>
-
-                        </div>
-
-                        <!-- Detail Pengukuran -->
-                        <div id="detailKedalaman"
-                            class="hidden mt-3 px-4 py-3 bg-[#e6f7f9] rounded-xl text-sm text-[#2d3757]">
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- ========================================= -->
-                <!-- CARD 4: KEKERUHAN -->
-                <!-- ========================================= -->
-
-                <div
-                    class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
-
-                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">
-                        Kekeruhan
-                    </h3>
-
-                    <!-- Area Grafik -->
-                    <div
-                        class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative cursor-pointer">
-
-                        <canvas id="tampilgrafikKekeruhan"></canvas>
-
-                    </div>
-
-                    <!-- Footer Card -->
-                    <div class="mt-auto">
-
-                        <div class="flex justify-between items-center">
-
-                            <span id="rataKekeruhan" class="text-gray-500 text-sm">
-                                Rata-rata: 0 NTU
-                            </span>
-
-                        </div>
-
-                        <!-- Detail Pengukuran -->
-                        <div id="detailKekeruhan"
-                            class="hidden mt-3 px-4 py-3 bg-[#e6f7f9] rounded-xl text-sm text-[#2d3757]">
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- ========================================= -->
-                <!-- CARD 5: pH -->
-                <!-- ========================================= -->
-
-                <div
-                    class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
-
-                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">
-                        Data pH
-                    </h3>
-
-                    <!-- Area Grafik -->
-                    <div
-                        class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative cursor-pointer">
-
-                        <canvas id="tampilgrafikpH"></canvas>
-
-                    </div>
-
-                    <!-- Footer Card -->
-                    <div class="mt-auto">
-
-                        <div class="flex justify-between items-center">
-
-                            <span id="ratapH" class="text-gray-500 text-sm">
-                                Rata-rata: 0
-                            </span>
-
-                        </div>
-
-                        <!-- Detail Pengukuran -->
-                        <div id="detailpH" class="hidden mt-3 px-4 py-3 bg-[#e6f7f9] rounded-xl text-sm text-[#2d3757]">
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- ========================================= -->
-                <!-- CARD 6: SALINITAS -->
-                <!-- ========================================= -->
-
-                <div
-                    class="border border-[#b2e3ea] rounded-2xl p-6 bg-white flex flex-col hover:shadow-lg transition-shadow duration-300">
-
-                    <h3 class="text-xl font-bold text-center text-brand-darkText mb-6 font-inter">
-                        Salinitas Air
-                    </h3>
-
-                    <!-- Area Grafik -->
-                    <div
-                        class="w-full bg-white-50 rounded-xl h-64 flex items-center justify-center mb-6 overflow-hidden relative cursor-pointer">
-
-                        <canvas id="tampilgrafikSalinitas"></canvas>
-
-                    </div>
-
-                    <!-- Footer Card -->
-                    <div class="mt-auto">
-
-                        <div class="flex justify-between items-center">
-
-                            <span id="rataSalinitas" class="text-gray-500 text-sm">
-                                Rata-rata: 0 ppt
-                            </span>
-
-                        </div>
-
-                        <!-- Detail Pengukuran -->
-                        <div id="detailSalinitas"
-                            class="hidden mt-3 px-4 py-3 bg-[#e6f7f9] rounded-xl text-sm text-[#2d3757]">
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- ========================================= -->
-    <!-- JAVASCRIPT -->
-    <!-- ========================================= -->
-
     <script>
-
-        // =====================================================
-        // SUHU AIR
-        // =====================================================
-
-        const dataDummy = [
-            { Waktu: "2026-10-04 08:00:00", Suhu: 28.5 },
-            { Waktu: "2026-10-04 08:15:00", Suhu: 29.0 },
-            { Waktu: "2026-10-04 08:30:00", Suhu: 29.2 },
-            { Waktu: "2026-10-04 08:45:00", Suhu: 28.8 },
-            { Waktu: "2026-10-04 09:00:00", Suhu: 29.5 },
-            { Waktu: "2026-10-04 09:15:00", Suhu: 29.8 },
-            { Waktu: "2026-10-04 09:30:00", Suhu: 30.1 }
-        ];
-
-        const labelWaktu = dataDummy.map(item => {
-            let waktuFull = item.Waktu.split(' ')[1];
-            return waktuFull.substring(0, 5);
-        });
-
-        const nilaiSuhu = dataDummy.map(item => parseFloat(item.Suhu));
-
-        const totalSuhu = nilaiSuhu.reduce((total, angka) => total + angka, 0);
-        const rataRataSuhu = (totalSuhu / nilaiSuhu.length).toFixed(1);
-
-        document.getElementById('rataSuhu').innerText =
-            'Rata-rata: ' + rataRataSuhu + ' °C';
-
-
-        const ctx = document
-            .getElementById('tampilgrafikSuhu')
-            .getContext('2d');
-
-        let gradient = ctx.createLinearGradient(0, 0, 0, 300);
-
-        gradient.addColorStop(
-            0,
-            'rgba(17, 138, 178, 0.4)'
-        );
-
-        gradient.addColorStop(
-            1,
-            'rgba(17, 138, 178, 0.0)'
-        );
-
-
-        new Chart(ctx, {
-
-            type: 'line',
-
-            data: {
-
-                labels: labelWaktu,
-
-                datasets: [{
-
-                    label: 'Suhu Air',
-
-                    data: nilaiSuhu,
-
-                    backgroundColor: gradient,
-
-                    borderColor: '#FF0000',
-
-                    borderWidth: 3,
-
-                    fill: true,
-
-                    tension: 0.4,
-
-                    pointBackgroundColor: '#ffffff',
-
-                    pointBorderColor: '#FF0000',
-
-                    pointBorderWidth: 2,
-
-                    pointRadius: 4,
-                    pointHoverRadius: 7,
-                    pointHitRadius: 12,
-                    pointBackgroundColor: '#ffffff',
-                    pointBorderWidth: 2,
-
-                }]
-
-            },
-
-            options: {
-
-                responsive: true,
-
-                maintainAspectRatio: false,
-
-                // KLIK TITIK GRAFIK
-                onClick: function (event, elements) {
-
-                    if (elements.length > 0) {
-
-                        const index = elements[0].index;
-
-                        const waktu = labelWaktu[index];
-
-                        const nilai = nilaiSuhu[index];
-
-                        const detail =
-                            document.getElementById('detailSuhu');
-
-                        detail.innerHTML = `
-                            <div class="font-semibold mb-1">
-                                Detail Pengukuran
-                            </div>
-
-                            <div>
-                                Waktu:
-                                <strong>${waktu}</strong>
-                            </div>
-
-                            <div>
-                                Suhu:
-                                <strong>${nilai} °C</strong>
-                            </div>
-                        `;
-
-                        detail.classList.remove('hidden');
-
-                    }
-
-                },
-
-                plugins: {
-
-                    legend: {
-                        display: false
-                    },
-
-                    tooltip: {
-
-                        backgroundColor: '#FF0000',
-
-                        titleFont: {
-                            family: 'Inter',
-                            size: 12
-                        },
-
-                        bodyFont: {
-                            family: 'Inter',
-                            size: 14,
-                            weight: 'bold'
-                        },
-
-                        padding: 12,
-
-                        displayColors: false,
-
-                        cornerRadius: 8,
-
-                        callbacks: {
-
-                            label: function (context) {
-
-                                return context.parsed.y + ' °C';
-
-                            }
-
-                        }
-
-                    }
-
-                },
-
-                scales: {
-
-                    x: {
-
-                        grid: {
-                            display: false,
-                            drawBorder: false
-                        },
-
-                        ticks: {
-                            font: {
-                                family: 'Inter',
-                                size: 11
-                            },
-                            color: '#94a3b8'
-                        }
-
-                    },
-
-                    y: {
-
-                        grid: {
-                            color: '#e2e8f0',
-                            borderDash: [5, 5],
-                            drawBorder: false
-                        },
-
-                        ticks: {
-                            font: {
-                                family: 'Inter',
-                                size: 11
-                            },
-                            color: '#94a3b8',
-                            padding: 10
-                        }
-
-                    }
-
-                }
-
-            }
-
-        });
-
-
-        // =====================================================
-        // DO
-        // =====================================================
-
-        const dataDummyDO = [
-
-            { Waktu: "2026-10-04 08:00:00", DO: 8 },
-            { Waktu: "2026-10-04 08:15:00", DO: 8.2 },
-            { Waktu: "2026-10-04 08:30:00", DO: 7.5 },
-            { Waktu: "2026-10-04 08:45:00", DO: 7.8 },
-            { Waktu: "2026-10-04 09:00:00", DO: 9.7 },
-            { Waktu: "2026-10-04 09:15:00", DO: 8.2 },
-            { Waktu: "2026-10-04 09:30:00", DO: 7.8 }
-
-        ];
-
-        const nilaiDO =
-            dataDummyDO.map(item => parseFloat(item.DO));
-
-        const totalDO =
-            nilaiDO.reduce((total, angka) => total + angka, 0);
-
-        const rataRataDO =
-            (totalDO / nilaiDO.length).toFixed(1);
-
-        document.getElementById('rataDO').innerText =
-            'Rata-rata: ' + rataRataDO + ' mg/L';
-
-
-        const ctxa =
-            document.getElementById('tampilgrafikDO')
-                .getContext('2d');
-
-        let gradienta =
-            ctxa.createLinearGradient(0, 0, 0, 300);
-
-        gradienta.addColorStop(
-            0,
-            'rgba(17, 138, 178, 0.4)'
-        );
-
-        gradienta.addColorStop(
-            1,
-            'rgba(17, 138, 178, 0.0)'
-        );
-
-
-        new Chart(ctxa, {
-
-            type: 'line',
-
-            data: {
-
-                labels: labelWaktu,
-
-                datasets: [{
-
-                    label: 'Oksigen Terlarut (DO)',
-
-                    data: nilaiDO,
-
-                    backgroundColor: gradienta,
-
-                    borderColor: '#008000',
-
-                    borderWidth: 3,
-
-                    fill: true,
-
-                    tension: 0.4,
-
-                    pointBackgroundColor: '#ffffff',
-
-                    pointBorderColor: '#008000',
-
-                    pointBorderWidth: 2,
-
-                    pointRadius: 4,
-                    pointHoverRadius: 7,
-                    pointHitRadius: 12,
-                    pointBackgroundColor: '#ffffff',
-                    pointBorderWidth: 2,
-
-                }]
-
-            },
-
-            options: {
-
-                responsive: true,
-
-                maintainAspectRatio: false,
-
-                onClick: function (event, elements) {
-
-                    if (elements.length > 0) {
-
-                        const index = elements[0].index;
-
-                        const waktu = labelWaktu[index];
-
-                        const nilai = nilaiDO[index];
-
-                        const detail =
-                            document.getElementById('detailDO');
-
-                        detail.innerHTML = `
-                            <div class="font-semibold mb-1">
-                                Detail Pengukuran
-                            </div>
-
-                            <div>
-                                Waktu:
-                                <strong>${waktu}</strong>
-                            </div>
-
-                            <div>
-                                DO:
-                                <strong>${nilai} mg/L</strong>
-                            </div>
-                        `;
-
-                        detail.classList.remove('hidden');
-
-                    }
-
-                },
-
-                plugins: {
-
-                    legend: {
-                        display: false
-                    },
-
-                    tooltip: {
-
-                        backgroundColor: '#008000',
-
-                        titleFont: {
-                            family: 'Inter',
-                            size: 12
-                        },
-
-                        bodyFont: {
-                            family: 'Inter',
-                            size: 14,
-                            weight: 'bold'
-                        },
-
-                        padding: 12,
-
-                        displayColors: false,
-
-                        cornerRadius: 8,
-
-                        callbacks: {
-
-                            label: function (context) {
-
-                                return context.parsed.y + ' mg/L';
-
-                            }
-
-                        }
-
-                    }
-
-                },
-
-                scales: {
-
-                    x: {
-
-                        grid: {
-                            display: false,
-                            drawBorder: false
-                        },
-
-                        ticks: {
-                            font: {
-                                family: 'Inter',
-                                size: 11
-                            },
-                            color: '#94a3b8'
-                        }
-
-                    },
-
-                    y: {
-
-                        grid: {
-                            color: '#e2e8f0',
-                            borderDash: [5, 5],
-                            drawBorder: false
-                        },
-
-                        ticks: {
-                            font: {
-                                family: 'Inter',
-                                size: 11
-                            },
-                            color: '#94a3b8',
-                            padding: 10
-                        }
-
-                    }
-
-                }
-
-            }
-
-        });
-
-
-        // =====================================================
-        // KEDALAMAN
-        // =====================================================
-
-        const dataDummyKed = [
-
-            { Waktu: "2026-10-04 08:00:00", Ked: 10 },
-            { Waktu: "2026-10-04 08:15:00", Ked: 10.2 },
-            { Waktu: "2026-10-04 08:30:00", Ked: 10.1 },
-            { Waktu: "2026-10-04 08:45:00", Ked: 9.8 },
-            { Waktu: "2026-10-04 09:00:00", Ked: 9.4 },
-            { Waktu: "2026-10-04 09:15:00", Ked: 9.1 },
-            { Waktu: "2026-10-04 09:30:00", Ked: 10.2 }
-
-        ];
-
-        const nilaiKed =
-            dataDummyKed.map(item => parseFloat(item.Ked));
-
-        const totalKed =
-            nilaiKed.reduce((total, angka) => total + angka, 0);
-
-        const rataRataKed =
-            (totalKed / nilaiKed.length).toFixed(1);
-
-        document.getElementById('rataKedalaman').innerText =
-            'Rata-rata: ' + rataRataKed + ' m';
-
-
-        const ctxb =
-            document.getElementById('tampilgrafikKedalaman')
-                .getContext('2d');
-
-        let gradientb =
-            ctxb.createLinearGradient(0, 0, 0, 300);
-
-        gradientb.addColorStop(
-            0,
-            'rgba(17, 138, 178, 0.4)'
-        );
-
-        gradientb.addColorStop(
-            1,
-            'rgba(17, 138, 178, 0.0)'
-        );
-
-
-        new Chart(ctxb, {
-
-            type: 'line',
-
-            data: {
-
-                labels: labelWaktu,
-
-                datasets: [{
-
-                    label: 'Kedalaman',
-
-                    data: nilaiKed,
-
-                    backgroundColor: gradientb,
-
-                    borderColor: '#000080',
-
-                    borderWidth: 3,
-
-                    fill: true,
-
-                    tension: 0.4,
-
-                    pointBackgroundColor: '#ffffff',
-
-                    pointBorderColor: '#000080',
-
-                    pointBorderWidth: 2,
-
-                    pointRadius: 4,
-                    pointHoverRadius: 7,
-                    pointHitRadius: 12,
-                    pointBackgroundColor: '#ffffff',
-                    pointBorderWidth: 2,
-
-                }]
-
-            },
-
-            options: {
-
-                responsive: true,
-
-                maintainAspectRatio: false,
-
-                onClick: function (event, elements) {
-
-                    if (elements.length > 0) {
-
-                        const index = elements[0].index;
-
-                        const waktu = labelWaktu[index];
-
-                        const nilai = nilaiKed[index];
-
-                        const detail =
-                            document.getElementById('detailKedalaman');
-
-                        detail.innerHTML = `
-                            <div class="font-semibold mb-1">
-                                Detail Pengukuran
-                            </div>
-
-                            <div>
-                                Waktu:
-                                <strong>${waktu}</strong>
-                            </div>
-
-                            <div>
-                                Kedalaman:
-                                <strong>${nilai} m</strong>
-                            </div>
-                        `;
-
-                        detail.classList.remove('hidden');
-
-                    }
-
-                },
-
-                plugins: {
-
-                    legend: {
-                        display: false
-                    },
-
-                    tooltip: {
-
-                        backgroundColor: '#000080',
-
-                        titleFont: {
-                            family: 'Inter',
-                            size: 12
-                        },
-
-                        bodyFont: {
-                            family: 'Inter',
-                            size: 14,
-                            weight: 'bold'
-                        },
-
-                        padding: 12,
-
-                        displayColors: false,
-
-                        cornerRadius: 8,
-
-                        callbacks: {
-
-                            label: function (context) {
-
-                                return context.parsed.y + ' m';
-
-                            }
-
-                        }
-
-                    }
-
-                },
-
-                scales: {
-
-                    x: {
-
-                        grid: {
-                            display: false,
-                            drawBorder: false
-                        },
-
-                        ticks: {
-                            font: {
-                                family: 'Inter',
-                                size: 11
-                            },
-                            color: '#94a3b8'
-                        }
-
-                    },
-
-                    y: {
-
-                        grid: {
-                            color: '#e2e8f0',
-                            borderDash: [5, 5],
-                            drawBorder: false
-                        },
-
-                        ticks: {
-                            font: {
-                                family: 'Inter',
-                                size: 11
-                            },
-                            color: '#94a3b8',
-                            padding: 10
-                        }
-
-                    }
-
-                }
-
-            }
-
-        });
-
-
-        // =====================================================
-        // KEKERUHAN
-        // =====================================================
-
-        const dataDummyKer = [
-
-            { Waktu: "2026-10-04 08:00:00", Ker: 14 },
-            { Waktu: "2026-10-04 08:15:00", Ker: 14.5 },
-            { Waktu: "2026-10-04 08:30:00", Ker: 14.7 },
-            { Waktu: "2026-10-04 08:45:00", Ker: 15 },
-            { Waktu: "2026-10-04 09:00:00", Ker: 14.3 },
-            { Waktu: "2026-10-04 09:15:00", Ker: 14.2 },
-            { Waktu: "2026-10-04 09:30:00", Ker: 15.6 }
-
-        ];
-
-        const nilaiKer =
-            dataDummyKer.map(item => parseFloat(item.Ker));
-
-        const totalKer =
-            nilaiKer.reduce((total, angka) => total + angka, 0);
-
-        const rataRataKer =
-            (totalKer / nilaiKer.length).toFixed(1);
-
-        document.getElementById('rataKekeruhan').innerText =
-            'Rata-rata: ' + rataRataKer + ' NTU';
-
-
-        const ctxc =
-            document.getElementById('tampilgrafikKekeruhan')
-                .getContext('2d');
-
-        let gradientc =
-            ctxc.createLinearGradient(0, 0, 0, 300);
-
-        gradientc.addColorStop(
-            0,
-            'rgba(17, 138, 178, 0.4)'
-        );
-
-        gradientc.addColorStop(
-            1,
-            'rgba(17, 138, 178, 0.0)'
-        );
-
-
-        new Chart(ctxc, {
-
-            type: 'line',
-
-            data: {
-
-                labels: labelWaktu,
-
-                datasets: [{
-
-                    label: 'Kekeruhan',
-
-                    data: nilaiKer,
-
-                    backgroundColor: gradientc,
-
-                    borderColor: '#F6BE00',
-
-                    borderWidth: 3,
-
-                    fill: true,
-
-                    tension: 0.4,
-
-                    pointBackgroundColor: '#ffffff',
-
-                    pointBorderColor: '#F6BE00',
-
-                    pointBorderWidth: 2,
-
-                    pointRadius: 4,
-                    pointHoverRadius: 7,
-                    pointHitRadius: 12,
-                    pointBackgroundColor: '#ffffff',
-                    pointBorderWidth: 2,
-
-                }]
-
-            },
-
-            options: {
-
-                responsive: true,
-
-                maintainAspectRatio: false,
-
-                onClick: function (event, elements) {
-
-                    if (elements.length > 0) {
-
-                        const index = elements[0].index;
-
-                        const waktu = labelWaktu[index];
-
-                        const nilai = nilaiKer[index];
-
-                        const detail =
-                            document.getElementById('detailKekeruhan');
-
-                        detail.innerHTML = `
-                            <div class="font-semibold mb-1">
-                                Detail Pengukuran
-                            </div>
-
-                            <div>
-                                Waktu:
-                                <strong>${waktu}</strong>
-                            </div>
-
-                            <div>
-                                Kekeruhan:
-                                <strong>${nilai} NTU</strong>
-                            </div>
-                        `;
-
-                        detail.classList.remove('hidden');
-
-                    }
-
-                },
-
-                plugins: {
-
-                    legend: {
-                        display: false
-                    },
-
-                    tooltip: {
-
-                        backgroundColor: '#F6BE00',
-
-                        titleFont: {
-                            family: 'Inter',
-                            size: 12
-                        },
-
-                        bodyFont: {
-                            family: 'Inter',
-                            size: 14,
-                            weight: 'bold'
-                        },
-
-                        padding: 12,
-
-                        displayColors: false,
-
-                        cornerRadius: 8,
-
-                        callbacks: {
-
-                            label: function (context) {
-
-                                return context.parsed.y + ' NTU';
-
-                            }
-
-                        }
-
-                    }
-
-                },
-
-                scales: {
-
-                    x: {
-
-                        grid: {
-                            display: false,
-                            drawBorder: false
-                        },
-
-                        ticks: {
-                            font: {
-                                family: 'Inter',
-                                size: 11
-                            },
-                            color: '#94a3b8'
-                        }
-
-                    },
-
-                    y: {
-
-                        grid: {
-                            color: '#e2e8f0',
-                            borderDash: [5, 5],
-                            drawBorder: false
-                        },
-
-                        ticks: {
-                            font: {
-                                family: 'Inter',
-                                size: 11
-                            },
-                            color: '#94a3b8',
-                            padding: 10
-                        }
-
-                    }
-
-                }
-
-            }
-
-        });
-
-
-        // =====================================================
-        // pH
-        // =====================================================
-
-        const dataDummypH = [
-
-            { Waktu: "2026-10-04 08:00:00", pH: 7.2 },
-            { Waktu: "2026-10-04 08:15:00", pH: 7.4 },
-            { Waktu: "2026-10-04 08:30:00", pH: 7.1 },
-            { Waktu: "2026-10-04 08:45:00", pH: 6.8 },
-            { Waktu: "2026-10-04 09:00:00", pH: 6.9 },
-            { Waktu: "2026-10-04 09:15:00", pH: 7.4 },
-            { Waktu: "2026-10-04 09:30:00", pH: 7.1 }
-
-        ];
-
-        const nilaipH =
-            dataDummypH.map(item => parseFloat(item.pH));
-
-        const totalpH =
-            nilaipH.reduce((total, angka) => total + angka, 0);
-
-        const rataRatapH =
-            (totalpH / nilaipH.length).toFixed(1);
-
-        document.getElementById('ratapH').innerText =
-            'Rata-rata: ' + rataRatapH;
-
-
-        const ctxd =
-            document.getElementById('tampilgrafikpH')
-                .getContext('2d');
-
-        let gradientd =
-            ctxd.createLinearGradient(0, 0, 0, 300);
-
-        gradientd.addColorStop(
-            0,
-            'rgba(17, 138, 178, 0.4)'
-        );
-
-        gradientd.addColorStop(
-            1,
-            'rgba(17, 138, 178, 0.0)'
-        );
-
-
-        new Chart(ctxd, {
-
-            type: 'line',
-
-            data: {
-
-                labels: labelWaktu,
-
-                datasets: [{
-
-                    label: 'pH',
-
-                    data: nilaipH,
-
-                    backgroundColor: gradientd,
-
-                    borderColor: '#A020F0',
-
-                    borderWidth: 3,
-
-                    fill: true,
-
-                    tension: 0.4,
-
-                    pointBackgroundColor: '#ffffff',
-
-                    pointBorderColor: '#A020F0',
-
-                    pointBorderWidth: 2,
-
-                    pointRadius: 4,
-                    pointHoverRadius: 7,
-                    pointHitRadius: 12,
-                    pointBackgroundColor: '#ffffff',
-                    pointBorderWidth: 2,
-
-                }]
-
-            },
-
-            options: {
-
-                responsive: true,
-
-                maintainAspectRatio: false,
-
-                onClick: function (event, elements) {
-
-                    if (elements.length > 0) {
-
-                        const index = elements[0].index;
-
-                        const waktu = labelWaktu[index];
-
-                        const nilai = nilaipH[index];
-
-                        const detail =
-                            document.getElementById('detailpH');
-
-                        detail.innerHTML = `
-                            <div class="font-semibold mb-1">
-                                Detail Pengukuran
-                            </div>
-
-                            <div>
-                                Waktu:
-                                <strong>${waktu}</strong>
-                            </div>
-
-                            <div>
-                                pH:
-                                <strong>${nilai}</strong>
-                            </div>
-                        `;
-
-                        detail.classList.remove('hidden');
-
-                    }
-
-                },
-
-                plugins: {
-
-                    legend: {
-                        display: false
-                    },
-
-                    tooltip: {
-
-                        backgroundColor: '#A020F0',
-
-                        titleFont: {
-                            family: 'Inter',
-                            size: 12
-                        },
-
-                        bodyFont: {
-                            family: 'Inter',
-                            size: 14,
-                            weight: 'bold'
-                        },
-
-                        padding: 12,
-
-                        displayColors: false,
-
-                        cornerRadius: 8,
-
-                        callbacks: {
-
-                            label: function (context) {
-
-                                return context.parsed.y;
-
-                            }
-
-                        }
-
-                    }
-
-                },
-
-                scales: {
-
-                    x: {
-
-                        grid: {
-                            display: false,
-                            drawBorder: false
-                        },
-
-                        ticks: {
-                            font: {
-                                family: 'Inter',
-                                size: 11
-                            },
-                            color: '#94a3b8'
-                        }
-
-                    },
-
-                    y: {
-
-                        grid: {
-                            color: '#e2e8f0',
-                            borderDash: [5, 5],
-                            drawBorder: false
-                        },
-
-                        ticks: {
-                            font: {
-                                family: 'Inter',
-                                size: 11
-                            },
-                            color: '#94a3b8',
-                            padding: 10
-                        }
-
-                    }
-
-                }
-
-            }
-
-        });
-
-
-        // =====================================================
-        // SALINITAS
-        // =====================================================
-
-        const dataDummySal = [
-
-            { Waktu: "2026-10-04 08:00:00", Sal: 28 },
-            { Waktu: "2026-10-04 08:15:00", Sal: 27.5 },
-            { Waktu: "2026-10-04 08:30:00", Sal: 27.8 },
-            { Waktu: "2026-10-04 08:45:00", Sal: 28.3 },
-            { Waktu: "2026-10-04 09:00:00", Sal: 27.9 },
-            { Waktu: "2026-10-04 09:15:00", Sal: 28 },
-            { Waktu: "2026-10-04 09:30:00", Sal: 28.4 }
-
-        ];
-
-        const nilaiSal =
-            dataDummySal.map(item => parseFloat(item.Sal));
-
-        const totalSal =
-            nilaiSal.reduce((total, angka) => total + angka, 0);
-
-        const rataRataSal =
-            (totalSal / nilaiSal.length).toFixed(1);
-
-        document.getElementById('rataSalinitas').innerText =
-            'Rata-rata: ' + rataRataSal + ' ppt';
-
-
-        const ctxe =
-            document.getElementById('tampilgrafikSalinitas')
-                .getContext('2d');
-
-        let gradiente =
-            ctxe.createLinearGradient(0, 0, 0, 300);
-
-        gradiente.addColorStop(
-            0,
-            'rgba(17, 138, 178, 0.4)'
-        );
-
-        gradiente.addColorStop(
-            1,
-            'rgba(17, 138, 178, 0.0)'
-        );
-
-
-        new Chart(ctxe, {
-
-            type: 'line',
-
-            data: {
-
-                labels: labelWaktu,
-
-                datasets: [{
-
-                    label: 'Salinitas Air',
-
-                    data: nilaiSal,
-
-                    backgroundColor: gradiente,
-
-                    borderColor: '#118AB2',
-
-                    borderWidth: 3,
-
-                    fill: true,
-
-                    tension: 0.4,
-
-                    pointBackgroundColor: '#ffffff',
-
-                    pointBorderColor: '#118AB2',
-
-                    pointBorderWidth: 2,
-
-                    pointRadius: 4,
-                    pointHoverRadius: 7,
-                    pointHitRadius: 12,
-                    pointBackgroundColor: '#ffffff',
-                    pointBorderWidth: 2,
-
-                }]
-
-            },
-
-            options: {
-
-                responsive: true,
-
-                maintainAspectRatio: false,
-
-                onClick: function (event, elements) {
-
-                    if (elements.length > 0) {
-
-                        const index = elements[0].index;
-
-                        const waktu = labelWaktu[index];
-
-                        const nilai = nilaiSal[index];
-
-                        const detail =
-                            document.getElementById('detailSalinitas');
-
-                        detail.innerHTML = `
-                            <div class="font-semibold mb-1">
-                                Detail Pengukuran
-                            </div>
-
-                            <div>
-                                Waktu:
-                                <strong>${waktu}</strong>
-                            </div>
-
-                            <div>
-                                Salinitas:
-                                <strong>${nilai} ppt</strong>
-                            </div>
-                        `;
-
-                        detail.classList.remove('hidden');
-
-                    }
-
-                },
-
-                plugins: {
-
-                    legend: {
-                        display: false
-                    },
-
-                    tooltip: {
-
-                        backgroundColor: '#118AB2',
-
-                        titleFont: {
-                            family: 'Inter',
-                            size: 12
-                        },
-
-                        bodyFont: {
-                            family: 'Inter',
-                            size: 14,
-                            weight: 'bold'
-                        },
-
-                        padding: 12,
-
-                        displayColors: false,
-
-                        cornerRadius: 8,
-
-                        callbacks: {
-
-                            label: function (context) {
-
-                                return context.parsed.y + ' ppt';
-
-                            }
-
-                        }
-
-                    }
-
-                },
-
-                scales: {
-
-                    x: {
-
-                        grid: {
-                            display: false,
-                            drawBorder: false
-                        },
-
-                        ticks: {
-                            font: {
-                                family: 'Inter',
-                                size: 11
-                            },
-                            color: '#94a3b8'
-                        }
-
-                    },
-
-                    y: {
-
-                        grid: {
-                            color: '#e2e8f0',
-                            borderDash: [5, 5],
-                            drawBorder: false
-                        },
-
-                        ticks: {
-                            font: {
-                                family: 'Inter',
-                                size: 11
-                            },
-                            color: '#94a3b8',
-                            padding: 10
-                        }
-
-                    }
-
-                }
-
-            }
-
-        });
-
         const mobileToggleBtn = document.getElementById('mobile-toggle-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const toggleIcon = document.getElementById('toggle-icon');
@@ -1855,11 +350,261 @@
             }
 
         });
-
     </script>
+    <!-- Hero Banner -->
+    <section class="bg-brand-tealBg text-white px-6 sm:px-8 pt-28 pb-10 shadow-inner min-h-[366px]">
+        <div class="max-w-6xl mx-auto w-full space-y-4">
+            <nav class="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-cyan-100 font-medium font-inter">
+                <a href="index.html" class="hover:underline flex items-center gap-1"><i class="fa-solid fa-house text-xs"></i> Beranda</a>
+                <span>&gt;</span>
+                <a href="data.html" class="hover:underline">Data</a>
+                <span>&gt;</span>
+                <span class="text-white font-semibold">Data ALBA</span>
+            </nav>
+            <div class="flex items-center gap-3 pt-2">
+                <i class="fa-solid fa-chart-line text-3xl sm:text-4xl"></i>
+                <h1 class="text-3xl sm:text-4xl font-bold tracking-wide font-anta">Data ALBA</h1>
+            </div>
+            <p class="text-sm sm:text-base text-cyan-50 max-w-3xl leading-relaxed font-normal font-inter">
+                Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data salinitas, kedalaman, kekeruhan, pH, oksigen terlarut (DO), dan suhu.
+            </p>
+            <div class="pt-4">
+
+                <div
+                    class="inline-flex items-center bg-white rounded-full py-1.5 px-2 shadow-sm border-[1.5px] border-[#434b6e]">
 
 
-    <br>
+                    <!-- Status Kiri -->
+                    <div class="flex items-center space-x-2 px-3">
+                        <div class="w-4 h-4 rounded-full bg-gray-400"></div>
+                        <span class="font-bold text-[#434b6e] text-sm">
+                            Tidak online
+                        </span>
+                    </div>
+                    <!-- Status Kanan -->
+                    <div class="flex items-center space-x-2 pr-4 pl-2">
+                        <div
+                            class="w-5 h-5 rounded-full bg-[#434b6e] flex items-center justify-center">
+                            <i class="fa-solid fa-chart-line text-xs"></i>
+                        </div>
+                        <span class="font-bold text-[#434b6e] text-sm">
+                            Data non-real-time
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow">
+        <!-- =================================================
+             JUDUL
+        ================================================== -->
+        <section class="mb-8">
+            <div class="text-center">
+                <h2
+                    class="text-2xl sm:text-3xl font-bold text-brand-darkText font-anta">
+                    Peta Data ALBA
+                </h2>
+                <p
+                    class="text-sm text-gray-500 mt-2 max-w-2xl mx-auto leading-relaxed">
+                    Titik-titik pada peta menunjukkan lokasi pengamatan yang digunakan untuk merepresentasikan data kondisi perairan.
+                </p>
+            </div>
+        </section>
+        <!-- =================================================
+             PETA
+        ================================================== -->
+
+        <section class="mb-10">
+            <div
+                class="bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-3 sm:p-5">
+                <!-- LEGENDA -->
+                <div
+                    class="flex flex-wrap items-center gap-x-6 gap-y-3 px-2 py-3 text-xs sm:text-sm text-gray-600">
+                    <div class="flex items-center gap-2">
+                        <span
+                            class="w-3 h-3 rounded-full bg-[#008ba3] border-2 border-white shadow">
+                        </span>
+
+                        <span>
+                            Titik pengamatan
+                        </span>
+                    </div>
+
+
+                    <div class="flex items-center gap-2">
+                        <span
+                            class="w-3 h-3 rounded-full bg-[#22c55e] border-2 border-white shadow">
+                        </span>
+                        <span>
+                            Titik awal
+                        </span>
+
+                    </div>
+
+
+                    <div class="flex items-center gap-2">
+                        <span
+                            class="w-3 h-3 rounded-full bg-[#ef4444] border-2 border-white shadow">
+                        </span>
+                        <span>
+                            Titik akhir
+                        </span>
+                    </div>
+                </div>
+
+
+                <!-- MAP -->
+
+                <div id="batimetri-map"
+                    class="w-full h-[450px] sm:h-[550px] rounded-xl overflow-hidden border border-gray-200">
+                </div>
+            </div>
+        </section>
+        <!-- =================================================
+             TABEL INDIKATOR KUALITAS PERAIRAN (PER 5 TITIK)
+        ================================================== -->
+        <section class="mb-10 mt-10">
+            <div class="mb-6">
+                <h2 class="text-xl sm:text-2xl font-bold text-brand-darkText">
+                    Indikator Kualitas Perairan
+                </h2>
+                <p class="text-sm text-gray-500 mt-2">
+                    Evaluasi nilai rata-rata parameter kualitas air per zona (5 titik pengamatan) berdasarkan kriteria baku mutu lingkungan
+                </p>
+                
+                <!-- Legenda Status -->
+                <div class="flex flex-wrap gap-4 mt-4 text-xs">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                        <span class="text-gray-600">Baik</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-yellow-400"></span>
+                        <span class="text-gray-600">Kurang Baik</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                        <span class="text-gray-600">Tidak Baik</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wadah Tabel (Akan diisi otomatis oleh JavaScript) -->
+            <div id="table-indikator-container" class="space-y-8"></div>
+        </section>
+
+        <!-- =================================================
+             INFORMASI PEMETAAN ALBA
+        ================================================== -->
+        <section
+            class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
+            
+            <!-- Card 1: Multi-Parameter -->
+            <div class="info-card p-5">
+                <div class="flex items-center gap-3 mb-3">
+                    <div
+                        class="w-11 h-11 rounded-xl bg-brand-lightCyan flex items-center justify-center text-brand-cyan text-lg">
+                        <!-- Mengganti icon air menjadi icon droplet/flask untuk merepresentasikan kualitas air -->
+                        <i class="fa-solid fa-droplet"></i>
+                    </div>
+                    <div>
+                        <h3
+                            class="font-bold text-brand-darkText">
+                            Parameter Lingkungan
+                        </h3>
+                        <p class="text-xs text-gray-400">
+                            Multi-sensor ALBA
+                        </p>
+                    </div>
+                </div>
+
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    Wahana ALBA mencatat data kedalaman, suhu, kekeruhan, pH, DO, dan salinitas secara terintegrasi pada setiap lokasi.
+                </p>
+            </div>
+
+            <!-- Card 2: Titik Koordinat (Waypoint) -->
+            <div class="info-card p-5">
+                <div class="flex items-center gap-3 mb-3">
+                    <div
+                        class="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 text-lg">
+                        <!-- Menggunakan target/crosshairs untuk nuansa navigasi otonom/waypoint -->
+                        <i class="fa-solid fa-location-crosshairs"></i>
+                    </div>
+                    <div>
+                        <h3
+                            class="font-bold text-brand-darkText">
+                            Posisi Pengukuran
+                        </h3>
+                        <p class="text-xs text-gray-400">
+                            Koordinat Waypoint (GPS)
+                        </p>
+                    </div>
+                </div>
+
+                <p
+                    class="text-sm text-gray-600 leading-relaxed">
+                    Setiap titik pada peta menunjukkan lokasi presisi secara spasial saat ALBA melakukan pembacaan parameter kualitas air.
+                </p>
+            </div>
+
+            <!-- Card 3: Visualisasi Spasial -->
+            <div class="info-card p-5">
+                <div class="flex items-center gap-3 mb-3">
+                    <div
+                        class="w-11 h-11 rounded-xl bg-green-50 flex items-center justify-center text-green-600 text-lg">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                    </div>
+                    <div>
+                        <h3
+                            class="font-bold text-brand-darkText">
+                            Pemetaan Kondisi Air
+                        </h3>
+                        <p class="text-xs text-gray-400">
+                            Visualisasi Spasial
+                        </p>
+                    </div>
+                </div>
+
+                <p
+                    class="text-sm text-gray-600 leading-relaxed">
+                    Persebaran titik membantu memvisualisasikan zonasi kondisi air untuk memudahkan analisis kelayakan dan kualitas suatu wilayah perairan.
+                </p>
+            </div>
+        </section>
+
+        <!-- =================================================
+             INFORMASI DATA
+        ================================================== -->
+        <section
+            class="bg-brand-lightCyan rounded-2xl border border-brand-borderCyan p-5 sm:p-6 mb-4">
+            <div class="flex items-start gap-3">
+                <div
+                    class="w-10 h-10 shrink-0 rounded-xl bg-white flex items-center justify-center text-brand-cyan">
+                    <i class="fa-solid fa-circle-info"></i>
+                </div>
+                <div>
+                    <h3
+                        class="font-bold text-brand-darkText mb-2">
+                        Informasi Parameter Titik Pengamatan
+                    </h3>
+                    <p
+                        class="text-sm text-gray-600 leading-relaxed">
+                        Klik salah satu titik pada peta untuk melihat informasi lokasi, waktu pencatatan, dan 6 parameter data pengamatan (Suhu, DO, Kedalaman, Kekeruhan, pH, dan Salinitas).
+                    </p>
+                </div>
+            </div>
+        </section>
+    
+    </main>
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
     <footer class="bg-white px-6 py-10 border-t-[2px] border-[#118AB2]">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
 
@@ -1870,8 +615,8 @@
                 <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9"
                     class="flex items-start gap-3 hover:text-[#464b71] transition">
                     <i class="fa-solid fa-location-dot text-xl mt-1"></i>
-                    <span class="leading-relaxed">Workshop Instrumentasi dan Robotika Kelautan (Bengkel) ITK,
-                        Babakan, Dramaga, Bogor, Indonesia 16680</span>
+                    <span class="leading-relaxed">Workshop Instrumentasi dan Robotika Kelautan (Bengkel) ITK, Babakan,
+                        Dramaga, Bogor, Indonesia 16680</span>
                 </a>
 
                 <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-3 hover:text-[#464b71] transition">
@@ -1903,8 +648,16 @@
 
                 <!-- Tempat untuk Logo MIT+R -->
                 <div class="w-full flex items-center justify-start">
-                    <!-- Ganti "URL_LOGO_KAMU.png" dengan path/link logo yang sebenarnya -->
-                    <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-24   object-contain">
+                    <!-- Kontainer Lingkaran Background -->
+                    <!-- Atur w-* dan h-* di bawah untuk mengubah ukuran lingkaran -->
+                    <div
+                        class="relative w-28 h-28 rounded-full bg-[#118AB2] flex items-center justify-center overflow-hidden shadow-md">
+
+                        <!-- Logo -->
+                        <!-- Atur h-* / w-* untuk ukuran logo, serta inset / top / left / translate jika ingin geser posisi -->
+                        <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-24 object-contain">
+
+                    </div>
                 </div>
 
                 <!-- Tombol Back to Top -->
@@ -1923,11 +676,429 @@
                             class="flex items-center justify-center w-7 h-7 bg-white text-[#118AB2] rounded-full transition-transform duration-500 group-hover:scale-110 shrink-0">
                             <i class="fa-solid fa-arrow-up text-sm"></i>
                         </span>
+
                     </button>
                 </div>
             </div>
+
         </div>
     </footer>
-</body>
+    
+    <!-- =====================================================
+         LEAFLET JS
+    ====================================================== -->
 
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+
+
+    <script>
+        
+        const batimetriPoints = [
+            {id: 1, time: "08:00", lat: -7.675694, lng: 108.819542, data: {kedalaman: 5.2, suhu: 28.5, salinitas: 32, kekeruhan: 12.4, ph: 8.1, do: 6.5}},
+            {id: 2, time: "08:05", lat: -7.669228, lng: 108.826683, data: {kedalaman: 5.4, suhu: 28.6, salinitas: 32.3, kekeruhan: 12.1, ph: 8.0, do: 6.4}},
+            {id: 3, time: "08:10", lat: -7.666444, lng: 108.830939, data: {kedalaman: 5.1, suhu: 28.6, kekeruhan: 13.0, ph: 8.1, do: 6.2, salinitas: 30.5 }},
+            {id: 4, time: "08:15", lat: -7.665309, lng: 108.835494, data: {kedalaman: 4.8, suhu: 28.8, kekeruhan: 14.2, ph: 7.9, do: 6.0, salinitas: 31.0 }},
+            {id: 5, time: "08:20", lat: -7.663216, lng: 108.841502, data: {kedalaman: 4.5, suhu: 28.9, kekeruhan: 15.1, ph: 7.9, do: 5.8, salinitas: 31.2 }},
+            {id: 6, time: "08:25", lat: -7.661267, lng: 108.848828, data: { kedalaman: 4.6, suhu: 29.1, kekeruhan: 15.5, ph: 7.8, do: 5.7, salinitas: 31.5 }},
+            {id: 7, time: "08:30", lat: -7.662660, lng: 108.857311, data: { kedalaman: 4.9, suhu: 29.2, kekeruhan: 16.0, ph: 7.8, do: 5.6, salinitas: 32.0 }},
+            {id: 8, time: "08:35", lat: -7.668329, lng: 108.862923, data: { kedalaman: 5.3, suhu: 29.0, kekeruhan: 14.8, ph: 8.0, do: 5.9, salinitas: 31.8 }},
+            {id: 9, time: "08:40", lat: -7.677056, lng: 108.868661, data: { kedalaman: 5.7, suhu: 28.8, kekeruhan: 13.5, ph: 8.1, do: 6.1, salinitas: 31.1 }},
+            {id: 10, time: "08:45", lat: -7.683345, lng: 108.868088, data: { kedalaman: 6.1, suhu: 28.6, kekeruhan: 12.0, ph: 8.2, do: 6.3, salinitas: 30.8 }},
+        ];
+
+        /* =====================================================
+           INISIALISASI PETA
+        ===================================================== */
+
+        const map =
+            L.map('batimetri-map');
+
+        /* =====================================================
+           CITRA SATELIT ESRI
+        ===================================================== */
+
+        const satelliteLayer =
+            L.tileLayer(
+                'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+                {
+                    attribution: 'Tiles &copy; Esri',
+                    maxZoom: 19
+                }
+            );
+
+
+        satelliteLayer.addTo(map);
+
+        /* =====================================================
+           MARKER TITIK PENGAMATAN
+        ===================================================== */
+
+        batimetriPoints.forEach(
+            (point, index) => {
+
+                const isFirst =
+                    index === 0;
+
+                const isLast =
+                    index === batimetriPoints.length - 1;
+
+                let markerColor;
+                if (isFirst) {
+                    markerColor = '#22c55e';
+                } else if (isLast) {
+                    markerColor = '#ef4444';    
+                } else {
+                    markerColor = '#008ba3';
+                }
+
+                /* =============================================
+                   ICON MARKER
+                ============================================= */
+
+                const pointIcon =
+                    L.divIcon({
+                        className: '',
+                        html: `
+                            <div
+                                class="batimetri-marker"
+                                style="
+                                    background:${markerColor};
+                                ">
+                                ${point.id}
+                            </div>
+                        `,
+                        iconSize: [28, 28],
+                        iconAnchor: [14, 14]
+                    });
+
+
+
+                const marker =
+                    L.marker(
+                        [point.lat, point.lng],
+                        {
+                            icon: pointIcon
+                        }
+                    ).addTo(map);
+
+                /* =============================================
+                   STATUS TITIK
+                ============================================= */
+
+                let status;
+                if (isFirst) {
+                    status = `
+                        <span style="
+                            color:#16a34a;
+                            font-weight:700;
+                        ">
+                            Titik awal
+                        </span>
+                    `;
+                } else if (isLast) {
+                    status = `
+                        <span style="
+                            color:#dc2626;
+                            font-weight:700;
+                        ">
+                            Titik akhir
+                        </span>
+                    `;
+                } else {
+                    status = `
+                        <span style="
+                            color:#008ba3;
+                            font-weight:700;
+                        ">
+                            Titik pengamatan
+                        </span>
+                    `;
+                }
+                const checkData = (val, unit) => (val !== null && val !== undefined) ? `${val} ${unit}` : '<span style="color:#9ca3af;">N/A</span>';
+
+                const parameterInformation = `
+                    <div style="
+                        margin-top:12px;
+                        padding-top:12px;
+                        border-top:1px solid #e5e7eb;
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 8px;
+                        font-size: 11px;
+                    ">
+                         <div>
+                            <strong style="display:block; color:#4b5563;">Suhu</strong>
+                            ${checkData(point.data.suhu, '°C')}
+                        </div>
+                        <div>
+                            <strong style="display:block; color:#4b5563;">DO</strong>
+                            ${checkData(point.data.do, 'mg/L')}
+                        </div>
+                        <div>
+                            <strong style="display:block; color:#4b5563;">Kedalaman</strong>
+                            ${checkData(point.data.kedalaman, 'm')}
+                        </div>
+                        <div>
+                            <strong style="display:block; color:#4b5563;">Kekeruhan</strong>
+                            ${checkData(point.data.kekeruhan, 'NTU')}
+                        </div>
+                        <div>
+                            <strong style="display:block; color:#4b5563;">pH</strong>
+                            ${checkData(point.data.ph, '')}
+                        </div>
+                        <div>
+                            <strong style="display:block; color:#4b5563;">Salinitas</strong>
+                            ${checkData(point.data.salinitas, 'ppt')}
+                        </div>
+                    </div>
+                `;
+
+                marker.bindPopup(`
+                    <div style="min-width:260px; font-family:Inter,Arial,sans-serif;">
+                        <div style="font-size:14px; font-weight:800; color:#2d3757; margin-bottom:4px;">
+                            Titik Pengukuran ${point.id}
+                        </div>
+                        <div style="font-size:11px; margin-bottom:10px;">
+                            ${status}
+                        </div>
+                        <div style="font-size:12px; margin-bottom:4px;">
+                            <strong>Waktu:</strong> ${point.time}
+                        </div>
+                        <div style="font-size:12px; margin-bottom:4px;">
+                            <strong>Koordinat:</strong> ${point.lat.toFixed(6)}, ${point.lng.toFixed(6)}
+                        </div>
+
+                        ${parameterInformation}
+
+                        <div style="
+                            margin-top:12px;
+                            padding-top:8px;
+                            border-top:1px solid #e5e7eb;
+                            color:#6b7280;
+                            font-size:10px;
+                            text-align:center;
+                        ">
+                            Metode: Pengukuran Multi-Parameter ALBA
+                        </div>
+                    </div>
+                `);
+
+                /* =============================================
+                   LABEL
+                ============================================= */
+
+                marker.bindTooltip(
+                    `Titik ${point.id}`,
+                    {
+                        permanent: true,
+                        direction: 'top',
+                        offset: [0, -15],
+                        className:
+                            'data-point-label'
+                    }
+                );
+
+            }
+        );
+
+        /* =====================================================
+           MENYESUAIKAN PETA DENGAN SEMUA TITIK
+        ===================================================== */
+
+        const allCoordinates =
+            batimetriPoints.map(
+                point => [
+                    point.lat,
+                    point.lng
+                ]
+            );
+
+
+        const bounds =
+            L.latLngBounds(allCoordinates);
+
+
+        map.fitBounds(
+            bounds,
+            {
+                padding: [45, 45]
+            }
+        );
+
+        /* =====================================================
+           LOGIKA TABEL INDIKATOR PARAMETER
+        ===================================================== */
+
+        // 1. Fungsi menentukan status tiap parameter (SILAKAN SESUAIKAN NILAI AMBANG BATASNYA)
+        // Nilai di bawah ini hanya contoh, bisa kamu sesuaikan dengan Kepmen LH / Literatur ITK
+        function getStatusBadge(paramName, value) {
+            if (value === null || value === undefined) {
+                return '<span class="px-2 py-1 bg-gray-100 text-gray-500 rounded text-xs font-medium border border-gray-200">N/A</span>';
+            }
+
+            let status = "Baik";
+            
+            // Contoh aturan ambang batas (Threshold)
+           if (paramName === 'suhu') {
+                if (value < 25 || value > 32) status = "Tidak Baik";
+                else if (value < 27 || value > 30) status = "Kurang Baik";
+            } else if (paramName === 'ph') {
+                if (value < 6 || value > 9) status = "Tidak Baik";
+                else if (value < 7 || value > 8.5) status = "Kurang Baik";
+            } else if (paramName === 'do') {
+                if (value < 3) status = "Tidak Baik";
+                else if (value < 5) status = "Kurang Baik";
+            } else if (paramName === 'kekeruhan') {
+                if (value > 30) status = "Tidak Baik";
+                else if (value > 15) status = "Kurang Baik";
+            } else if (paramName === 'salinitas') {
+                if (value < 5 || value > 36) status = "Tidak Baik"; 
+                else if (value > 34) status = "Kurang Baik";        
+            }
+
+            // Menentukan warna badge berdasarkan Tailwind CSS
+            let badgeClass = "bg-green-100 text-green-700 border-green-200"; 
+            if (status === "Kurang Baik") {
+                badgeClass = "bg-yellow-100 text-yellow-700 border-yellow-200";
+            } else if (status === "Tidak Baik") {
+                badgeClass = "bg-red-100 text-red-700 border-red-200";
+            }
+
+            return `<span class="px-2 py-1 border ${badgeClass} rounded text-xs font-medium whitespace-nowrap block text-center w-full min-w-[70px]">${status}</span>`;
+        }
+
+        // 2. Render Data ke dalam HTML per 5 Titik
+        /* =====================================================
+           LOGIKA TABEL INDIKATOR PARAMETER (RATA-RATA PER 5 TITIK)
+        ===================================================== */
+
+        // 1. Fungsi untuk menghitung rata-rata dari array (mengabaikan nilai null)
+        function getAverage(chunk, paramName) {
+            let sum = 0;
+            let count = 0;
+            for (let point of chunk) {
+                // Pastikan object data ada dan nilainya tidak null
+                if (point.data && point.data[paramName] !== null && point.data[paramName] !== undefined) {
+                    sum += point.data[paramName];
+                    count++;
+                }
+            }
+            return count > 0 ? (sum / count) : null;
+        }
+
+        // 2. Fungsi menentukan status dan mencetak sel tabel (Angka + Badge)
+        function formatIndicatorCell(paramName, value, unit = "") {
+            if (value === null || value === undefined) {
+                return '<span class="text-gray-400 text-xs">N/A</span>';
+            }
+
+            let status = "Baik";
+            
+            // Ambang batas baku mutu
+            if (paramName === 'suhu') {
+                if (value < 25 || value > 32) status = "Tidak Baik";
+                else if (value < 27 || value > 30) status = "Kurang Baik";
+            } else if (paramName === 'ph') {
+                if (value < 6 || value > 9) status = "Tidak Baik";
+                else if (value < 7 || value > 8.5) status = "Kurang Baik";
+            } else if (paramName === 'do') {
+                if (value < 3) status = "Tidak Baik";
+                else if (value < 5) status = "Kurang Baik";
+            } else if (paramName === 'kekeruhan') {
+                if (value > 30) status = "Tidak Baik";
+                else if (value > 15) status = "Kurang Baik";
+            } else if (paramName === 'salinitas') {
+                if (value < 5 || value > 36) status = "Tidak Baik";
+                else if (value > 34) status = "Kurang Baik";
+            }
+
+            // Styling Badge Tailwind
+            let badgeClass = "bg-green-100 text-green-700 border-green-200"; 
+            if (status === "Kurang Baik") {
+                badgeClass = "bg-yellow-100 text-yellow-700 border-yellow-200";
+            } else if (status === "Tidak Baik") {
+                badgeClass = "bg-red-100 text-red-700 border-red-200";
+            }
+
+            // Jika parameter kedalaman, tidak perlu pakai badge status kualitas air
+            if (paramName === 'kedalaman') {
+                return `<div class="font-medium text-gray-800">${value.toFixed(2)} ${unit}</div>`;
+            }
+
+            // Tampilkan Angka rata-rata dan Badge-nya
+            return `
+                <div class="flex flex-col items-center justify-center gap-1.5">
+                    <span class="font-medium text-gray-800 text-sm">${value.toFixed(2)} ${unit}</span>
+                    <span class="px-2 py-0.5 border ${badgeClass} rounded text-[10px] font-bold whitespace-nowrap">
+                        ${status}
+                    </span>
+                </div>
+            `;
+        }
+
+        // 3. Render Tabel Rata-rata
+        const tableContainer = document.getElementById('table-indikator-container');
+        
+        let tableHTML = `
+            <div class="overflow-x-auto bg-white rounded-xl border-2 border-gray-100 shadow-sm">
+                <table class="w-full text-sm text-left whitespace-nowrap">
+                    <thead class="bg-gray-50 text-gray-700 border-b border-gray-200">
+                        <tr>
+                            <th class="px-4 py-4 font-semibold text-center border-r">Zona / Kelompok</th>
+                            <th class="px-4 py-4 font-semibold text-center">Suhu</th>
+                            <th class="px-4 py-4 font-semibold text-center">DO</th>
+                            <th class="px-4 py-4 font-semibold text-center">Kedalaman</th>
+                            <th class="px-4 py-4 font-semibold text-center">Kekeruhan</th>
+                            <th class="px-4 py-4 font-semibold text-center">pH</th>
+                            <th class="px-4 py-4 font-semibold text-center">Salinitas</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+        `;
+
+        const chunkSize = 5; 
+        for (let i = 0; i < batimetriPoints.length; i += chunkSize) {
+            const chunk = batimetriPoints.slice(i, i + chunkSize);
+            
+            const startId = chunk[0].id;
+            const endId = chunk[chunk.length - 1].id;
+            
+            // Hitung rata-rata per parameter
+            const avgSuhu = getAverage(chunk, 'suhu');
+            const avgDo = getAverage(chunk, 'do');
+            const avgKedalaman = getAverage(chunk, 'kedalaman');
+            const avgKekeruhan = getAverage(chunk, 'kekeruhan');
+            const avgPh = getAverage(chunk, 'ph');
+            const avgSalinitas = getAverage(chunk, 'salinitas');
+
+            tableHTML += `
+                <tr class="hover:bg-blue-50/50 transition-colors">
+                    <td class="px-4 py-4 border-r text-center">
+                        <div class="font-bold text-[#118AB2]">Zona ${Math.floor(i / chunkSize) + 1}</div>
+                        <div class="text-xs text-gray-400 mt-1">Titik ${startId} - ${endId}</div>
+                    </td>
+                    <td class="px-4 py-4 text-center align-middle">${formatIndicatorCell('suhu', avgSuhu, '°C')}</td>
+                    <td class="px-4 py-4 text-center align-middle">${formatIndicatorCell('do', avgDo, 'mg/L')}</td>
+                    <td class="px-4 py-4 text-center align-middle">${formatIndicatorCell('kedalaman', avgKedalaman, 'm')}</td>
+                    <td class="px-4 py-4 text-center align-middle">${formatIndicatorCell('kekeruhan', avgKekeruhan, 'NTU')}</td>
+                    <td class="px-4 py-4 text-center align-middle">${formatIndicatorCell('ph', avgPh, '')}</td>
+                    <td class="px-4 py-4 text-center align-middle">${formatIndicatorCell('salinitas', avgSalinitas, 'ppt')}</td>
+                </tr>
+            `;
+        }
+
+        tableHTML += `
+                    </tbody>
+                </table>
+            </div>
+        `;
+
+        if (tableContainer) {
+            tableContainer.innerHTML = tableHTML;
+        }
+    </script>
+</body>
 </html>
