@@ -184,7 +184,29 @@
                 height: 180px;
             }
         }
+
+        /* RESPONSIVE NAVBAR */
+        @media (max-width: 768px) {
+            #navbar {
+                padding: 12px 16px;
+            }
+
+            #navbar img {
+                height: 42px;
+            }
+
+            #logo-circle {
+                width: 50px;
+                height: 50px;
+            }
+
+            #mobile-toggle-btn {
+                font-size: 22px;
+                padding: 8px;
+            }
+        }
     </style>
+
 </head>
 
 <body class="bg-white text-gray-800 font-inter">
@@ -200,7 +222,7 @@
 
                 <!-- 1. SHAPE BIRU (Gunakan opacity-0 transition-opacity duration-300) -->
                 <div id="logo-circle"
-                    class="absolute bg-[#118AB2] rounded-full w-14 h-14 -z-0 opacity-0 transition-opacity duration-300 ease-in-out pointer-events-none">
+                    class="absolute bg-[#118AB2] rounded-full w-14 h-14 -z-0 opacity-0 scale-75 transition-all duration-300 ease-in-out pointer-events-none">
                 </div>
 
                 <!-- 2. Tombol Logo -->
@@ -359,23 +381,23 @@
         <!-- Hero Content -->
         <div class="relative z-10 flex-grow flex flex-col justify-center items-center text-center px-6 mt-[-40px]">
             <h1
-                class="font-tech text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-[0.15em] drop-shadow-lg mb-6">
+                class="font-tech text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-[0.08em] sm:tracking-[0.15em] drop-shadow-lg mb-5 sm:mb-6">
                 ALBATROSS
             </h1>
             <p
-                class="text-white text-sm md:text-base lg:text-lg max-w-3xl leading-relaxed drop-shadow-md mb-10 font-medium px-4">
+                class="text-white text-sm sm:text-base md:text-base lg:text-lg max-w-3xl leading-relaxed drop-shadow-md mb-8 sm:mb-10 font-medium px-4">
                 Memantau perairan dan ekosistem mangrove dari sedimentasi secara akurat untuk mendukung keberlangsungan
                 masyarakat dan biota yang hidup sekitarnya.
             </p>
             <!-- Action Buttons -->
-            <div class="flex flex-col sm:flex-row gap-5">
+            <div class="flex flex-col sm:flex-row gap-4 sm:gap-5 w-full sm:w-auto px-4 sm:px-0">
                 <a href="data.html"
-                    class="glass-btn text-white px-8 py-3 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 font-semibold tracking-wide w-48">
+                    class="glass-btn text-white px-8 py-3 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 font-semibold tracking-wide w-full sm:w-48">
                     <i class="fas fa-qrcode text-lg"></i>
                     Data
                 </a>
                 <a href="alat.html"
-                    class="glass-btn text-white px-8 py-3 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 font-semibold tracking-wide w-48">
+                    class="glass-btn text-white px-8 py-3 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 font-semibold tracking-wide w-full sm:w-48">
                     <i class="fas fa-tools text-lg"></i>
                     Alat
                 </a>
@@ -397,12 +419,14 @@
             </div>
             <!-- Right Column: Info Card -->
             <div class="w-full relative mt-8 lg:mt-0">
-                <div class="relative bg-[#1a7f9f] rounded-2xl p-8 pt-20 md:p-20 md:pt-30 shadow-2xl mt-0">
-                    <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-4/5 sm:w-auto">
+                <div
+                    class="relative bg-[#1a7f9f] rounded-2xl p-6 pt-16 sm:p-8 sm:pt-20 md:p-20 md:pt-30 shadow-2xl mt-0">
+                    <div
+                        class="absolute -top-5 sm:-top-6 left-1/2 transform -translate-x-1/2 bg-white px-5 sm:px-10 py-4 sm:py-6 rounded-xl shadow-md whitespace-nowrap">
                         <div
                             class="bg-white px-10 py-6 rounded-t-xl rounded-b-md shadow-lg border-b-4 border-[#1a7f9f] flex justify-center items-center">
                             <h2
-                                class="font-tech text-xl md:text-3xl font-bold text-[#445b73] tracking-wide text-center whitespace-nowrap pt-3">
+                                class="font-tech text-lg sm:text-xl md:text-3xl font-bold text-[#445b73] tracking-wide text-center whitespace-nowrap pt-3">
                                 Apa itu Albatross?
                             </h2>
                         </div>
@@ -828,7 +852,7 @@
             <!-- SECTION 1: COMMENTS (DIPERBARUI)               -->
             <!-- ============================================== -->
             <div class="bg-brand-bg px-6 py-8 relative">
-                <div class="flex justify-between items-center mb-8">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
                     <div class="flex items-baseline gap-3">
                         <h2 class="text-2xl font-bold text-gray-800">Komentar</h2>
                         <!-- ID ditambahkan di sini -->
@@ -1145,19 +1169,6 @@
 
         requestAnimationFrame(animate);
 
-        const logoCircle = document.getElementById('logo-circle');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 20) {
-                // Muncul saat di-scroll ke bawah
-                logoCircle.classList.remove('opacity-0', 'scale-75');
-                logoCircle.classList.add('opacity-100', 'scale-100');
-            } else {
-                // Sembunyi kembali saat posisi paling atas
-                logoCircle.classList.remove('opacity-100', 'scale-100');
-                logoCircle.classList.add('opacity-0', 'scale-75');
-            }
-        });
     </script>
 
     <footer class="bg-[#118AB2] px-6 py-10 border-t-[2px] border-[#118AB2]">
@@ -1202,7 +1213,7 @@
                 <!-- Tempat untuk Logo MIT+R -->
                 <div class="w-full flex items-center justify-start">
                     <!-- Ganti "URL_LOGO_KAMU.png" dengan path/link logo yang sebenarnya -->
-                    <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-56 object-contain">
+                    <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-40 sm:h-48 md:h-56 object-contain">
                 </div>
 
                 <!-- Tombol Back to Top -->
