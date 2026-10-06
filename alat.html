@@ -54,27 +54,27 @@
     </style>
 </head>
 
-<body class="bg-white">
+<body class="bg-white text-gray-800">
 
     <!-- Navbar -->
     <nav id="navbar"
-        class="fixed top-0 left-0 w-full z-50 p-4 lg:px-12 transition-all duration-300 bg-white shadow-md text-[#118AB2]">
+        class="fixed top-0 left-0 w-full z-50 p-3 sm:p-4 lg:px-12 transition-all duration-300 bg-white shadow-md text-[#118AB2]">
 
         <div class="max-w-7xl mx-auto flex justify-between items-center relative">
 
             <!-- Logo ALBATROSS -->
             <div class="relative flex items-center justify-center">
                 <!-- Shape Bulat Biru -->
-                <div class="absolute bg-[#118AB2] rounded-full w-14 h-14 -z-0"></div>
+                <div class="absolute bg-[#118AB2] rounded-full w-12 h-12 sm:w-14 sm:h-14 -z-0"></div>
 
                 <!-- Tombol Logo -->
                 <a href="#" id="logo-btn"
                     class="relative z-10 flex items-center justify-center transition-transform hover:scale-105">
-                    <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="h-12 w-auto object-contain">
+                    <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="h-10 sm:h-12 w-auto object-contain">
                 </a>
             </div>
 
-            <!-- Container Kanan -->
+            <!-- Container Kanan Desktop -->
             <div class="flex items-center space-x-3">
 
                 <ul id="nav-links"
@@ -148,7 +148,7 @@
 
                 </ul>
 
-                <!-- Tombol Mobile -->
+                <!-- Tombol Mobile Toggle -->
                 <button id="mobile-toggle-btn" class="md:hidden text-2xl p-2 transition-colors focus:outline-none"
                     aria-label="Buka menu navigasi">
                     <i id="toggle-icon" class="fas fa-bars"></i>
@@ -156,46 +156,55 @@
             </div>
         </div>
 
-        <!-- Menu Mobile -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white mt-4 rounded-xl shadow-lg p-4">
+        <!-- Menu Mobile Interaktif -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white mt-3 rounded-xl shadow-lg p-4 border border-gray-100">
             <div class="flex flex-col space-y-2 text-sm font-semibold text-[#118AB2]">
-                <a href="index.html" class="px-4 py-3 rounded-lg hover:bg-cyan-50">
+                <a href="index.html" class="px-4 py-2.5 rounded-lg hover:bg-cyan-50">
                     BERANDA
                 </a>
-                <a href="tentang kami.html" class="px-4 py-3 rounded-lg hover:bg-cyan-50">
+                <a href="tentang kami.html" class="px-4 py-2.5 rounded-lg hover:bg-cyan-50">
                     TENTANG KAMI
                 </a>
+
+                <!-- Accordion Mobile ALAT -->
                 <div class="border-t border-gray-100 pt-2">
-                    <p class="px-4 py-2 text-xs text-gray-400">
-                        ALAT
-                    </p>
-                    <a href="alat alba.html" class="block px-4 py-2 hover:bg-cyan-50 rounded-lg">
-                        Alat ALBA
-                    </a>
-                    <a href="alat bat.html" class="block px-4 py-2 hover:bg-cyan-50 rounded-lg">
-                        Alat BAT
-                    </a>
-                    <a href="alat tross.html" class="block px-4 py-2 hover:bg-cyan-50 rounded-lg">
-                        Alat TROSS
-                    </a>
+                    <button id="mobile-alat-btn" class="w-full flex justify-between items-center px-4 py-2 rounded-lg hover:bg-cyan-50 text-left uppercase text-xs tracking-wider text-gray-500 font-bold">
+                        <span>ALAT</span>
+                        <i id="mobile-alat-icon" class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+                    </button>
+                    <div id="mobile-alat-sub" class="hidden pl-4 pr-2 py-1 space-y-1">
+                        <a href="alat alba.html" class="block px-4 py-2 text-gray-700 hover:bg-cyan-50 hover:text-[#118AB2] rounded-lg">
+                            Alat ALBA
+                        </a>
+                        <a href="alat bat.html" class="block px-4 py-2 text-gray-700 hover:bg-cyan-50 hover:text-[#118AB2] rounded-lg">
+                            Alat BAT
+                        </a>
+                        <a href="alat tross.html" class="block px-4 py-2 text-gray-700 hover:bg-cyan-50 hover:text-[#118AB2] rounded-lg">
+                            Alat TROSS
+                        </a>
+                    </div>
                 </div>
 
+                <!-- Accordion Mobile DATA -->
                 <div class="border-t border-gray-100 pt-2">
-                    <p class="px-4 py-2 text-xs text-gray-400">
-                        DATA
-                    </p>
-                    <a href="data pemetaan.html" class="block px-4 py-2 hover:bg-cyan-50 rounded-lg">
-                        Data Pemetaan
-                    </a>
-                    <a href="data alba.html" class="block px-4 py-2 hover:bg-cyan-50 rounded-lg">
-                        Data ALBA
-                    </a>
-                    <a href="data bat.html" class="block px-4 py-2 hover:bg-cyan-50 rounded-lg">
-                        Data BAT
-                    </a>
-                    <a href="data tross.html" class="block px-4 py-2 hover:bg-cyan-50 rounded-lg">
-                        Data TROSS
-                    </a>
+                    <button id="mobile-data-btn" class="w-full flex justify-between items-center px-4 py-2 rounded-lg hover:bg-cyan-50 text-left uppercase text-xs tracking-wider text-gray-500 font-bold">
+                        <span>DATA</span>
+                        <i id="mobile-data-icon" class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+                    </button>
+                    <div id="mobile-data-sub" class="hidden pl-4 pr-2 py-1 space-y-1">
+                        <a href="data pemetaan.html" class="block px-4 py-2 text-gray-700 hover:bg-cyan-50 hover:text-[#118AB2] rounded-lg">
+                            Data Pemetaan
+                        </a>
+                        <a href="data alba.html" class="block px-4 py-2 text-gray-700 hover:bg-cyan-50 hover:text-[#118AB2] rounded-lg">
+                            Data ALBA
+                        </a>
+                        <a href="data bat.html" class="block px-4 py-2 text-gray-700 hover:bg-cyan-50 hover:text-[#118AB2] rounded-lg">
+                            Data BAT
+                        </a>
+                        <a href="data tross.html" class="block px-4 py-2 text-gray-700 hover:bg-cyan-50 hover:text-[#118AB2] rounded-lg">
+                            Data TROSS
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -203,32 +212,29 @@
 
 
     <!-- ================= KONTEN UTAMA ================= -->
-    <main class="min-h-screen pt-32 pb-10 px-6">
+    <main class="min-h-screen pt-28 sm:pt-36 pb-12 px-4 sm:px-6">
 
         <!-- Judul Halaman -->
-        <div class="text-center mb-12">
-            <h1 class="font-tech text-4xl md:text-5xl font-bold text-[#445b73]">
+        <div class="text-center mb-8 sm:mb-12">
+            <h1 class="font-tech text-3xl sm:text-4xl md:text-5xl font-bold text-[#445b73]">
                 ALAT
             </h1>
 
-            <p class="font-inter text-sm md:text-base text-gray-500 mt-3">
+            <p class="font-inter text-xs sm:text-sm md:text-base text-gray-500 mt-2 sm:mt-3 px-4">
                 Mengenal perangkat yang digunakan dalam sistem ALBATROSS.
             </p>
         </div>
 
-        <!-- Grid 3 Kotak Alat -->
-        <div class="w-full max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10 items-center justify-center">
+        <!-- Grid 3 Kotak Alat (Responsif untuk Seluler) -->
+        <div class="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-y-12 sm:gap-x-8 sm:gap-y-10 items-center justify-center">
 
             <!-- ALBA -->
-            <a href="alat alba.html" class="w-full">
-                <div class="flex flex-col items-center w-full max-w-lg mx-auto">
-                    <div
-                        class="relative bg-[#1a7f9f] p-3 md:p-5 rounded-3xl shadow-xl transition-transform duration-300 hover:scale-[1.02] w-full pt-10">
+            <a href="alat alba.html" class="w-full block">
+                <div class="flex flex-col items-center w-full max-w-md md:max-w-lg mx-auto">
+                    <div class="relative bg-[#1a7f9f] p-2.5 sm:p-4 md:p-5 rounded-3xl shadow-xl transition-transform duration-300 hover:scale-[1.02] w-full pt-8 sm:pt-10">
                         <!-- Kotak Putih ALAT ALBA -->
-                        <div
-                            class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-8 py-2 rounded-b-xl shadow-md border-b-2 border-[#1a7f9f] z-10 whitespace-nowrap">
-                            <h2
-                                class="font-tech text-lg md:text-2xl font-bold text-[#445b73] text-center tracking-wide">
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-6 sm:px-8 py-1.5 sm:py-2 rounded-b-xl shadow-md border-b-2 border-[#1a7f9f] z-10 whitespace-nowrap">
+                            <h2 class="font-tech text-base sm:text-xl md:text-2xl font-bold text-[#445b73] text-center tracking-wide">
                                 ALBA
                             </h2>
                         </div>
@@ -237,7 +243,7 @@
                         <div class="p-1">
                             <div class="overflow-hidden rounded-2xl w-full">
                                 <img src="alba.png" alt="Alat Alba"
-                                    class="w-full h-[220px] sm:h-[260px] md:h-[280px] object-cover rounded-2xl block"
+                                    class="w-full h-[200px] sm:h-[260px] md:h-[280px] object-cover rounded-2xl block"
                                     onerror="this.onerror=null; this.src='https://placehold.co/800x450/0883a4/ffffff?text=Alat+Alba';">
                             </div>
                         </div>
@@ -246,15 +252,12 @@
             </a>
 
             <!-- BAT -->
-            <a href="alat bat.html" class="w-full">
-                <div class="flex flex-col items-center w-full max-w-lg mx-auto">
-                    <div
-                        class="relative bg-[#1a7f9f] p-3 md:p-5 rounded-3xl shadow-xl transition-transform duration-300 hover:scale-[1.02] w-full pt-10">
+            <a href="alat bat.html" class="w-full block">
+                <div class="flex flex-col items-center w-full max-w-md md:max-w-lg mx-auto">
+                    <div class="relative bg-[#1a7f9f] p-2.5 sm:p-4 md:p-5 rounded-3xl shadow-xl transition-transform duration-300 hover:scale-[1.02] w-full pt-8 sm:pt-10">
                         <!-- Kotak Putih ALAT BAT -->
-                        <div
-                            class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-8 py-2 rounded-b-xl shadow-md border-b-2 border-[#1a7f9f] z-10 whitespace-nowrap">
-                            <h2
-                                class="font-tech text-lg md:text-2xl font-bold text-[#445b73] text-center tracking-wide">
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-6 sm:px-8 py-1.5 sm:py-2 rounded-b-xl shadow-md border-b-2 border-[#1a7f9f] z-10 whitespace-nowrap">
+                            <h2 class="font-tech text-base sm:text-xl md:text-2xl font-bold text-[#445b73] text-center tracking-wide">
                                 BAT
                             </h2>
                         </div>
@@ -263,7 +266,7 @@
                         <div class="p-1">
                             <div class="overflow-hidden rounded-2xl w-full">
                                 <img src="bat.jpeg" alt="Alat Bat"
-                                    class="w-full h-[220px] sm:h-[260px] md:h-[280px] object-cover rounded-2xl block"
+                                    class="w-full h-[200px] sm:h-[260px] md:h-[280px] object-cover rounded-2xl block"
                                     onerror="this.onerror=null; this.src='https://placehold.co/800x450/0883a4/ffffff?text=Alat+Bat';">
                             </div>
                         </div>
@@ -271,16 +274,13 @@
                 </div>
             </a>
 
-            <!-- TROSS (Diatur posisi tengah pada layar tablet & desktop) -->
-            <a href="alat tross.html" class="w-full sm:col-span-2 sm:max-w-md sm:mx-auto">
-                <div class="flex flex-col items-center w-full mx-auto">
-                    <div
-                        class="relative bg-[#1a7f9f] p-3 md:p-5 rounded-3xl shadow-xl transition-transform duration-300 hover:scale-[1.02] w-full pt-10">
+            <!-- TROSS (Tengah di Desktop/Tablet, Penuh di Mobile) -->
+            <a href="alat tross.html" class="w-full block md:col-span-2 md:max-w-md md:mx-auto">
+                <div class="flex flex-col items-center w-full max-w-md mx-auto">
+                    <div class="relative bg-[#1a7f9f] p-2.5 sm:p-4 md:p-5 rounded-3xl shadow-xl transition-transform duration-300 hover:scale-[1.02] w-full pt-8 sm:pt-10">
                         <!-- Kotak Putih ALAT TROSS -->
-                        <div
-                            class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-8 py-2 rounded-b-xl shadow-md border-b-2 border-[#1a7f9f] z-10 whitespace-nowrap">
-                            <h2
-                                class="font-tech text-lg md:text-2xl font-bold text-[#445b73] text-center tracking-wide">
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-6 sm:px-8 py-1.5 sm:py-2 rounded-b-xl shadow-md border-b-2 border-[#1a7f9f] z-10 whitespace-nowrap">
+                            <h2 class="font-tech text-base sm:text-xl md:text-2xl font-bold text-[#445b73] text-center tracking-wide">
                                 TROSS
                             </h2>
                         </div>
@@ -289,7 +289,7 @@
                         <div class="p-1">
                             <div class="overflow-hidden rounded-2xl w-full">
                                 <img src="tross.jpeg" alt="Alat Tross"
-                                    class="w-full h-[220px] sm:h-[260px] md:h-[280px] object-cover rounded-2xl block"
+                                    class="w-full h-[200px] sm:h-[260px] md:h-[280px] object-cover rounded-2xl block"
                                     onerror="this.onerror=null; this.src='https://placehold.co/800x450/0883a4/ffffff?text=Alat+Tross';">
                             </div>
                         </div>
@@ -301,100 +301,88 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#118AB2] px-6 py-10 border-t-[2px] border-[#118AB2]">
+    <footer class="bg-[#118AB2] px-4 sm:px-6 py-8 sm:py-10 border-t-[2px] border-[#118AB2]">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
 
-            <!-- Kolom 1 (Dibuat lebih lebar/span 2): Lokasi, Email, dan WhatsApp -->
-            <div class="md:col-span-2 flex flex-col gap-4 text-white">
-                <h3 class="font-bold text-xl mb-2">Kontak Kami</h3>
+            <!-- Kolom 1: Kontak -->
+            <div class="md:col-span-2 flex flex-col gap-3 sm:gap-4 text-white">
+                <h3 class="font-bold text-lg sm:text-xl mb-1 sm:mb-2">Kontak Kami</h3>
 
-                <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9"
-                    class="flex items-start gap-3 hover:text-[#464b71] transition">
-                    <i class="fa-solid fa-location-dot text-xl mt-1"></i>
+                <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9" target="_blank"
+                    class="flex items-start gap-3 hover:text-cyan-200 transition text-sm sm:text-base">
+                    <i class="fa-solid fa-location-dot text-lg sm:text-xl mt-1 shrink-0"></i>
                     <span class="leading-relaxed">Workshop Instrumentasi dan Robotika Kelautan (Bengkel) ITK, Babakan,
                         Dramaga, Bogor, Indonesia 16680</span>
                 </a>
 
-                <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-3 hover:text-[#464b71] transition">
-                    <i class="fa-regular fa-envelope text-xl"></i>
-                    <span>mitr.ipb@gmail.com</span>
+                <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-3 hover:text-cyan-200 transition text-sm sm:text-base">
+                    <i class="fa-regular fa-envelope text-lg sm:text-xl shrink-0"></i>
+                    <span class="break-all">mitr.ipb@gmail.com</span>
                 </a>
 
-                <a href="https://wa.me/6283898339620" class="flex items-center gap-3 hover:text-[#464b71] transition">
-                    <i class="fa-brands fa-whatsapp text-xl"></i>
-                    <span>+6283898339620 (Deni Rizkiana Anwar Hidayat)</span>
+                <a href="https://wa.me/6283898339620" target="_blank" class="flex items-center gap-3 hover:text-cyan-200 transition text-sm sm:text-base">
+                    <i class="fa-brands fa-whatsapp text-lg sm:text-xl shrink-0"></i>
+                    <span>+6283898339620 (Deni Rizkiana)</span>
                 </a>
             </div>
 
-            <!-- Kolom 2: Sosial Media -->
-            <div class="flex flex-col gap-4 text-white">
-                <h3 class="font-bold text-xl mb-2">Media Sosial</h3>
+            <!-- Kolom 2: Media Sosial -->
+            <div class="flex flex-col gap-3 sm:gap-4 text-white">
+                <h3 class="font-bold text-lg sm:text-xl mb-1 sm:mb-2">Media Sosial</h3>
 
-                <a href="https://www.instagram.com/dmitr6teen/"
-                    class="flex items-center gap-3 hover:text-[#464b71] transition">
-                    <i class="fa-brands fa-instagram text-xl"></i>
+                <a href="https://www.instagram.com/dmitr6teen/" target="_blank"
+                    class="flex items-center gap-3 hover:text-cyan-200 transition text-sm sm:text-base">
+                    <i class="fa-brands fa-instagram text-lg sm:text-xl shrink-0"></i>
                     <span>@dmitr16teen</span>
                 </a>
-                <!-- Kamu bisa tambahkan link LinkedIn atau YouTube di sini jika ada -->
             </div>
 
             <!-- Kolom 3: Logo dan Tombol Back to Top -->
-            <div class="flex flex-col items-start gap-7 text-white">
-                <!-- Tempat untuk Logo MIT+R -->
+            <div class="flex flex-col items-start sm:items-end md:items-start justify-between gap-6 text-white">
                 <div class="w-full flex items-center justify-start">
-                    <!-- Ganti "URL_LOGO_KAMU.png" dengan path/link logo yang sebenarnya -->
-                    <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-56 object-contain">
+                    <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-32 sm:h-44 md:h-56 object-contain">
                 </div>
 
                 <!-- Tombol Back to Top -->
-                <div class="w-full flex justify-end mt-auto">
+                <div class="w-full flex justify-end">
                     <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-                        class="group flex items-center p-3 bg-white text-white rounded-full shadow-md hover:bg-[#0c6b8a] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
+                        class="group flex items-center p-2.5 sm:p-3 bg-white text-[#118AB2] rounded-full shadow-md hover:bg-[#0c6b8a] hover:text-white hover:shadow-xl transition-all duration-300 ease-in-out cursor-pointer">
 
-                        <!-- Teks yang Muncul Saat Hover (Sekarang di urutan pertama / sebelah kiri) -->
-                        <span
-                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[160px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold">
+                        <span class="whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out max-w-0 opacity-0 group-hover:max-w-[160px] group-hover:opacity-100 group-hover:mr-2 group-hover:pl-2 font-semibold text-xs sm:text-sm">
                             Kembali ke Atas
                         </span>
 
-                        <!-- Lingkaran Icon Panah (Sekarang di urutan kedua / sebelah kanan) -->
-                        <span
-                            class="flex items-center justify-center w-7 h-7 bg-white text-[#118AB2] rounded-full transition-transform duration-500 group-hover:scale-110 shrink-0">
-                            <i class="fa-solid fa-arrow-up text-sm"></i>
+                        <span class="flex items-center justify-center w-7 h-7 bg-[#118AB2] text-white group-hover:bg-white group-hover:text-[#118AB2] rounded-full transition-all duration-300 shrink-0">
+                            <i class="fa-solid fa-arrow-up text-xs sm:text-sm"></i>
                         </span>
-
                     </button>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Tambahan kotak/bar kuning diletakkan di LUAR tag footer aslimu -->
-    <div class="w-full relative bg-[#E2F0F3] py-4 px-6 border-t-[1px] border-[#118AB2] overflow-hidden">
-
-        <!-- Pola Pattern di Background -->
+    <!-- Copyright Bar -->
+    <div class="w-full relative bg-[#E2F0F3] py-4 px-4 sm:px-6 border-t-[1px] border-[#118AB2] overflow-hidden">
         <div class="absolute inset-0 opacity-15 pointer-events-none"
             style="background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0l15 15-15 15-15-15zm0 30l15 15-15 15-15-15z' fill='%23118AB2' fill-opacity='0.4' fill-rule='evenodd' /%3E%3C/svg%3E&quot;); background-size: 30px 30px;">
         </div>
 
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
-
-            <!-- Teks/Hak Cipta di sebelah Kanan -->
-            <div class="text-[#403100] font-semibold text-sm text-center md:text-right">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center md:justify-end gap-2 relative z-10">
+            <div class="text-[#403100] font-semibold text-xs sm:text-sm text-center md:text-right">
                 © 2026 Diklat MIT+R 16. All Rights Reserved.
             </div>
         </div>
     </div>
 
-    <!-- JavaScript Menu Mobile -->
+    <!-- JavaScript Interaktif -->
     <script>
+        // Toggle Utama Mobile Menu
         const mobileToggleBtn = document.getElementById('mobile-toggle-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const toggleIcon = document.getElementById('toggle-icon');
 
         mobileToggleBtn.addEventListener('click', function () {
             mobileMenu.classList.toggle('hidden');
-
             if (mobileMenu.classList.contains('hidden')) {
                 toggleIcon.classList.remove('fa-times');
                 toggleIcon.classList.add('fa-bars');
@@ -402,6 +390,26 @@
                 toggleIcon.classList.remove('fa-bars');
                 toggleIcon.classList.add('fa-times');
             }
+        });
+
+        // Accordion Mobile Submenu ALAT
+        const mobileAlatBtn = document.getElementById('mobile-alat-btn');
+        const mobileAlatSub = document.getElementById('mobile-alat-sub');
+        const mobileAlatIcon = document.getElementById('mobile-alat-icon');
+
+        mobileAlatBtn.addEventListener('click', function () {
+            mobileAlatSub.classList.toggle('hidden');
+            mobileAlatIcon.classList.toggle('rotate-180');
+        });
+
+        // Accordion Mobile Submenu DATA
+        const mobileDataBtn = document.getElementById('mobile-data-btn');
+        const mobileDataSub = document.getElementById('mobile-data-sub');
+        const mobileDataIcon = document.getElementById('mobile-data-icon');
+
+        mobileDataBtn.addEventListener('click', function () {
+            mobileDataSub.classList.toggle('hidden');
+            mobileDataIcon.classList.toggle('rotate-180');
         });
     </script>
 </body>
