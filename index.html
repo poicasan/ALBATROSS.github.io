@@ -217,7 +217,7 @@
 
     <!-- Sticky Navigation Bar -->
     <nav id="navbar"
-        class="fixed top-0 left-0 w-full z-50 p-4 lg:px-12 transition-all duration-300 text-[#118AB2] bg-transparent">
+        class="fixed top-0 left-0 w-full z-50 p-4 lg:px-12 transition-all duration-300 text-white bg-transparent">
 
         <div class="max-w-7xl mx-auto flex justify-between items-center relative">
 
@@ -323,7 +323,8 @@
                 </ul>
 
                 <!-- Tombol Mobile -->
-                <button id="mobile-toggle-btn" class="md:hidden text-2xl p-2 transition-colors focus:outline-none"
+                <button id="mobile-toggle-btn"
+                    class="md:hidden text-white text-2xl p-2 transition-colors focus:outline-none"
                     aria-label="Buka menu navigasi">
                     <i id="toggle-icon" class="fas fa-bars"></i>
                 </button>
@@ -1147,7 +1148,7 @@
             if (event.pointerType == 'mouse') {
                 event.preventDefault();
             }
-            
+
             isDragging = true;
             startX = event.clientX;
             startPosition = position;
