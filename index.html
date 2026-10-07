@@ -154,14 +154,14 @@
             height: 260px;
             object-fit: cover;
             border-radius: 16px;
-            pointer-events: none;
-            user-select: none;
+
             -webkit-user-drag: none;
+            user-select: none;
+            pointer-events: none;
         }
 
         /* Tablet */
         @media (max-width: 768px) {
-
             .slide {
                 flex: 0 0 350px;
                 width: 350px;
@@ -174,7 +174,6 @@
 
         /* HP */
         @media (max-width: 480px) {
-
             .slide {
                 flex: 0 0 280px;
                 width: 280px;
@@ -206,6 +205,11 @@
             }
         }
     </style>
+    <script>
+        slider.addEventListener('dragstart', (e) => {
+            e.preventDefault();
+        });
+    </script>
 
 </head>
 
@@ -570,53 +574,53 @@
                 <!-- FOTO ASLI -->
                 <div class="slide">
                     <div class="slide-card">
-                        <img src="IMG_1502.JPG" draggable="false" alt="Exhibition 1">
+                        <img src="IMG_1502.JPG" alt="Exhibition 1" draggable="false">
                     </div>
                 </div>
                 <div class="slide">
                     <div class="slide-card">
-                        <img src="IMG_1706.JPG" draggable="false" alt="Exhibition 2">
+                        <img src="IMG_1706.JPG" alt="Exhibition 2" draggable="false">
                     </div>
                 </div>
                 <div class="slide">
                     <div class="slide-card">
-                        <img src="IMG_1502.JPG" draggable="false" alt="Exhibition 3">
+                        <img src="IMG_1502.JPG" alt="Exhibition 3" draggable="false">
                     </div>
                 </div>
                 <div class="slide">
                     <div class="slide-card">
-                        <img src="IMG_1706.JPG" draggable="false" alt="Exhibition 4">
+                        <img src="IMG_1706.JPG" alt="Exhibition 4" draggable="false">
                     </div>
                 </div>
                 <div class="slide">
                     <div class="slide-card">
-                        <img src="IMG_1502.JPG" draggable="false" alt="Exhibition 5">
+                        <img src="IMG_1502.JPG" alt="Exhibition 5" draggable="false">
                     </div>
                 </div>
                 <!-- DUPLIKAT UNTUK LOOP -->
                 <div class="slide">
                     <div class="slide-card">
-                        <img src="IMG_1502.JPG" draggable="false" alt="Exhibition 1">
+                        <img src="IMG_1502.JPG" alt="Exhibition 1" draggable="false">
                     </div>
                 </div>
                 <div class="slide">
                     <div class="slide-card">
-                        <img src="IMG_1706.JPG" draggable="false" alt="Exhibition 2">
+                        <img src="IMG_1706.JPG" alt="Exhibition 2" draggable="false">
                     </div>
                 </div>
                 <div class="slide">
                     <div class="slide-card">
-                        <img src="IMG_1502.JPG" draggable="false" alt="Exhibition 3">
+                        <img src="IMG_1502.JPG" alt="Exhibition 3" draggable="false">
                     </div>
                 </div>
                 <div class="slide">
                     <div class="slide-card">
-                        <img src="IMG_1706.JPG" draggable="false" alt="Exhibition 4">
+                        <img src="IMG_1706.JPG" alt="Exhibition 4" draggable="false">
                     </div>
                 </div>
                 <div class="slide">
                     <div class="slide-card">
-                        <img src="IMG_1502.JPG" draggable="false" alt="Exhibition 5">
+                        <img src="IMG_1502.JPG" alt="Exhibition 5" draggable="false">
                     </div>
                 </div>
             </div>
@@ -1123,13 +1127,11 @@
                 position = ((position % loopWidth) + loopWidth) % loopWidth;
             }
 
-            track.style.transform = `translate3d(${-position}px, 0, 0)`;
+            track.style.transform = `translateX(${-position}px)`;
         }
 
         function animate(time) {
-            if (!lastTime) {
-                lastTime = time;
-            }
+            if (!lastTime) lastTime = time;
 
             const deltaTime = (time - lastTime) / 1000;
             lastTime = time;
@@ -1138,13 +1140,12 @@
                 position += speed * deltaTime;
                 updateSlider();
             }
-
             requestAnimationFrame(animate);
         }
 
         slider.addEventListener('pointerdown', (event) => {
+            event.preventDefault();
             isDragging = true;
-
             startX = event.clientX;
             startPosition = position;
             lastTime = 0;
@@ -1156,31 +1157,21 @@
             if (!isDragging) return;
 
             const distance = event.clientX - startX;
-
             position = startPosition - distance;
 
             updateSlider();
         });
 
-        function stopDragging(event) {
-            if (!isDragging) return;
-
+        function stopDragging() {
             isDragging = false;
-            lastTime = 0;
-
-            if (event && slider.hasPointerCapture(event.pointerId)) {
-                slider.releasePointerCapture(event.pointerId);
-            }
         }
 
         slider.addEventListener('pointerup', stopDragging);
         slider.addEventListener('pointercancel', stopDragging);
-        slider.addEventListener('lostpointercapture', () => {
-            isDragging = false;
-            lastTime = 0;
-        });
+        slider.addEventListener('lostpointercapture', stopDragging);
 
         requestAnimationFrame(animate);
+
     </script>
 
     <footer class="bg-[#118AB2] px-4 sm:px-6 py-10 border-t-[2px] border-[#118AB2]">
