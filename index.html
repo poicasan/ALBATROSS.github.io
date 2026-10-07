@@ -1144,7 +1144,10 @@
         }
 
         slider.addEventListener('pointerdown', (event) => {
-            event.preventDefault();
+            if (event.pointerType == 'mouse') {
+                event.preventDefault();
+            }
+            
             isDragging = true;
             startX = event.clientX;
             startPosition = position;
