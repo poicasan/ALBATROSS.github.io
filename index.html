@@ -1123,11 +1123,13 @@
                 position = ((position % loopWidth) + loopWidth) % loopWidth;
             }
 
-            track.style.transform = `translateX(${-position}px)`;
+            track.style.transform = `translate3d(${-position}px, 0, 0)`;
         }
 
         function animate(time) {
-            if (!lastTime) lastTime = time;
+            if (!lastTime) {
+                lastTime = time;
+            }
 
             const deltaTime = (time - lastTime) / 1000;
             lastTime = time;
@@ -1136,11 +1138,13 @@
                 position += speed * deltaTime;
                 updateSlider();
             }
+
             requestAnimationFrame(animate);
         }
 
         slider.addEventListener('pointerdown', (event) => {
             isDragging = true;
+
             startX = event.clientX;
             startPosition = position;
             lastTime = 0;
@@ -1152,21 +1156,31 @@
             if (!isDragging) return;
 
             const distance = event.clientX - startX;
+
             position = startPosition - distance;
 
             updateSlider();
         });
 
-        function stopDragging() {
+        function stopDragging(event) {
+            if (!isDragging) return;
+
             isDragging = false;
+            lastTime = 0;
+
+            if (event && slider.hasPointerCapture(event.pointerId)) {
+                slider.releasePointerCapture(event.pointerId);
+            }
         }
 
         slider.addEventListener('pointerup', stopDragging);
         slider.addEventListener('pointercancel', stopDragging);
-        slider.addEventListener('lostpointercapture', stopDragging);
+        slider.addEventListener('lostpointercapture', () => {
+            isDragging = false;
+            lastTime = 0;
+        });
 
         requestAnimationFrame(animate);
-
     </script>
 
     <footer class="bg-[#118AB2] px-4 sm:px-6 py-10 border-t-[2px] border-[#118AB2]">
