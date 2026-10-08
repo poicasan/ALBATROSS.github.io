@@ -4,20 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alat Alba - Monitoring Kampung Laut</title>
+    <title>Data ALBA - Albatross</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- Google Fonts: Anta & Inter -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Anta&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Anta&family=Inter:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- LEAFLET CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
     <script>
         tailwind.config = {
@@ -49,10 +54,131 @@
         .font-tech {
             font-family: 'Anta', sans-serif;
         }
+
+        .leaflet-container {
+            font-family: 'Inter', sans-serif;
+            z-index: 1;
+        }
+
+        .leaflet-popup-content-wrapper {
+            border-radius: 14px;
+        }
+
+        .leaflet-popup-content {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* Label titik pada peta */
+
+        .data-point-label {
+            background: rgba(45, 55, 72, 0.92);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 3px 7px;
+            font-size: 10px;
+            font-weight: 700;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+        }
+
+        .data-point-label::before {
+            display: none;
+        }
+
+
+        /* Marker angka */
+
+        .batimetri-marker {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #008ba3;
+            color: white;
+
+            border: 3px solid white;
+
+            font-size: 10px;
+            font-weight: 800;
+
+            box-shadow: 0 2px 7px rgba(0, 0, 0, 0.35);
+        }
+
+
+        /* Kartu informasi */
+
+        .info-card {
+            background: white;
+            border: 1px solid #d5eaf0;
+            border-radius: 18px;
+
+            box-shadow:
+                0 4px 12px rgba(17, 138, 178, 0.06);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 10px 22px rgba(17, 138, 178, 0.10);
+        }
+
+        .batimetri-marker {
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+            /* INI KUNCI EFEKNYA */
+            opacity: 0.4;
+            /* Titik pudar 40% */
+            transform: scale(0.6);
+            /* Ukuran titik menyusut jadi 60% */
+            transition: all 0.3s ease-in-out;
+            /* Animasi halus */
+            cursor: pointer;
+        }
+
+        /* Gaya saat kursor mendekat (Hover) */
+        .batimetri-marker:hover {
+            opacity: 1 !important;
+            /* Muncul 100% jelas */
+            transform: scale(1.3) !important;
+            /* Membesar 130% */
+            z-index: 9999 !important;
+            /* Memaksa titik tampil paling depan menutupi titik lain */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Menyembunyikan Label (Tooltip) permanen agar tidak menuh-menuhin layar */
+        .leaflet-tooltip.data-point-label {
+            opacity: 0 !important;
+            transition: opacity 0.3s;
+        }
+
+        /* Memunculkan Label hanya saat marker di-hover */
+        .leaflet-marker-icon:hover .leaflet-tooltip.data-point-label {
+            opacity: 1 !important;
+        }
     </style>
 </head>
 
-<body class="bg-gray-50 min-h-screen flex flex-col justify-between text-gray-800 font-inter">
+<body class="bg-white text-gray-800 font-inter">
 
     <!-- Navbar -->
     <nav id="navbar"
@@ -210,597 +336,251 @@
             </div>
         </div>
     </nav>
+    <script>
+        const mobileToggleBtn = document.getElementById('mobile-toggle-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const toggleIcon = document.getElementById('toggle-icon');
 
-    <section class="bg-brand-tealBg text-white px-4 sm:px-8 pt-28 pb-10 shadow-inner min-h-[350px]">
-        <div class="max-w-6xl mx-auto space-y-4">
+        mobileToggleBtn.addEventListener('click', function () {
 
-            <!-- Breadcrumbs -->
-            <nav class="flex items-center space-x-2 text-xs sm:text-sm text-cyan-100 font-medium font-inter">
-                <a href="index.html" class="hover:underline flex items-center gap-1">
-                    <i class="fa-solid fa-house text-xs"></i> Beranda
-                </a>
+            mobileMenu.classList.toggle('hidden');
+
+            if (mobileMenu.classList.contains('hidden')) {
+
+                toggleIcon.classList.remove('fa-times');
+                toggleIcon.classList.add('fa-bars');
+
+            } else {
+
+                toggleIcon.classList.remove('fa-bars');
+                toggleIcon.classList.add('fa-times');
+
+            }
+
+        });
+    </script>
+    <!-- Hero Banner -->
+    <section class="bg-brand-tealBg text-white px-4 sm:px-8 pt-28 pb-10 shadow-inner min-h-[366px]">
+        <div class="max-w-6xl mx-auto w-full space-y-4">
+            <nav class="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-cyan-100 font-medium font-inter">
+                <a href="index.html" class="hover:underline flex items-center gap-1"><i
+                        class="fa-solid fa-house text-xs"></i> Beranda</a>
                 <span>&gt;</span>
-                <a href="alat.html" class="hover:underline">Alat</a>
+                <a href="data.html" class="hover:underline">Data</a>
                 <span>&gt;</span>
-                <span class="text-white font-semibold">Alat Alba</span>
+                <span class="text-white font-semibold">Data ALBA</span>
             </nav>
-
-            <!-- Title with Network Icon -->
-            <div class="flex items-center space-x-3 pt-2">
-                <div class="text-3xl sm:text-4xl">
-                    <i class="fa-solid fa-ship"></i>
-                </div>
-                <h1 class="text-3xl sm:text-4xl font-bold tracking-wide font-anta">Alat Alba</h1>
+            <div class="flex items-center gap-3 pt-2">
+                <i class="fa-solid fa-chart-line text-3xl sm:text-4xl"></i>
+                <h1 class="text-3xl sm:text-4xl font-bold tracking-wide font-anta">Data ALBA</h1>
             </div>
-
-            <!-- Description -->
             <p class="text-sm sm:text-base text-cyan-50 max-w-3xl leading-relaxed font-normal font-inter">
-                Memantau kondisi perairan di kawasan Kampung Laut, Nusakambangan melalui pengukuran salinitas,
-                kedalaman, kecepatan arus, kekeruhan, pH, oksigen terlarut (DO), dan suhu secara otomatis.
+                Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data salinitas, kedalaman, kekeruhan, pH,
+                oksigen terlarut (DO), dan suhu.
             </p>
+            <div class="pt-4">
 
-            <!-- Action Button -->
-            <div class="pt-2">
-                <a href="#maintenance"
-                    class="inline-flex items-center space-x-2 bg-white text-brand-darkText font-semibold px-4 py-2 rounded-full text-xs sm:text-sm shadow hover:bg-gray-100 transition duration-200 border border-gray-200 font-inter">
-                    <span
-                        class="w-5 h-5 rounded-full bg-brand-darkText text-white flex items-center justify-center text-[10px]">
-                        <i class="fa-solid fa-wrench"></i>
-                    </span>
-                    <span>Pemeliharaan Alat</span>
-                </a>
+                <div
+                    class="inline-flex items-center bg-white rounded-full py-1.5 px-2 shadow-sm border-[1.5px] border-[#434b6e]">
+
+
+                    <!-- Status Kiri -->
+                    <div class="flex items-center space-x-2 px-3">
+                        <div class="w-4 h-4 rounded-full bg-gray-400"></div>
+                        <span class="font-bold text-[#434b6e] text-sm">
+                            Tidak aktif
+                        </span>
+                    </div>
+                    <!-- Status Kanan -->
+                    <div class="flex items-center space-x-2 pr-4 pl-2">
+                        <div class="w-5 h-5 rounded-full bg-[#434b6e] flex items-center justify-center">
+                            <i class="fa-solid fa-chart-line text-xs"></i>
+                        </div>
+                        <span class="font-bold text-[#434b6e] text-sm">
+                            Data <i>non-real-time</i>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow">
-
-        <!-- Section Heading -->
-        <h2 class="text-2xl sm:text-3xl font-bold text-center text-brand-darkText mb-6 font-anta">
-            Alat Alba
-        </h2>
-
-        <!-- Main Image Card Container -->
-        <div class="bg-white p-3 sm:p-4 rounded-2xl border-2 border-brand-borderCyan shadow-sm mb-10 max-w-3xl mx-auto">
-            <div class="overflow-hidden rounded-xl bg-gray-100 aspect-[16/9] flex items-center justify-center">
-                <img src="alba.png" alt="Alat Alba"
-                    class="w-full h-full object-cover transform hover:scale-105 transition duration-500"
-                    onerror="this.onerror=null; this.src='https://placehold.co/800x450/0883a4/ffffff?text=Alat+Alba+Boat';">
+        <!-- =================================================
+             JUDUL
+        ================================================== -->
+        <section class="mb-8">
+            <div class="text-center">
+                <h2 class="text-2xl sm:text-3xl font-bold text-brand-darkText font-anta">
+                    Peta Data ALBA
+                </h2>
+                <p class="text-sm text-gray-500 mt-2 max-w-2xl mx-auto leading-relaxed">
+                    Titik-titik pada peta menunjukkan lokasi pengamatan yang digunakan untuk merepresentasikan data
+                    kondisi perairan.
+                </p>
             </div>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full items-start">
+        </section>
+        <!-- =================================================
+             PETA
+        ================================================== -->
 
-            <!-- KOTAK ELEKTRO (KIRI) -->
-            <div class="flex flex-col items-center w-full">
-                <h3 class="text-xl sm:text-2xl font-bold text-brand-darkText mb-4 font-anta">
-                    Komponen Elektro
-                </h3>
+        <section class="mb-10">
+            <div class="bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-3 sm:p-5">
+                <!-- LEGENDA -->
+                <div class="flex flex-wrap items-center gap-x-6 gap-y-3 px-2 py-3 text-xs sm:text-sm text-gray-600">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-[#008ba3] border-2 border-white shadow">
+                        </span>
 
-                <div
-                    class="w-full bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-6 hover:shadow-md transition duration-200 h-full">
-                    <!-- Grid 2 Kolom Kebawah Dinamis -->
-                    <div class="grid grid-cols-2 gap-4">
+                        <span>
+                            Titik pengamatan
+                        </span>
+                    </div>
 
-                        <!-- Item 1 -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="raspberry.png" alt="Raspberry Pi 4"
-                                class="max-h-full max-w-full object-contain p-1">
+                    <!-- MAP -->
 
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        Raspberry Pi 4 Model B RAM 4GB<br>
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        <i>Single Board Computer</i> (SBC)
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Item 2 -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="sipeed.png" alt="Sipeed Maixcam2"
-                                class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        Sipeed Maixcam2 4K AI Visual Camera
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Kamera AI atau Modul Visi
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Item 3 -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="echo.png" alt="Echo Sounder Mini"
-                                class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        Echo Sounder Mini (A01NYUB)<br><span>
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Sensor Ultrasonik Jarak
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Item 4 -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="turbi.png" alt="Turbidity Sensor"
-                                class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        RS485 Water Quality Turbidity Sensor
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Sensor Kekeruhan Air
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Item 5 -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="ph.png" alt="pH Sensor" class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        RS485 Water Quality pH Sensor (IP68)
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Sensor Keasaman (pH)
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Item 6 -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="salinitas.png" alt="Electrical Conductivity Sensor"
-                                class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        RS485 Electrical Conductivity Sensor
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Sensor Konduktivitas atau Salinitas
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Item 7 -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="do.png" alt="Electrical Conductivity Sensor"
-                                class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        DFROBOT RS485 Dissolved Oxygen Sensor Sea Water
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Sensor Oksigen Terlarut
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Item 8 -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="suhu.png" alt="Electrical Conductivity Sensor"
-                                class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        DS18B20 Waterproof
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Sensor Suhu
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Item 9 -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="arduino.png" alt="Electrical Conductivity Sensor"
-                                class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        Arduino Mega 2560
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Papan Sirkuit Mikrokontroler
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Item 10 -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="pixhawk.png" alt="Electrical Conductivity Sensor"
-                                class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        Pixhawk 6X M10N GPS 20294
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Pengendali Penerbangan
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
-                            </div>
-                        </div>
-
+                    <div id="batimetri-map"
+                        class="w-full h-[450px] sm:h-[550px] rounded-xl overflow-hidden border border-gray-200">
                     </div>
                 </div>
-            </div>
-
-            <!-- KOTAK MEKANIK (KANAN) -->
-            <div class="flex flex-col items-center w-full">
-                <h3 class="text-xl sm:text-2xl font-bold text-brand-darkText mb-4 font-anta">
-                    Komponen Mekanik
-                </h3>
-
-                <div
-                    class="w-full bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-6 hover:shadow-md transition duration-200 h-full">
-                    <!-- Grid 2 Kolom Kebawah Dinamis -->
-                    <div class="grid grid-cols-2 gap-4">
-
-                        <!-- Resin -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="resin.jpg" alt="Resin" class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        Resin
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Ukuran: 23 Kilogram
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Dempul -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="dempul.jpg" alt="Dempul" class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        Dempul
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Ukuran: 3 Bungkus
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Fiberglass -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="fiberglass.jpg" alt="Fiberglass" class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        Fiberglass
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Ukuran: 4 x 2 Meter
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tripleks -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0">
-                            <img src="tripleks.jpg" alt="Tripleks" class="max-h-full max-w-full object-contain p-1">
-
-                            <div
-                                class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
-                                <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        Tripleks
-                                    </p>
-                                    <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
-                                        Ukuran: 4,2 x 2,2 Meter (0,9 Centimeter)
-                                    </span>
-                                </div>
-                                <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <!-- Maintenance Section -->
-    <section id="maintenance" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full scroll-mt-24">
-
-        <!-- Section Heading -->
-        <div class="text-center mb-8">
-            <h2 class="text-2xl sm:text-3xl font-bold text-brand-darkText font-anta">
-                Pemeliharaan Alat
-            </h2>
-        </div>
-
-        <!-- Maintenance Card -->
-        <div class="bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-5 sm:p-8">
-
+        </section>
+        <!-- =================================================
+             TABEL INDIKATOR KUALITAS PERAIRAN (PER 5 TITIK)
+        ================================================== -->
+        <section class="mb-10 mt-10">
             <div class="mb-6">
-                <p class="text-sm text-gray-600 leading-relaxed font-inter">
-                    Panduan ini berisi langkah-langkah pemeriksaan dan perawatan
-                    perangkat ALBA untuk menjaga kondisi dan kinerja alat selama
-                    proses pemantauan perairan.
+                <h2 class="text-xl sm:text-2xl font-bold text-brand-darkText">
+                    Indikator Kualitas Perairan
+                </h2>
+                <p class="text-sm text-gray-500 mt-2">
+                    Evaluasi nilai rata-rata parameter kualitas air per zona (5 titik pengamatan) berdasarkan kriteria
+                    baku mutu lingkungan
+                </p>
+
+                <!-- Legenda Status -->
+                <div class="flex flex-wrap gap-4 mt-4 text-xs">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                        <span class="text-gray-600">Baik</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-yellow-400"></span>
+                        <span class="text-gray-600">Kurang Baik</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                        <span class="text-gray-600">Tidak Baik</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wadah Tabel (Akan diisi otomatis oleh JavaScript) -->
+            <div id="table-indikator-container" class="space-y-8"></div>
+        </section>
+
+        <!-- =================================================
+             INFORMASI PEMETAAN ALBA
+        ================================================== -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
+
+            <!-- Card 1: Multi-Parameter -->
+            <div class="info-card p-5">
+                <div class="flex items-center gap-3 mb-3">
+                    <div
+                        class="w-11 h-11 rounded-xl bg-brand-lightCyan flex items-center justify-center text-brand-cyan text-lg">
+                        <!-- Mengganti icon air menjadi icon droplet/flask untuk merepresentasikan kualitas air -->
+                        <i class="fa-solid fa-droplet"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-brand-darkText">
+                            Parameter Lingkungan
+                        </h3>
+                        <p class="text-xs text-gray-400">
+                            Multi-sensor ALBA
+                        </p>
+                    </div>
+                </div>
+
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    Wahana ALBA mencatat data kedalaman, suhu, kekeruhan, pH, DO, dan salinitas secara terintegrasi pada
+                    setiap lokasi.
                 </p>
             </div>
 
-            <div class="space-y-4">
-
-                <!-- 1. Pemeriksaan Komponen Elektronik -->
-                <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
-                    <summary
-                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
-                        <span
-                            class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
-                            <i class="fa-solid fa-microchip text-brand-cyan"></i>
-                            1. Pemeriksaan Komponen Elektronik
-                        </span>
-                        <i
-                            class="fa-solid fa-chevron-down text-brand-cyan transition-transform group-open:rotate-180"></i>
-                    </summary>
-
-                    <div class="p-4 sm:p-5 text-sm text-gray-600 font-inter leading-relaxed">
-                        <ul class="list-disc pl-5 space-y-2">
-                            <li>Memeriksa kondisi kabel, konektor, dan sambungan listrik sebelum dan sesudah
-                                pengoperasian.</li>
-                            <li>Memastikan komponen elektronik terlindungi dari air dan kelembapan.</li>
-                            <li>Memeriksa kondisi fisik baterai dan memastikan tidak terdapat kerusakan.</li>
-                            <li>Memastikan Raspberry Pi, Arduino, dan Pixhawk berfungsi dengan baik.</li>
-                            <li>Memastikan tidak terdapat kabel yang longgar, terkelupas, atau mengalami kerusakan.</li>
-                        </ul>
+            <!-- Card 2: Titik Koordinat (Waypoint) -->
+            <div class="info-card p-5">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 text-lg">
+                        <!-- Menggunakan target/crosshairs untuk nuansa navigasi otonom/waypoint -->
+                        <i class="fa-solid fa-location-crosshairs"></i>
                     </div>
-                </details>
-
-                <!-- 2. Pembersihan dan Perawatan Sensor -->
-                <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
-                    <summary
-                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
-                        <span
-                            class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
-                            <i class="fa-solid fa-water text-brand-cyan"></i>
-                            2. Pembersihan dan Perawatan Sensor
-                        </span>
-                        <i
-                            class="fa-solid fa-chevron-down text-brand-cyan transition-transform group-open:rotate-180"></i>
-                    </summary>
-
-                    <div class="p-4 sm:p-5 text-sm text-gray-600 font-inter leading-relaxed">
-                        <ul class="list-disc pl-5 space-y-2">
-                            <li>Membilas sensor yang bersentuhan dengan air menggunakan air bersih setelah
-                                pengoperasian.</li>
-                            <li>Membersihkan bagian sensor dari lumpur, kotoran, atau endapan yang menempel.</li>
-                            <li>Memeriksa kondisi fisik sensor dan kabel penghubung.</li>
-                            <li>Memastikan bagian sensor tidak mengalami kerusakan atau korosi.</li>
-                            <li>Menyimpan sensor sesuai petunjuk produsen ketika tidak digunakan.</li>
-                        </ul>
+                    <div>
+                        <h3 class="font-bold text-brand-darkText">
+                            Posisi Pengukuran
+                        </h3>
+                        <p class="text-xs text-gray-400">
+                            Koordinat Waypoint (GPS)
+                        </p>
                     </div>
-                </details>
+                </div>
 
-                <!-- 3. Perawatan Sistem Penggerak -->
-                <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
-                    <summary
-                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
-                        <span
-                            class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
-                            <i class="fa-solid fa-gear text-brand-cyan"></i>
-                            3. Perawatan Sistem Penggerak
-                        </span>
-                        <i
-                            class="fa-solid fa-chevron-down text-brand-cyan transition-transform group-open:rotate-180"></i>
-                    </summary>
-
-                    <div class="p-4 sm:p-5 text-sm text-gray-600 font-inter leading-relaxed">
-                        <ul class="list-disc pl-5 space-y-2">
-                            <li>Memeriksa kondisi motor dan baling-baling sebelum dan sesudah pengoperasian.</li>
-                            <li>Membersihkan baling-baling dari sampah, tali, atau material yang tersangkut.</li>
-                            <li>Memeriksa kekencangan baut dan sambungan mekanik.</li>
-                            <li>Memastikan motor dan ESC tidak mengalami panas berlebih atau kerusakan.</li>
-                            <li>Memastikan sistem penggerak dapat beroperasi dengan normal sebelum alat digunakan.</li>
-                        </ul>
-                    </div>
-                </details>
-
-                <!-- 4. Perawatan Struktur Mekanik -->
-                <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
-                    <summary
-                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
-                        <span
-                            class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
-                            <i class="fa-solid fa-screwdriver-wrench text-brand-cyan"></i>
-                            4. Perawatan Struktur Mekanik
-                        </span>
-                        <i
-                            class="fa-solid fa-chevron-down text-brand-cyan transition-transform group-open:rotate-180"></i>
-                    </summary>
-
-                    <div class="p-4 sm:p-5 text-sm text-gray-600 font-inter leading-relaxed">
-                        <ul class="list-disc pl-5 space-y-2">
-                            <li>Membersihkan badan kapal dari lumpur dan kotoran setelah digunakan.</li>
-                            <li>Memeriksa permukaan fiberglass dari retakan, pengelupasan, atau kerusakan.</li>
-                            <li>Memeriksa sambungan, baut, dan bagian besi untuk mendeteksi korosi.</li>
-                            <li>Memastikan struktur kapal tetap kokoh dan tidak mengalami kebocoran.</li>
-                            <li>Memeriksa kondisi lapisan pelindung badan kapal secara berkala.</li>
-                        </ul>
-                    </div>
-                </details>
-
-                <!-- 5. Pemeriksaan Sebelum dan Sesudah Pengoperasian -->
-                <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
-                    <summary
-                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
-                        <span
-                            class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
-                            <i class="fa-solid fa-clipboard-check text-brand-cyan"></i>
-                            5. Pemeriksaan Sebelum dan Sesudah Pengoperasian
-                        </span>
-                        <i
-                            class="fa-solid fa-chevron-down text-brand-cyan transition-transform group-open:rotate-180"></i>
-                    </summary>
-
-                    <div class="p-4 sm:p-5 text-sm text-gray-600 font-inter leading-relaxed">
-                        <ul class="list-disc pl-5 space-y-2">
-                            <li>Memastikan seluruh komponen terpasang dengan baik sebelum alat digunakan.</li>
-                            <li>Memeriksa daya baterai dan kesiapan sistem navigasi.</li>
-                            <li>Memastikan sensor dapat membaca data dengan normal.</li>
-                            <li>Melakukan pemeriksaan ulang dan membersihkan alat setelah pengoperasian.</li>
-                            <li>Mencatat kerusakan atau kendala yang ditemukan selama penggunaan.</li>
-                            <li>Menyimpan alat di tempat yang kering dan aman setelah selesai digunakan.</li>
-                        </ul>
-                    </div>
-                </details>
-
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    Setiap titik pada peta menunjukkan lokasi presisi secara spasial saat ALBA melakukan pembacaan
+                    parameter kualitas air.
+                </p>
             </div>
-        </div>
-    </section>
 
-    <br>
-    <!-- Kodingan aslimu, tidak diubah sama sekali -->
+            <!-- Card 3: Visualisasi Spasial -->
+            <div class="info-card p-5">
+                <div class="flex items-center gap-3 mb-3">
+                    <div
+                        class="w-11 h-11 rounded-xl bg-green-50 flex items-center justify-center text-green-600 text-lg">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-brand-darkText">
+                            Pemetaan Kondisi Air
+                        </h3>
+                        <p class="text-xs text-gray-400">
+                            Visualisasi Spasial
+                        </p>
+                    </div>
+                </div>
+
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    Persebaran titik membantu memvisualisasikan zonasi kondisi air untuk memudahkan analisis kelayakan
+                    dan kualitas suatu wilayah perairan.
+                </p>
+            </div>
+        </section>
+
+        <!-- =================================================
+             INFORMASI DATA
+        ================================================== -->
+        <section class="bg-brand-lightCyan rounded-2xl border border-brand-borderCyan p-5 sm:p-6 mb-4">
+            <div class="flex items-start gap-3">
+                <div class="w-10 h-10 shrink-0 rounded-xl bg-white flex items-center justify-center text-brand-cyan">
+                    <i class="fa-solid fa-circle-info"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-brand-darkText mb-2">
+                        Informasi Parameter Titik Pengamatan
+                    </h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Klik salah satu titik pada peta untuk melihat informasi lokasi, waktu pencatatan, dan 6
+                        parameter data pengamatan (Suhu, DO, Kedalaman, Kekeruhan, pH, dan Salinitas).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
     <footer class="bg-[#118AB2] px-4 sm:px-6 py-10 border-t-[2px] border-[#118AB2]">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
 
@@ -887,29 +667,531 @@
             </div>
         </div>
     </div>
-    
+    <!-- =====================================================
+         LEAFLET JS
+    ====================================================== -->
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+
+
     <script>
-        const mobileToggleBtn = document.getElementById('mobile-toggle-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const toggleIcon = document.getElementById('toggle-icon');
 
-        mobileToggleBtn.addEventListener('click', function () {
+        const batimetriPoints = [
+            // Stasiun 1
+            { id: 1, stasiun: 1, time: "08:00", lat: -7.67569642, lng: 108.81990855, data: { kedalaman: 5.2, suhu: 28.5, salinitas: 32, kekeruhan: 12.4, ph: 8.1, do: 6.5 } },
+            { id: 2, stasiun: 1, time: "08:05", lat: -7.6737174, lng: 108.8207788, data: { kedalaman: 5.4, suhu: 28.6, salinitas: 32.3, kekeruhan: 12.1, ph: 8.0, do: 6.4 } },
+            { id: 3, stasiun: 1, time: "08:10", lat: -7.67554458, lng: 108.82175012, data: { kedalaman: 5.1, suhu: 28.6, kekeruhan: 13.0, ph: 8.1, do: 6.2, salinitas: 30.5 } },
+            { id: 4, stasiun: 1, time: "08:15", lat: -7.6733705, lng: 108.8223472, data: { kedalaman: 4.8, suhu: 28.8, kekeruhan: 14.2, ph: 7.9, do: 6.0, salinitas: 31.0 } },
+            { id: 5, stasiun: 1, time: "08:20", lat: -7.67533401, lng: 108.82345333, data: { kedalaman: 4.5, suhu: 28.9, kekeruhan: 15.1, ph: 7.9, do: 5.8, salinitas: 31.2 } },
+            { id: 6, stasiun: 1, time: "08:25", lat: -7.67318829, lng: 108.82413463, data: { kedalaman: 4.6, suhu: 29.1, kekeruhan: 15.5, ph: 7.8, do: 5.7, salinitas: 31.5 } },
+            { id: 7, stasiun: 1, time: "08:30", lat: -7.67511432, lng: 108.82530445, data: { kedalaman: 4.9, suhu: 29.2, kekeruhan: 16.0, ph: 7.8, do: 5.6, salinitas: 32.0 } },
+            { id: 8, stasiun: 1, time: "08:35", lat: -7.67306148, lng: 108.8262134, data: { kedalaman: 5.3, suhu: 29.0, kekeruhan: 14.8, ph: 8.0, do: 5.9, salinitas: 31.8 } },
+            { id: 9, stasiun: 1, time: "08:40", lat: -7.6750536, lng: 108.82727331, data: { kedalaman: 5.7, suhu: 28.8, kekeruhan: 13.5, ph: 8.1, do: 6.1, salinitas: 31.1 } },
+            { id: 10, stasiun: 1, time: "08:45", lat: -7.67295237, lng: 108.82807376, data: { kedalaman: 6.1, suhu: 28.6, kekeruhan: 12.0, ph: 8.2, do: 6.3, salinitas: 30.8 } },
+            { id: 11, stasiun: 1, time: "08:50", lat: -7.67495512, lng: 108.82911677, data: { kedalaman: 6.5, suhu: 28.5, kekeruhan: 11.5, ph: 8.2, do: 6.5, salinitas: 30.5 } },
+            { id: 12, stasiun: 1, time: "08:55", lat: -7.67383601, lng: 108.82958, data: { kedalaman: 6.8, suhu: 28.4, kekeruhan: 10.8, ph: 8.3, do: 6.6, salinitas: 30.2 } },
+            { id: 13, stasiun: 1, time: "09:00", lat: -7.67275144, lng: 108.82901878, data: { kedalaman: 7.2, suhu: 28.3, kekeruhan: 10.5, ph: 8.3, do: 6.7, salinitas: 30.0 } },
+            { id: 14, stasiun: 1, time: "09:05", lat: -7.67500405, lng: 108.82824547, data: { kedalaman: 7.0, suhu: 28.3, kekeruhan: 11.2, ph: 8.2, do: 6.6, salinitas: 30.1 } },
+            { id: 15, stasiun: 1, time: "09:10", lat: -7.67303742, lng: 108.82713977, data: { kedalaman: 6.6, suhu: 28.4, kekeruhan: 12.5, ph: 8.1, do: 6.4, salinitas: 30.4 } },
+            { id: 16, stasiun: 1, time: "09:15", lat: -7.67513951, lng: 108.8263465, data: { kedalaman: 6.2, suhu: 28.5, kekeruhan: 13.1, ph: 8.1, do: 6.2, salinitas: 30.7 } },
+            { id: 17, stasiun: 1, time: "09:20", lat: -7.67313147, lng: 108.82523293, data: { kedalaman: 5.8, suhu: 28.7, kekeruhan: 14.0, ph: 8.0, do: 6.0, salinitas: 31.0 } },
+            { id: 18, stasiun: 1, time: "09:25", lat: -7.6752606, lng: 108.8243608, data: { kedalaman: 5.5, suhu: 28.8, kekeruhan: 15.2, ph: 7.9, do: 5.8, salinitas: 31.3 } },
+            { id: 19, stasiun: 1, time: "09:30", lat: -7.6732454, lng: 108.82326752, data: { kedalaman: 5.1, suhu: 29.0, kekeruhan: 16.5, ph: 7.8, do: 5.6, salinitas: 31.6 } },
+            { id: 20, stasiun: 1, time: "09:35", lat: -7.67545139, lng: 108.82263031, data: { kedalaman: 4.8, suhu: 29.1, kekeruhan: 17.0, ph: 7.8, do: 5.4, salinitas: 32.1 } },
+            { id: 21, stasiun: 1, time: "09:40", lat: -7.67353113, lng: 108.82152738, data: { kedalaman: 4.5, suhu: 29.2, kekeruhan: 18.1, ph: 7.7, do: 5.2, salinitas: 32.5 } },
+            { id: 22, stasiun: 1, time: "09:45", lat: -7.67562763, lng: 108.82086413, data: { kedalaman: 4.2, suhu: 29.4, kekeruhan: 19.5, ph: 7.7, do: 5.1, salinitas: 32.8 } },
+            { id: 23, stasiun: 1, time: "09:50", lat: -7.67384405, lng: 108.81999087, data: { kedalaman: 4.0, suhu: 29.5, kekeruhan: 20.2, ph: 7.6, do: 5.0, salinitas: 33.1 } },
+            { id: 24, stasiun: 1, time: "09:55", lat: -7.67465575, lng: 108.81951304, data: { kedalaman: 4.3, suhu: 29.8, kekeruhan: 20.6, ph: 7.2, do: 5.1, salinitas: 33.3 } },
 
-            mobileMenu.classList.toggle('hidden');
+            // Stasiun 2
+            { id: 25, stasiun: 2, time: "10:25", lat: -7.66494274, lng: 108.83267462, data: { kedalaman: 4.5, suhu: 31.8, salinitas: 15.2, kekeruhan: 7.5, ph: 7.6, do: 7.3 } },
+            { id: 26, stasiun: 2, time: "10:30", lat: -7.66836655, lng: 108.83485794, data: { kedalaman: 4.8, suhu: 28.7, salinitas: 21.0, kekeruhan: 7.8, ph: 6.7, do: 7.3 } },
+            { id: 27, stasiun: 2, time: "10:35", lat: -7.66735376, lng: 108.83595228, data: { kedalaman: 6.4, suhu: 30.7, salinitas: 25.5, kekeruhan: 20.4, ph: 7.9, do: 7.4 } },
+            { id: 28, stasiun: 2, time: "10:40", lat: -7.66415058, lng: 108.83350074, data: { kedalaman: 7.4, suhu: 29.1, salinitas: 26.3, kekeruhan: 14.4, ph: 8.4, do: 7.3 } },
+            { id: 29, stasiun: 2, time: "10:45", lat: -7.66643933, lng: 108.83683741, data: { kedalaman: 6.0, suhu: 28.6, salinitas: 15.0, kekeruhan: 9.0, ph: 6.9, do: 7.3 } },
+            { id: 30, stasiun: 2, time: "10:50", lat: -7.66365615, lng: 108.83453473, data: { kedalaman: 6.7, suhu: 28.8, salinitas: 14.3, kekeruhan: 14.3, ph: 7.0, do: 7.2 } },
+            { id: 31, stasiun: 2, time: "10:55", lat: -7.66549964, lng: 108.83765146, data: { kedalaman: 5.4, suhu: 29.3, salinitas: 21.0, kekeruhan: 10.2, ph: 7.1, do: 7.3 } },
+            { id: 32, stasiun: 2, time: "11:00", lat: -7.664124, lng: 108.83656383, data: { kedalaman: 7.5, suhu: 28.3, salinitas: 15.7, kekeruhan: 24.4, ph: 8.3, do: 7.3 } },
+            { id: 33, stasiun: 2, time: "11:05", lat: -7.66323216, lng: 108.83497998, data: { kedalaman: 7.7, suhu: 29.5, salinitas: 10.5, kekeruhan: 24.6, ph: 8.0, do: 7.4 } },
+            { id: 34, stasiun: 2, time: "11:10", lat: -7.66597945, lng: 108.8373296, data: { kedalaman: 5.3, suhu: 30.3, salinitas: 16.3, kekeruhan: 10.3, ph: 7.4, do: 7.2 } },
+            { id: 35, stasiun: 2, time: "11:15", lat: -7.66397248, lng: 108.83410022, data: { kedalaman: 7.6, suhu: 28.8, salinitas: 10.4, kekeruhan: 18.3, ph: 8.4, do: 7.3 } },
+            { id: 36, stasiun: 2, time: "11:20", lat: -7.66692977, lng: 108.83645788, data: { kedalaman: 5.3, suhu: 28.3, salinitas: 20.2, kekeruhan: 23.7, ph: 7.3, do: 7.2 } },
+            { id: 37, stasiun: 2, time: "11:25", lat: -7.66458521, lng: 108.83311987, data: { kedalaman: 5.5, suhu: 31.8, salinitas: 19.2, kekeruhan: 5.9, ph: 7.2, do: 7.4 } },
+            { id: 38, stasiun: 2, time: "11:30", lat: -7.6679306, lng: 108.83540578, data: { kedalaman: 7.1, suhu: 28.0, salinitas: 24.7, kekeruhan: 16.1, ph: 6.9, do: 7.4 } },
+            { id: 39, stasiun: 2, time: "11:35", lat: -7.66524578, lng: 108.832165, data: { kedalaman: 4.1, suhu: 31.0, salinitas: 21.0, kekeruhan: 8.7, ph: 7.1, do: 7.4 } },
+            { id: 40, stasiun: 2, time: "11:40", lat: -7.6668487, lng: 108.83307964, data: { kedalaman: 7.8, suhu: 28.1, salinitas: 22.7, kekeruhan: 23.8, ph: 7.1, do: 7.3 } },
 
-            if (mobileMenu.classList.contains('hidden')) {
+            // Stasiun 3
+            { id: 41, stasiun: 3, time: "11.45", lat: -7.66233233, lng: 108.84888053, data: { kedalaman: 7.1, suhu: 28.0, salinitas: 18.3, kekeruhan: 7.7, ph: 6.7, do: 7.3 } },
+            { id: 42, stasiun: 3, time: "11:50", lat: -7.65727625, lng: 108.8507688, data: { kedalaman: 6.7, suhu: 28.6, salinitas: 21.9, kekeruhan: 5.3, ph: 8.0, do: 7.3 } },
+            { id: 43, stasiun: 3, time: "11:55", lat: -7.66253703, lng: 108.85197848, data: { kedalaman: 7.3, suhu: 30.9, salinitas: 9.9, kekeruhan: 17.7, ph: 8.3, do: 7.4 } },
+            { id: 44, stasiun: 3, time: "12:00", lat: -7.65798339, lng: 108.85392845, data: { kedalaman: 5.5, suhu: 30.0, salinitas: 19.5, kekeruhan: 17.3, ph: 7.0, do: 7.3 } },
+            { id: 45, stasiun: 3, time: "12:05", lat: -7.66331322, lng: 108.85477334, data: { kedalaman: 7.4, suhu: 31.5, salinitas: 24.8, kekeruhan: 10.0, ph: 8.2, do: 7.4 } },
+            { id: 46, stasiun: 3, time: "12:10", lat: -7.66101381, lng: 108.8561976, data: { kedalaman: 8.0, suhu: 29.7, salinitas: 29.2, kekeruhan: 9.7, ph: 7.9, do: 7.4 } },
+            { id: 47, stasiun: 3, time: "12:15", lat: -7.65840075, lng: 108.8555029, data: { kedalaman: 7.8, suhu: 30.7, salinitas: 10.2, kekeruhan: 22.6, ph: 6.9, do: 7.3 } },
+            { id: 48, stasiun: 3, time: "12:20", lat: -7.66285868, lng: 108.85334641, data: { kedalaman: 6.0, suhu: 31.0, salinitas: 27.6, kekeruhan: 4.4, ph: 8.0, do: 7.3 } },
+            { id: 49, stasiun: 3, time: "12:25", lat: -7.65771756, lng: 108.85246396, data: { kedalaman: 5.0, suhu: 29.4, salinitas: 23.3, kekeruhan: 4.9, ph: 7.4, do: 7.3 } },
+            { id: 50, stasiun: 3, time: "12:30", lat: -7.66247588, lng: 108.85053545, data: { kedalaman: 5.4, suhu: 29.1, salinitas: 8.9, kekeruhan: 10.3, ph: 7.9, do: 7.4 } },
+            { id: 51, stasiun: 3, time: "12:35", lat: -7.65712745, lng: 108.84930432, data: { kedalaman: 4.7, suhu: 30.3, salinitas: 16.6, kekeruhan: 16.6, ph: 6.6, do: 7.2 } },
+            { id: 52, stasiun: 3, time: "12:40", lat: -7.65961294, lng: 108.84824753, data: { kedalaman: 7.1, suhu: 29.6, salinitas: 13.0, kekeruhan: 2.3, ph: 6.6, do: 7.3 } },
 
-                toggleIcon.classList.remove('fa-times');
-                toggleIcon.classList.add('fa-bars');
+            // Stasiun 4
+            { id: 53, stasiun: 4, time: "12.45", lat: -7.66578806, lng: 108.85915875, data: { kedalaman: 6.6, suhu: 28.4, salinitas: 15.0, kekeruhan: 24.8, ph: 7.9, do: 7.3 } },
+            { id: 54, stasiun: 4, time: "12:50", lat: -7.6653973, lng: 108.86276364, data: { kedalaman: 7.0, suhu: 28.3, salinitas: 25.1, kekeruhan: 21.5, ph: 7.2, do: 7.3 } },
+            { id: 55, stasiun: 4, time: "12:55", lat: -7.66845161, lng: 108.86084318, data: { kedalaman: 4.5, suhu: 28.5, salinitas: 15.2, kekeruhan: 8.4, ph: 7.2, do: 7.3 } },
+            { id: 56, stasiun: 4, time: "13:00", lat: -7.66745212, lng: 108.86479676, data: { kedalaman: 5.1, suhu: 29.1, salinitas: 18.5, kekeruhan: 12.0, ph: 7.5, do: 7.2 } },
+            { id: 57, stasiun: 4, time: "13:05", lat: -7.67047451, lng: 108.86251152, data: { kedalaman: 6.2, suhu: 30.0, salinitas: 22.1, kekeruhan: 15.5, ph: 8.1, do: 7.4 } },
+            { id: 58, stasiun: 4, time: "13:10", lat: -7.66937135, lng: 108.86663139, data: { kedalaman: 7.8, suhu: 31.2, salinitas: 28.0, kekeruhan: 22.1, ph: 8.4, do: 7.3 } },
+            { id: 59, stasiun: 4, time: "13:15", lat: -7.67257183, lng: 108.86384726, data: { kedalaman: 4.2, suhu: 28.2, salinitas: 6.5, kekeruhan: 3.5, ph: 6.8, do: 7.2 } },
+            { id: 60, stasiun: 4, time: "13:20", lat: -7.67225816, lng: 108.86595547, data: { kedalaman: 5.5, suhu: 29.8, salinitas: 25.4, kekeruhan: 18.2, ph: 7.7, do: 7.4 } },
+            { id: 61, stasiun: 4, time: "13:25", lat: -7.67066856, lng: 108.86736363, data: { kedalaman: 6.8, suhu: 30.5, salinitas: 12.8, kekeruhan: 9.1, ph: 7.3, do: 7.3 } },
+            { id: 62, stasiun: 4, time: "13:30", lat: -7.671474, lng: 108.86317402, data: { kedalaman: 7.1, suhu: 31.8, salinitas: 29.5, kekeruhan: 24.0, ph: 8.2, do: 7.2 } },
+            { id: 63, stasiun: 4, time: "13:35", lat: -7.66837984, lng: 108.86580527, data: { kedalaman: 4.9, suhu: 28.9, salinitas: 10.5, kekeruhan: 5.6, ph: 7.0, do: 7.4 } },
+            { id: 64, stasiun: 4, time: "13:40", lat: -7.66937135, lng: 108.86175513, data: { kedalaman: 5.8, suhu: 29.5, salinitas: 20.3, kekeruhan: 14.8, ph: 7.6, do: 7.3 } },
+            { id: 65, stasiun: 4, time: "13:45", lat: -7.66642072, lng: 108.86383653, data: { kedalaman: 6.5, suhu: 30.2, salinitas: 16.7, kekeruhan: 11.2, ph: 7.9, do: 7.2 } },
+            { id: 66, stasiun: 4, time: "13:50", lat: -7.66698958, lng: 108.86007607, data: { kedalaman: 7.5, suhu: 31.0, salinitas: 27.2, kekeruhan: 21.5, ph: 8.3, do: 7.4 } },
+            { id: 67, stasiun: 4, time: "13:55", lat: -7.6642516, lng: 108.86199653, data: { kedalaman: 4.1, suhu: 28.1, salinitas: 5.9, kekeruhan: 2.5, ph: 6.6, do: 7.3 } },
+            { id: 68, stasiun: 4, time: "14:00", lat: -7.66446957, lng: 108.86019409, data: { kedalaman: 5.3, suhu: 29.6, salinitas: 23.8, kekeruhan: 17.4, ph: 7.4, do: 7.2 } },
 
-            } else {
+            // Stasiun 5
+            { id: 69, stasiun: 5, time: "12.45", lat: -7.6953812, lng: 108.87531906, data: { kedalaman: 6.4, suhu: 31.5, salinitas: 21.4, kekeruhan: 22.8, ph: 7.6, do: 7.4 } },
+            { id: 70, stasiun: 5, time: "12:50", lat: -7.69500907, lng: 108.87588836, data: { kedalaman: 6.3, suhu: 31.1, salinitas: 6.7, kekeruhan: 16.5, ph: 8.0, do: 7.3 } },
+            { id: 71, stasiun: 5, time: "12:55", lat: -7.69567425, lng: 108.87581527, data: { kedalaman: 4.8, suhu: 31.1, salinitas: 17.9, kekeruhan: 16.8, ph: 7.0, do: 7.3 } },
+            { id: 72, stasiun: 5, time: "13:00", lat: -7.69531873, lng: 108.87640134, data: { kedalaman: 6.7, suhu: 30.9, salinitas: 27.6, kekeruhan: 8.8, ph: 7.5, do: 7.3 } },
+            { id: 73, stasiun: 5, time: "13:05", lat: -7.69598458, lng: 108.87634836, data: { kedalaman: 5.6, suhu: 28.5, salinitas: 8.6, kekeruhan: 25.0, ph: 6.9, do: 7.2 } },
+            { id: 74, stasiun: 5, time: "13:10", lat: -7.69555663, lng: 108.87694046, data: { kedalaman: 4.1, suhu: 28.1, salinitas: 29.3, kekeruhan: 13.0, ph: 7.3, do: 7.3 } },
+            { id: 75, stasiun: 5, time: "13:15", lat: -7.69627696, lng: 108.87694046, data: { kedalaman: 5.7, suhu: 31.4, salinitas: 23.3, kekeruhan: 20.1, ph: 7.1, do: 7.3 } },
+            { id: 76, stasiun: 5, time: "13:20", lat: -7.69583307, lng: 108.87755871, data: { kedalaman: 7.4, suhu: 28.4, salinitas: 11.8, kekeruhan: 15.2, ph: 7.4, do: 7.2 } },
+            { id: 77, stasiun: 5, time: "13:25", lat: -7.69659991, lng: 108.87756541, data: { kedalaman: 4.5, suhu: 29.7, salinitas: 7.1, kekeruhan: 21.9, ph: 7.2, do: 7.3 } },
+            { id: 78, stasiun: 5, time: "13:30", lat: -7.69604305, lng: 108.87810186, data: { kedalaman: 4.2, suhu: 31.6, salinitas: 15.6, kekeruhan: 22.8, ph: 8.0, do: 7.3 } },
+            { id: 79, stasiun: 5, time: "13:35", lat: -7.69679794, lng: 108.87813941, data: { kedalaman: 6.7, suhu: 29.9, salinitas: 16.5, kekeruhan: 7.5, ph: 7.8, do: 7.4 } },
+            { id: 80, stasiun: 5, time: "13:40", lat: -7.69617861, lng: 108.87874022, data: { kedalaman: 4.6, suhu: 29.8, salinitas: 13.4, kekeruhan: 8.5, ph: 7.4, do: 7.4 } },
+            { id: 81, stasiun: 5, time: "13:45", lat: -7.69702299, lng: 108.87883544, data: { kedalaman: 7.7, suhu: 30.0, salinitas: 22.8, kekeruhan: 19.1, ph: 7.5, do: 7.4 } },
+            { id: 82, stasiun: 5, time: "13:50", lat: -7.69631506, lng: 108.87940139, data: { kedalaman: 4.4, suhu: 31.3, salinitas: 8.1, kekeruhan: 10.8, ph: 7.2, do: 7.4 } },
+            { id: 83, stasiun: 5, time: "13:55", lat: -7.69716342, lng: 108.87949124, data: { kedalaman: 5.4, suhu: 30.6, salinitas: 28.5, kekeruhan: 2.6, ph: 8.3, do: 7.3 } },
+            { id: 84, stasiun: 5, time: "14:00", lat: -7.69641252, lng: 108.87999684, data: { kedalaman: 7.0, suhu: 30.8, salinitas: 24.3, kekeruhan: 23.0, ph: 7.9, do: 7.4 } },
+            { id: 85, stasiun: 5, time: "14:05", lat: -7.6972405, lng: 108.88021812, data: { kedalaman: 4.4, suhu: 29.7, salinitas: 14.3, kekeruhan: 18.4, ph: 8.1, do: 7.2 } },
+            { id: 86, stasiun: 5, time: "14:10", lat: -7.69646435, lng: 108.88066739, data: { kedalaman: 4.1, suhu: 29.6, salinitas: 21.4, kekeruhan: 13.5, ph: 8.2, do: 7.3 } },
+            { id: 87, stasiun: 5, time: "14:15", lat: -7.69726442, lng: 108.8809678, data: { kedalaman: 5.8, suhu: 29.1, salinitas: 15.6, kekeruhan: 11.4, ph: 7.9, do: 7.3 } },
+            { id: 88, stasiun: 5, time: "14:20", lat: -7.69645239, lng: 108.88135672, data: { kedalaman: 5.6, suhu: 28.4, salinitas: 21.6, kekeruhan: 15.5, ph: 8.1, do: 7.4 } },
+            { id: 89, stasiun: 5, time: "14:25", lat: -7.69725911, lng: 108.88165444, data: { kedalaman: 5.7, suhu: 31.6, salinitas: 26.1, kekeruhan: 23.4, ph: 8.2, do: 7.3 } },
+            { id: 90, stasiun: 5, time: "14:30", lat: -7.69645505, lng: 108.88205275, data: { kedalaman: 7.0, suhu: 28.1, salinitas: 29.4, kekeruhan: 6.5, ph: 8.0, do: 7.2 } },
+            { id: 91, stasiun: 5, time: "14:35", lat: -7.69721126, lng: 108.88245642, data: { kedalaman: 4.5, suhu: 31.4, salinitas: 9.3, kekeruhan: 13.3, ph: 8.3, do: 7.4 } },
+            { id: 92, stasiun: 5, time: "14:40", lat: -7.69633012, lng: 108.88263747, data: { kedalaman: 6.8, suhu: 30.5, salinitas: 17.0, kekeruhan: 11.7, ph: 8.1, do: 7.2 } },
+            { id: 93, stasiun: 5, time: "14:45", lat: -7.69702919, lng: 108.88313234, data: { kedalaman: 7.6, suhu: 29.1, salinitas: 12.7, kekeruhan: 24.2, ph: 8.1, do: 7.3 } },
+            { id: 94, stasiun: 5, time: "14:50", lat: -7.69613343, lng: 108.88316587, data: { kedalaman: 5.9, suhu: 30.9, salinitas: 26.3, kekeruhan: 22.9, ph: 7.3, do: 7.3 } },
+            { id: 95, stasiun: 5, time: "14:55", lat: -7.69694413, lng: 108.88374925, data: { kedalaman: 5.8, suhu: 28.7, salinitas: 22.1, kekeruhan: 20.2, ph: 8.3, do: 7.3 } },
+            { id: 96, stasiun: 5, time: "15:00", lat: -7.69590882, lng: 108.88373584, data: { kedalaman: 6.0, suhu: 31.6, salinitas: 9.3, kekeruhan: 18.3, ph: 7.4, do: 7.4 } },
+            { id: 97, stasiun: 5, time: "15:05", lat: -7.69675009, lng: 108.88441712, data: { kedalaman: 4.8, suhu: 28.8, salinitas: 6.7, kekeruhan: 9.7, ph: 8.4, do: 7.2 } },
+            { id: 98, stasiun: 5, time: "15:10", lat: -7.69616798, lng: 108.88441309, data: { kedalaman: 5.5, suhu: 28.8, salinitas: 13.4, kekeruhan: 4.9, ph: 6.6, do: 7.4 } },
+            { id: 99, stasiun: 5, time: "15:15", lat: -7.69578123, lng: 108.88403356, data: { kedalaman: 6.1, suhu: 29.1, salinitas: 28.0, kekeruhan: 6.2, ph: 7.0, do: 7.2 } },
+            { id: 100, stasiun: 5, time: "15:20", lat: -7.69685376, lng: 108.8841033, data: { kedalaman: 6.9, suhu: 31.7, salinitas: 24.4, kekeruhan: 2.5, ph: 8.0, do: 7.3 } },
+            { id: 101, stasiun: 5, time: "15:25", lat: -7.69604438, lng: 108.88345152, data: { kedalaman: 6.3, suhu: 28.3, salinitas: 29.0, kekeruhan: 14.8, ph: 6.9, do: 7.3 } },
+            { id: 102, stasiun: 5, time: "15:30", lat: -7.69699197, lng: 108.88343006, data: { kedalaman: 4.3, suhu: 30.2, salinitas: 6.8, kekeruhan: 5.0, ph: 6.8, do: 7.4 } },
+            { id: 103, stasiun: 5, time: "15:35", lat: -7.6962557, lng: 108.88291508, data: { kedalaman: 6.4, suhu: 29.4, salinitas: 27.5, kekeruhan: 9.2, ph: 8.5, do: 7.3 } },
+            { id: 104, stasiun: 5, time: "15:40", lat: -7.69710361, lng: 108.8828212, data: { kedalaman: 6.9, suhu: 30.8, salinitas: 22.3, kekeruhan: 13.7, ph: 7.7, do: 7.4 } },
+            { id: 105, stasiun: 5, time: "15:45", lat: -7.6964072, lng: 108.88231963, data: { kedalaman: 5.0, suhu: 30.0, salinitas: 20.1, kekeruhan: 6.6, ph: 7.3, do: 7.2 } },
+            { id: 106, stasiun: 5, time: "15:50", lat: -7.69722854, lng: 108.88208628, data: { kedalaman: 6.4, suhu: 28.2, salinitas: 11.6, kekeruhan: 17.4, ph: 7.9, do: 7.3 } },
+            { id: 107, stasiun: 5, time: "15:55", lat: -7.69646302, lng: 108.88169199, data: { kedalaman: 4.8, suhu: 28.2, salinitas: 22.5, kekeruhan: 6.9, ph: 6.7, do: 7.2 } },
+            { id: 108, stasiun: 5, time: "16:00", lat: -7.69728303, lng: 108.88131917, data: { kedalaman: 6.6, suhu: 28.6, salinitas: 19.4, kekeruhan: 18.2, ph: 7.0, do: 7.3 } },
+            { id: 109, stasiun: 5, time: "16:05", lat: -7.69648429, lng: 108.88101876, data: { kedalaman: 6.1, suhu: 29.3, salinitas: 13.3, kekeruhan: 4.0, ph: 7.2, do: 7.2 } },
+            { id: 110, stasiun: 5, time: "16:10", lat: -7.69728968, lng: 108.88062313, data: { kedalaman: 5.6, suhu: 29.3, salinitas: 22.6, kekeruhan: 7.2, ph: 8.5, do: 7.3 } },
+            { id: 111, stasiun: 5, time: "16:15", lat: -7.69643511, lng: 108.88034016, data: { kedalaman: 5.5, suhu: 30.9, salinitas: 9.7, kekeruhan: 5.5, ph: 6.5, do: 7.2 } },
+            { id: 122, stasiun: 5, time: "16:20", lat: -7.69721392, lng: 108.87987345, data: { kedalaman: 7.6, suhu: 28.3, salinitas: 25.4, kekeruhan: 8.0, ph: 7.4, do: 7.4 } },
+            { id: 123, stasiun: 5, time: "16:25", lat: -7.6963793, lng: 108.87970045, data: { kedalaman: 6.1, suhu: 28.4, salinitas: 13.6, kekeruhan: 9.7, ph: 7.0, do: 7.4 } },
+            { id: 124, stasiun: 5, time: "16:30", lat: -7.69710627, lng: 108.87916937, data: { kedalaman: 8.0, suhu: 30.6, salinitas: 6.7, kekeruhan: 18.2, ph: 7.9, do: 7.3 } },
+            { id: 125, stasiun: 5, time: "16:35", lat: -7.6962537, lng: 108.8790755, data: { kedalaman: 7.3, suhu: 29.6, salinitas: 29.2, kekeruhan: 17.2, ph: 7.8, do: 7.3 } },
+            { id: 126, stasiun: 5, time: "16:40", lat: -7.69690426, lng: 108.87851357, data: { kedalaman: 5.7, suhu: 31.5, salinitas: 21.1, kekeruhan: 18.0, ph: 7.8, do: 7.4 } },
+            { id: 127, stasiun: 5, time: "16:45", lat: -7.69610685, lng: 108.87840897, data: { kedalaman: 4.8, suhu: 28.9, salinitas: 14.8, kekeruhan: 10.3, ph: 7.6, do: 7.3 } },
+            { id: 128, stasiun: 5, time: "16:50", lat: -7.69670092, lng: 108.87784839, data: { kedalaman: 6.8, suhu: 31.5, salinitas: 20.7, kekeruhan: 17.1, ph: 6.9, do: 7.3 } },
+            { id: 129, stasiun: 5, time: "16:55", lat: -7.69593673, lng: 108.87783095, data: { kedalaman: 7.3, suhu: 29.3, salinitas: 17.8, kekeruhan: 19.0, ph: 8.1, do: 7.4 } },
+            { id: 130, stasiun: 5, time: "17:00", lat: -7.6964504, lng: 108.87726165, data: { kedalaman: 5.7, suhu: 30.5, salinitas: 14.1, kekeruhan: 13.8, ph: 6.7, do: 7.4 } },
+            { id: 131, stasiun: 5, time: "17:05", lat: -7.69569153, lng: 108.87723953, data: { kedalaman: 5.0, suhu: 28.7, salinitas: 25.7, kekeruhan: 6.7, ph: 8.3, do: 7.3 } },
+            { id: 132, stasiun: 5, time: "17:10", lat: -7.69617064, lng: 108.87663536, data: { kedalaman: 5.5, suhu: 31.3, salinitas: 23.8, kekeruhan: 20.2, ph: 6.9, do: 7.3 } },
+            { id: 133, stasiun: 5, time: "17:15", lat: -7.69540778, lng: 108.87666486, data: { kedalaman: 8.0, suhu: 31.2, salinitas: 11.2, kekeruhan: 3.4, ph: 8.3, do: 7.3 } },
+            { id: 134, stasiun: 5, time: "17:20", lat: -7.69585566, lng: 108.87608886, data: { kedalaman: 5.6, suhu: 29.0, salinitas: 27.1, kekeruhan: 18.2, ph: 7.9, do: 7.3 } },
+            { id: 135, stasiun: 5, time: "17:25", lat: -7.69514197, lng: 108.87616128, data: { kedalaman: 7.1, suhu: 29.5, salinitas: 18.6, kekeruhan: 14.4, ph: 7.2, do: 7.2 } },
+            { id: 136, stasiun: 5, time: "17:30", lat: -7.69551011, lng: 108.875539, data: { kedalaman: 6.0, suhu: 29.7, salinitas: 19.8, kekeruhan: 20.0, ph: 7.1, do: 7.4 } },
+            { id: 137, stasiun: 5, time: "17:35", lat: -7.69488414, lng: 108.87562618, data: { kedalaman: 7.6, suhu: 29.3, salinitas: 26.6, kekeruhan: 22.9, ph: 7.1, do: 7.3 } }
+        ];
 
-                toggleIcon.classList.remove('fa-bars');
-                toggleIcon.classList.add('fa-times');
+        /* =====================================================
+           INISIALISASI PETA
+        ===================================================== */
+
+        const map =
+            L.map('batimetri-map');
+
+        /* =====================================================
+           CITRA SATELIT ESRI
+        ===================================================== */
+
+        const satelliteLayer =
+            L.tileLayer(
+                'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+                {
+                    attribution: 'Tiles &copy; Esri',
+                    maxZoom: 19
+                }
+            );
+
+
+        satelliteLayer.addTo(map);
+
+        /* =====================================================
+           MARKER TITIK PENGAMATAN
+        ===================================================== */
+
+        batimetriPoints.forEach(
+            (point, index) => {
+
+                const isFirst =
+                    index === 0;
+
+                const isLast =
+                    index === batimetriPoints.length - 1;
+
+                markerColor = '#008ba3';
+
+                /* =============================================
+                   ICON MARKER
+                ============================================= */
+
+                const pointIcon =
+                    L.divIcon({
+                        className: '',
+                        html: `
+                            <div
+                                class="batimetri-marker"
+                                style="
+                                    background:${markerColor};
+                                ">
+                                ${point.id}
+                            </div>
+                        `,
+                        iconSize: [28, 28],
+                        iconAnchor: [14, 14]
+                    });
+
+
+
+                const marker =
+                    L.marker(
+                        [point.lat, point.lng],
+                        {
+                            icon: pointIcon
+                        }
+                    ).addTo(map);
+
+                /* =============================================
+                   STATUS TITIK
+                ============================================= */
+
+                    status = `
+                        <span style="
+                            color:#008ba3;
+                            font-weight:700;
+                        ">
+                            Titik pengamatan
+                        </span>
+                    `;
+                
+                const checkData = (val, unit) => (val !== null && val !== undefined) ? `${val} ${unit}` : '<span style="color:#9ca3af;">N/A</span>';
+
+                const parameterInformation = `
+                    <div style="
+                        margin-top:12px;
+                        padding-top:12px;
+                        border-top:1px solid #e5e7eb;
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 8px;
+                        font-size: 11px;
+                    ">
+                         <div>
+                            <strong style="display:block; color:#4b5563;">Suhu</strong>
+                            ${checkData(point.data.suhu, '°C')}
+                        </div>
+                        <div>
+                            <strong style="display:block; color:#4b5563;">DO</strong>
+                            ${checkData(point.data.do, 'mg/L')}
+                        </div>
+                        <div>
+                            <strong style="display:block; color:#4b5563;">Kedalaman</strong>
+                            ${checkData(point.data.kedalaman, 'm')}
+                        </div>
+                        <div>
+                            <strong style="display:block; color:#4b5563;">Kekeruhan</strong>
+                            ${checkData(point.data.kekeruhan, 'NTU')}
+                        </div>
+                        <div>
+                            <strong style="display:block; color:#4b5563;">pH</strong>
+                            ${checkData(point.data.ph, '')}
+                        </div>
+                        <div>
+                            <strong style="display:block; color:#4b5563;">Salinitas</strong>
+                            ${checkData(point.data.salinitas, 'ppt')}
+                        </div>
+                    </div>
+                `;
+
+                marker.bindPopup(`
+                    <div style="min-width:260px; font-family:Inter,Arial,sans-serif;">
+                        <div style="font-size:14px; font-weight:800; color:#2d3757; margin-bottom:4px;">
+                            Titik Pengukuran ${point.id}
+                        </div>
+                        <div style="font-size:11px; margin-bottom:10px;">
+                            ${status}
+                        </div>
+                        <div style="font-size:12px; margin-bottom:4px;">
+                            <strong>Waktu:</strong> ${point.time}
+                        </div>
+                        <div style="font-size:12px; margin-bottom:4px;">
+                            <strong>Koordinat:</strong> ${point.lat.toFixed(6)}, ${point.lng.toFixed(6)}
+                        </div>
+
+                        ${parameterInformation}
+
+                        <div style="
+                            margin-top:12px;
+                            padding-top:8px;
+                            border-top:1px solid #e5e7eb;
+                            color:#6b7280;
+                            font-size:10px;
+                            text-align:center;
+                        ">
+                            Metode: Pengukuran Multi-Parameter ALBA
+                        </div>
+                    </div>
+                `);
+
+                /* =============================================
+                   LABEL
+                ============================================= */
+
+                marker.bindTooltip(
+                    `Titik ${point.id}`,
+                    {
+                        permanent: true,
+                        direction: 'top',
+                        offset: [0, -15],
+                        className:
+                            'data-point-label'
+                    }
+                );
 
             }
+        );
 
+        /* =====================================================
+           MENYESUAIKAN PETA DENGAN SEMUA TITIK
+        ===================================================== */
+
+        const allCoordinates =
+            batimetriPoints.map(
+                point => [
+                    point.lat,
+                    point.lng
+                ]
+            );
+
+
+        const bounds =
+            L.latLngBounds(allCoordinates);
+
+
+        map.fitBounds(
+            bounds,
+            {
+                padding: [45, 45]
+            }
+        );
+
+        /* =====================================================
+           LOGIKA TABEL INDIKATOR PARAMETER
+        ===================================================== */
+
+        // 1. Fungsi menentukan status tiap parameter (SILAKAN SESUAIKAN NILAI AMBANG BATASNYA)
+        // Nilai di bawah ini hanya contoh, bisa kamu sesuaikan dengan Kepmen LH / Literatur ITK
+        function getStatusBadge(paramName, value) {
+            if (value === null || value === undefined) {
+                return '<span class="px-2 py-1 bg-gray-100 text-gray-500 rounded text-xs font-medium border border-gray-200">N/A</span>';
+            }
+
+            let status = "Baik";
+
+            // Contoh aturan ambang batas (Threshold)
+            if (paramName === 'suhu') {
+                if (value < 25 || value > 32) status = "Tidak Baik";
+                else if (value < 27 || value > 30) status = "Kurang Baik";
+            } else if (paramName === 'ph') {
+                if (value < 6 || value > 9) status = "Tidak Baik";
+                else if (value < 7 || value > 8.5) status = "Kurang Baik";
+            } else if (paramName === 'do') {
+                if (value < 3) status = "Tidak Baik";
+                else if (value < 5) status = "Kurang Baik";
+            } else if (paramName === 'kekeruhan') {
+                if (value > 30) status = "Tidak Baik";
+                else if (value > 15) status = "Kurang Baik";
+            } else if (paramName === 'salinitas') {
+                if (value < 5 || value > 36) status = "Tidak Baik";
+                else if (value > 34) status = "Kurang Baik";
+            }
+
+            // Menentukan warna badge berdasarkan Tailwind CSS
+            let badgeClass = "bg-green-100 text-green-700 border-green-200";
+            if (status === "Kurang Baik") {
+                badgeClass = "bg-yellow-100 text-yellow-700 border-yellow-200";
+            } else if (status === "Tidak Baik") {
+                badgeClass = "bg-red-100 text-red-700 border-red-200";
+            }
+
+            return `<span class="px-2 py-1 border ${badgeClass} rounded text-xs font-medium whitespace-nowrap block text-center w-full min-w-[70px]">${status}</span>`;
+        }
+
+        // 2. Render Data ke dalam HTML per 5 Titik
+        /* =====================================================
+           LOGIKA TABEL INDIKATOR PARAMETER (RATA-RATA PER 5 TITIK)
+        ===================================================== */
+
+        // 1. Fungsi untuk menghitung rata-rata dari array (mengabaikan nilai null)
+        function getAverage(chunk, paramName) {
+            let sum = 0;
+            let count = 0;
+            for (let point of chunk) {
+                // Pastikan object data ada dan nilainya tidak null
+                if (point.data && point.data[paramName] !== null && point.data[paramName] !== undefined) {
+                    sum += point.data[paramName];
+                    count++;
+                }
+            }
+            return count > 0 ? (sum / count) : null;
+        }
+
+        // 2. Fungsi menentukan status dan mencetak sel tabel (Angka + Badge)
+        function formatIndicatorCell(paramName, value, unit = "") {
+            if (value === null || value === undefined) {
+                return '<span class="text-gray-400 text-xs">N/A</span>';
+            }
+
+            let status = "Baik";
+
+            // Ambang batas baku mutu
+            if (paramName === 'suhu') {
+                if (value < 25 || value > 32) status = "Tidak Baik";
+                else if (value < 27 || value > 30) status = "Kurang Baik";
+            } else if (paramName === 'ph') {
+                if (value < 6 || value > 9) status = "Tidak Baik";
+                else if (value < 7 || value > 8.5) status = "Kurang Baik";
+            } else if (paramName === 'do') {
+                if (value < 3) status = "Tidak Baik";
+                else if (value < 5) status = "Kurang Baik";
+            } else if (paramName === 'kekeruhan') {
+                if (value > 30) status = "Tidak Baik";
+                else if (value > 15) status = "Kurang Baik";
+            } else if (paramName === 'salinitas') {
+                if (value < 5 || value > 36) status = "Tidak Baik";
+                else if (value > 34) status = "Kurang Baik";
+            }
+
+            // Styling Badge Tailwind
+            let badgeClass = "bg-green-100 text-green-700 border-green-200";
+            if (status === "Kurang Baik") {
+                badgeClass = "bg-yellow-100 text-yellow-700 border-yellow-200";
+            } else if (status === "Tidak Baik") {
+                badgeClass = "bg-red-100 text-red-700 border-red-200";
+            }
+
+            // Jika parameter kedalaman, tidak perlu pakai badge status kualitas air
+            if (paramName === 'kedalaman') {
+                return `<div class="font-medium text-gray-800">${value.toFixed(2)} ${unit}</div>`;
+            }
+
+            // Tampilkan Angka rata-rata dan Badge-nya
+            return `
+                <div class="flex flex-col items-center justify-center gap-1.5">
+                    <span class="font-medium text-gray-800 text-sm">${value.toFixed(2)} ${unit}</span>
+                    <span class="px-2 py-0.5 border ${badgeClass} rounded text-[10px] font-bold whitespace-nowrap">
+                        ${status}
+                    </span>
+                </div>
+            `;
+        }
+
+        // 3. Render Tabel Rata-rata
+        // 3. Render Tabel Rata-rata berdasarkan ID Stasiun
+        const tableContainer = document.getElementById('table-indikator-container');
+
+        let tableHTML = `
+            <div class="overflow-x-auto bg-white rounded-xl border-2 border-gray-100 shadow-sm">
+                <table class="w-full text-sm text-left whitespace-nowrap">
+                    <thead class="bg-gray-50 text-gray-700 border-b border-gray-200">
+                        <tr>
+                            <th class="px-4 py-4 font-semibold text-center border-r">Zona / Kelompok</th>
+                            <th class="px-4 py-4 font-semibold text-center">Suhu</th>
+                            <th class="px-4 py-4 font-semibold text-center">DO</th>
+                            <th class="px-4 py-4 font-semibold text-center">Kedalaman</th>
+                            <th class="px-4 py-4 font-semibold text-center">Kekeruhan</th>
+                            <th class="px-4 py-4 font-semibold text-center">pH</th>
+                            <th class="px-4 py-4 font-semibold text-center">Salinitas</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+        `;
+
+        // Proses pengelompokan data berdasarkan properti 'stasiun'
+        const stasiunGroups = {};
+        batimetriPoints.forEach(point => {
+            const idStasiun = point.stasiun || 1; // Jika lupa diberi stasiun, otomatis masuk Stasiun 1
+            if (!stasiunGroups[idStasiun]) {
+                stasiunGroups[idStasiun] = [];
+            }
+            stasiunGroups[idStasiun].push(point);
         });
+
+        // Looping untuk setiap Stasiun yang sudah dikelompokkan
+        for (const idStasiun in stasiunGroups) {
+            const titikDiStasiunIni = stasiunGroups[idStasiun];
+
+            // Ambil nomor titik awal dan akhir dari stasiun tersebut
+            const startId = titikDiStasiunIni[0].id;
+            const endId = titikDiStasiunIni[titikDiStasiunIni.length - 1].id;
+
+            // Hitung rata-rata per parameter
+            const avgSuhu = getAverage(titikDiStasiunIni, 'suhu');
+            const avgDo = getAverage(titikDiStasiunIni, 'do');
+            const avgKedalaman = getAverage(titikDiStasiunIni, 'kedalaman');
+            const avgKekeruhan = getAverage(titikDiStasiunIni, 'kekeruhan');
+            const avgPh = getAverage(titikDiStasiunIni, 'ph');
+            const avgSalinitas = getAverage(titikDiStasiunIni, 'salinitas');
+
+            tableHTML += `
+                <tr class="hover:bg-blue-50/50 transition-colors">
+                    <td class="px-4 py-4 border-r text-center">
+                        <div class="font-bold text-[#118AB2]">Stasiun ${idStasiun}</div>
+                        <div class="text-xs text-gray-400 mt-1">Titik ${startId} - ${endId}</div>
+                    </td>
+                    <td class="px-4 py-4 text-center align-middle">${formatIndicatorCell('suhu', avgSuhu, '°C')}</td>
+                    <td class="px-4 py-4 text-center align-middle">${formatIndicatorCell('do', avgDo, 'mg/L')}</td>
+                    <td class="px-4 py-4 text-center align-middle">${formatIndicatorCell('kedalaman', avgKedalaman, 'm')}</td>
+                    <td class="px-4 py-4 text-center align-middle">${formatIndicatorCell('kekeruhan', avgKekeruhan, 'NTU')}</td>
+                    <td class="px-4 py-4 text-center align-middle">${formatIndicatorCell('ph', avgPh, '')}</td>
+                    <td class="px-4 py-4 text-center align-middle">${formatIndicatorCell('salinitas', avgSalinitas, 'ppt')}</td>
+                </tr>
+            `;
+        }
+
+        tableHTML += `
+                    </tbody>
+                </table>
+            </div>
+        `;
+
+        if (tableContainer) {
+            tableContainer.innerHTML = tableHTML;
+        }
     </script>
 </body>
 
