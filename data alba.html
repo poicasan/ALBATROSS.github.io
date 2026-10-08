@@ -438,33 +438,12 @@
                         </span>
                     </div>
 
+                    <!-- MAP -->
 
-                    <div class="flex items-center gap-2">
-                        <span class="w-3 h-3 rounded-full bg-[#22c55e] border-2 border-white shadow">
-                        </span>
-                        <span>
-                            Titik awal
-                        </span>
-
-                    </div>
-
-
-                    <div class="flex items-center gap-2">
-                        <span class="w-3 h-3 rounded-full bg-[#ef4444] border-2 border-white shadow">
-                        </span>
-                        <span>
-                            Titik akhir
-                        </span>
+                    <div id="batimetri-map"
+                        class="w-full h-[450px] sm:h-[550px] rounded-xl overflow-hidden border border-gray-200">
                     </div>
                 </div>
-
-
-                <!-- MAP -->
-
-                <div id="batimetri-map"
-                    class="w-full h-[450px] sm:h-[550px] rounded-xl overflow-hidden border border-gray-200">
-                </div>
-            </div>
         </section>
         <!-- =================================================
              TABEL INDIKATOR KUALITAS PERAIRAN (PER 5 TITIK)
@@ -602,7 +581,7 @@
          FOOTER
     ====================================================== -->
 
-   <footer class="bg-[#118AB2] px-4 sm:px-6 py-10 border-t-[2px] border-[#118AB2]">
+    <footer class="bg-[#118AB2] px-4 sm:px-6 py-10 border-t-[2px] border-[#118AB2]">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
 
             <!-- Kolom 1 (Dibuat lebih lebar/span 2): Lokasi, Email, dan WhatsApp -->
@@ -700,16 +679,142 @@
     <script>
 
         const batimetriPoints = [
-            { id: 1, time: "08:00", lat: -7.675694, lng: 108.819542, data: { kedalaman: 5.2, suhu: 28.5, salinitas: 32, kekeruhan: 12.4, ph: 8.1, do: 6.5 } },
-            { id: 2, time: "08:05", lat: -7.669228, lng: 108.826683, data: { kedalaman: 5.4, suhu: 28.6, salinitas: 32.3, kekeruhan: 12.1, ph: 8.0, do: 6.4 } },
-            { id: 3, time: "08:10", lat: -7.666444, lng: 108.830939, data: { kedalaman: 5.1, suhu: 28.6, kekeruhan: 13.0, ph: 8.1, do: 6.2, salinitas: 30.5 } },
-            { id: 4, time: "08:15", lat: -7.665309, lng: 108.835494, data: { kedalaman: 4.8, suhu: 28.8, kekeruhan: 14.2, ph: 7.9, do: 6.0, salinitas: 31.0 } },
-            { id: 5, time: "08:20", lat: -7.663216, lng: 108.841502, data: { kedalaman: 4.5, suhu: 28.9, kekeruhan: 15.1, ph: 7.9, do: 5.8, salinitas: 31.2 } },
-            { id: 6, time: "08:25", lat: -7.661267, lng: 108.848828, data: { kedalaman: 4.6, suhu: 29.1, kekeruhan: 15.5, ph: 7.8, do: 5.7, salinitas: 31.5 } },
-            { id: 7, time: "08:30", lat: -7.662660, lng: 108.857311, data: { kedalaman: 4.9, suhu: 29.2, kekeruhan: 16.0, ph: 7.8, do: 5.6, salinitas: 32.0 } },
-            { id: 8, time: "08:35", lat: -7.668329, lng: 108.862923, data: { kedalaman: 5.3, suhu: 29.0, kekeruhan: 14.8, ph: 8.0, do: 5.9, salinitas: 31.8 } },
-            { id: 9, time: "08:40", lat: -7.677056, lng: 108.868661, data: { kedalaman: 5.7, suhu: 28.8, kekeruhan: 13.5, ph: 8.1, do: 6.1, salinitas: 31.1 } },
-            { id: 10, time: "08:45", lat: -7.683345, lng: 108.868088, data: { kedalaman: 6.1, suhu: 28.6, kekeruhan: 12.0, ph: 8.2, do: 6.3, salinitas: 30.8 } },
+            // Stasiun 1
+            { id: 1, stasiun: 1, time: "08:00", lat: -7.67569642, lng: 108.81990855, data: { kedalaman: 5.2, suhu: 28.5, salinitas: 32, kekeruhan: 12.4, ph: 8.1, do: 6.5 } },
+            { id: 2, stasiun: 1, time: "08:05", lat: -7.6737174, lng: 108.8207788, data: { kedalaman: 5.4, suhu: 28.6, salinitas: 32.3, kekeruhan: 12.1, ph: 8.0, do: 6.4 } },
+            { id: 3, stasiun: 1, time: "08:10", lat: -7.67554458, lng: 108.82175012, data: { kedalaman: 5.1, suhu: 28.6, kekeruhan: 13.0, ph: 8.1, do: 6.2, salinitas: 30.5 } },
+            { id: 4, stasiun: 1, time: "08:15", lat: -7.6733705, lng: 108.8223472, data: { kedalaman: 4.8, suhu: 28.8, kekeruhan: 14.2, ph: 7.9, do: 6.0, salinitas: 31.0 } },
+            { id: 5, stasiun: 1, time: "08:20", lat: -7.67533401, lng: 108.82345333, data: { kedalaman: 4.5, suhu: 28.9, kekeruhan: 15.1, ph: 7.9, do: 5.8, salinitas: 31.2 } },
+            { id: 6, stasiun: 1, time: "08:25", lat: -7.67318829, lng: 108.82413463, data: { kedalaman: 4.6, suhu: 29.1, kekeruhan: 15.5, ph: 7.8, do: 5.7, salinitas: 31.5 } },
+            { id: 7, stasiun: 1, time: "08:30", lat: -7.67511432, lng: 108.82530445, data: { kedalaman: 4.9, suhu: 29.2, kekeruhan: 16.0, ph: 7.8, do: 5.6, salinitas: 32.0 } },
+            { id: 8, stasiun: 1, time: "08:35", lat: -7.67306148, lng: 108.8262134, data: { kedalaman: 5.3, suhu: 29.0, kekeruhan: 14.8, ph: 8.0, do: 5.9, salinitas: 31.8 } },
+            { id: 9, stasiun: 1, time: "08:40", lat: -7.6750536, lng: 108.82727331, data: { kedalaman: 5.7, suhu: 28.8, kekeruhan: 13.5, ph: 8.1, do: 6.1, salinitas: 31.1 } },
+            { id: 10, stasiun: 1, time: "08:45", lat: -7.67295237, lng: 108.82807376, data: { kedalaman: 6.1, suhu: 28.6, kekeruhan: 12.0, ph: 8.2, do: 6.3, salinitas: 30.8 } },
+            { id: 11, stasiun: 1, time: "08:50", lat: -7.67495512, lng: 108.82911677, data: { kedalaman: 6.5, suhu: 28.5, kekeruhan: 11.5, ph: 8.2, do: 6.5, salinitas: 30.5 } },
+            { id: 12, stasiun: 1, time: "08:55", lat: -7.67383601, lng: 108.82958, data: { kedalaman: 6.8, suhu: 28.4, kekeruhan: 10.8, ph: 8.3, do: 6.6, salinitas: 30.2 } },
+            { id: 13, stasiun: 1, time: "09:00", lat: -7.67275144, lng: 108.82901878, data: { kedalaman: 7.2, suhu: 28.3, kekeruhan: 10.5, ph: 8.3, do: 6.7, salinitas: 30.0 } },
+            { id: 14, stasiun: 1, time: "09:05", lat: -7.67500405, lng: 108.82824547, data: { kedalaman: 7.0, suhu: 28.3, kekeruhan: 11.2, ph: 8.2, do: 6.6, salinitas: 30.1 } },
+            { id: 15, stasiun: 1, time: "09:10", lat: -7.67303742, lng: 108.82713977, data: { kedalaman: 6.6, suhu: 28.4, kekeruhan: 12.5, ph: 8.1, do: 6.4, salinitas: 30.4 } },
+            { id: 16, stasiun: 1, time: "09:15", lat: -7.67513951, lng: 108.8263465, data: { kedalaman: 6.2, suhu: 28.5, kekeruhan: 13.1, ph: 8.1, do: 6.2, salinitas: 30.7 } },
+            { id: 17, stasiun: 1, time: "09:20", lat: -7.67313147, lng: 108.82523293, data: { kedalaman: 5.8, suhu: 28.7, kekeruhan: 14.0, ph: 8.0, do: 6.0, salinitas: 31.0 } },
+            { id: 18, stasiun: 1, time: "09:25", lat: -7.6752606, lng: 108.8243608, data: { kedalaman: 5.5, suhu: 28.8, kekeruhan: 15.2, ph: 7.9, do: 5.8, salinitas: 31.3 } },
+            { id: 19, stasiun: 1, time: "09:30", lat: -7.6732454, lng: 108.82326752, data: { kedalaman: 5.1, suhu: 29.0, kekeruhan: 16.5, ph: 7.8, do: 5.6, salinitas: 31.6 } },
+            { id: 20, stasiun: 1, time: "09:35", lat: -7.67545139, lng: 108.82263031, data: { kedalaman: 4.8, suhu: 29.1, kekeruhan: 17.0, ph: 7.8, do: 5.4, salinitas: 32.1 } },
+            { id: 21, stasiun: 1, time: "09:40", lat: -7.67353113, lng: 108.82152738, data: { kedalaman: 4.5, suhu: 29.2, kekeruhan: 18.1, ph: 7.7, do: 5.2, salinitas: 32.5 } },
+            { id: 22, stasiun: 1, time: "09:45", lat: -7.67562763, lng: 108.82086413, data: { kedalaman: 4.2, suhu: 29.4, kekeruhan: 19.5, ph: 7.7, do: 5.1, salinitas: 32.8 } },
+            { id: 23, stasiun: 1, time: "09:50", lat: -7.67384405, lng: 108.81999087, data: { kedalaman: 4.0, suhu: 29.5, kekeruhan: 20.2, ph: 7.6, do: 5.0, salinitas: 33.1 } },
+            { id: 24, stasiun: 1, time: "09:55", lat: -7.67465575, lng: 108.81951304, data: { kedalaman: 4.3, suhu: 29.8, kekeruhan: 20.6, ph: 7.2, do: 5.1, salinitas: 33.3 } },
+
+            // Stasiun 2
+            { id: 25, stasiun: 2, time: "10:25", lat: -7.66494274, lng: 108.83267462, data: { kedalaman: 4.5, suhu: 31.8, salinitas: 15.2, kekeruhan: 7.5, ph: 7.6, do: 7.3 } },
+            { id: 26, stasiun: 2, time: "10:30", lat: -7.66836655, lng: 108.83485794, data: { kedalaman: 4.8, suhu: 28.7, salinitas: 21.0, kekeruhan: 7.8, ph: 6.7, do: 7.3 } },
+            { id: 27, stasiun: 2, time: "10:35", lat: -7.66735376, lng: 108.83595228, data: { kedalaman: 6.4, suhu: 30.7, salinitas: 25.5, kekeruhan: 20.4, ph: 7.9, do: 7.4 } },
+            { id: 28, stasiun: 2, time: "10:40", lat: -7.66415058, lng: 108.83350074, data: { kedalaman: 7.4, suhu: 29.1, salinitas: 26.3, kekeruhan: 14.4, ph: 8.4, do: 7.3 } },
+            { id: 29, stasiun: 2, time: "10:45", lat: -7.66643933, lng: 108.83683741, data: { kedalaman: 6.0, suhu: 28.6, salinitas: 15.0, kekeruhan: 9.0, ph: 6.9, do: 7.3 } },
+            { id: 30, stasiun: 2, time: "10:50", lat: -7.66365615, lng: 108.83453473, data: { kedalaman: 6.7, suhu: 28.8, salinitas: 14.3, kekeruhan: 14.3, ph: 7.0, do: 7.2 } },
+            { id: 31, stasiun: 2, time: "10:55", lat: -7.66549964, lng: 108.83765146, data: { kedalaman: 5.4, suhu: 29.3, salinitas: 21.0, kekeruhan: 10.2, ph: 7.1, do: 7.3 } },
+            { id: 32, stasiun: 2, time: "11:00", lat: -7.664124, lng: 108.83656383, data: { kedalaman: 7.5, suhu: 28.3, salinitas: 15.7, kekeruhan: 24.4, ph: 8.3, do: 7.3 } },
+            { id: 33, stasiun: 2, time: "11:05", lat: -7.66323216, lng: 108.83497998, data: { kedalaman: 7.7, suhu: 29.5, salinitas: 10.5, kekeruhan: 24.6, ph: 8.0, do: 7.4 } },
+            { id: 34, stasiun: 2, time: "11:10", lat: -7.66597945, lng: 108.8373296, data: { kedalaman: 5.3, suhu: 30.3, salinitas: 16.3, kekeruhan: 10.3, ph: 7.4, do: 7.2 } },
+            { id: 35, stasiun: 2, time: "11:15", lat: -7.66397248, lng: 108.83410022, data: { kedalaman: 7.6, suhu: 28.8, salinitas: 10.4, kekeruhan: 18.3, ph: 8.4, do: 7.3 } },
+            { id: 36, stasiun: 2, time: "11:20", lat: -7.66692977, lng: 108.83645788, data: { kedalaman: 5.3, suhu: 28.3, salinitas: 20.2, kekeruhan: 23.7, ph: 7.3, do: 7.2 } },
+            { id: 37, stasiun: 2, time: "11:25", lat: -7.66458521, lng: 108.83311987, data: { kedalaman: 5.5, suhu: 31.8, salinitas: 19.2, kekeruhan: 5.9, ph: 7.2, do: 7.4 } },
+            { id: 38, stasiun: 2, time: "11:30", lat: -7.6679306, lng: 108.83540578, data: { kedalaman: 7.1, suhu: 28.0, salinitas: 24.7, kekeruhan: 16.1, ph: 6.9, do: 7.4 } },
+            { id: 39, stasiun: 2, time: "11:35", lat: -7.66524578, lng: 108.832165, data: { kedalaman: 4.1, suhu: 31.0, salinitas: 21.0, kekeruhan: 8.7, ph: 7.1, do: 7.4 } },
+            { id: 40, stasiun: 2, time: "11:40", lat: -7.6668487, lng: 108.83307964, data: { kedalaman: 7.8, suhu: 28.1, salinitas: 22.7, kekeruhan: 23.8, ph: 7.1, do: 7.3 } },
+
+            // Stasiun 3
+            { id: 41, stasiun: 3, time: "11.45", lat: -7.66233233, lng: 108.84888053, data: { kedalaman: 7.1, suhu: 28.0, salinitas: 18.3, kekeruhan: 7.7, ph: 6.7, do: 7.3 } },
+            { id: 42, stasiun: 3, time: "11:50", lat: -7.65727625, lng: 108.8507688, data: { kedalaman: 6.7, suhu: 28.6, salinitas: 21.9, kekeruhan: 5.3, ph: 8.0, do: 7.3 } },
+            { id: 43, stasiun: 3, time: "11:55", lat: -7.66253703, lng: 108.85197848, data: { kedalaman: 7.3, suhu: 30.9, salinitas: 9.9, kekeruhan: 17.7, ph: 8.3, do: 7.4 } },
+            { id: 44, stasiun: 3, time: "12:00", lat: -7.65798339, lng: 108.85392845, data: { kedalaman: 5.5, suhu: 30.0, salinitas: 19.5, kekeruhan: 17.3, ph: 7.0, do: 7.3 } },
+            { id: 45, stasiun: 3, time: "12:05", lat: -7.66331322, lng: 108.85477334, data: { kedalaman: 7.4, suhu: 31.5, salinitas: 24.8, kekeruhan: 10.0, ph: 8.2, do: 7.4 } },
+            { id: 46, stasiun: 3, time: "12:10", lat: -7.66101381, lng: 108.8561976, data: { kedalaman: 8.0, suhu: 29.7, salinitas: 29.2, kekeruhan: 9.7, ph: 7.9, do: 7.4 } },
+            { id: 47, stasiun: 3, time: "12:15", lat: -7.65840075, lng: 108.8555029, data: { kedalaman: 7.8, suhu: 30.7, salinitas: 10.2, kekeruhan: 22.6, ph: 6.9, do: 7.3 } },
+            { id: 48, stasiun: 3, time: "12:20", lat: -7.66285868, lng: 108.85334641, data: { kedalaman: 6.0, suhu: 31.0, salinitas: 27.6, kekeruhan: 4.4, ph: 8.0, do: 7.3 } },
+            { id: 49, stasiun: 3, time: "12:25", lat: -7.65771756, lng: 108.85246396, data: { kedalaman: 5.0, suhu: 29.4, salinitas: 23.3, kekeruhan: 4.9, ph: 7.4, do: 7.3 } },
+            { id: 50, stasiun: 3, time: "12:30", lat: -7.66247588, lng: 108.85053545, data: { kedalaman: 5.4, suhu: 29.1, salinitas: 8.9, kekeruhan: 10.3, ph: 7.9, do: 7.4 } },
+            { id: 51, stasiun: 3, time: "12:35", lat: -7.65712745, lng: 108.84930432, data: { kedalaman: 4.7, suhu: 30.3, salinitas: 16.6, kekeruhan: 16.6, ph: 6.6, do: 7.2 } },
+            { id: 52, stasiun: 3, time: "12:40", lat: -7.65961294, lng: 108.84824753, data: { kedalaman: 7.1, suhu: 29.6, salinitas: 13.0, kekeruhan: 2.3, ph: 6.6, do: 7.3 } },
+
+            // Stasiun 4
+            { id: 53, stasiun: 4, time: "12.45", lat: -7.66578806, lng: 108.85915875, data: { kedalaman: 6.6, suhu: 28.4, salinitas: 15.0, kekeruhan: 24.8, ph: 7.9, do: 7.3 } },
+            { id: 54, stasiun: 4, time: "12:50", lat: -7.6653973, lng: 108.86276364, data: { kedalaman: 7.0, suhu: 28.3, salinitas: 25.1, kekeruhan: 21.5, ph: 7.2, do: 7.3 } },
+            { id: 55, stasiun: 4, time: "12:55", lat: -7.66845161, lng: 108.86084318, data: { kedalaman: 4.5, suhu: 28.5, salinitas: 15.2, kekeruhan: 8.4, ph: 7.2, do: 7.3 } },
+            { id: 56, stasiun: 4, time: "13:00", lat: -7.66745212, lng: 108.86479676, data: { kedalaman: 5.1, suhu: 29.1, salinitas: 18.5, kekeruhan: 12.0, ph: 7.5, do: 7.2 } },
+            { id: 57, stasiun: 4, time: "13:05", lat: -7.67047451, lng: 108.86251152, data: { kedalaman: 6.2, suhu: 30.0, salinitas: 22.1, kekeruhan: 15.5, ph: 8.1, do: 7.4 } },
+            { id: 58, stasiun: 4, time: "13:10", lat: -7.66937135, lng: 108.86663139, data: { kedalaman: 7.8, suhu: 31.2, salinitas: 28.0, kekeruhan: 22.1, ph: 8.4, do: 7.3 } },
+            { id: 59, stasiun: 4, time: "13:15", lat: -7.67257183, lng: 108.86384726, data: { kedalaman: 4.2, suhu: 28.2, salinitas: 6.5, kekeruhan: 3.5, ph: 6.8, do: 7.2 } },
+            { id: 60, stasiun: 4, time: "13:20", lat: -7.67225816, lng: 108.86595547, data: { kedalaman: 5.5, suhu: 29.8, salinitas: 25.4, kekeruhan: 18.2, ph: 7.7, do: 7.4 } },
+            { id: 61, stasiun: 4, time: "13:25", lat: -7.67066856, lng: 108.86736363, data: { kedalaman: 6.8, suhu: 30.5, salinitas: 12.8, kekeruhan: 9.1, ph: 7.3, do: 7.3 } },
+            { id: 62, stasiun: 4, time: "13:30", lat: -7.671474, lng: 108.86317402, data: { kedalaman: 7.1, suhu: 31.8, salinitas: 29.5, kekeruhan: 24.0, ph: 8.2, do: 7.2 } },
+            { id: 63, stasiun: 4, time: "13:35", lat: -7.66837984, lng: 108.86580527, data: { kedalaman: 4.9, suhu: 28.9, salinitas: 10.5, kekeruhan: 5.6, ph: 7.0, do: 7.4 } },
+            { id: 64, stasiun: 4, time: "13:40", lat: -7.66937135, lng: 108.86175513, data: { kedalaman: 5.8, suhu: 29.5, salinitas: 20.3, kekeruhan: 14.8, ph: 7.6, do: 7.3 } },
+            { id: 65, stasiun: 4, time: "13:45", lat: -7.66642072, lng: 108.86383653, data: { kedalaman: 6.5, suhu: 30.2, salinitas: 16.7, kekeruhan: 11.2, ph: 7.9, do: 7.2 } },
+            { id: 66, stasiun: 4, time: "13:50", lat: -7.66698958, lng: 108.86007607, data: { kedalaman: 7.5, suhu: 31.0, salinitas: 27.2, kekeruhan: 21.5, ph: 8.3, do: 7.4 } },
+            { id: 67, stasiun: 4, time: "13:55", lat: -7.6642516, lng: 108.86199653, data: { kedalaman: 4.1, suhu: 28.1, salinitas: 5.9, kekeruhan: 2.5, ph: 6.6, do: 7.3 } },
+            { id: 68, stasiun: 4, time: "14:00", lat: -7.66446957, lng: 108.86019409, data: { kedalaman: 5.3, suhu: 29.6, salinitas: 23.8, kekeruhan: 17.4, ph: 7.4, do: 7.2 } },
+
+            // Stasiun 5
+            { id: 69, stasiun: 5, time: "12.45", lat: -7.6953812, lng: 108.87531906, data: { kedalaman: 6.4, suhu: 31.5, salinitas: 21.4, kekeruhan: 22.8, ph: 7.6, do: 7.4 } },
+            { id: 70, stasiun: 5, time: "12:50", lat: -7.69500907, lng: 108.87588836, data: { kedalaman: 6.3, suhu: 31.1, salinitas: 6.7, kekeruhan: 16.5, ph: 8.0, do: 7.3 } },
+            { id: 71, stasiun: 5, time: "12:55", lat: -7.69567425, lng: 108.87581527, data: { kedalaman: 4.8, suhu: 31.1, salinitas: 17.9, kekeruhan: 16.8, ph: 7.0, do: 7.3 } },
+            { id: 72, stasiun: 5, time: "13:00", lat: -7.69531873, lng: 108.87640134, data: { kedalaman: 6.7, suhu: 30.9, salinitas: 27.6, kekeruhan: 8.8, ph: 7.5, do: 7.3 } },
+            { id: 73, stasiun: 5, time: "13:05", lat: -7.69598458, lng: 108.87634836, data: { kedalaman: 5.6, suhu: 28.5, salinitas: 8.6, kekeruhan: 25.0, ph: 6.9, do: 7.2 } },
+            { id: 74, stasiun: 5, time: "13:10", lat: -7.69555663, lng: 108.87694046, data: { kedalaman: 4.1, suhu: 28.1, salinitas: 29.3, kekeruhan: 13.0, ph: 7.3, do: 7.3 } },
+            { id: 75, stasiun: 5, time: "13:15", lat: -7.69627696, lng: 108.87694046, data: { kedalaman: 5.7, suhu: 31.4, salinitas: 23.3, kekeruhan: 20.1, ph: 7.1, do: 7.3 } },
+            { id: 76, stasiun: 5, time: "13:20", lat: -7.69583307, lng: 108.87755871, data: { kedalaman: 7.4, suhu: 28.4, salinitas: 11.8, kekeruhan: 15.2, ph: 7.4, do: 7.2 } },
+            { id: 77, stasiun: 5, time: "13:25", lat: -7.69659991, lng: 108.87756541, data: { kedalaman: 4.5, suhu: 29.7, salinitas: 7.1, kekeruhan: 21.9, ph: 7.2, do: 7.3 } },
+            { id: 78, stasiun: 5, time: "13:30", lat: -7.69604305, lng: 108.87810186, data: { kedalaman: 4.2, suhu: 31.6, salinitas: 15.6, kekeruhan: 22.8, ph: 8.0, do: 7.3 } },
+            { id: 79, stasiun: 5, time: "13:35", lat: -7.69679794, lng: 108.87813941, data: { kedalaman: 6.7, suhu: 29.9, salinitas: 16.5, kekeruhan: 7.5, ph: 7.8, do: 7.4 } },
+            { id: 80, stasiun: 5, time: "13:40", lat: -7.69617861, lng: 108.87874022, data: { kedalaman: 4.6, suhu: 29.8, salinitas: 13.4, kekeruhan: 8.5, ph: 7.4, do: 7.4 } },
+            { id: 81, stasiun: 5, time: "13:45", lat: -7.69702299, lng: 108.87883544, data: { kedalaman: 7.7, suhu: 30.0, salinitas: 22.8, kekeruhan: 19.1, ph: 7.5, do: 7.4 } },
+            { id: 82, stasiun: 5, time: "13:50", lat: -7.69631506, lng: 108.87940139, data: { kedalaman: 4.4, suhu: 31.3, salinitas: 8.1, kekeruhan: 10.8, ph: 7.2, do: 7.4 } },
+            { id: 83, stasiun: 5, time: "13:55", lat: -7.69716342, lng: 108.87949124, data: { kedalaman: 5.4, suhu: 30.6, salinitas: 28.5, kekeruhan: 2.6, ph: 8.3, do: 7.3 } },
+            { id: 84, stasiun: 5, time: "14:00", lat: -7.69641252, lng: 108.87999684, data: { kedalaman: 7.0, suhu: 30.8, salinitas: 24.3, kekeruhan: 23.0, ph: 7.9, do: 7.4 } },
+            { id: 85, stasiun: 5, time: "14:05", lat: -7.6972405, lng: 108.88021812, data: { kedalaman: 4.4, suhu: 29.7, salinitas: 14.3, kekeruhan: 18.4, ph: 8.1, do: 7.2 } },
+            { id: 86, stasiun: 5, time: "14:10", lat: -7.69646435, lng: 108.88066739, data: { kedalaman: 4.1, suhu: 29.6, salinitas: 21.4, kekeruhan: 13.5, ph: 8.2, do: 7.3 } },
+            { id: 87, stasiun: 5, time: "14:15", lat: -7.69726442, lng: 108.8809678, data: { kedalaman: 5.8, suhu: 29.1, salinitas: 15.6, kekeruhan: 11.4, ph: 7.9, do: 7.3 } },
+            { id: 88, stasiun: 5, time: "14:20", lat: -7.69645239, lng: 108.88135672, data: { kedalaman: 5.6, suhu: 28.4, salinitas: 21.6, kekeruhan: 15.5, ph: 8.1, do: 7.4 } },
+            { id: 89, stasiun: 5, time: "14:25", lat: -7.69725911, lng: 108.88165444, data: { kedalaman: 5.7, suhu: 31.6, salinitas: 26.1, kekeruhan: 23.4, ph: 8.2, do: 7.3 } },
+            { id: 90, stasiun: 5, time: "14:30", lat: -7.69645505, lng: 108.88205275, data: { kedalaman: 7.0, suhu: 28.1, salinitas: 29.4, kekeruhan: 6.5, ph: 8.0, do: 7.2 } },
+            { id: 91, stasiun: 5, time: "14:35", lat: -7.69721126, lng: 108.88245642, data: { kedalaman: 4.5, suhu: 31.4, salinitas: 9.3, kekeruhan: 13.3, ph: 8.3, do: 7.4 } },
+            { id: 92, stasiun: 5, time: "14:40", lat: -7.69633012, lng: 108.88263747, data: { kedalaman: 6.8, suhu: 30.5, salinitas: 17.0, kekeruhan: 11.7, ph: 8.1, do: 7.2 } },
+            { id: 93, stasiun: 5, time: "14:45", lat: -7.69702919, lng: 108.88313234, data: { kedalaman: 7.6, suhu: 29.1, salinitas: 12.7, kekeruhan: 24.2, ph: 8.1, do: 7.3 } },
+            { id: 94, stasiun: 5, time: "14:50", lat: -7.69613343, lng: 108.88316587, data: { kedalaman: 5.9, suhu: 30.9, salinitas: 26.3, kekeruhan: 22.9, ph: 7.3, do: 7.3 } },
+            { id: 95, stasiun: 5, time: "14:55", lat: -7.69694413, lng: 108.88374925, data: { kedalaman: 5.8, suhu: 28.7, salinitas: 22.1, kekeruhan: 20.2, ph: 8.3, do: 7.3 } },
+            { id: 96, stasiun: 5, time: "15:00", lat: -7.69590882, lng: 108.88373584, data: { kedalaman: 6.0, suhu: 31.6, salinitas: 9.3, kekeruhan: 18.3, ph: 7.4, do: 7.4 } },
+            { id: 97, stasiun: 5, time: "15:05", lat: -7.69675009, lng: 108.88441712, data: { kedalaman: 4.8, suhu: 28.8, salinitas: 6.7, kekeruhan: 9.7, ph: 8.4, do: 7.2 } },
+            { id: 98, stasiun: 5, time: "15:10", lat: -7.69616798, lng: 108.88441309, data: { kedalaman: 5.5, suhu: 28.8, salinitas: 13.4, kekeruhan: 4.9, ph: 6.6, do: 7.4 } },
+            { id: 99, stasiun: 5, time: "15:15", lat: -7.69578123, lng: 108.88403356, data: { kedalaman: 6.1, suhu: 29.1, salinitas: 28.0, kekeruhan: 6.2, ph: 7.0, do: 7.2 } },
+            { id: 100, stasiun: 5, time: "15:20", lat: -7.69685376, lng: 108.8841033, data: { kedalaman: 6.9, suhu: 31.7, salinitas: 24.4, kekeruhan: 2.5, ph: 8.0, do: 7.3 } },
+            { id: 101, stasiun: 5, time: "15:25", lat: -7.69604438, lng: 108.88345152, data: { kedalaman: 6.3, suhu: 28.3, salinitas: 29.0, kekeruhan: 14.8, ph: 6.9, do: 7.3 } },
+            { id: 102, stasiun: 5, time: "15:30", lat: -7.69699197, lng: 108.88343006, data: { kedalaman: 4.3, suhu: 30.2, salinitas: 6.8, kekeruhan: 5.0, ph: 6.8, do: 7.4 } },
+            { id: 103, stasiun: 5, time: "15:35", lat: -7.6962557, lng: 108.88291508, data: { kedalaman: 6.4, suhu: 29.4, salinitas: 27.5, kekeruhan: 9.2, ph: 8.5, do: 7.3 } },
+            { id: 104, stasiun: 5, time: "15:40", lat: -7.69710361, lng: 108.8828212, data: { kedalaman: 6.9, suhu: 30.8, salinitas: 22.3, kekeruhan: 13.7, ph: 7.7, do: 7.4 } },
+            { id: 105, stasiun: 5, time: "15:45", lat: -7.6964072, lng: 108.88231963, data: { kedalaman: 5.0, suhu: 30.0, salinitas: 20.1, kekeruhan: 6.6, ph: 7.3, do: 7.2 } },
+            { id: 106, stasiun: 5, time: "15:50", lat: -7.69722854, lng: 108.88208628, data: { kedalaman: 6.4, suhu: 28.2, salinitas: 11.6, kekeruhan: 17.4, ph: 7.9, do: 7.3 } },
+            { id: 107, stasiun: 5, time: "15:55", lat: -7.69646302, lng: 108.88169199, data: { kedalaman: 4.8, suhu: 28.2, salinitas: 22.5, kekeruhan: 6.9, ph: 6.7, do: 7.2 } },
+            { id: 108, stasiun: 5, time: "16:00", lat: -7.69728303, lng: 108.88131917, data: { kedalaman: 6.6, suhu: 28.6, salinitas: 19.4, kekeruhan: 18.2, ph: 7.0, do: 7.3 } },
+            { id: 109, stasiun: 5, time: "16:05", lat: -7.69648429, lng: 108.88101876, data: { kedalaman: 6.1, suhu: 29.3, salinitas: 13.3, kekeruhan: 4.0, ph: 7.2, do: 7.2 } },
+            { id: 110, stasiun: 5, time: "16:10", lat: -7.69728968, lng: 108.88062313, data: { kedalaman: 5.6, suhu: 29.3, salinitas: 22.6, kekeruhan: 7.2, ph: 8.5, do: 7.3 } },
+            { id: 111, stasiun: 5, time: "16:15", lat: -7.69643511, lng: 108.88034016, data: { kedalaman: 5.5, suhu: 30.9, salinitas: 9.7, kekeruhan: 5.5, ph: 6.5, do: 7.2 } },
+            { id: 122, stasiun: 5, time: "16:20", lat: -7.69721392, lng: 108.87987345, data: { kedalaman: 7.6, suhu: 28.3, salinitas: 25.4, kekeruhan: 8.0, ph: 7.4, do: 7.4 } },
+            { id: 123, stasiun: 5, time: "16:25", lat: -7.6963793, lng: 108.87970045, data: { kedalaman: 6.1, suhu: 28.4, salinitas: 13.6, kekeruhan: 9.7, ph: 7.0, do: 7.4 } },
+            { id: 124, stasiun: 5, time: "16:30", lat: -7.69710627, lng: 108.87916937, data: { kedalaman: 8.0, suhu: 30.6, salinitas: 6.7, kekeruhan: 18.2, ph: 7.9, do: 7.3 } },
+            { id: 125, stasiun: 5, time: "16:35", lat: -7.6962537, lng: 108.8790755, data: { kedalaman: 7.3, suhu: 29.6, salinitas: 29.2, kekeruhan: 17.2, ph: 7.8, do: 7.3 } },
+            { id: 126, stasiun: 5, time: "16:40", lat: -7.69690426, lng: 108.87851357, data: { kedalaman: 5.7, suhu: 31.5, salinitas: 21.1, kekeruhan: 18.0, ph: 7.8, do: 7.4 } },
+            { id: 127, stasiun: 5, time: "16:45", lat: -7.69610685, lng: 108.87840897, data: { kedalaman: 4.8, suhu: 28.9, salinitas: 14.8, kekeruhan: 10.3, ph: 7.6, do: 7.3 } },
+            { id: 128, stasiun: 5, time: "16:50", lat: -7.69670092, lng: 108.87784839, data: { kedalaman: 6.8, suhu: 31.5, salinitas: 20.7, kekeruhan: 17.1, ph: 6.9, do: 7.3 } },
+            { id: 129, stasiun: 5, time: "16:55", lat: -7.69593673, lng: 108.87783095, data: { kedalaman: 7.3, suhu: 29.3, salinitas: 17.8, kekeruhan: 19.0, ph: 8.1, do: 7.4 } },
+            { id: 130, stasiun: 5, time: "17:00", lat: -7.6964504, lng: 108.87726165, data: { kedalaman: 5.7, suhu: 30.5, salinitas: 14.1, kekeruhan: 13.8, ph: 6.7, do: 7.4 } },
+            { id: 131, stasiun: 5, time: "17:05", lat: -7.69569153, lng: 108.87723953, data: { kedalaman: 5.0, suhu: 28.7, salinitas: 25.7, kekeruhan: 6.7, ph: 8.3, do: 7.3 } },
+            { id: 132, stasiun: 5, time: "17:10", lat: -7.69617064, lng: 108.87663536, data: { kedalaman: 5.5, suhu: 31.3, salinitas: 23.8, kekeruhan: 20.2, ph: 6.9, do: 7.3 } },
+            { id: 133, stasiun: 5, time: "17:15", lat: -7.69540778, lng: 108.87666486, data: { kedalaman: 8.0, suhu: 31.2, salinitas: 11.2, kekeruhan: 3.4, ph: 8.3, do: 7.3 } },
+            { id: 134, stasiun: 5, time: "17:20", lat: -7.69585566, lng: 108.87608886, data: { kedalaman: 5.6, suhu: 29.0, salinitas: 27.1, kekeruhan: 18.2, ph: 7.9, do: 7.3 } },
+            { id: 135, stasiun: 5, time: "17:25", lat: -7.69514197, lng: 108.87616128, data: { kedalaman: 7.1, suhu: 29.5, salinitas: 18.6, kekeruhan: 14.4, ph: 7.2, do: 7.2 } },
+            { id: 136, stasiun: 5, time: "17:30", lat: -7.69551011, lng: 108.875539, data: { kedalaman: 6.0, suhu: 29.7, salinitas: 19.8, kekeruhan: 20.0, ph: 7.1, do: 7.4 } },
+            { id: 137, stasiun: 5, time: "17:35", lat: -7.69488414, lng: 108.87562618, data: { kedalaman: 7.6, suhu: 29.3, salinitas: 26.6, kekeruhan: 22.9, ph: 7.1, do: 7.3 } }
         ];
 
         /* =====================================================
@@ -748,14 +853,7 @@
                 const isLast =
                     index === batimetriPoints.length - 1;
 
-                let markerColor;
-                if (isFirst) {
-                    markerColor = '#22c55e';
-                } else if (isLast) {
-                    markerColor = '#ef4444';
-                } else {
-                    markerColor = '#008ba3';
-                }
+                markerColor = '#008ba3';
 
                 /* =============================================
                    ICON MARKER
@@ -791,26 +889,6 @@
                    STATUS TITIK
                 ============================================= */
 
-                let status;
-                if (isFirst) {
-                    status = `
-                        <span style="
-                            color:#16a34a;
-                            font-weight:700;
-                        ">
-                            Titik awal
-                        </span>
-                    `;
-                } else if (isLast) {
-                    status = `
-                        <span style="
-                            color:#dc2626;
-                            font-weight:700;
-                        ">
-                            Titik akhir
-                        </span>
-                    `;
-                } else {
                     status = `
                         <span style="
                             color:#008ba3;
@@ -819,7 +897,7 @@
                             Titik pengamatan
                         </span>
                     `;
-                }
+                
                 const checkData = (val, unit) => (val !== null && val !== undefined) ? `${val} ${unit}` : '<span style="color:#9ca3af;">N/A</span>';
 
                 const parameterInformation = `
@@ -1043,6 +1121,7 @@
         }
 
         // 3. Render Tabel Rata-rata
+        // 3. Render Tabel Rata-rata berdasarkan ID Stasiun
         const tableContainer = document.getElementById('table-indikator-container');
 
         let tableHTML = `
@@ -1062,25 +1141,36 @@
                     <tbody class="divide-y divide-gray-100">
         `;
 
-        const chunkSize = 5;
-        for (let i = 0; i < batimetriPoints.length; i += chunkSize) {
-            const chunk = batimetriPoints.slice(i, i + chunkSize);
+        // Proses pengelompokan data berdasarkan properti 'stasiun'
+        const stasiunGroups = {};
+        batimetriPoints.forEach(point => {
+            const idStasiun = point.stasiun || 1; // Jika lupa diberi stasiun, otomatis masuk Stasiun 1
+            if (!stasiunGroups[idStasiun]) {
+                stasiunGroups[idStasiun] = [];
+            }
+            stasiunGroups[idStasiun].push(point);
+        });
 
-            const startId = chunk[0].id;
-            const endId = chunk[chunk.length - 1].id;
+        // Looping untuk setiap Stasiun yang sudah dikelompokkan
+        for (const idStasiun in stasiunGroups) {
+            const titikDiStasiunIni = stasiunGroups[idStasiun];
+
+            // Ambil nomor titik awal dan akhir dari stasiun tersebut
+            const startId = titikDiStasiunIni[0].id;
+            const endId = titikDiStasiunIni[titikDiStasiunIni.length - 1].id;
 
             // Hitung rata-rata per parameter
-            const avgSuhu = getAverage(chunk, 'suhu');
-            const avgDo = getAverage(chunk, 'do');
-            const avgKedalaman = getAverage(chunk, 'kedalaman');
-            const avgKekeruhan = getAverage(chunk, 'kekeruhan');
-            const avgPh = getAverage(chunk, 'ph');
-            const avgSalinitas = getAverage(chunk, 'salinitas');
+            const avgSuhu = getAverage(titikDiStasiunIni, 'suhu');
+            const avgDo = getAverage(titikDiStasiunIni, 'do');
+            const avgKedalaman = getAverage(titikDiStasiunIni, 'kedalaman');
+            const avgKekeruhan = getAverage(titikDiStasiunIni, 'kekeruhan');
+            const avgPh = getAverage(titikDiStasiunIni, 'ph');
+            const avgSalinitas = getAverage(titikDiStasiunIni, 'salinitas');
 
             tableHTML += `
                 <tr class="hover:bg-blue-50/50 transition-colors">
                     <td class="px-4 py-4 border-r text-center">
-                        <div class="font-bold text-[#118AB2]">Zona ${Math.floor(i / chunkSize) + 1}</div>
+                        <div class="font-bold text-[#118AB2]">Stasiun ${idStasiun}</div>
                         <div class="text-xs text-gray-400 mt-1">Titik ${startId} - ${endId}</div>
                     </td>
                     <td class="px-4 py-4 text-center align-middle">${formatIndicatorCell('suhu', avgSuhu, '°C')}</td>
