@@ -259,9 +259,11 @@
 
             <!-- Description -->
             <p class="text-sm sm:text-base text-cyan-50 max-w-3xl leading-relaxed font-normal font-inter">
-                Alat pendukung yang digunakan untuk mengukur arah dan kecepatan arus perairan berdasarkan perubahan posisi alat terhadap waktu. Data yang diperoleh digunakan untuk mendukung interpretasi hasil pengukuran ALBA, khususnya dalam memahami pola pergerakan dan transportasi sedimen.
+                Alat pendukung yang digunakan untuk mengukur arah dan kecepatan arus perairan berdasarkan perubahan
+                posisi alat terhadap waktu. Data yang diperoleh digunakan untuk mendukung interpretasi hasil pengukuran
+                ALBA, khususnya dalam memahami pola pergerakan dan transportasi sedimen.
 
-            <!-- Action Button -->
+                <!-- Action Button -->
             <div class="pt-2">
                 <a href="#maintenance"
                     class="inline-flex items-center space-x-2 bg-white text-brand-darkText font-semibold px-4 py-2 rounded-full text-xs sm:text-sm shadow hover:bg-gray-100 transition duration-200 border border-gray-200 font-inter">
@@ -306,19 +308,21 @@
                     <div class="grid grid-cols-2 gap-4">
 
                         <!-- Item 1: GPS -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0"
-                            style="border: 2px solid #b2e3ea;">
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-48 flex flex-col items-center p-6 gap-0"
+                            tabindex="0" style="border: 2px solid #b2e3ea;">
                             <img src="gps bat.jpg" alt="GPS"
                                 class="max-h-full max-w-full object-contain p-1 rounded-lg">
+
+                            <div>
+                                <p
+                                    class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2 text-center">
+                                    GPS U-blox Neo 6M V2
+                                </p>
+                            </div>
                             <div
                                 class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
                                 <div
                                     class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        GPS U-blox Neo 6M V2
-                                    </p>
                                     <span
                                         class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
                                         Navigasi & Geolokasi
@@ -331,19 +335,24 @@
                         </div>
 
                         <!-- Item 2: Antena -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0"
-                            style="border: 2px solid #b2e3ea;">
-                            <img src="antena bat.jpg" alt="Antena"
-                                class="max-h-full max-w-full object-contain p-1 rounded-lg">
+                        <div class="group relative flex flex-col items-center justify-between pt-3 pb-6 px-6 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-48"
+                            tabindex="0" style="border: 2px solid #b2e3ea;">
+
+                            <div class="w-24 h-24 flex justify-center">
+                                <img src="antena bat.jpg" alt="Antena"
+                                    class="max-h-full max-w-full object-contain p-1 rounded-lg">
+                            </div>
+
+                            <div class="w-full text-center">
+                                <p class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight">
+                                    TS9 Antenna Spiral 7dBi <br> 4G LTE 3G WCDMA GSM <br> 3G 2.4G Kabel 5 meter
+                                </p>
+                            </div>
+
                             <div
                                 class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
                                 <div
                                     class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        TS9 Antenna Spiral 7dBi 4G LTE 3G WCDMA GSM 3G 2.4G Kabel 5 meter
-                                    </p>
                                     <span
                                         class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
                                         Penguat Sinyal Transmisi
@@ -356,19 +365,20 @@
                         </div>
 
                         <!-- Item 3: SIM800L -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0"
-                            style="border: 2px solid #b2e3ea;">
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-48 flex flex-col items-center p-6 gap-0"
+                            tabindex="0" style="border: 2px solid #b2e3ea;">
                             <img src="sim800l bat.jpg" alt="SIM800L"
                                 class="max-h-full max-w-full object-contain p-1 rounded-lg">
+
+                            <div>
+                                <p class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                    SIM800L GSM/GPRS
+                                </p>
+                            </div>
                             <div
                                 class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
                                 <div
                                     class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        SIM800L GSM/GPRS
-                                    </p>
                                     <span
                                         class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
                                         Modul Komunikasi Seluler
@@ -381,19 +391,20 @@
                         </div>
 
                         <!-- Item 4: RTC -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0"
-                            style="border: 2px solid #b2e3ea;">
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-48 flex flex-col items-center p-6 gap-0"
+                            tabindex="0" style="border: 2px solid #b2e3ea;">
                             <img src="rtc bat tross.jpg" alt="RTC"
                                 class="max-h-full max-w-full object-contain p-1 rounded-lg">
+
+                            <div>
+                                <p class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                    RTC (Real Time Clock) DS3231
+                                </p>
+                            </div>
                             <div
                                 class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
                                 <div
                                     class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        RTC (Real Time Clock) DS3231
-                                    </p>
                                     <span
                                         class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
                                         Pewaktu <i>Real-Time</i>
@@ -407,19 +418,28 @@
 
                         <!-- Item 5: Panel Surya (Tengah Baris Terakhir) -->
                         <div class="col-span-2 flex justify-center">
-                            <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32 w-1/2"
-                                tabindex="0"
-                                style="border: 2px solid #b2e3ea;">
-                                <img src="panel surya bat.jpg" alt="Panel Surya"
-                                    class="max-h-full max-w-full object-contain p-1 rounded-lg">
+                            <div class="group relative flex flex-col items-center justify-between pt-3 pb-6 px-6 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-48 w-1/2"
+                                tabindex="0" style="border: 2px solid #b2e3ea;">
+
+                                <!-- Pembungkus Foto Komponen -->
+                                <div class="w-24 h-24 flex justify-center">
+                                    <img src="panel surya bat.jpg" alt="Panel Surya"
+                                        class="max-h-full max-w-full object-contain p-1 rounded-lg">
+                                </div>
+
+                                <!-- Teks di Bawah -->
+                                <div class="w-full text-center">
+                                    <p class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight">
+                                        Solar Panel Lipat 15W FlexSolar E15 USB Charger <br> Monocrystalline Waterproof
+                                        IP67 Portable
+                                    </p>
+                                </div>
+
+                                <!-- Tooltip Pop-up (Tetap berfungsi saat dipencet/hover) -->
                                 <div
                                     class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
                                     <div
                                         class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                        <p
-                                            class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                            Solar Panel Lipat 15W FlexSolar E15 USB Charger
-                                            Monocrystalline Waterproof IP67 Portable</p>
                                         <span
                                             class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
                                             Sumber Daya Mandiri
@@ -447,19 +467,20 @@
                     <div class="grid grid-cols-2 gap-4">
 
                         <!-- Item 1: Resin -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0"
-                            style="border: 2px solid #b2e3ea;">
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-48 flex flex-col items-center p-6 gap-0"
+                            tabindex="0" style="border: 2px solid #b2e3ea;">
                             <img src="resin.jpg" alt="Resin"
                                 class="max-h-full max-w-full object-contain p-1 rounded-lg">
+
+                            <div>
+                                <p class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                    Resin
+                                </p>
+                            </div>
                             <div
                                 class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
                                 <div
                                     class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        Resin
-                                    </p>
                                     <span
                                         class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
                                         Ukuran: 7 Kilogram
@@ -472,19 +493,20 @@
                         </div>
 
                         <!-- Item 2: Fiberglass -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0"
-                            style="border: 2px solid #b2e3ea;">
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-48 flex flex-col items-center p-6 gap-0"
+                            tabindex="0" style="border: 2px solid #b2e3ea;">
                             <img src="fiberglass.jpg" alt="Fiberglass"
                                 class="max-h-full max-w-full object-contain p-1 rounded-lg">
+
+                            <div>
+                                <p class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                    <i>Fiberglass</i>
+                                </p>
+                            </div>
                             <div
                                 class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
                                 <div
                                     class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        <i>Fiberglass</i>
-                                    </p>
                                     <span
                                         class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
                                         Ukuran: 4 x 2 Meter
@@ -497,19 +519,20 @@
                         </div>
 
                         <!-- Item 3: Dempul -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0"
-                            style="border: 2px solid #b2e3ea;">
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-48 flex flex-col items-center p-6 gap-0"
+                            tabindex="0" style="border: 2px solid #b2e3ea;">
                             <img src="dempul.jpg" alt="Dempul"
                                 class="max-h-full max-w-full object-contain p-1 rounded-lg">
+
+                            <div>
+                                <p class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                    Dempul
+                                </p>
+                            </div>
                             <div
                                 class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
                                 <div
                                     class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        Dempul
-                                    </p>
                                     <span
                                         class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
                                         Ukuran: 3 Bungkus
@@ -522,19 +545,20 @@
                         </div>
 
                         <!-- Item 4: Katalis -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0"
-                            style="border: 2px solid #b2e3ea;">
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-48 flex flex-col items-center p-6 gap-0"
+                            tabindex="0" style="border: 2px solid #b2e3ea;">
                             <img src="katalis.jpg" alt="Katalis"
                                 class="max-h-full max-w-full object-contain p-1 rounded-lg">
+
+                            <div>
+                                <p class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                    Katalis
+                                </p>
+                            </div>
                             <div
                                 class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
                                 <div
                                     class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        Katalis
-                                    </p>
                                     <span
                                         class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
                                         Ukuran: 100 Mililiter
@@ -547,19 +571,20 @@
                         </div>
 
                         <!-- Item 5: Tali Tambang -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0"
-                            style="border: 2px solid #b2e3ea;">
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-48 flex flex-col items-center p-6 gap-0"
+                            tabindex="0" style="border: 2px solid #b2e3ea;">
                             <img src="tali tambang.jpg" alt="Tali Tambang"
                                 class="max-h-full max-w-full object-contain p-1 rounded-lg">
+
+                            <div>
+                                <p class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                    Tali Tambang
+                                </p>
+                            </div>
                             <div
                                 class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
                                 <div
                                     class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        Tali Tambang
-                                    </p>
                                     <span
                                         class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
                                         Ukuran: 50 Centimeter
@@ -572,19 +597,20 @@
                         </div>
 
                         <!-- Item 6: Jaring -->
-                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-32"
-                            tabindex="0"
-                            style="border: 2px solid #b2e3ea;">
+                        <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-48 flex flex-col items-center p-6 gap-0"
+                            tabindex="0" style="border: 2px solid #b2e3ea;">
                             <img src="jaring.jpg" alt="Jaring"
                                 class="max-h-full max-w-full object-contain p-1 rounded-lg">
+
+                            <div>
+                                <p class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                    Jaring
+                                </p>
+                            </div>
                             <div
                                 class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
                                 <div
                                     class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
-                                    <p
-                                        class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
-                                        Jaring
-                                    </p>
                                     <span
                                         class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
                                         Ukuran: 40 x 50 Centimeter
@@ -601,7 +627,8 @@
             </div>
         </div>
 
-        <section class="bg-brand-lightCyan rounded-2xl border border-brand-borderCyan p-5 sm:p-6 mb-4" style="margin-bottom: -0; position: relative; top: 30px;">
+        <section class="bg-brand-lightCyan rounded-2xl border border-brand-borderCyan p-5 sm:p-6 mb-4"
+            style="margin-bottom: -0; position: relative; top: 30px;">
             <div class="flex items-start gap-3">
                 <div class="w-10 h-10 shrink-0 rounded-xl bg-white flex items-center justify-center text-brand-cyan">
                     <i class="fa-solid fa-circle-info"></i>
