@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Config Tailwind CSS untuk mendukung Utility Class font-anta & font-inter -->
+
     <script>
         tailwind.config = {
             theme: {
@@ -29,16 +30,20 @@
                     },
                     colors: {
                         brand: {
-                            blue: '#1b85b8',
-                            dark: '#2d3748',
-                            slate: '#4d566c',
-                            bg: '#eef5f9'
+                            green: '#2A7C13',
+                            lightGreen: '#76C457',
+                            brown: '#6E3511',
+                            gray: '#454545',
+                            bg: '#F3F7F0',
+                            dark: '#454545',
+                            slate: '#454545'
                         }
                     }
                 }
             }
         }
     </script>
+
 
     <style>
         body {
@@ -139,7 +144,7 @@
 
             padding: 12px;
 
-            border: 2px solid #bae6fd;
+            border: 2px solid #76C457;
 
             border-radius: 24px;
 
@@ -204,6 +209,51 @@
                 padding: 8px;
             }
         }
+
+
+        /* Garis bawah menu saat di-hover */
+        .nav-underline {
+            position: relative;
+        }
+
+        .nav-underline::after {
+            content: "";
+            position: absolute;
+            left: 16px;
+            right: 16px;
+            bottom: 5px;
+            height: 2px;
+            background-color: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-underline:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Responsif untuk perangkat mobile */
+        @media (max-width: 768px) {
+            #navbar {
+                padding: 12px 16px;
+            }
+
+            #navbar img {
+                height: 42px;
+            }
+
+            #logo-circle {
+                width: 50px;
+                height: 50px;
+            }
+
+            #mobile-toggle-btn {
+                font-size: 22px;
+                padding: 8px;
+            }
+        }
     </style>
     <script>
         slider.addEventListener('dragstart', (e) => {
@@ -216,6 +266,7 @@
 <body class="bg-white text-gray-800 font-inter">
 
     <!-- Sticky Navigation Bar -->
+
     <nav id="navbar"
         class="fixed top-0 left-0 w-full z-50 p-4 lg:px-12 transition-all duration-300 text-white bg-transparent">
 
@@ -224,153 +275,195 @@
             <!-- Logo ALBATROSS -->
             <div class="relative flex items-center justify-center">
 
-                <!-- 1. SHAPE BIRU (Gunakan opacity-0 transition-opacity duration-300) -->
-                <div id="logo-circle"
-                    class="absolute bg-[#118AB2] rounded-full w-14 h-14 -z-0 opacity-0 scale-75 transition-all duration-300 ease-in-out pointer-events-none">
-                </div>
-
-                <!-- 2. Tombol Logo -->
+                <!-- Tombol Logo -->
                 <a href="#" id="logo-btn"
-                    class="relative z-10 flex items-center justify-center transition-transform hover:scale-105">
-                    <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="h-12 w-auto object-contain">
+                    class="relative z-10 flex items-center justify-center transition-transform hover:scale-105 mx-[5px]">
+                    <img src="logo mitr.png" alt="LOGO " class="h-12 w-auto object-contain mx-[10px]">
+                </a>
+                <a href="#" id="logo-btn"
+                    class="relative flex items-center justify-center transition-transform hover:scale-105">
+                    <div id="logo-circle"
+                        class="absolute bg-[#2A7C13] rounded-full w-14 h-14 -z-0 opacity-0 scale-75 transition-all duration-300 ease-in-out pointer-events-none">
+                    </div>
+                    <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="relative z-10 h-12 w-auto object-contain">
                 </a>
 
             </div>
 
-            <!-- Container Kanan -->
+            <!-- Container Kanan Desktop -->
             <div class="flex items-center space-x-3">
 
                 <ul id="nav-links"
                     class="hidden md:flex items-center space-x-2 sm:space-x-3 text-xs sm:text-sm font-semibold tracking-wider sm:tracking-widest uppercase transition-all duration-300 py-1 font-inter">
 
-                    <li>
+                    <!-- BERANDA -->
+                    <li class="group">
                         <a href="index.html"
-                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
+                            class="nav-item relative whitespace-nowrap px-3 sm:px-4 py-2 rounded-full transition-all duration-200 hover:bg-[#2A7C13] hover:text-white after:absolute after:bottom-1 after:left-4 after:right-4 after:h-[2px] after:bg-white after:scale-x-0 group-hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
                             BERANDA
                         </a>
                     </li>
 
-                    <li>
+                    <!-- TENTANG KAMI -->
+                    <li class="group">
                         <a href="tentang kami.html"
-                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
+                            class="nav-item relative z-20 whitespace-nowrap px-3 sm:px-4 py-2 rounded-full transition-all duration-200 hover:bg-[#2A7C13] hover:text-white after:absolute after:bottom-1 after:left-4 after:right-4 after:h-[2px] after:bg-white after:scale-x-0 group-hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
                             TENTANG KAMI
                         </a>
                     </li>
 
                     <!-- Dropdown ALAT -->
                     <li class="relative group" id="alat-dropdown">
+                        <div
+                            class="absolute top-3 right-0 w-full h-10 bg-[#2A7C13] rounded-t-xl z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200 pointer-events-none">
+                        </div>
 
                         <button id="alat-btn" type="button"
-                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+                            class="nav-item relative z-20 whitespace-nowrap px-4 py-2 rounded-full transition-all duration-200 group-hover:bg-[#2A7C13] group-hover:text-white after:absolute after:bottom-1 after:left-4 after:right-4 after:h-[2px] after:bg-white after:scale-x-0 group-hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300 flex items-center gap-1 uppercase font-semibold">
                             ALAT
                         </button>
 
                         <div id="alat-menu"
-                            class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
-
+                            class="absolute right-0 top-full w-48 bg-[#2A7C13] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200">
                             <a href="alat alba.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
-                                Alat ALBA
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors group/item">
+                                <span
+                                    class="relative inline-block hover:font-bold after:absolute after:-bottom-0.5 after:left-0 after:right-0 after:h-[1.5px] after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
+                                    Alat ALBA
+                                </span>
                             </a>
-
                             <a href="alat bat.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
-                                Alat BAT
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors group/item">
+                                <span
+                                    class="relative inline-block hover:font-bold after:absolute after:-bottom-0.5 after:left-0 after:right-0 after:h-[1.5px] after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
+                                    Alat BAT
+                                </span>
                             </a>
-
                             <a href="alat tross.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">
-                                Alat TROSS
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors pb-3 group/item">
+                                <span
+                                    class="relative inline-block hover:font-bold after:absolute after:-bottom-0.5 after:left-0 after:right-0 after:h-[1.5px] after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
+                                    Alat TROSS
+                                </span>
                             </a>
-
                         </div>
                     </li>
 
                     <!-- Dropdown DATA -->
                     <li class="relative group" id="data-dropdown">
+                        <div
+                            class="absolute top-3 right-0 w-full h-10 bg-[#2A7C13] rounded-t-xl z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200 pointer-events-none">
+                        </div>
 
                         <button id="data-btn" type="button"
-                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+                            class="nav-item relative z-20 whitespace-nowrap px-4 py-2 rounded-full transition-all duration-200 group-hover:bg-[#2A7C13] group-hover:text-white after:absolute after:bottom-1 after:left-4 after:right-4 after:h-[2px] after:bg-white after:scale-x-0 group-hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300 flex items-center gap-1 uppercase font-semibold">
                             DATA
                         </button>
 
                         <div id="data-menu"
-                            class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
-
+                            class="absolute right-0 top-full w-48 bg-[#2A7C13] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200">
                             <a href="data pemetaan.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
-                                Data Pemetaan
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors group/item">
+                                <span
+                                    class="relative inline-block hover:font-bold after:absolute after:-bottom-0.5 after:left-0 after:right-0 after:h-[1.5px] after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
+                                    Data Pemetaan
+                                </span>
                             </a>
-
                             <a href="data alba.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
-                                Data ALBA
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors group/item">
+                                <span
+                                    class="relative inline-block hover:font-bold after:absolute after:-bottom-0.5 after:left-0 after:right-0 after:h-[1.5px] after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
+                                    Data ALBA
+                                </span>
                             </a>
-
                             <a href="data bat.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
-                                Data BAT
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors group/item">
+                                <span
+                                    class="relative inline-block hover:font-bold after:absolute after:-bottom-0.5 after:left-0 after:right-0 after:h-[1.5px] after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
+                                    Data BAT
+                                </span>
                             </a>
-
                             <a href="data tross.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">
-                                Data TROSS
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors pb-3 group/item">
+                                <span
+                                    class="relative inline-block hover:font-bold after:absolute after:-bottom-0.5 after:left-0 after:right-0 after:h-[1.5px] after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
+                                    Data TROSS
+                                </span>
                             </a>
-
                         </div>
                     </li>
 
                 </ul>
 
-                <!-- Tombol Mobile -->
+                <!-- Tombol Mobile Toggle -->
                 <button id="mobile-toggle-btn"
-                    class="md:hidden text-white text-2xl p-2 transition-colors focus:outline-none"
+                    class="md:hidden text-2xl p-2 transition-colors focus:outline-none cursor-pointer"
                     aria-label="Buka menu navigasi">
                     <i id="toggle-icon" class="fas fa-bars"></i>
                 </button>
             </div>
         </div>
 
-        <!-- Menu Mobile -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white mt-4 rounded-xl shadow-lg p-4">
-            <div class="flex flex-col space-y-2 text-sm font-semibold text-[#118AB2]">
-                <a href="index.html" class="px-4 py-3 rounded-lg hover:bg-brand-lightCyan">
+        <!-- Menu Mobile Interaktif -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white mt-3 rounded-xl shadow-lg p-4 border border-gray-100">
+            <div class="flex flex-col space-y-2 text-sm font-semibold text-[#2A7C13]">
+                <a href="index.html" class="px-4 py-2.5 rounded-lg hover:bg-green-50 transition-colors">
                     BERANDA
                 </a>
-                <a href="tentang kami.html" class="px-4 py-3 rounded-lg hover:bg-brand-lightCyan">
+                <a href="tentang kami.html" class="px-4 py-2.5 rounded-lg hover:bg-green-50 transition-colors">
                     TENTANG KAMI
                 </a>
+
+                <!-- Accordion Mobile ALAT -->
                 <div class="border-t border-gray-100 pt-2">
-                    <p class="px-4 py-2 text-xs text-gray-400">
-                        ALAT
-                    </p>
-                    <a href="alat alba.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Alat ALBA
-                    </a>
-                    <a href="alat bat.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Alat BAT
-                    </a>
-                    <a href="alat tross.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Alat TROSS
-                    </a>
+                    <button id="mobile-alat-btn" type="button"
+                        class="w-full flex justify-between items-center px-4 py-2.5 rounded-lg hover:bg-green-50 text-left uppercase text-xs tracking-wider text-gray-500 font-bold transition-colors cursor-pointer">
+                        <span class="text-[#2A7C13]">ALAT</span>
+                        <i id="mobile-alat-icon"
+                            class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+                    </button>
+                    <div id="mobile-alat-sub" class="hidden pl-4 pr-2 py-1 space-y-1">
+                        <a href="alat alba.html"
+                            class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#2A7C13] rounded-lg transition-colors">
+                            Alat ALBA
+                        </a>
+                        <a href="alat bat.html"
+                            class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#2A7C13] rounded-lg transition-colors">
+                            Alat BAT
+                        </a>
+                        <a href="alat tross.html"
+                            class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#2A7C13] rounded-lg transition-colors">
+                            Alat TROSS
+                        </a>
+                    </div>
                 </div>
 
+                <!-- Accordion Mobile DATA -->
                 <div class="border-t border-gray-100 pt-2">
-                    <p class="px-4 py-2 text-xs text-gray-400">
-                        DATA
-                    </p>
-                    <a href="data pemetaan.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Data Pemetaan
-                    </a>
-                    <a href="data alba.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Data ALBA
-                    </a>
-                    <a href="data bat.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Data BAT
-                    </a>
-                    <a href="data tross.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Data TROSS
-                    </a>
+                    <button id="mobile-data-btn" type="button"
+                        class="w-full flex justify-between items-center px-4 py-2.5 rounded-lg hover:bg-green-50 text-left uppercase text-xs tracking-wider text-gray-500 font-bold transition-colors cursor-pointer">
+                        <span class="text-[#2A7C13]">DATA</span>
+                        <i id="mobile-data-icon"
+                            class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+                    </button>
+                    <div id="mobile-data-sub" class="hidden pl-4 pr-2 py-1 space-y-1">
+                        <a href="data pemetaan.html"
+                            class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#2A7C13] rounded-lg transition-colors">
+                            Data Pemetaan
+                        </a>
+                        <a href="data alba.html"
+                            class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#2A7C13] rounded-lg transition-colors">
+                            Data ALBA
+                        </a>
+                        <a href="data bat.html"
+                            class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#2A7C13] rounded-lg transition-colors">
+                            Data BAT
+                        </a>
+                        <a href="data tross.html"
+                            class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#2A7C13] rounded-lg transition-colors">
+                            Data TROSS
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -380,7 +473,7 @@
     <section class="relative w-full h-screen min-h-[600px] flex flex-col bg-gray-900 overflow-hidden pt-20">
         <!-- Background Image with Overlay -->
         <div class="absolute inset-0 z-0">
-            <img src="IMG_0895.JPG" alt="Water and Equipment Background" class="w-full h-full object-cover opacity-70">
+            <img src="perairan.jpg" alt="Water and Equipment Background" class="w-full h-full object-cover opacity-70">
             <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/60"></div>
         </div>
         <!-- Hero Content -->
@@ -416,7 +509,7 @@
             <!-- Left Column: Image -->
             <div class="w-full relative group">
                 <div
-                    class="absolute -inset-2 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-3xl blur-lg opacity-70 group-hover:opacity-100 transition duration-500">
+                    class="absolute -inset-2 bg-gradient-to-r from-[#76C457]/20 to-[#2A7C13]/10 rounded-3xl blur-lg opacity-70 group-hover:opacity-100 transition duration-500">
                 </div>
 
                 <img src="Foto di Aquatic.jpg" alt="Tim Albatross di Aquatic Center"
@@ -425,12 +518,12 @@
             <!-- Right Column: Info Card -->
             <div class="w-full relative mt-8 lg:mt-0">
                 <div
-                    class="relative bg-[#1a7f9f] rounded-2xl p-6 pt-16 sm:p-8 sm:pt-20 md:p-20 md:pt-30 shadow-2xl mt-0">
+                    class="relative bg-[#2A7C13] rounded-2xl p-6 pt-16 sm:p-8 sm:pt-20 md:p-20 md:pt-30 shadow-2xl mt-0">
                     <div class="absolute -top-5 sm:-top-6 left-1/2 transform -translate-x-1/2">
                         <div
                             class="bg-white px-5 sm:px-10 py-4 sm:py-6 rounded-xl shadow-lg flex justify-center items-center whitespace-nowrap">
                             <h2
-                                class="relative top-2 font-tech text-lg sm:text-xl md:text-3xl font-bold text-[#445b73] tracking-wide text-center whitespace-nowrap">
+                                class="relative top-2 font-tech text-lg sm:text-xl md:text-3xl font-bold text-[#454545] tracking-wide text-center whitespace-nowrap">
                                 Apa itu Albatross?
                             </h2>
                         </div>
@@ -476,55 +569,60 @@
 
         });
 
+
         window.addEventListener('scroll', function () {
             const navbar = document.getElementById('navbar');
             const navItems = document.querySelectorAll('.nav-item');
             const mobileBtn = document.getElementById('mobile-toggle-btn');
-
-            // NAMA ID SUDAH DISESUAIKAN DENGAN HTML-MU
             const logoCircle = document.getElementById('logo-circle');
 
             if (window.scrollY > 50) {
-                // Navbar jadi putih
+                // Navbar berubah menjadi putih saat halaman di-scroll
                 navbar.classList.remove('bg-transparent', 'text-white');
                 navbar.classList.add('bg-white', 'shadow-md');
 
-                // Teks menu jadi biru
+                // Warna menu berubah menjadi hijau tua
                 navItems.forEach(link => {
                     link.classList.remove('text-white');
-                    link.classList.add('text-[#118AB2]');
+                    link.classList.add('text-[#2A7C13]');
                 });
 
-                // Warna tombol mobile
-                if (mobileBtn) mobileBtn.classList.add('text-gray-800');
+                // Tombol hamburger ikut berubah menjadi hijau tua
+                if (mobileBtn) {
+                    mobileBtn.classList.remove('text-white');
+                    mobileBtn.classList.add('text-[#2A7C13]');
+                }
 
-                // LINGKARAN MUNCUL BERSAMAAN (Fade In + Membesar)
+                // Lingkaran hijau muncul di belakang logo ALBATROSS
                 if (logoCircle) {
                     logoCircle.classList.remove('opacity-0', 'scale-75');
                     logoCircle.classList.add('opacity-100', 'scale-100');
                 }
 
             } else {
-                // Navbar kembali transparan
+                // Navbar kembali transparan di bagian paling atas
                 navbar.classList.add('bg-transparent', 'text-white');
                 navbar.classList.remove('bg-white', 'shadow-md');
 
-                // Teks menu kembali putih
+                // Menu kembali putih
                 navItems.forEach(link => {
-                    link.classList.remove('text-[#118AB2]');
+                    link.classList.remove('text-[#2A7C13]');
                     link.classList.add('text-white');
                 });
 
-                // Warna tombol mobile kembali normal
-                if (mobileBtn) mobileBtn.classList.remove('text-gray-800');
+                if (mobileBtn) {
+                    mobileBtn.classList.remove('text-[#2A7C13]');
+                    mobileBtn.classList.add('text-white');
+                }
 
-                // LINGKARAN HILANG BERSAMAAN (Fade Out + Mengecil)
+                // Lingkaran di belakang logo menghilang
                 if (logoCircle) {
                     logoCircle.classList.remove('opacity-100', 'scale-100');
                     logoCircle.classList.add('opacity-0', 'scale-75');
                 }
             }
         });
+
 
         function escapeHTML(str) {
             return str.replace(/[&<>'"]/g,
@@ -537,12 +635,47 @@
                 }[tag] || tag)
             );
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Main Menu Toggle
+            const toggleBtn = document.getElementById('mobile-toggle-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const toggleIcon = document.getElementById('toggle-icon');
+
+            if (toggleBtn && mobileMenu && toggleIcon) {
+                toggleBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                    toggleIcon.classList.toggle('fa-bars');
+                    toggleIcon.classList.toggle('fa-times');
+                });
+            }
+
+            // Helper Function Accordion Mobile
+            const setupAccordion = (btnId, subId, iconId) => {
+                const btn = document.getElementById(btnId);
+                const sub = document.getElementById(subId);
+                const icon = document.getElementById(iconId);
+
+                if (btn && sub) {
+                    btn.addEventListener('click', () => {
+                        sub.classList.toggle('hidden');
+                        if (icon) {
+                            icon.classList.toggle('rotate-180');
+                        }
+                    });
+                }
+            };
+
+            setupAccordion('mobile-alat-btn', 'mobile-alat-sub', 'mobile-alat-icon');
+            setupAccordion('mobile-data-btn', 'mobile-data-sub', 'mobile-data-icon');
+        });
+
     </script>
 
     <!-- Peta Lokasi Monitoring -->
     <section id="data-map" class="w-full bg-white pt-0 pb-16 px-6 lg:px-12">
         <div class="max-w-6xl mx-auto">
-            <h2 class="font-tech text-2xl md:text-3xl font-bold text-[#464B71] text-center mb-10">
+            <h2 class="font-tech text-2xl md:text-3xl font-bold text-[#454545] text-center mb-10">
                 Peta Lokasi Monitoring
             </h2>
             <div class="w-full h-[450px] md:h-[600px] rounded-2xl overflow-hidden shadow-lg border border-gray-200">
@@ -556,16 +689,16 @@
 
     <section class="w-full bg-white pt-0 pb-0 px-6 lg:px-12">
         <div class="max-w-6xl mx-auto">
-            <h2 class="font-tech text-xl md:text-3xl font-bold flex justify-center items-center text-[#464B71]">
+            <h2 class="font-tech text-xl md:text-3xl font-bold flex justify-center items-center text-[#454545]">
                 Kata Mereka:
             </h2>
 
             <p
-                class="text-[#118AB2] text-base md:text-lg leading-relaxed text-center mt-7 font-light max-w-2xl mx-auto text-justify">
+                class="text-[#2A7C13] text-base md:text-lg leading-relaxed text-center mt-7 font-light max-w-2xl mx-auto text-justify">
                 “Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque
                 sem
                 placerat. In id cursus mi pretium tellus duis convallis.”
-                <strong class="font-semibold text-[#118AB2]">- Perlman</strong>
+                <strong class="font-semibold text-[#2A7C13]">- Perlman</strong>
             </p>
         </div>
     </section>
@@ -629,7 +762,7 @@
         </div>
     </div>
     <div>
-        <h2 class="font-tech text-xl md:text-3xl font-bold flex justify-center items-center h-40 text-[#464B71]">
+        <h2 class="font-tech text-xl md:text-3xl font-bold flex justify-center items-center h-40 text-[#454545]">
             Didukung Oleh:
         </h2>
 
@@ -647,9 +780,9 @@
                     <!-- Tooltip di Bawah (Dinaikkan sedikit ke -bottom-8 + z-50) -->
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#118AB2]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
                         <span
-                            class="bg-[#118AB2] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             Pertamina
                         </span>
                     </div>
@@ -661,9 +794,9 @@
                     <img src="Logo PLN.png" alt="PLN" class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#118AB2]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
                         <span
-                            class="bg-[#118AB2] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             PLN
                         </span>
                     </div>
@@ -676,9 +809,9 @@
                         class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#118AB2]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
                         <span
-                            class="bg-[#118AB2] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             KLHK
                         </span>
                     </div>
@@ -690,9 +823,9 @@
                     <img src="Logo kkp.png" alt="KKP" class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#118AB2]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
                         <span
-                            class="bg-[#118AB2] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             KKP
                         </span>
                     </div>
@@ -705,9 +838,9 @@
                         class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#118AB2]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
                         <span
-                            class="bg-[#118AB2] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             Le Minerale
                         </span>
                     </div>
@@ -720,9 +853,9 @@
                         class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#118AB2]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
                         <span
-                            class="bg-[#118AB2] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             BRIN
                         </span>
                     </div>
@@ -734,9 +867,9 @@
                     <img src="Logo CNT.jpe" alt="CNT" class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#118AB2]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
                         <span
-                            class="bg-[#118AB2] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             CNT
                         </span>
                     </div>
@@ -749,9 +882,9 @@
                         class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#118AB2]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
                         <span
-                            class="bg-[#118AB2] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             TOMORO
                         </span>
                     </div>
@@ -764,9 +897,9 @@
                         class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#118AB2]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
                         <span
-                            class="bg-[#118AB2] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             Dragonship
                         </span>
                     </div>
@@ -779,9 +912,9 @@
                         class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#118AB2]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
                         <span
-                            class="bg-[#118AB2] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             Gojek
                         </span>
                     </div>
@@ -794,9 +927,9 @@
                         class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#118AB2]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
                         <span
-                            class="bg-[#118AB2] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             INTEN
                         </span>
                     </div>
@@ -808,9 +941,9 @@
                     <img src="Logo BCA.png" alt="BCA" class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#118AB2]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
                         <span
-                            class="bg-[#118AB2] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             BCA
                         </span>
                     </div>
@@ -822,9 +955,9 @@
                     <img src="Logo BSI.png" alt="BSI" class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#118AB2]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
                         <span
-                            class="bg-[#118AB2] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             BSI
                         </span>
                     </div>
@@ -836,9 +969,9 @@
                     <img src="Logo KAI.png" alt="KAI" class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#118AB2]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
                         <span
-                            class="bg-[#118AB2] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             KAI
                         </span>
                     </div>
@@ -865,7 +998,7 @@
                     <!-- Tambahkan ID dan sesuaikan class warna default-nya -->
                     <div class="flex text-sm font-medium shadow-sm rounded-full">
                         <button id="btn-terbaru"
-                            class="bg-brand-blue text-white px-4 py-1.5 rounded-l-full transition">Terbaru</button>
+                            class="bg-brand-green text-white px-4 py-1.5 rounded-l-full transition">Terbaru</button>
                         <button id="btn-teratas"
                             class="bg-gray-200 text-gray-600 px-4 py-1.5 rounded-r-full hover:bg-gray-300 transition">Teratas</button>
                     </div>
@@ -880,13 +1013,13 @@
                         </svg>
                     </div>
                     <div
-                        class="flex-grow flex items-center border-b border-gray-400 py-2 focus-within:border-brand-blue transition-colors group">
+                        class="flex-grow flex items-center border-b border-gray-400 py-2 focus-within:border-brand-green transition-colors group">
                         <!-- ID ditambahkan pada input -->
                         <input id="comment-input" type="text" placeholder="Tambahkan komentar..."
                             class="w-full bg-transparent text-gray-700 focus:outline-none placeholder-gray-500">
                         <!-- ID dan type button ditambahkan di sini -->
                         <button id="submit-comment"
-                            class="text-gray-400 group-focus-within:text-brand-blue hover:text-blue-700 transition-colors ml-3 px-1">
+                            class="text-gray-400 group-focus-within:text-brand-green hover:text-blue-700 transition-colors ml-3 px-1">
                             <i class="fa-regular fa-paper-plane text-xl"></i>
                         </button>
                     </div>
@@ -908,10 +1041,10 @@
                 </div>
             </div>
 
-            <div class="bg-brand-blue px-6 py-8 relative text-white">
+            <div class="bg-brand-green px-6 py-8 relative text-white">
                 <div class="text-center mt-2 mb-8">
                     <div
-                        class="inline-block bg-white text-brand-blue font-bold px-6 py-2 rounded-full mb-4 shadow-sm text-lg font-anta">
+                        class="inline-block bg-white text-brand-green font-bold px-6 py-2 rounded-full mb-4 shadow-sm text-lg font-anta">
                         Kontak Kami</div>
                     <p class="text-sm md:text-base font-medium max-w-lg mx-auto leading-relaxed font-inter">
                         Ingin tahu lebih banyak tentang alat yang telah kami kembangkan?<br>
@@ -927,22 +1060,22 @@
                         <div>
                             <label class="block font-semibold mb-2 text-lg font-anta">Nama</label>
                             <input type="text" name="nama" required placeholder="Masukkan nama Anda"
-                                class="w-full px-4 py-3 rounded-md text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                                class="w-full px-4 py-3 rounded-md text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#76C457]">
                         </div>
                         <div>
                             <label class="block font-semibold mb-2 text-lg font-anta">Email</label>
                             <input type="email" name="email" required placeholder="Masukkan email Anda"
-                                class="w-full px-4 py-3 rounded-md text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                                class="w-full px-4 py-3 rounded-md text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#76C457]">
                         </div>
                     </div>
                     <div class="flex flex-col">
                         <label class="block font-semibold mb-2 text-lg font-anta">Pesan</label>
                         <div class="relative flex-grow">
                             <textarea name="pesan" required placeholder="Ketik pesan Anda"
-                                class="w-full h-full min-h-[140px] px-4 py-3 pb-12 rounded-md text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300 resize-none"></textarea>
+                                class="w-full h-full min-h-[140px] px-4 py-3 pb-12 rounded-md text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#76C457] resize-none"></textarea>
                             <!-- Diubah dari type="button" menjadi type="submit" -->
                             <button type="submit"
-                                class="absolute bottom-3 right-4 text-brand-blue hover:text-blue-700 transition">
+                                class="absolute bottom-3 right-4 text-brand-green hover:text-[#6E3511] transition">
                                 <i class="fa-regular fa-paper-plane text-2xl"></i>
                             </button>
                         </div>
@@ -990,10 +1123,10 @@
             // Fungsi mengubah warna tombol saat diklik
             function updateButtonStyles() {
                 if (currentSort === 'terbaru') {
-                    btnTerbaru.className = 'bg-brand-blue text-white px-4 py-1.5 rounded-l-full transition';
+                    btnTerbaru.className = 'bg-brand-green text-white px-4 py-1.5 rounded-l-full transition';
                     btnTeratas.className = 'bg-gray-200 text-gray-600 px-4 py-1.5 rounded-r-full hover:bg-gray-300 transition';
                 } else {
-                    btnTeratas.className = 'bg-brand-blue text-white px-4 py-1.5 rounded-r-full transition';
+                    btnTeratas.className = 'bg-brand-green text-white px-4 py-1.5 rounded-r-full transition';
                     btnTerbaru.className = 'bg-gray-200 text-gray-600 px-4 py-1.5 rounded-l-full hover:bg-gray-300 transition';
                 }
             }
@@ -1179,7 +1312,7 @@
 
     </script>
 
-    <footer class="bg-[#118AB2] px-4 sm:px-6 py-10 border-t-[2px] border-[#118AB2]">
+    <footer class="bg-[#2A7C13] px-4 sm:px-6 py-10 border-t-[2px] border-[#2A7C13]">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
 
             <!-- Kolom 1 (Dibuat lebih lebar/span 2): Lokasi, Email, dan WhatsApp -->
@@ -1187,7 +1320,7 @@
                 <h3 class="font-bold text-xl mb-2">Kontak Kami</h3>
 
                 <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9"
-                    class="flex items-start gap-3 hover:text-[#464b71] transition">
+                    class="flex items-start gap-3 hover:text-[#76C457] transition">
                     <i class="fa-solid fa-location-dot text-xl mt-1"></i>
                     <span class="leading-relaxed break-words">
                         Workshop Instrumentasi dan Robotika Kelautan (Bengkel) ITK, Babakan,
@@ -1195,12 +1328,12 @@
                     </span>
                 </a>
 
-                <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-3 hover:text-[#464b71] transition">
+                <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-3 hover:text-[#76C457] transition">
                     <i class="fa-regular fa-envelope text-xl"></i>
                     <span>diklatmitrxvi@gmail.com</span>
                 </a>
 
-                <a href="https://wa.me/6283898339620" class="flex items-center gap-3 hover:text-[#464b71] transition">
+                <a href="https://wa.me/6283898339620" class="flex items-center gap-3 hover:text-[#76C457] transition">
                     <i class="fa-brands fa-whatsapp text-xl"></i>
                     <span class="break-words">+6283898339620 (Deni Rizkiana Anwar Hidayat)</span>
                 </a>
@@ -1210,39 +1343,46 @@
             <div class="flex flex-col gap-4 text-white">
                 <h3 class="font-bold text-xl mb-2">Media Sosial</h3>
 
-                <a href="https://www.instagram.com/dmitr6teen/"
-                    class="flex items-center gap-3 hover:text-[#464b71] transition">
+                <a href="https://www.instagram.com/mitr_ipb/"
+                    class="flex items-center gap-3 hover:text-[#76C457] transition">
                     <i class="fa-brands fa-instagram text-xl"></i>
-                    <span>@dmitr16teen</span>
+                    <span>@mitr_ipb</span>
+                </a>
+                <a href="https://www.instagram.com/dmitr6teen/"
+                    class="flex items-center gap-3 hover:text-[#76C457] transition">
+                    <i class="fa-brands fa-instagram text-xl"></i>
+                    <span>@dmitr6teen</span>
                 </a>
                 <!-- Kamu bisa tambahkan link LinkedIn atau YouTube di sini jika ada -->
             </div>
 
             <!-- Kolom 3: Logo dan Tombol Back to Top -->
-            <div class="flex flex-col items-start gap-7 text-white">
-                <!-- Tempat untuk Logo MIT+R -->
-                <div class="w-full flex items-center justify-start">
-                    <!-- Ganti "URL_LOGO_KAMU.png" dengan path/link logo yang sebenarnya -->
-                    <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-40 sm:h-56 object-contain">
+            <div class="flex flex-col items-start gap-7 text-white h-full">
+                <!-- Bagian Logo Baru Anda -->
+                <div class="w-full flex flex-wrap items-center justify-start pb-12 gap-4">
+                    <!-- Perbaikan typo: trasnform menjadi transform -->
+                    <div
+                        class="flex items-center justify-center w-16 h-16 sm:w-28 sm:h-28 bg-white rounded-full shadow-md shrink-0 p-2 transform -translate-x-4 translate-y-8">
+                        <img src="logo mitr.png" alt="Logo MIT+R"
+                            class="h-16 sm:h-[120px] w-auto object-contain transform -translate-y-1">
+                    </div>
+                    <!-- Logo Tambahan -->
+                    <img src="logo ALBATROSS.png" alt="Logo Kedua"
+                        class="h-16 sm:h-[150px] w-auto object-contain transform -translate-x-4 translate-y-8">
                 </div>
 
-                <!-- Tombol Back to Top -->
+                <!-- Tombol Back to Top yang HILANG dikembalikan di sini -->
                 <div class="w-full flex justify-end mt-auto">
-                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-                        class="group flex items-center p-3 bg-white text-white rounded-full shadow-md hover:bg-[#0c6b8a] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
-
-                        <!-- Teks yang Muncul Saat Hover (Sekarang di urutan pertama / sebelah kiri) -->
+                    <button id="back-to-top"
+                        class="group flex items-center p-3 bg-white text-white rounded-full shadow-md hover:bg-[#FFFFFF] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
                         <span
-                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[160px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold">
+                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[160px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold text-[#2A7C13]">
                             Kembali ke Atas
                         </span>
-
-                        <!-- Lingkaran Icon Panah (Sekarang di urutan kedua / sebelah kanan) -->
                         <span
-                            class="flex items-center justify-center w-7 h-7 bg-white text-[#118AB2] rounded-full transition-transform duration-500 group-hover:scale-110 shrink-0">
+                            class="flex items-center justify-center w-7 h-7 bg-white text-[#2A7C13] rounded-full transition-transform duration-500 group-hover:scale-110 shrink-0">
                             <i class="fa-solid fa-arrow-up text-sm"></i>
                         </span>
-
                     </button>
                 </div>
             </div>
@@ -1250,19 +1390,20 @@
     </footer>
 
     <!-- Tambahan kotak/bar kuning diletakkan di LUAR tag footer aslimu -->
-    <div class="w-full relative bg-[#E2F0F3] py-4 px-6 border-t-[1px] border-[#118AB2] overflow-hidden">
+    <div class="w-full relative bg-[#FFFFFF] py-4 px-6 border-t-[1px] border-[#2A7C13] overflow-hidden">
 
         <!-- Pola Pattern di Background -->
         <div class="absolute inset-0 opacity-15 pointer-events-none"
-            style="background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0l15 15-15 15-15-15zm0 30l15 15-15 15-15-15z' fill='%23118AB2' fill-opacity='0.4' fill-rule='evenodd' /%3E%3C/svg%3E&quot;); background-size: 30px 30px;">
+            style="background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0l15 15-15 15-15-15zm0 30l15 15-15 15-15-15z' fill='%232A7C13' fill-opacity='0.8' fill-rule='evenodd' /%3E%3C/svg%3E&quot;); background-size: 30px 30px;">
         </div>
 
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-4 relative z-10">
 
-            <!-- Teks/Hak Cipta di sebelah Kanan -->
-            <div class="text-[#403100] font-semibold text-sm text-center md:text-right">
+            <!-- Teks/Hak Cipta di tengah -->
+            <div class="text-[#403100] font-semibold text-sm text-center">
                 © 2026 Diklat MIT+R 16. All Rights Reserved.
             </div>
+
         </div>
     </div>
 </body>
