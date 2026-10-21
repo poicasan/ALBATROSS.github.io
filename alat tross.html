@@ -56,163 +56,201 @@
 
     <!-- Navbar -->
     <nav id="navbar"
-        class="fixed top-0 left-0 w-full z-50 p-4 lg:px-12 transition-all duration-300 bg-white shadow-md text-[#118AB2]">
+        class="fixed top-0 left-0 w-full z-50 p-3 sm:p-4 lg:px-12 transition-all duration-300 bg-white shadow-md text-[#2A7C13]">
 
         <div class="max-w-7xl mx-auto flex justify-between items-center relative">
 
             <!-- Logo ALBATROSS -->
-            <div class="relative flex items-center justify-center">
-                <!-- Shape Bulat Biru (Ukuran lebih besar, tidak mempengaruhi tinggi header) -->
-                <div class="absolute bg-[#118AB2] rounded-full w-14 h-14 -z-0"></div>
-
-                <!-- Tombol Logo (Tetap menentukan ukuran utama di header) -->
-                <a href="#" id="logo-btn"
-                    class="relative z-10 flex items-center justify-center transition-transform hover:scale-105">
-                    <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="h-12 w-auto object-contain">
+            <div class="relative flex items-center justify-start space-x-2 sm:space-x-3">
+                <a href="#" class="relative z-10 flex items-center justify-center transition-transform hover:scale-105">
+                    <img src="logo mitr.png" alt="LOGO MIT+R" class="h-9 sm:h-12 w-auto object-contain">
+                </a>
+                <a href="#" class="relative flex items-center justify-center transition-transform hover:scale-105">
+                    <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="relative z-10 h-9 sm:h-12 w-auto object-contain">
                 </a>
             </div>
 
-            <!-- Container Kanan -->
+            <!-- Container Kanan Desktop -->
             <div class="flex items-center space-x-3">
 
                 <ul id="nav-links"
                     class="hidden md:flex items-center space-x-2 sm:space-x-3 text-xs sm:text-sm font-semibold tracking-wider sm:tracking-widest uppercase transition-all duration-300 py-1 font-inter">
 
-                    <li>
+                    <!-- BERANDA -->
+                    <li class="group">
                         <a href="index.html"
-                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
+                            class="nav-item relative whitespace-nowrap px-3 sm:px-4 py-2 rounded-full transition-all duration-200 hover:bg-[#2A7C13] hover:text-white after:absolute after:bottom-1 after:left-4 after:right-4 after:h-[2px] after:bg-white after:scale-x-0 group-hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
                             BERANDA
                         </a>
                     </li>
 
-                    <li>
+                    <!-- TENTANG KAMI -->
+                    <li class="group">
                         <a href="tentang kami.html"
-                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
+                            class="nav-item relative z-20 whitespace-nowrap px-3 sm:px-4 py-2 rounded-full transition-all duration-200 hover:bg-[#2A7C13] hover:text-white after:absolute after:bottom-1 after:left-4 after:right-4 after:h-[2px] after:bg-white after:scale-x-0 group-hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
                             TENTANG KAMI
                         </a>
                     </li>
 
                     <!-- Dropdown ALAT -->
                     <li class="relative group" id="alat-dropdown">
+                        <div
+                            class="absolute top-3 right-0 w-full h-10 bg-[#2A7C13] rounded-t-xl z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200 pointer-events-none">
+                        </div>
 
                         <button id="alat-btn" type="button"
-                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+                            class="nav-item relative z-20 whitespace-nowrap px-4 py-2 rounded-full transition-all duration-200 group-hover:bg-[#2A7C13] group-hover:text-white after:absolute after:bottom-1 after:left-4 after:right-4 after:h-[2px] after:bg-white after:scale-x-0 group-hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300 flex items-center gap-1 uppercase font-semibold">
                             ALAT
                         </button>
 
                         <div id="alat-menu"
-                            class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
-
+                            class="absolute right-0 top-full w-48 bg-[#2A7C13] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200">
                             <a href="alat alba.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
-                                Alat ALBA
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors group/item">
+                                <span
+                                    class="relative inline-block hover:font-bold after:absolute after:-bottom-0.5 after:left-0 after:right-0 after:h-[1.5px] after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
+                                    Alat ALBA
+                                </span>
                             </a>
-
                             <a href="alat bat.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
-                                Alat BAT
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors group/item">
+                                <span
+                                    class="relative inline-block hover:font-bold after:absolute after:-bottom-0.5 after:left-0 after:right-0 after:h-[1.5px] after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
+                                    Alat BAT
+                                </span>
                             </a>
-
                             <a href="alat tross.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">
-                                Alat TROSS
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors pb-3 group/item">
+                                <span
+                                    class="relative inline-block hover:font-bold after:absolute after:-bottom-0.5 after:left-0 after:right-0 after:h-[1.5px] after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
+                                    Alat TROSS
+                                </span>
                             </a>
-
                         </div>
                     </li>
 
                     <!-- Dropdown DATA -->
                     <li class="relative group" id="data-dropdown">
+                        <div
+                            class="absolute top-3 right-0 w-full h-10 bg-[#2A7C13] rounded-t-xl z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200 pointer-events-none">
+                        </div>
 
                         <button id="data-btn" type="button"
-                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+                            class="nav-item relative z-20 whitespace-nowrap px-4 py-2 rounded-full transition-all duration-200 group-hover:bg-[#2A7C13] group-hover:text-white after:absolute after:bottom-1 after:left-4 after:right-4 after:h-[2px] after:bg-white after:scale-x-0 group-hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300 flex items-center gap-1 uppercase font-semibold">
                             DATA
                         </button>
 
                         <div id="data-menu"
-                            class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
-
-
+                            class="absolute right-0 top-full w-48 bg-[#2A7C13] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200">
                             <a href="data pemetaan.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
-                                Data Pemetaan
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors group/item">
+                                <span
+                                    class="relative inline-block hover:font-bold after:absolute after:-bottom-0.5 after:left-0 after:right-0 after:h-[1.5px] after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
+                                    Data Pemetaan
+                                </span>
                             </a>
-
                             <a href="data alba.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
-                                Data ALBA
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors group/item">
+                                <span
+                                    class="relative inline-block hover:font-bold after:absolute after:-bottom-0.5 after:left-0 after:right-0 after:h-[1.5px] after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
+                                    Data ALBA
+                                </span>
                             </a>
-
                             <a href="data bat.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
-                                Data BAT
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors group/item">
+                                <span
+                                    class="relative inline-block hover:font-bold after:absolute after:-bottom-0.5 after:left-0 after:right-0 after:h-[1.5px] after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
+                                    Data BAT
+                                </span>
                             </a>
-
                             <a href="data tross.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">
-                                Data TROSS
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors pb-3 group/item">
+                                <span
+                                    class="relative inline-block hover:font-bold after:absolute after:-bottom-0.5 after:left-0 after:right-0 after:h-[1.5px] after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
+                                    Data TROSS
+                                </span>
                             </a>
-
                         </div>
                     </li>
 
                 </ul>
 
-                <!-- Tombol Mobile -->
-                <button id="mobile-toggle-btn" class="md:hidden text-2xl p-2 transition-colors focus:outline-none"
+                <!-- Tombol Mobile Toggle -->
+                <button id="mobile-toggle-btn"
+                    class="md:hidden text-2xl p-2 transition-colors focus:outline-none cursor-pointer"
                     aria-label="Buka menu navigasi">
                     <i id="toggle-icon" class="fas fa-bars"></i>
                 </button>
             </div>
         </div>
 
-        <!-- Menu Mobile -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white mt-4 rounded-xl shadow-lg p-4">
-            <div class="flex flex-col space-y-2 text-sm font-semibold text-[#118AB2]">
-                <a href="index.html" class="px-4 py-3 rounded-lg hover:bg-brand-lightCyan">
+        <!-- Menu Mobile Interaktif -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white mt-3 rounded-xl shadow-lg p-4 border border-gray-100">
+            <div class="flex flex-col space-y-2 text-sm font-semibold text-[#2A7C13]">
+                <a href="index.html" class="px-4 py-2.5 rounded-lg hover:bg-green-50 transition-colors">
                     BERANDA
                 </a>
-                <a href="tentang kami.html" class="px-4 py-3 rounded-lg hover:bg-brand-lightCyan">
+                <a href="tentang kami.html" class="px-4 py-2.5 rounded-lg hover:bg-green-50 transition-colors">
                     TENTANG KAMI
                 </a>
+
+                <!-- Accordion Mobile ALAT -->
                 <div class="border-t border-gray-100 pt-2">
-                    <p class="px-4 py-2 text-xs text-gray-400">
-                        ALAT
-                    </p>
-                    <a href="alat alba.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Alat ALBA
-                    </a>
-                    <a href="alat bat.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Alat BAT
-                    </a>
-                    <a href="alat tross.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Alat TROSS
-                    </a>
+                    <button id="mobile-alat-btn" type="button"
+                        class="w-full flex justify-between items-center px-4 py-2.5 rounded-lg hover:bg-green-50 text-left uppercase text-xs tracking-wider text-gray-500 font-bold transition-colors cursor-pointer">
+                        <span class="text-[#2A7C13]">ALAT</span>
+                        <i id="mobile-alat-icon"
+                            class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+                    </button>
+                    <div id="mobile-alat-sub" class="hidden pl-4 pr-2 py-1 space-y-1">
+                        <a href="alat alba.html"
+                            class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#2A7C13] rounded-lg transition-colors">
+                            Alat ALBA
+                        </a>
+                        <a href="alat bat.html"
+                            class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#2A7C13] rounded-lg transition-colors">
+                            Alat BAT
+                        </a>
+                        <a href="alat tross.html"
+                            class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#2A7C13] rounded-lg transition-colors">
+                            Alat TROSS
+                        </a>
+                    </div>
                 </div>
 
+                <!-- Accordion Mobile DATA -->
                 <div class="border-t border-gray-100 pt-2">
-                    <p class="px-4 py-2 text-xs text-gray-400">
-                        DATA
-                    </p>
-                    <a href="data pemetaan.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Data Pemetaan
-                    </a>
-                    <a href="data alba.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Data ALBA
-                    </a>
-                    <a href="data bat.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Data BAT
-                    </a>
-                    <a href="data tross.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
-                        Data TROSS
-                    </a>
+                    <button id="mobile-data-btn" type="button"
+                        class="w-full flex justify-between items-center px-4 py-2.5 rounded-lg hover:bg-green-50 text-left uppercase text-xs tracking-wider text-gray-500 font-bold transition-colors cursor-pointer">
+                        <span class="text-[#2A7C13]">DATA</span>
+                        <i id="mobile-data-icon"
+                            class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+                    </button>
+                    <div id="mobile-data-sub" class="hidden pl-4 pr-2 py-1 space-y-1">
+                        <a href="data pemetaan.html"
+                            class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#2A7C13] rounded-lg transition-colors">
+                            Data Pemetaan
+                        </a>
+                        <a href="data alba.html"
+                            class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#2A7C13] rounded-lg transition-colors">
+                            Data ALBA
+                        </a>
+                        <a href="data bat.html"
+                            class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#2A7C13] rounded-lg transition-colors">
+                            Data BAT
+                        </a>
+                        <a href="data tross.html"
+                            class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#2A7C13] rounded-lg transition-colors">
+                            Data TROSS
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Banner -->
-    <section class="bg-brand-tealBg text-white px-4 sm:px-8 pt-28 pb-10 shadow-inner min-h-[350px]" ;>
+    <section class="bg-[#2A7C13] text-white px-4 sm:px-8 pt-28 pb-10 shadow-inner min-h-[350px]" ;>
         <div class="max-w-6xl mx-auto space-y-4">
 
             <!-- Breadcrumbs -->
@@ -246,9 +284,9 @@
             <!-- Action Button -->
             <div class="pt-2">
                 <a href="#maintenance"
-                    class="inline-flex items-center space-x-2 bg-white text-brand-darkText font-semibold px-4 py-2 rounded-full text-xs sm:text-sm shadow hover:bg-gray-100 transition duration-200 border border-gray-200 font-inter">
+                    class="inline-flex items-center space-x-2 bg-white text-[#6E3511] font-semibold px-4 py-2 rounded-full text-xs sm:text-sm shadow hover:bg-gray-100 transition duration-200 border border-gray-200 font-inter">
                     <span
-                        class="w-5 h-5 rounded-full bg-brand-darkText text-white flex items-center justify-center text-[10px]">
+                        class="w-5 h-5 rounded-full bg-[#6E3511] text-white flex items-center justify-center text-[10px]">
                         <i class="fa-solid fa-wrench"></i>
                     </span>
                     <span>Pemeliharaan Alat</span>
@@ -261,12 +299,12 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow">
 
         <!-- Section Heading -->
-        <h2 class="text-2xl sm:text-3xl font-bold text-center text-brand-darkText mb-6 font-anta">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center text-[#6E3511] mb-6 font-anta">
             Alat TROSS
         </h2>
 
         <!-- Main Image Card Container -->
-        <div class="bg-white p-3 sm:p-4 rounded-2xl border-2 border-brand-borderCyan shadow-sm mb-10 max-w-3xl mx-auto">
+        <div class="bg-white p-3 sm:p-4 rounded-2xl border-2 border-[#76C457] shadow-sm mb-10 max-w-3xl mx-auto">
             <div class="overflow-hidden rounded-xl bg-gray-100 aspect-[16/9] flex items-center justify-center">
                 <img src="tross.jpeg" alt="Alat TROSS"
                     class="w-full h-full object-cover transform hover:scale-105 transition duration-500"
@@ -279,171 +317,171 @@
 
             <!-- KOTAK ELEKTRO (KIRI) -->
             <div class="flex flex-col items-center w-full">
-                <h3 class="text-xl sm:text-2xl font-bold text-brand-darkText mb-4 font-anta">
+                <h3 class="text-xl sm:text-2xl font-bold text-[#6E3511] mb-4 font-anta">
                     Komponen Elektro
                 </h3>
 
                 <div
-                    class="w-full bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-6 hover:shadow-md transition duration-200 h-full">
+                    class="w-full bg-white rounded-2xl border-2 border-[#76C457] shadow-sm p-6 hover:shadow-md transition duration-200 h-full">
                     <div class="grid grid-cols-2 gap-4">
 
                         <!-- Item 1: LED Infrared -->
                         <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-48 flex flex-col items-center p-6 gap-0"
-                            tabindex="0" style="border: 2px solid #b2e3ea;">
+                            tabindex="0" style="border: 2px solid #76C457;">
                             <img src="led infrared tross.jpg" alt="LED Infrared"
                                 class="max-h-full max-w-full object-contain p-4 rounded-lg">
 
                             <div>
                                 <p
-                                    class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2 text-center">
+                                    class="text-xs sm:text-sm text-[#2A7C13] font-bold font-inter leading-tight mb-2 text-center">
                                     SCC 10A PWM Solar Charge LCD LED Display 12V/24V
                                 </p>
                             </div>
                             <div
                                 class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
                                 <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    class="bg-white border-2 border-[#76C457] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
                                     <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        class="bg-[#2A7C13] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
                                         Pencahayaan Inframerah
                                     </span>
                                 </div>
                                 <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#76C457]">
                                 </div>
                             </div>
                         </div>
 
                         <!-- Item 2: Kamera OV2640 -->
                         <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-48 flex flex-col items-center p-6 gap-0"
-                            tabindex="0" style="border: 2px solid #b2e3ea;">
+                            tabindex="0" style="border: 2px solid #76C457;">
                             <img src="kamera ov2640 tross.jpg" alt="Kamera OV2640"
                                 class="max-h-full max-w-full object-contain p-0 rounded-lg">
 
                             <div>
                                 <p
-                                    class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2 text-center">
+                                    class="text-xs sm:text-sm text-[#2A7C13] font-bold font-inter leading-tight mb-2 text-center">
                                     Adafruit OV2640 Camera Breakout - 72 Degree
                                 </p>
                             </div>
                             <div
                                 class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
                                 <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    class="bg-white border-2 border-[#76C457] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
                                     <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        class="bg-[#2A7C13] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
                                         Pengambilan Dokumentasi
                                     </span>
                                 </div>
                                 <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#76C457]">
                                 </div>
                             </div>
                         </div>
 
                         <!-- Item 3: Panel Surya -->
                         <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-48 flex flex-col items-center p-6 gap-0"
-                            tabindex="0" style="border: 2px solid #b2e3ea;">
+                            tabindex="0" style="border: 2px solid #76C457;">
                             <img src="panel surya tross.jpg" alt="Panel Surya"
                                 class="max-h-full max-w-full object-contain p-1 rounded-lg">
 
                             <div>
                                 <p
-                                    class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2 text-center">
+                                    class="text-xs sm:text-sm text-[#2A7C13] font-bold font-inter leading-tight mb-2 text-center">
                                     Panel Surya Monocrystalline 20 Watt x2 (12V)
                                 </p>
                             </div>
                             <div
                                 class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
                                 <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    class="bg-white border-2 border-[#76C457] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
                                     <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        class="bg-[#2A7C13] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
                                         Sumber Daya Mandiri
                                     </span>
                                 </div>
                                 <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#76C457]">
                                 </div>
                             </div>
                         </div>
 
                         <!-- Item 4: Sensor PIR -->
                         <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-48 flex flex-col items-center p-6 gap-0"
-                            tabindex="0" style="border: 2px solid #b2e3ea;">
+                            tabindex="0" style="border: 2px solid #76C457;">
                             <img src="sensor pir tross.jpg" alt="Sensor PIR"
                                 class="max-h-full max-w-full object-contain p-1 rounded-lg">
 
                             <div>
-                                <p class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2">
+                                <p class="text-xs sm:text-sm text-[#2A7C13] font-bold font-inter leading-tight mb-2">
                                     Sensor PIR HC-SR501
                                 </p>
                             </div>
                             <div
                                 class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
                                 <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    class="bg-white border-2 border-[#76C457] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
                                     <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        class="bg-[#2A7C13] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
                                         Deteksi Gerakan
                                     </span>
                                 </div>
                                 <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#76C457]">
                                 </div>
                             </div>
                         </div>
 
                         <!-- Item 5: RTC -->
                         <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-48 flex flex-col items-center p-6 gap-0"
-                            tabindex="0" style="border: 2px solid #b2e3ea;">
+                            tabindex="0" style="border: 2px solid #76C457;">
                             <img src="rtc bat tross.jpg" alt="RTC"
                                 class="max-h-full max-w-full object-contain p-1 rounded-lg">
 
                             <div>
                                 <p
-                                    class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2 text-center">
+                                    class="text-xs sm:text-sm text-[#2A7C13] font-bold font-inter leading-tight mb-2 text-center">
                                     RTC (<i>Real Time Clock</i>) DS3231
                                 </p>
                             </div>
                             <div
                                 class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
                                 <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    class="bg-white border-2 border-[#76C457] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
                                     <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        class="bg-[#2A7C13] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
                                         Pewaktu <i>Real-Time</i>
                                     </span>
                                 </div>
                                 <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#76C457]">
                                 </div>
                             </div>
                         </div>
 
                         <!-- Item 6: Modem -->
                         <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-48 flex flex-col items-center p-6 gap-0"
-                            tabindex="0" style="border: 2px solid #b2e3ea;">
+                            tabindex="0" style="border: 2px solid #76C457;">
                             <img src="modem tross.jpg" alt="Modem"
                                 class="max-h-full max-w-full object-contain p-1 rounded-lg">
 
                             <div>
                                 <p
-                                    class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2 text-center">
+                                    class="text-xs sm:text-sm text-[#2A7C13] font-bold font-inter leading-tight mb-2 text-center">
                                     Modem 4G LTE A7670C
                                 </p>
                             </div>
                             <div
                                 class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
                                 <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    class="bg-white border-2 border-[#76C457] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
                                     <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        class="bg-[#2A7C13] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
                                         Transmisi Data Jaringan
                                     </span>
                                 </div>
                                 <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#76C457]">
                                 </div>
                             </div>
                         </div>
@@ -454,118 +492,118 @@
 
             <!-- KOTAK MEKANIK (KANAN) -->
             <div class="flex flex-col items-center w-full">
-                <h3 class="text-xl sm:text-2xl font-bold text-brand-darkText mb-4 font-anta">
+                <h3 class="text-xl sm:text-2xl font-bold text-[#6E3511] mb-4 font-anta">
                     Komponen Mekanik
                 </h3>
 
                 <div
-                    class="w-full bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-6 hover:shadow-md transition duration-200 h-full">
+                    class="w-full bg-white rounded-2xl border-2 border-[#76C457] shadow-sm p-6 hover:shadow-md transition duration-200 h-full">
                     <div class="grid grid-cols-2 gap-4">
 
                         <!-- Item 1: Junction Box -->
                         <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-48 flex flex-col items-center p-6 gap-0"
-                            tabindex="0" style="border: 2px solid #b2e3ea;">
+                            tabindex="0" style="border: 2px solid #76C457;">
                             <img src="junction box.jpg" alt="Junction Box"
                                 class="max-h-full max-w-full object-contain p-1 rounded-lg">
 
                             <div>
                                 <p
-                                    class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2 text-center">
+                                    class="text-xs sm:text-sm text-[#2A7C13] font-bold font-inter leading-tight mb-2 text-center">
                                     <i>Junction Box</i> Engsel
                                 </p>
                             </div>
                             <div
                                 class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
                                 <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    class="bg-white border-2 border-[#76C457] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
                                     <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        class="bg-[#2A7C13] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
                                         Ukuran: 250 x 180 x 105 Milimeter
                                     </span>
                                 </div>
                                 <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#76C457]">
                                 </div>
                             </div>
                         </div>
 
                         <!-- Item 2: Besi Hollow -->
                         <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-48 flex flex-col items-center p-6 gap-0"
-                            tabindex="0" style="border: 2px solid #b2e3ea;">
+                            tabindex="0" style="border: 2px solid #76C457;">
                             <img src="besi.jpg" alt="Besi Hollow"
                                 class="max-h-full max-w-full object-contain p-1 rounded-lg">
 
                             <div>
                                 <p
-                                    class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2 text-center">
+                                    class="text-xs sm:text-sm text-[#2A7C13] font-bold font-inter leading-tight mb-2 text-center">
                                     Hollow Besi Galvanis
                                 </p>
                             </div>
                             <div
                                 class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
                                 <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    class="bg-white border-2 border-[#76C457] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
                                     <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        class="bg-[#2A7C13] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
                                         Ukuran: 120 x 2 x 4 Centimeter
                                     </span>
                                 </div>
                                 <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#76C457]">
                                 </div>
                             </div>
                         </div>
 
                         <!-- Item 3: Pipa Galvanis -->
                         <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-48 flex flex-col items-center p-6 gap-0"
-                            tabindex="0" style="border: 2px solid #b2e3ea;">
+                            tabindex="0" style="border: 2px solid #76C457;">
                             <img src="pipa galvanis.jpg" alt="Pipa Galvanis"
                                 class="max-h-full max-w-full object-contain p-1 rounded-lg">
 
                             <div>
                                 <p
-                                    class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2 text-center">
+                                    class="text-xs sm:text-sm text-[#2A7C13] font-bold font-inter leading-tight mb-2 text-center">
                                     Pipa Besi Galvanis
                                 </p>
                             </div>
                             <div
                                 class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
                                 <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    class="bg-white border-2 border-[#76C457] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
                                     <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        class="bg-[#2A7C13] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
                                         Ukuran: 3 Inch 6 Meter
                                     </span>
                                 </div>
                                 <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#76C457]">
                                 </div>
                             </div>
                         </div>
 
                         <!-- Item 4: Klem Pipa Besi -->
                         <div class="group relative flex items-center justify-center p-3 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer h-48 flex flex-col items-center p-6 gap-0"
-                            tabindex="0" style="border: 2px solid #b2e3ea;">
+                            tabindex="0" style="border: 2px solid #76C457;">
                             <img src="klem pipa besi.jpg" alt="Klem Pipa Besi"
                                 class="max-h-full max-w-full object-contain p-1 rounded-lg">
 
                             <div>
                                 <p
-                                    class="text-xs sm:text-sm text-[#118AB2] font-bold font-inter leading-tight mb-2 text-center">
+                                    class="text-xs sm:text-sm text-[#2A7C13] font-bold font-inter leading-tight mb-2 text-center">
                                     Klem Besi Pipa
                                 </p>
                             </div>
                             <div
                                 class="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-focus:opacity-100 group-focus:scale-100 transition-all duration-300 ease-out z-40 flex flex-col items-center w-48">
                                 <div
-                                    class="bg-white border-2 border-[#118AB2] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
+                                    class="bg-white border-2 border-[#76C457] rounded-xl p-3 shadow-xl flex flex-col items-center w-full text-center">
                                     <span
-                                        class="bg-[#118AB2] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
+                                        class="bg-[#2A7C13] text-white font-semibold text-[10px] sm:text-[11px] px-2.5 py-1 rounded-lg shadow-sm w-full">
                                         Ukuran: 3 Inch
                                     </span>
                                 </div>
                                 <div
-                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#118AB2]">
+                                    class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[7px] border-t-[#76C457]">
                                 </div>
                             </div>
                         </div>
@@ -575,17 +613,17 @@
             </div>
         </div>
 
-        <section class="bg-brand-lightCyan rounded-2xl border border-brand-borderCyan p-5 sm:p-6 mb-4"
-            style="margin-bottom: -0; position: relative; top: 30px;">
+        <section class="rounded-2xl border border-[#76C457] p-5 sm:p-6 mb-4"
+         style="background-color: rgba(118, 196, 87, 0.5); margin-bottom: -0; position: relative; top: 30px;">
             <div class="flex items-start gap-3">
-                <div class="w-10 h-10 shrink-0 rounded-xl bg-white flex items-center justify-center text-brand-cyan">
+                <div class="w-10 h-10 shrink-0 rounded-xl bg-white flex items-center justify-center text-[#6E3511]">
                     <i class="fa-solid fa-circle-info"></i>
                 </div>
                 <div>
-                    <h3 class="font-bold text-brand-darkText mb-2">
+                    <h3 class="font-bold text-[#6E3511] mb-2">
                         Informasi Komponen
                     </h3>
-                    <p class="text-sm text-gray-600 leading-relaxed">
+                    <p class="text-sm text-[#454545] leading-relaxed">
                         Klik gambar komponen untuk melihat spesifikasi yang digunakan.
                     </p>
                 </div>
@@ -598,16 +636,16 @@
 
         <!-- Section Heading -->
         <div class="text-center mb-8">
-            <h2 class="text-2xl sm:text-3xl font-bold text-brand-darkText font-anta">
+            <h2 class="text-2xl sm:text-3xl font-bold text-[#6E3511] font-anta">
                 Pemeliharaan Alat
             </h2>
         </div>
 
         <!-- Maintenance Card -->
-        <div class="bg-white rounded-2xl border-2 border-brand-borderCyan shadow-sm p-5 sm:p-8">
+        <div class="bg-white rounded-2xl border-2 border-[#76C457] shadow-sm p-5 sm:p-8">
 
             <div class="mb-6">
-                <p class="text-sm text-gray-600 leading-relaxed font-inter">
+                <p class="text-sm text-[#454545] leading-relaxed font-inter">
                     Panduan ini berisi langkah-langkah pemeriksaan dan perawatan perangkat TROSS untuk menjaga
                     kondisi dan kinerja alat selama proses pemantauan fauna di kawasan mangrove.
                 </p>
@@ -616,9 +654,9 @@
             <div class="space-y-4">
 
                 <!-- 1. Pemeriksaan Komponen Elektronik -->
-                <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
+                <details class="group border border-[#76C457] rounded-xl overflow-hidden">
                     <summary
-                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
+                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-[#76C457]/50 hover:bg-cyan-100/50 transition-colors list-none">
                         <span
                             class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
                             <i class="fa-solid fa-microchip text-brand-cyan"></i>
@@ -645,7 +683,7 @@
                 <!-- 2. Perawatan Sistem Kelistrikan -->
                 <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
                     <summary
-                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
+                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-[#76C457]/50 hover:bg-cyan-100/50 transition-colors list-none">
                         <span
                             class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
                             <i class="fa-solid fa-battery-full text-brand-cyan"></i>
@@ -671,7 +709,7 @@
                 <!-- 3. Pemeriksaan Kamera dan Sensor -->
                 <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
                     <summary
-                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
+                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-[#76C457]/50 hover:bg-cyan-100/50 transition-colors list-none">
                         <span
                             class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
                             <i class="fa-solid fa-camera text-brand-cyan"></i>
@@ -698,7 +736,7 @@
                 <!-- 4. Perawatan Struktur dan Pelindung Alat -->
                 <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
                     <summary
-                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
+                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-[#76C457]/50 hover:bg-cyan-100/50 transition-colors list-none">
                         <span
                             class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
                             <i class="fa-solid fa-shield-halved text-brand-cyan"></i>
@@ -726,7 +764,7 @@
                 <!-- 5. Pemeriksaan Sistem Komunikasi dan Penyimpanan Data -->
                 <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
                     <summary
-                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
+                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-[#76C457]/50 hover:bg-cyan-100/50 transition-colors list-none">
                         <span
                             class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
                             <i class="fa-solid fa-wifi text-brand-cyan"></i>
@@ -756,7 +794,7 @@
                 <!-- 6. Pemeriksaan Sebelum dan Sesudah Pengoperasian -->
                 <details class="group border border-brand-borderCyan rounded-xl overflow-hidden">
                     <summary
-                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-brand-lightCyan hover:bg-cyan-100 transition-colors list-none">
+                        class="flex items-center justify-between gap-3 p-4 cursor-pointer bg-[#76C457]/50 hover:bg-cyan-100/50 transition-colors list-none">
                         <span
                             class="flex items-center gap-3 text-sm sm:text-base font-semibold text-brand-darkText font-inter">
                             <i class="fa-solid fa-clipboard-check text-brand-cyan"></i>
@@ -785,7 +823,7 @@
     </section>
 
     <br>
-    <footer class="bg-[#118AB2] px-4 sm:px-6 py-10 border-t-[2px] border-[#118AB2]">
+    <footer class="bg-[#2A7C13] px-4 sm:px-6 py-10 border-t-[2px] border-[#2A7C13]">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
 
             <!-- Kolom 1 (Dibuat lebih lebar/span 2): Lokasi, Email, dan WhatsApp -->
@@ -793,7 +831,7 @@
                 <h3 class="font-bold text-xl mb-2">Kontak Kami</h3>
 
                 <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9"
-                    class="flex items-start gap-3 hover:text-[#464b71] transition">
+                    class="flex items-start gap-3 hover:text-[#76C457] transition">
                     <i class="fa-solid fa-location-dot text-xl mt-1"></i>
                     <span class="leading-relaxed break-words">
                         Workshop Instrumentasi dan Robotika Kelautan (Bengkel) ITK, Babakan,
@@ -801,12 +839,12 @@
                     </span>
                 </a>
 
-                <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-3 hover:text-[#464b71] transition">
+                <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-3 hover:text-[#76C457] transition">
                     <i class="fa-regular fa-envelope text-xl"></i>
                     <span>diklatmitrxvi@gmail.com</span>
                 </a>
 
-                <a href="https://wa.me/6283898339620" class="flex items-center gap-3 hover:text-[#464b71] transition">
+                <a href="https://wa.me/6283898339620" class="flex items-center gap-3 hover:text-[#76C457] transition">
                     <i class="fa-brands fa-whatsapp text-xl"></i>
                     <span class="break-words">+6283898339620 (Deni Rizkiana Anwar Hidayat)</span>
                 </a>
@@ -816,39 +854,46 @@
             <div class="flex flex-col gap-4 text-white">
                 <h3 class="font-bold text-xl mb-2">Media Sosial</h3>
 
-                <a href="https://www.instagram.com/dmitr6teen/"
-                    class="flex items-center gap-3 hover:text-[#464b71] transition">
+                <a href="https://www.instagram.com/mitr_ipb/"
+                    class="flex items-center gap-3 hover:text-[#76C457] transition">
                     <i class="fa-brands fa-instagram text-xl"></i>
-                    <span>@dmitr16teen</span>
+                    <span>@mitr_ipb</span>
+                </a>
+                <a href="https://www.instagram.com/dmitr6teen/"
+                    class="flex items-center gap-3 hover:text-[#76C457] transition">
+                    <i class="fa-brands fa-instagram text-xl"></i>
+                    <span>@dmitr6teen</span>
                 </a>
                 <!-- Kamu bisa tambahkan link LinkedIn atau YouTube di sini jika ada -->
             </div>
 
             <!-- Kolom 3: Logo dan Tombol Back to Top -->
-            <div class="flex flex-col items-start gap-7 text-white">
-                <!-- Tempat untuk Logo MIT+R -->
-                <div class="w-full flex items-center justify-start">
-                    <!-- Ganti "URL_LOGO_KAMU.png" dengan path/link logo yang sebenarnya -->
-                    <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-40 sm:h-56 object-contain">
+            <div class="flex flex-col items-start gap-7 text-white h-full">
+                <!-- Bagian Logo Baru Anda -->
+                <div class="w-full flex flex-wrap items-center justify-start pb-12 gap-4">
+                    <!-- Perbaikan typo: trasnform menjadi transform -->
+                    <div
+                        class="flex items-center justify-center w-16 h-16 sm:w-28 sm:h-28 bg-white rounded-full shadow-md shrink-0 p-2 transform -translate-x-4 translate-y-8">
+                        <img src="logo mitr.png" alt="Logo MIT+R"
+                            class="h-16 sm:h-[120px] w-auto object-contain transform -translate-y-1">
+                    </div>
+                    <!-- Logo Tambahan -->
+                    <img src="logo ALBATROSS.png" alt="Logo Kedua"
+                        class="h-16 sm:h-[150px] w-auto object-contain transform -translate-x-4 translate-y-8">
                 </div>
 
-                <!-- Tombol Back to Top -->
+                <!-- Tombol Back to Top yang HILANG dikembalikan di sini -->
                 <div class="w-full flex justify-end mt-auto">
-                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-                        class="group flex items-center p-3 bg-white text-white rounded-full shadow-md hover:bg-[#0c6b8a] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
-
-                        <!-- Teks yang Muncul Saat Hover (Sekarang di urutan pertama / sebelah kiri) -->
+                    <button id="back-to-top"
+                        class="group flex items-center p-3 bg-white text-white rounded-full shadow-md hover:bg-[#FFFFFF] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
                         <span
-                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[160px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold">
+                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[160px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold text-[#2A7C13]">
                             Kembali ke Atas
                         </span>
-
-                        <!-- Lingkaran Icon Panah (Sekarang di urutan kedua / sebelah kanan) -->
                         <span
-                            class="flex items-center justify-center w-7 h-7 bg-white text-[#118AB2] rounded-full transition-transform duration-500 group-hover:scale-110 shrink-0">
+                            class="flex items-center justify-center w-7 h-7 bg-white text-[#2A7C13] rounded-full transition-transform duration-500 group-hover:scale-110 shrink-0">
                             <i class="fa-solid fa-arrow-up text-sm"></i>
                         </span>
-
                     </button>
                 </div>
             </div>
@@ -856,43 +901,128 @@
     </footer>
 
     <!-- Tambahan kotak/bar kuning diletakkan di LUAR tag footer aslimu -->
-    <div class="w-full relative bg-[#E2F0F3] py-4 px-6 border-t-[1px] border-[#118AB2] overflow-hidden">
+    <div class="w-full relative bg-[#FFFFFF] py-4 px-6 border-t-[1px] border-[#2A7C13] overflow-hidden">
 
         <!-- Pola Pattern di Background -->
         <div class="absolute inset-0 opacity-15 pointer-events-none"
-            style="background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0l15 15-15 15-15-15zm0 30l15 15-15 15-15-15z' fill='%23118AB2' fill-opacity='0.4' fill-rule='evenodd' /%3E%3C/svg%3E&quot;); background-size: 30px 30px;">
+            style="background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0l15 15-15 15-15-15zm0 30l15 15-15 15-15-15z' fill='%232A7C13' fill-opacity='0.8' fill-rule='evenodd' /%3E%3C/svg%3E&quot;); background-size: 30px 30px;">
         </div>
 
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-4 relative z-10">
 
-            <!-- Teks/Hak Cipta di sebelah Kanan -->
-            <div class="text-[#403100] font-semibold text-sm text-center md:text-right">
+            <!-- Teks/Hak Cipta di tengah -->
+            <div class="text-[#403100] font-semibold text-sm text-center">
                 © 2026 Diklat MIT+R 16. All Rights Reserved.
             </div>
+
         </div>
     </div>
 
     <script>
-        const mobileToggleBtn = document.getElementById('mobile-toggle-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const toggleIcon = document.getElementById('toggle-icon');
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Main Menu Toggle
+            const toggleBtn = document.getElementById('mobile-toggle-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const toggleIcon = document.getElementById('toggle-icon');
 
-        mobileToggleBtn.addEventListener('click', function () {
-
-            mobileMenu.classList.toggle('hidden');
-
-            if (mobileMenu.classList.contains('hidden')) {
-
-                toggleIcon.classList.remove('fa-times');
-                toggleIcon.classList.add('fa-bars');
-
-            } else {
-
-                toggleIcon.classList.remove('fa-bars');
-                toggleIcon.classList.add('fa-times');
-
+            if (toggleBtn && mobileMenu && toggleIcon) {
+                toggleBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                    toggleIcon.classList.toggle('fa-bars');
+                    toggleIcon.classList.toggle('fa-times');
+                });
             }
 
+            // Back to top button
+            const backToTopBtn = document.getElementById('back-to-top');
+            if (backToTopBtn) {
+                backToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // Helper Function Accordion Mobile
+            const setupAccordion = (btnId, subId, iconId) => {
+                const btn = document.getElementById(btnId);
+                const sub = document.getElementById(subId);
+                const icon = document.getElementById(iconId);
+
+                if (btn && sub) {
+                    btn.addEventListener('click', () => {
+                        sub.classList.toggle('hidden');
+                        if (icon) {
+                            icon.classList.toggle('rotate-180');
+                        }
+                    });
+                }
+            };
+
+            setupAccordion('mobile-alat-btn', 'mobile-alat-sub', 'mobile-alat-icon');
+            setupAccordion('mobile-data-btn', 'mobile-data-sub', 'mobile-data-icon');
+
+            // ================= CANVAS LINE NETWORK SYSTEM =================
+            const canvas = document.getElementById('network-canvas');
+            const container = document.getElementById('network-container');
+            const nodeElements = document.querySelectorAll('.node-item');
+
+            if (canvas && container) {
+                const ctx = canvas.getContext('2d');
+                let dashOffset = 0;
+
+                function resizeCanvas() {
+                    canvas.width = container.clientWidth;
+                    canvas.height = container.clientHeight;
+                }
+
+                window.addEventListener('resize', resizeCanvas);
+                resizeCanvas();
+
+                function getCenterCoordinates(el) {
+                    const rect = el.getBoundingClientRect();
+                    const containerRect = container.getBoundingClientRect();
+                    return {
+                        x: rect.left + rect.width / 2 - containerRect.left,
+                        y: rect.top + rect.height / 2 - containerRect.top
+                    };
+                }
+
+                function drawNetworkLines() {
+                    // Jangan gambar garis jika di layar mobile (< 768px)
+                    if (window.innerWidth < 768) {
+                        requestAnimationFrame(drawNetworkLines);
+                        return;
+                    }
+
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    const points = Array.from(nodeElements).map(el => getCenterCoordinates(el));
+
+                    ctx.lineWidth = 1.5;
+                    ctx.strokeStyle = 'rgba(42, 124, 19, 0.35)';
+                    ctx.setLineDash([6, 6]);
+                    ctx.lineDashOffset = -dashOffset;
+
+                    for (let i = 0; i < points.length; i++) {
+                        for (let j = i + 1; j < points.length; j++) {
+                            const dx = points[i].x - points[j].x;
+                            const dy = points[i].y - points[j].y;
+                            const dist = Math.sqrt(dx * dx + dy * dy);
+
+                            if (dist < canvas.width * 0.45) {
+                                ctx.beginPath();
+                                ctx.moveTo(points[i].x, points[i].y);
+                                ctx.lineTo(points[j].x, points[j].y);
+                                ctx.stroke();
+                            }
+                        }
+                    }
+
+                    dashOffset += 0.4;
+                    requestAnimationFrame(drawNetworkLines);
+                }
+
+                drawNetworkLines();
+            }
         });
     </script>
 </body>
