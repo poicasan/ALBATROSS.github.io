@@ -254,13 +254,104 @@
                 padding: 8px;
             }
         }
-    </style>
-    <script>
-        slider.addEventListener('dragstart', (e) => {
-            e.preventDefault();
-        });
-    </script>
 
+
+        /* ========================================
+   ANIMASI ALBATROSS
+======================================== */
+
+        /* 1. Animasi teks hero */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(28px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            animation: fadeUp 0.9s ease-out both;
+        }
+
+        .hero-description {
+            animation: fadeUp 0.9s ease-out 0.2s both;
+        }
+
+        .hero-buttons {
+            animation: fadeUp 0.9s ease-out 0.4s both;
+        }
+
+        /* 2. Zoom perlahan pada foto hero */
+        @keyframes slowZoom {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .hero-background {
+            animation: slowZoom 18s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        /* 3. Elemen muncul saat di-scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 4. Efek hover tombol */
+        .hero-buttons a {
+            transition:
+                transform 0.3s ease,
+                background-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .hero-buttons a:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+        }
+
+        /* 5. Animasi ramah untuk pengguna yang
+   memilih mengurangi gerakan */
+        @media (prefers-reduced-motion: reduce) {
+
+            .hero-title,
+            .hero-description,
+            .hero-buttons,
+            .hero-background {
+                animation: none !important;
+            }
+
+            .reveal,
+            .reveal.is-visible,
+            .hero-buttons a {
+                opacity: 1;
+                transform: none;
+                transition: none !important;
+            }
+        }
+    </style>
 </head>
 
 <body class="bg-white text-gray-800 font-inter">
@@ -473,41 +564,52 @@
     <section class="relative w-full h-screen min-h-[600px] flex flex-col bg-gray-900 overflow-hidden pt-20">
         <!-- Background Image with Overlay -->
         <div class="absolute inset-0 z-0">
-            <img src="perairan.jpg" alt="Water and Equipment Background" class="w-full h-full object-cover opacity-70">
-            <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/60"></div>
+            <img src="perairan.jpg" alt="Pemantauan perairan ALBATROSS"
+                class="hero-background w-full h-full object-cover opacity-70">
+            <div class="absolute inset-0 bg-gradient-to-br from-[#6E3511]/50 via-black/30 to-[#2A7C13]/50"></div>
+
         </div>
+
         <!-- Hero Content -->
         <div class="relative z-10 flex-grow flex flex-col justify-center items-center text-center px-6 mt-[-40px]">
+
             <h1
-                class="font-tech text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-[0.08em] sm:tracking-[0.15em] drop-shadow-lg mb-5 sm:mb-6">
+                class="hero-title font-tech text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-[0.08em] sm:tracking-[0.15em] drop-shadow-lg mb-5 sm:mb-6">
                 ALBATROSS
             </h1>
+
             <p
-                class="text-white text-sm sm:text-base md:text-base lg:text-lg max-w-3xl leading-relaxed drop-shadow-md mb-8 sm:mb-10 font-medium px-4">
+                class="hero-description text-white text-sm sm:text-base md:text-base lg:text-lg max-w-3xl leading-relaxed drop-shadow-md mb-8 sm:mb-10 font-medium px-4">
                 Memantau perairan dan ekosistem mangrove dari sedimentasi secara akurat untuk mendukung keberlangsungan
                 masyarakat dan biota yang hidup sekitarnya.
             </p>
+
             <!-- Action Buttons -->
-            <div class="flex flex-col sm:flex-row gap-4 sm:gap-5 w-full sm:w-auto px-4 sm:px-0">
+            <div class="hero-buttons flex flex-col sm:flex-row gap-4 sm:gap-5 w-full sm:w-auto px-4 sm:px-0">
+
                 <a href="data.html"
                     class="glass-btn text-white px-8 py-3 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 font-semibold tracking-wide w-full sm:w-48">
                     <i class="fas fa-qrcode text-lg"></i>
                     Data
                 </a>
+
                 <a href="alat.html"
                     class="glass-btn text-white px-8 py-3 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 font-semibold tracking-wide w-full sm:w-48">
                     <i class="fas fa-tools text-lg"></i>
                     Alat
                 </a>
+
             </div>
         </div>
+
     </section>
 
     <!-- Content Section -->
     <section class="w-full bg-white py-20 px-6 lg:px-12">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-stretch">
+
             <!-- Left Column: Image -->
-            <div class="w-full relative group">
+            <div class="reveal w-full relative group">
                 <div
                     class="absolute -inset-2 bg-gradient-to-r from-[#76C457]/20 to-[#2A7C13]/10 rounded-3xl blur-lg opacity-70 group-hover:opacity-100 transition duration-500">
                 </div>
@@ -515,10 +617,12 @@
                 <img src="Foto di Aquatic.jpg" alt="Tim Albatross di Aquatic Center"
                     class="relative w-full h-auto aspect-[4/3] object-cover rounded-2xl shadow-xl z-10 transition-transform duration-500 group-hover:scale-[1.02]">
             </div>
+
             <!-- Right Column: Info Card -->
-            <div class="w-full relative mt-8 lg:mt-0">
+            <div class="reveal w-full relative mt-8 lg:mt-0 lg:h-full">
                 <div
-                    class="relative bg-[#2A7C13] rounded-2xl p-6 pt-16 sm:p-8 sm:pt-20 md:p-20 md:pt-30 shadow-2xl mt-0">
+                    class="relative bg-[#2A7C13] rounded-2xl p-6 pt-16 sm:p-8 sm:pt-16 lg:p-8 lg:pt-14 shadow-2xl h-full flex flex-col justify-center">
+
                     <div class="absolute -top-5 sm:-top-6 left-1/2 transform -translate-x-1/2">
                         <div
                             class="bg-white px-5 sm:px-10 py-4 sm:py-6 rounded-xl shadow-lg flex justify-center items-center whitespace-nowrap">
@@ -529,19 +633,21 @@
                         </div>
                     </div>
 
-                    <p
-                        class="text-white/95 text-base md:text-lg leading-relaxed text-justify mt-7 font-light -translate-y-4 md:translate-y-0">
-                        Sistem pemantauan yang mengintegrasikan pengukuran kondisi perairan dan pengamatan ekosistem
-                        mangrove melalui tiga subsistem, yaitu
-                        <strong class="font-semibold text-white">ALBA</strong> <i class="text-white/80">(Autonomous
-                            Littoral Bathymetric and Aquatic)</i>,
-                        <strong class="font-semibold text-white">BAT</strong> <i class="text-white/80">(Buoy-based
-                            Aquatic Tracking)</i>, dan
-                        <strong class="font-semibold text-white">TROSS</strong> <i class="text-white/80">(Trap-based
-                            Recognition and Observation Surveillance System)</i>.
+                    <p class="text-white text-base md:text-lg leading-relaxed text-justify mt-7 font-light lg:mt-4">
+                        <strong class="font-semibold text-white">ALBATROSS</strong> merupakan inovasi pemantauan
+                        perairan dan ekosistem mangrove yang mengintegrasikan tiga sistem utama.
+                        <strong class="font-semibold text-white">ALBA</strong> berupa <i class="text-white">Autonomous
+                            Surface Vehicle</i> (ASV) untuk memantau kondisi perairan,
+                        <strong class="font-semibold text-white">BAT</strong> berupa <i class="text-white">drifter</i>
+                        untuk mengikuti pergerakan air, dan
+                        <strong class="font-semibold text-white">TROSS</strong> berupa <i class="text-white">camera
+                            trap</i> untuk mengamati aktivitas satwa di kawasan mangrove.
+                        Ketiganya mendukung pengumpulan data perairan dan ekosistem secara terpadu sebagai dasar upaya
+                        konservasi dan pengelolaan lingkungan Segara Anakan.
                     </p>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -682,34 +788,211 @@
 
     <!-- Peta Lokasi Monitoring -->
     <section id="data-map" class="w-full bg-white pt-0 pb-16 px-6 lg:px-12">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="font-tech text-2xl md:text-3xl font-bold text-[#454545] text-center mb-10">
-                Peta Lokasi Monitoring
-            </h2>
-            <div class="w-full h-[450px] md:h-[600px] rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+        <div class="reveal max-w-6xl mx-auto">
+
+            <!-- Judul dengan garis di samping -->
+            <div class="flex items-center gap-4 mb-10">
+                <div class="flex-1 h-px bg-[#76C457]"></div>
+
+                <h2 class="font-tech text-2xl md:text-3xl font-bold text-[#454545] text-center whitespace-nowrap">
+                    Peta Lokasi Monitoring
+                </h2>
+
+                <div class="flex-1 h-px bg-[#76C457]"></div>
+            </div>
+
+            <!-- Peta -->
+            <div class="w-full h-[350px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg border border-gray-200">
                 <iframe
                     src="https://www.google.com/maps/d/embed?mid=1VZPmoYAKLJNFjlaemzn78e-kN0fwwlk&ehbc=2E312F&noprof=1"
                     width="100%" height="100%" style="border:0;" loading="lazy" allowfullscreen>
                 </iframe>
             </div>
+
         </div>
     </section>
 
-    <section class="w-full bg-white pt-0 pb-0 px-6 lg:px-12">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="font-tech text-xl md:text-3xl font-bold flex justify-center items-center text-[#454545]">
+    <!-- Kata Mereka -->
+    <section id="testimoni" class="relative w-full pt-0 pb-0 px-6 lg:px-12 overflow-hidden" style="
+        background-color: #ffffff;
+        background-image:
+            radial-gradient(
+                ellipse at 28% 45%,
+                rgba(118, 196, 87, 0.28) 0%,
+                rgba(118, 196, 87, 0.14) 25%,
+                transparent 48%
+            ),
+            radial-gradient(
+                ellipse at 65% 55%,
+                rgba(110, 53, 17, 0.24) 0%,
+                rgba(110, 53, 17, 0.12) 20%,
+                transparent 42%
+            );
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    ">
+
+        <!-- Konten testimonial -->
+        <div class="relative z-10 max-w-6xl mx-auto">
+
+            <h2 class="font-tech text-xl md:text-3xl font-bold text-[#454545] text-center mb-8">
                 Kata Mereka:
             </h2>
 
-            <p
-                class="text-[#2A7C13] text-base md:text-lg leading-relaxed text-center mt-7 font-light max-w-2xl mx-auto text-justify">
-                “Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque
-                sem
-                placerat. In id cursus mi pretium tellus duis convallis.”
-                <strong class="font-semibold text-[#2A7C13]">- Perlman</strong>
-            </p>
+            <div class="relative w-full">
+
+                <!-- Tombol Sebelumnya -->
+                <button id="prevTestimoni" type="button" aria-label="Testimoni sebelumnya" class="hidden absolute left-0 top-1/2 -translate-y-1/2 z-20
+                w-10 h-10 md:w-12 md:h-12 rounded-full
+                bg-[#2A7C13] text-white items-center justify-center
+                hover:bg-[#1f5c0e] transition-colors">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+
+                <!-- Area Testimoni -->
+                <div id="testimoniViewport" class="w-full overflow-hidden">
+                    <div id="testimoniTrack" class="flex items-stretch transition-transform duration-500 ease-in-out">
+
+                        <!-- TESTIMONI 1 -->
+                        <div class="testimoni-slide w-full flex-shrink-0 px-12 md:px-16 text-center">
+
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-10 h-10 md:w-12 md:h-12 text-[#76C457] mx-auto mb-4" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M7.17 6A5.17 5.17 0 0 0 2 11.17V18h7v-6H5.5a3.5 3.5 0 0 1 3.5-3.5V6H7.17zm11 0A5.17 5.17 0 0 0 13 11.17V18h7v-6h-3.5a3.5 3.5 0 0 1 3.5-3.5V6h-1.83z" />
+                            </svg>
+
+                            <p class="text-[#454545] text-base md:text-lg leading-relaxed max-w-4xl mx-auto">
+                                “Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.”
+                            </p>
+
+                            <p class="text-[#2A7C13] font-semibold mt-6">
+                                Nightwing
+                            </p>
+                            <p class="text-sm text-gray-500 mt-1">
+                                Kepala Dusun
+                            </p>
+                        </div>
+
+                        <!-- TESTIMONI 2 -->
+                        <div class="testimoni-slide w-full flex-shrink-0 px-12 md:px-16 text-center">
+
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-10 h-10 md:w-12 md:h-12 text-[#76C457] mx-auto mb-4" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M7.17 6A5.17 5.17 0 0 0 2 11.17V18h7v-6H5.5a3.5 3.5 0 0 1 3.5-3.5V6H7.17zm11 0A5.17 5.17 0 0 0 13 11.17V18h7v-6h-3.5a3.5 3.5 0 0 1 3.5-3.5V6h-1.83z" />
+                            </svg>
+
+                            <p class="text-[#454545] text-base md:text-lg leading-relaxed max-w-4xl mx-auto">
+                                “Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in
+                                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+                                est laborum.”
+                            </p>
+
+                            <p class="text-[#2A7C13] font-semibold mt-6">
+                                Gracie Abrams
+                            </p>
+                            <p class="text-sm text-gray-500 mt-1">
+                                Penduduk Setempat
+                            </p>
+                        </div>
+
+                        <!-- TESTIMONI 3 -->
+                        <div class="testimoni-slide w-full flex-shrink-0 px-12 md:px-16 text-center">
+
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-10 h-10 md:w-12 md:h-12 text-[#76C457] mx-auto mb-4" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M7.17 6A5.17 5.17 0 0 0 2 11.17V18h7v-6H5.5a3.5 3.5 0 0 1 3.5-3.5V6H7.17zm11 0A5.17 5.17 0 0 0 13 11.17V18h7v-6h-3.5a3.5 3.5 0 0 1 3.5-3.5V6h-1.83z" />
+                            </svg>
+
+                            <p class="text-[#454545] text-base md:text-lg leading-relaxed max-w-4xl mx-auto">
+                                “Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+                                Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis
+                                consectetur purus sit amet fermentum.”
+                            </p>
+
+                            <p class="text-[#2A7C13] font-semibold mt-6">
+                                Minatozaki Sana
+                            </p>
+                            <p class="text-sm text-gray-500 mt-1">
+                                Penduduk Setempat
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Tombol Selanjutnya -->
+                <button id="nextTestimoni" type="button" aria-label="Testimoni selanjutnya" class="flex absolute right-0 top-1/2 -translate-y-1/2 z-20
+                w-10 h-10 md:w-12 md:h-12 rounded-full
+                bg-[#2A7C13] text-white items-center justify-center
+                hover:bg-[#1f5c0e] transition-colors">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+
+            </div>
         </div>
     </section>
+
+    <!-- JavaScript Testimoni -->
+    <script>
+        const trackTestimoni = document.getElementById("testimoniTrack");
+        const slidesTestimoni = document.querySelectorAll(".testimoni-slide");
+        const prevTestimoni = document.getElementById("prevTestimoni");
+        const nextTestimoni = document.getElementById("nextTestimoni");
+
+        let indexTestimoni = 0;
+
+        function geserTestimoni() {
+            trackTestimoni.style.transform =
+                `translateX(-${indexTestimoni * 100}%)`;
+
+            prevTestimoni.classList.toggle(
+                "hidden", indexTestimoni === 0
+            );
+            prevTestimoni.classList.toggle(
+                "flex", indexTestimoni > 0
+            );
+
+            nextTestimoni.classList.toggle(
+                "hidden", indexTestimoni === slidesTestimoni.length - 1
+            );
+            nextTestimoni.classList.toggle(
+                "flex", indexTestimoni < slidesTestimoni.length - 1
+            );
+        }
+
+        nextTestimoni.addEventListener("click", () => {
+            if (indexTestimoni < slidesTestimoni.length - 1) {
+                indexTestimoni++;
+                geserTestimoni();
+            }
+        });
+
+        prevTestimoni.addEventListener("click", () => {
+            if (indexTestimoni > 0) {
+                indexTestimoni--;
+                geserTestimoni();
+            }
+        });
+
+        geserTestimoni();
+    </script>
 
     <div class="w-full py-8">
         <div class="slider">
@@ -770,7 +1053,7 @@
         </div>
     </div>
     <div>
-        <h2 class="font-tech text-xl md:text-3xl font-bold flex justify-center items-center h-40 text-[#454545]">
+        <h2 class="font-tech text-xl md:text-3xl font-bold flex justify-center items-center h-24 text-[#454545]">
             Didukung Oleh:
         </h2>
 
@@ -788,9 +1071,9 @@
                     <!-- Tooltip di Bawah (Dinaikkan sedikit ke -bottom-8 + z-50) -->
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#6E3511]"></div>
                         <span
-                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#6E3511] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             Pertamina
                         </span>
                     </div>
@@ -802,9 +1085,9 @@
                     <img src="Logo PLN.png" alt="PLN" class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#6E3511]"></div>
                         <span
-                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#6E3511] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             PLN
                         </span>
                     </div>
@@ -817,9 +1100,9 @@
                         class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#6E3511]"></div>
                         <span
-                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#6E3511] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             KLHK
                         </span>
                     </div>
@@ -831,9 +1114,9 @@
                     <img src="Logo kkp.png" alt="KKP" class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#6E3511]"></div>
                         <span
-                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#6E3511] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             KKP
                         </span>
                     </div>
@@ -846,9 +1129,9 @@
                         class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#6E3511]"></div>
                         <span
-                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#6E3511] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             Le Minerale
                         </span>
                     </div>
@@ -861,9 +1144,9 @@
                         class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#6E3511]"></div>
                         <span
-                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#6E3511] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             BRIN
                         </span>
                     </div>
@@ -875,9 +1158,9 @@
                     <img src="Logo CNT.jpe" alt="CNT" class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#6E3511]"></div>
                         <span
-                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#6E3511] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             CNT
                         </span>
                     </div>
@@ -890,9 +1173,9 @@
                         class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#6E3511]"></div>
                         <span
-                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#6E3511] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             TOMORO
                         </span>
                     </div>
@@ -905,9 +1188,9 @@
                         class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#6E3511]"></div>
                         <span
-                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#6E3511] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             Dragonship
                         </span>
                     </div>
@@ -920,9 +1203,9 @@
                         class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#6E3511]"></div>
                         <span
-                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#6E3511] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             Gojek
                         </span>
                     </div>
@@ -935,9 +1218,9 @@
                         class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#6E3511]"></div>
                         <span
-                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#6E3511] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             INTEN
                         </span>
                     </div>
@@ -949,9 +1232,9 @@
                     <img src="Logo BCA.png" alt="BCA" class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#6E3511]"></div>
                         <span
-                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#6E3511] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             BCA
                         </span>
                     </div>
@@ -963,9 +1246,9 @@
                     <img src="Logo BSI.png" alt="BSI" class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#6E3511]"></div>
                         <span
-                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#6E3511] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             BSI
                         </span>
                     </div>
@@ -977,9 +1260,9 @@
                     <img src="Logo KAI.png" alt="KAI" class="max-w-full max-h-full object-contain pointer-events-none">
                     <div
                         class="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-all duration-200 pointer-events-none z-50 flex flex-col items-center">
-                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#2A7C13]"></div>
+                        <div class="w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-[#6E3511]"></div>
                         <span
-                            class="bg-[#2A7C13] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
+                            class="bg-[#6E3511] text-white text-xs font-semibold px-2.5 py-0.5 rounded-md shadow-md whitespace-nowrap">
                             KAI
                         </span>
                     </div>
@@ -1317,6 +1600,38 @@
         slider.addEventListener('lostpointercapture', stopDragging);
 
         requestAnimationFrame(animate);
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const revealElements = document.querySelectorAll('.reveal');
+
+            // Jika browser tidak mendukung IntersectionObserver,
+            // tampilkan semua elemen agar konten tetap terlihat.
+            if (!('IntersectionObserver' in window)) {
+                revealElements.forEach((element) => {
+                    element.classList.add('is-visible');
+                });
+                return;
+            }
+
+            const revealObserver = new IntersectionObserver(
+                (entries, observer) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                {
+                    threshold: 0.12
+                }
+            );
+
+            revealElements.forEach((element) => {
+                revealObserver.observe(element);
+            });
+        });
 
     </script>
 
