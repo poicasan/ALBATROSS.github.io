@@ -32,11 +32,20 @@
     </script>
 
     <style>
+        :root {
+            /* Warna hijau mint lembut untuk pattern */
+            --pattern-color: #a7f3d0; 
+            
+            /* Tingkat Opacity Pattern (Bisa diatur dari 0.1 sampai 1.0) */
+            --pattern-opacity: 0.85;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
+            background-color: #ffffff;
         }
 
         .font-tech {
@@ -52,68 +61,33 @@
             scrollbar-width: none;
         }
 
-        /* Pulse ring animation for background nodes */
-        @keyframes pulseRing {
-            0% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(42, 124, 19, 0.4);
-            }
-            70% {
-                transform: scale(1.1);
-                box-shadow: 0 0 0 10px rgba(42, 124, 19, 0);
-            }
-            100% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(42, 124, 19, 0);
-            }
+        /* Wrapper Pattern Halftone Oval di Background Konten Utama */
+        .content-pattern-wrapper {
+            position: relative;
+            background-color: #ffffff;
+            overflow: hidden;
         }
 
-        .node-pulse {
-            animation: pulseRing 3s infinite ease-in-out;
-        }
-
-        /* Penyesuaian khusus tampilan mobile */
-        @media (max-width: 768px) {
-            .desktop-nodes-wrapper {
-                position: absolute !important;
-                inset: 0 !important;
-                width: 100% !important;
-                height: 100% !important;
-                pointer-events: none !important;
-            }
+        .content-pattern-wrapper::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: var(--pattern-opacity);
             
-            .node-item {
-                position: absolute !important;
-                transform: translate(-50%, -50%) !important;
-                pointer-events: auto !important;
-            }
+            /* Pola titik/oval berjejer rapi */
+            background-image: radial-gradient(ellipse 2.5px 1.5px at 50% 50%, var(--pattern-color) 100%, transparent 100%);
+            background-size: 10px 8px;
+            background-repeat: repeat;
 
-            /* Posisi sebaran node di mobile: Satelit & Drone digeser aman agar tidak menutupi teks penjelasan */
-            .node-item[data-id="satelit"] { left: 14% !important; top: 18% !important; }
-            .node-item[data-id="drone"] { left: 86% !important; top: 20% !important; }
-            .node-item[data-id="asv"] { left: 10% !important; top: 35% !important; }
-            .node-item[data-id="drifter"] { left: 90% !important; top: 38% !important; }
-            .node-item[data-id="mangrove"] { left: 8% !important; top: 62% !important; }
-            .node-item[data-id="sedimentasi"] { left: 92% !important; top: 65% !important; }
-            .node-item[data-id="perairan"] { left: 14% !important; top: 88% !important; }
-            .node-item[data-id="arus"] { left: 86% !important; top: 91% !important; }
-
-            .node-item span {
-                font-size: 9px !important;
-            }
-            /* Bulatan node diperbesar optimal */
-            .node-item > div {
-                width: 72px !important;
-                height: 72px !important;
-            }
-            .node-item i {
-                font-size: 26px !important;
-            }
+            /* Masking Gradient: membuat efek memudar di bagian pinggir */
+            -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0) 100%);
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0) 100%);
         }
     </style>
 </head>
 
-<body class="bg-slate-50 text-gray-800 flex flex-col min-h-screen">
+<body class="bg-white text-gray-800 flex flex-col min-h-screen">
 
     <!-- Navbar -->
     <nav id="navbar"
@@ -311,81 +285,8 @@
     </nav>
 
 
-    <!-- ================= KONTEN UTAMA ================= -->
-    <main class="flex-grow pt-24 sm:pt-36 pb-16 px-4 sm:px-6 relative overflow-hidden">
-
-        <!-- ===== BACKGROUND NODE NETWORK SYSTEM ===== -->
-        <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden" id="network-container">
-            <!-- Canvas garis penghubung (aktif di mobile dan desktop) -->
-            <canvas id="network-canvas" class="absolute inset-0 w-full h-full"></canvas>
-
-            <!-- Wrapper Ikon Node -->
-            <div class="desktop-nodes-wrapper absolute inset-0 w-full h-full">
-                <!-- 1. ASV Node -->
-                <div class="node-item absolute z-10 -translate-x-1/2 -translate-y-1/2 pointer-events-auto group cursor-pointer" style="left: 10%; top: 20%;" data-id="asv">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white border-2 border-[#2A7C13] text-[#2A7C13] flex flex-col items-center justify-center shadow-lg node-pulse group-hover:scale-110 group-hover:bg-[#2A7C13] group-hover:text-white transition-all duration-300">
-                        <i class="fa-solid fa-ship text-lg sm:text-xl"></i>
-                        <span class="text-[9px] font-bold mt-0.5 tracking-tighter">ASV</span>
-                    </div>
-                </div>
-
-                <!-- 2. River Drifter Node -->
-                <div class="node-item absolute z-10 -translate-x-1/2 -translate-y-1/2 pointer-events-auto group cursor-pointer" style="left: 90%; top: 18%;" data-id="drifter">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white border-2 border-[#2A7C13] text-[#2A7C13] flex flex-col items-center justify-center shadow-lg node-pulse group-hover:scale-110 group-hover:bg-[#2A7C13] group-hover:text-white transition-all duration-300">
-                        <i class="fa-solid fa-compass text-lg sm:text-xl"></i>
-                        <span class="text-[8px] font-bold mt-0.5 tracking-tighter">DRIFTER</span>
-                    </div>
-                </div>
-
-                <!-- 3. Mangrove Node -->
-                <div class="node-item absolute z-10 -translate-x-1/2 -translate-y-1/2 pointer-events-auto group cursor-pointer" style="left: 6%; top: 52%;" data-id="mangrove">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white border-2 border-[#2A7C13] text-[#2A7C13] flex flex-col items-center justify-center shadow-lg node-pulse group-hover:scale-110 group-hover:bg-[#2A7C13] group-hover:text-white transition-all duration-300">
-                        <i class="fa-solid fa-tree text-lg sm:text-xl"></i>
-                        <span class="text-[8px] font-bold mt-0.5 tracking-tighter">MANGROVE</span>
-                    </div>
-                </div>
-
-                <!-- 4. Sedimentasi Node -->
-                <div class="node-item absolute z-10 -translate-x-1/2 -translate-y-1/2 pointer-events-auto group cursor-pointer" style="left: 94%; top: 50%;" data-id="sedimentasi">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white border-2 border-[#2A7C13] text-[#2A7C13] flex flex-col items-center justify-center shadow-lg node-pulse group-hover:scale-110 group-hover:bg-[#2A7C13] group-hover:text-white transition-all duration-300">
-                        <i class="fa-solid fa-layer-group text-lg sm:text-xl"></i>
-                        <span class="text-[8px] font-bold mt-0.5 tracking-tighter">SEDIMEN</span>
-                    </div>
-                </div>
-
-                <!-- 5. Perairan Node -->
-                <div class="node-item absolute z-10 -translate-x-1/2 -translate-y-1/2 pointer-events-auto group cursor-pointer" style="left: 12%; top: 82%;" data-id="perairan">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white border-2 border-[#2A7C13] text-[#2A7C13] flex flex-col items-center justify-center shadow-lg node-pulse group-hover:scale-110 group-hover:bg-[#2A7C13] group-hover:text-white transition-all duration-300">
-                        <i class="fa-solid fa-water text-lg sm:text-xl"></i>
-                        <span class="text-[8px] font-bold mt-0.5 tracking-tighter">PERAIRAN</span>
-                    </div>
-                </div>
-
-                <!-- 6. Arus Node -->
-                <div class="node-item absolute z-10 -translate-x-1/2 -translate-y-1/2 pointer-events-auto group cursor-pointer" style="left: 88%; top: 80%;" data-id="arus">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white border-2 border-[#2A7C13] text-[#2A7C13] flex flex-col items-center justify-center shadow-lg node-pulse group-hover:scale-110 group-hover:bg-[#2A7C13] group-hover:text-white transition-all duration-300">
-                        <i class="fa-solid fa-wind text-lg sm:text-xl"></i>
-                        <span class="text-[8px] font-bold mt-0.5 tracking-tighter">ARUS</span>
-                    </div>
-                </div>
-
-                <!-- 7. Satelit Node -->
-                <div class="node-item absolute z-10 -translate-x-1/2 -translate-y-1/2 pointer-events-auto group cursor-pointer" style="left: 30%; top: 12%;" data-id="satelit">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white border-2 border-[#2A7C13] text-[#2A7C13] flex flex-col items-center justify-center shadow-lg node-pulse group-hover:scale-110 group-hover:bg-[#2A7C13] group-hover:text-white transition-all duration-300">
-                        <i class="fa-solid fa-satellite-dish text-lg sm:text-xl"></i>
-                        <span class="text-[8px] font-bold mt-0.5 tracking-tighter">SATELIT</span>
-                    </div>
-                </div>
-
-                <!-- 8. Drone Aerial Node -->
-                <div class="node-item absolute z-10 -translate-x-1/2 -translate-y-1/2 pointer-events-auto group cursor-pointer" style="left: 70%; top: 13%;" data-id="drone">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white border-2 border-[#2A7C13] text-[#2A7C13] flex flex-col items-center justify-center shadow-lg node-pulse group-hover:scale-110 group-hover:bg-[#2A7C13] group-hover:text-white transition-all duration-300">
-                        <i class="fa-solid fa-crosshairs text-lg sm:text-xl"></i>
-                        <span class="text-[8px] font-bold mt-0.5 tracking-tighter">DRONE</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- ================= KONTEN UTAMA DENGAN PATTERN OVAL ================= -->
+    <main class="flex-grow pt-24 sm:pt-36 pb-16 px-4 sm:px-6 content-pattern-wrapper">
 
         <!-- Judul Halaman -->
         <div class="text-center mb-8 sm:mb-12 relative z-10">
@@ -414,7 +315,7 @@
                             </h2>
                         </div>
                         <div class="p-1 flex-1">
-                            <div class="overflow-hidden rounded-2xl w-full h-full">
+                            <div class="overflow-hidden rounded-2xl w-full h-full bg-white">
                                 <img src="alba.png" alt="Alat Alba"
                                     class="w-full h-40 sm:h-[260px] md:h-[280px] object-cover rounded-2xl block"
                                     onerror="this.onerror=null; this.src='https://placehold.co/800x450/0883a4/ffffff?text=Alat+Alba';">
@@ -437,7 +338,7 @@
                             </h2>
                         </div>
                         <div class="p-1 flex-1">
-                            <div class="overflow-hidden rounded-2xl w-full h-full">
+                            <div class="overflow-hidden rounded-2xl w-full h-full bg-white">
                                 <img src="bat.jpeg" alt="Alat Bat"
                                     class="w-full h-40 sm:h-[260px] md:h-[280px] object-cover rounded-2xl block"
                                     onerror="this.onerror=null; this.src='https://placehold.co/800x450/0883a4/ffffff?text=Alat+Bat';">
@@ -460,7 +361,7 @@
                             </h2>
                         </div>
                         <div class="p-1 flex-1">
-                            <div class="overflow-hidden rounded-2xl w-full h-full">
+                            <div class="overflow-hidden rounded-2xl w-full h-full bg-white">
                                 <img src="tross.jpeg" alt="Alat Tross"
                                     class="w-full h-40 sm:h-[260px] md:h-[280px] object-cover rounded-2xl block"
                                     onerror="this.onerror=null; this.src='https://placehold.co/800x450/0883a4/ffffff?text=Alat+Tross';">
@@ -473,16 +374,16 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#2A7C13] px-4 sm:px-6 py-8 sm:py-10 border-t-[2px] border-[#2A7C13] relative z-20 text-white">
+    <footer class="bg-[#2A7C13] px-4 sm:px-6 py-10 border-t-[2px] border-[#2A7C13]">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
 
             <!-- Kolom 1: Lokasi, Email, dan WhatsApp -->
-            <div class="md:col-span-2 flex flex-col gap-3 sm:gap-4 text-xs sm:text-sm">
-                <h3 class="font-bold text-lg sm:text-xl mb-1 sm:mb-2">Kontak Kami</h3>
+            <div class="md:col-span-2 flex flex-col gap-4 text-white">
+                <h3 class="font-bold text-xl mb-2">Kontak Kami</h3>
 
                 <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9"
                     class="flex items-start gap-3 hover:text-[#76C457] transition">
-                    <i class="fa-solid fa-location-dot text-lg sm:text-xl mt-1 shrink-0"></i>
+                    <i class="fa-solid fa-location-dot text-xl mt-1"></i>
                     <span class="leading-relaxed break-words">
                         Workshop Instrumentasi dan Robotika Kelautan (Bengkel) ITK, Babakan,
                         Dramaga, Bogor, Indonesia 16680
@@ -490,54 +391,54 @@
                 </a>
 
                 <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-3 hover:text-[#76C457] transition">
-                    <i class="fa-regular fa-envelope text-lg sm:text-xl shrink-0"></i>
-                    <span class="break-all">diklatmitrxvi@gmail.com</span>
+                    <i class="fa-regular fa-envelope text-xl"></i>
+                    <span>mitr.ipb@gmail.com</span>
                 </a>
 
-                <a href="https://wa.me/6283898339620" class="flex items-center gap-3 hover:text-[#76C457] transition">
-                    <i class="fa-brands fa-whatsapp text-lg sm:text-xl shrink-0"></i>
-                    <span class="break-words">+6283898339620 (Deni Rizkiana Anwar Hidayat)</span>
+                <a href="https://wa.me/6281283435353" class="flex items-center gap-3 hover:text-[#76C457] transition">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    <span class="break-words">+6281283435353 (Hanifa Rahmaliya)</span>
                 </a>
             </div>
 
             <!-- Kolom 2: Sosial Media -->
-            <div class="flex flex-col gap-3 sm:gap-4 text-xs sm:text-sm">
-                <h3 class="font-bold text-lg sm:text-xl mb-1 sm:mb-2">Media Sosial</h3>
+            <div class="flex flex-col gap-4 text-white">
+                <h3 class="font-bold text-xl mb-2">Media Sosial</h3>
 
                 <a href="https://www.instagram.com/mitr_ipb/"
                     class="flex items-center gap-3 hover:text-[#76C457] transition">
-                    <i class="fa-brands fa-instagram text-lg sm:text-xl shrink-0"></i>
+                    <i class="fa-brands fa-instagram text-xl"></i>
                     <span>@mitr_ipb</span>
                 </a>
                 <a href="https://www.instagram.com/dmitr6teen/"
                     class="flex items-center gap-3 hover:text-[#76C457] transition">
-                    <i class="fa-brands fa-instagram text-lg sm:text-xl shrink-0"></i>
+                    <i class="fa-brands fa-instagram text-xl"></i>
                     <span>@dmitr6teen</span>
                 </a>
             </div>
 
             <!-- Kolom 3: Logo dan Tombol Back to Top -->
-            <div class="flex flex-col justify-between items-start md:items-end gap-6 h-full">
-                <div class="w-full flex items-center justify-start md:justify-end gap-3 sm:gap-4">
+            <div class="flex flex-col items-start gap-7 text-white h-full">
+                <div class="w-full flex flex-wrap items-center justify-start pb-12 gap-4">
                     <div
-                        class="flex items-center justify-center w-16 h-16 sm:w-24 sm:h-24 bg-white rounded-full shadow-md shrink-0 p-2">
+                        class="flex items-center justify-center w-16 h-16 sm:w-28 sm:h-28 bg-white rounded-full shadow-md shrink-0 p-2 transform -translate-x-4 translate-y-8">
                         <img src="logo mitr.png" alt="Logo MIT+R"
-                            class="h-10 sm:h-16 w-auto object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100/ffffff/2A7C13?text=MIT+R';">
+                            class="h-16 sm:h-[120px] w-auto object-contain transform -translate-y-1">
                     </div>
                     <img src="logo ALBATROSS.png" alt="Logo Kedua"
-                        class="h-12 sm:h-20 w-auto object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100/ffffff/2A7C13?text=ALBATROSS';">
+                        class="h-16 sm:h-[150px] w-auto object-contain transform -translate-x-4 translate-y-8">
                 </div>
 
-                <div class="w-full flex justify-end">
+                <div class="w-full flex justify-end mt-auto">
                     <button id="back-to-top"
-                        class="group flex items-center p-2.5 sm:p-3 bg-white text-white rounded-full shadow-md hover:bg-[#FFFFFF] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
+                        class="group flex items-center p-3 bg-white text-white rounded-full shadow-md hover:bg-[#FFFFFF] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
                         <span
-                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[160px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold text-xs sm:text-sm text-[#2A7C13]">
+                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[160px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold text-[#2A7C13]">
                             Kembali ke Atas
                         </span>
                         <span
-                            class="flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 bg-white text-[#2A7C13] rounded-full transition-transform duration-500 group-hover:scale-110 shrink-0">
-                            <i class="fa-solid fa-arrow-up text-xs sm:text-sm"></i>
+                            class="flex items-center justify-center w-7 h-7 bg-white text-[#2A7C13] rounded-full transition-transform duration-500 group-hover:scale-110 shrink-0">
+                            <i class="fa-solid fa-arrow-up text-sm"></i>
                         </span>
                     </button>
                 </div>
@@ -558,7 +459,7 @@
         </div>
     </div>
 
-    <!-- JavaScript Interaktif Navigasi & Rendering Garis Background Canvas -->
+    <!-- JavaScript Interaktif Navigasi -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Mobile Main Menu Toggle
@@ -600,66 +501,6 @@
 
             setupAccordion('mobile-alat-btn', 'mobile-alat-sub', 'mobile-alat-icon');
             setupAccordion('mobile-data-btn', 'mobile-data-sub', 'mobile-data-icon');
-
-            // ================= CANVAS LINE NETWORK SYSTEM =================
-            const canvas = document.getElementById('network-canvas');
-            const container = document.getElementById('network-container');
-            const nodeElements = document.querySelectorAll('.node-item');
-
-            if (canvas && container) {
-                const ctx = canvas.getContext('2d');
-                let dashOffset = 0;
-
-                function resizeCanvas() {
-                    canvas.width = container.clientWidth;
-                    canvas.height = container.clientHeight;
-                }
-
-                window.addEventListener('resize', resizeCanvas);
-                resizeCanvas();
-
-                function getCenterCoordinates(el) {
-                    const rect = el.getBoundingClientRect();
-                    const containerRect = container.getBoundingClientRect();
-                    return {
-                        x: rect.left + rect.width / 2 - containerRect.left,
-                        y: rect.top + rect.height / 2 - containerRect.top
-                    };
-                }
-
-                function drawNetworkLines() {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                    const points = Array.from(nodeElements).map(el => getCenterCoordinates(el));
-
-                    ctx.lineWidth = 1.2;
-                    ctx.strokeStyle = 'rgba(42, 124, 19, 0.22)';
-                    ctx.setLineDash([4, 4]);
-                    ctx.lineDashOffset = -dashOffset;
-
-                    for (let i = 0; i < points.length; i++) {
-                        for (let j = i + 1; j < points.length; j++) {
-                            const dx = points[i].x - points[j].x;
-                            const dy = points[i].y - points[j].y;
-                            const dist = Math.sqrt(dx * dx + dy * dy);
-
-                            const maxDist = window.innerWidth < 768 ? canvas.width * 0.38 : canvas.width * 0.45;
-
-                            if (dist < maxDist) {
-                                ctx.beginPath();
-                                ctx.moveTo(points[i].x, points[i].y);
-                                ctx.lineTo(points[j].x, points[j].y);
-                                ctx.stroke();
-                            }
-                        }
-                    }
-
-                    dashOffset += 0.3;
-                    requestAnimationFrame(drawNetworkLines);
-                }
-
-                drawNetworkLines();
-            }
         });
     </script>
 </body>
