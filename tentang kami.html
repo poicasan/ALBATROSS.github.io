@@ -44,19 +44,23 @@
 
     <!-- Navbar -->
     <nav id="navbar"
-        class="fixed top-0 left-0 w-full z-50 p-4 lg:px-12 transition-all duration-300 bg-white shadow-md text-[#118AB2]">
+        class="fixed top-0 left-0 w-full z-50 p-4 lg:px-12 transition-all duration-300 bg-white shadow-md text-[#2A7C13]">
 
         <div class="max-w-7xl mx-auto flex justify-between items-center relative">
 
-            <!-- Logo ALBATROSS -->
             <div class="relative flex items-center justify-center">
-                <!-- Shape Bulat Biru (Ukuran lebih besar, tidak mempengaruhi tinggi header) -->
-                <div class="absolute bg-[#118AB2] rounded-full w-14 h-14 -z-0"></div>
+                <!-- Logo MITR -->
+                <a href="index.html"
+                    class="relative z-10 flex items-center justify-center transition-transform hover:scale-105 mx-[5px]">
+                    <img src="logo mitr.png" alt="Logo MITR" class="h-12 w-auto object-contain mx-[10px]">
+                </a>
 
-                <!-- Tombol Logo (Tetap menentukan ukuran utama di header) -->
-                <a href="#" id="logo-btn"
-                    class="relative z-10 flex items-center justify-center transition-transform hover:scale-105">
-                    <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="h-12 w-auto object-contain">
+                <!-- Logo ALBATROSS -->
+                <a href="index.html"
+                    class="relative flex items-center justify-center transition-transform hover:scale-105">
+                    <div class="absolute bg-[#2A7C13] rounded-full w-14 h-14 -z-0">
+                    </div>
+                    <img src="logo ALBATROSS.png" alt="Logo ALBATROSS" class="relative z-10 h-12 w-auto object-contain">
                 </a>
             </div>
 
@@ -68,14 +72,14 @@
 
                     <li>
                         <a href="index.html"
-                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
+                            class="nav-item relative whitespace-nowrap px-3 sm:px-4 py-2 rounded-full transition-all duration-200 hover:bg-[#2A7C13] hover:text-white after:absolute after:bottom-1 after:left-4 after:right-4 after:h-[2px] after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
                             BERANDA
                         </a>
                     </li>
 
                     <li>
                         <a href="tentang kami.html"
-                            class="nav-item whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:bg-[#118AB2] hover:text-white hover:underline underline-offset-4">
+                            class="nav-item relative whitespace-nowrap px-3 sm:px-4 py-2 rounded-full transition-all duration-200 hover:bg-[#2A7C13] hover:text-white after:absolute after:bottom-1 after:left-4 after:right-4 after:h-[2px] after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
                             TENTANG KAMI
                         </a>
                     </li>
@@ -84,25 +88,25 @@
                     <li class="relative group" id="alat-dropdown">
 
                         <button id="alat-btn" type="button"
-                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+                            class="nav-item relative whitespace-nowrap px-4 py-2 rounded-full transition-all duration-200 group-hover:bg-[#2A7C13] group-hover:text-white after:absolute after:bottom-1 after:left-4 after:right-4 after:h-[2px] after:bg-white after:scale-x-0 group-hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300 flex items-center gap-1 uppercase font-semibold">
                             ALAT
                         </button>
 
                         <div id="alat-menu"
-                            class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
+                            class="absolute right-0 top-full w-48 bg-[#2A7C13] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200">
 
                             <a href="alat alba.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors">
                                 Alat ALBA
                             </a>
 
                             <a href="alat bat.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors">
                                 Alat BAT
                             </a>
 
                             <a href="alat tross.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors pb-3">
                                 Alat TROSS
                             </a>
 
@@ -113,31 +117,31 @@
                     <li class="relative group" id="data-dropdown">
 
                         <button id="data-btn" type="button"
-                            class="nav-item whitespace-nowrap px-4 py-2 rounded-t-lg transition-all duration-200 group-hover:bg-[#118AB2] group-hover:text-white group-hover:underline underline-offset-4 flex items-center gap-1 uppercase font-semibold">
+                            class="nav-item relative whitespace-nowrap px-4 py-2 rounded-full transition-all duration-200 group-hover:bg-[#2A7C13] group-hover:text-white after:absolute after:bottom-1 after:left-4 after:right-4 after:h-[2px] after:bg-white after:scale-x-0 group-hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300 flex items-center gap-1 uppercase font-semibold">
                             DATA
                         </button>
 
                         <div id="data-menu"
-                            class="absolute right-0 top-full hidden group-hover:block w-48 bg-[#118AB2] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1">
+                            class="absolute right-0 top-full w-48 bg-[#2A7C13] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200">
 
 
-                             <a href="data pemetaan.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                            <a href="data pemetaan.html"
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors">
                                 Data Pemetaan
                             </a>
 
                             <a href="data alba.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors">
                                 Data ALBA
                             </a>
 
                             <a href="data bat.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors">
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors">
                                 Data BAT
                             </a>
 
                             <a href="data tross.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#0e7496] transition-colors pb-3">
+                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors pb-3">
                                 Data TROSS
                             </a>
 
@@ -147,7 +151,8 @@
                 </ul>
 
                 <!-- Tombol Mobile -->
-                <button id="mobile-toggle-btn" class="md:hidden text-2xl p-2 transition-colors focus:outline-none"
+                <button id="mobile-toggle-btn"
+                    class="md:hidden text-2xl p-2 text-[#2A7C13] hover:text-[#6E3511] transition-colors focus:outline-none"
                     aria-label="Buka menu navigasi">
                     <i id="toggle-icon" class="fas fa-bars"></i>
                 </button>
@@ -156,24 +161,24 @@
 
         <!-- Menu Mobile -->
         <div id="mobile-menu" class="hidden md:hidden bg-white mt-4 rounded-xl shadow-lg p-4">
-            <div class="flex flex-col space-y-2 text-sm font-semibold text-[#118AB2]">
-                <a href="index.html" class="px-4 py-3 rounded-lg hover:bg-brand-lightCyan">
+            <div class="flex flex-col space-y-2 text-sm font-semibold text-[#2A7C13]">
+                <a href="index.html" class="px-4 py-3 rounded-lg hover:bg-[#F5F7F0] transition-colors">
                     BERANDA
                 </a>
-                <a href="tentang kami.html" class="px-4 py-3 rounded-lg hover:bg-brand-lightCyan">
+                <a href="tentang kami.html" class="px-4 py-3 rounded-lg hover:bg-[#F5F7F0] transition-colors">
                     TENTANG KAMI
                 </a>
                 <div class="border-t border-gray-100 pt-2">
                     <p class="px-4 py-2 text-xs text-gray-400">
                         ALAT
                     </p>
-                    <a href="alat alba.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                    <a href="alat alba.html" class="block px-4 py-2 hover:bg-[#F5F7F0] rounded-lg">
                         Alat ALBA
                     </a>
-                    <a href="alat bat.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                    <a href="alat bat.html" class="block px-4 py-2 hover:bg-[#F5F7F0] rounded-lg">
                         Alat BAT
                     </a>
-                    <a href="alat tross.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                    <a href="alat tross.html" class="block px-4 py-2 hover:bg-[#F5F7F0] rounded-lg">
                         Alat TROSS
                     </a>
                 </div>
@@ -182,16 +187,16 @@
                     <p class="px-4 py-2 text-xs text-gray-400">
                         DATA
                     </p>
-                    <a href="data pemetaan.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                    <a href="data pemetaan.html" class="block px-4 py-2 hover:bg-[#F5F7F0] rounded-lg">
                         Data Pemetaan
                     </a>
-                    <a href="data alba.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                    <a href="data alba.html" class="block px-4 py-2 hover:bg-[#F5F7F0] rounded-lg">
                         Data ALBA
                     </a>
-                    <a href="data bat.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                    <a href="data bat.html" class="block px-4 py-2 hover:bg-[#F5F7F0] rounded-lg">
                         Data BAT
                     </a>
-                    <a href="data tross.html" class="block px-4 py-2 hover:bg-brand-lightCyan rounded-lg">
+                    <a href="data tross.html" class="block px-4 py-2 hover:bg-[#F5F7F0] rounded-lg">
                         Data TROSS
                     </a>
                 </div>
@@ -200,7 +205,7 @@
     </nav>
 
     <!-- Section Pembimbing & Pembina -->
-    <section class="bg-[#118AB2] py-16 md:py-24 px-6 mt-20">
+    <section class="bg-[#2A7C13] py-16 md:py-24 px-6 mt-20">
         <div class="max-w-5xl mx-auto text-center">
 
             <!-- Judul Section -->
@@ -221,7 +226,7 @@
                     </h3>
 
                     <span
-                        class="bg-[#2c6981] text-white text-xs sm:text-sm font-bold px-2.5 py-1 sm:px-4 sm:py-1.5 rounded-md shadow-sm">
+                        class="bg-[#6E3511] text-white text-xs sm:text-sm font-bold px-2.5 py-1 sm:px-4 sm:py-1.5 rounded-md shadow-sm">
                         Pembina
                     </span>
                 </div>
@@ -236,7 +241,7 @@
                     </h3>
 
                     <span
-                        class="bg-[#2c6981] text-white text-xs sm:text-sm font-bold px-2.5 py-1 sm:px-4 sm:py-1.5 rounded-md shadow-sm">
+                        class="bg-[#6E3511] text-white text-xs sm:text-sm font-bold px-2.5 py-1 sm:px-4 sm:py-1.5 rounded-md shadow-sm">
                         Pembimbing
                     </span>
                 </div>
@@ -247,7 +252,7 @@
 
     <!-- Section Supervisor -->
     <section class="bg-white py-16 md:py-24 px-6 text-center">
-        <h2 class="text-[#434b6b] text-4xl md:text-5xl font-anta tracking-wide mb-12">
+        <h2 class="text-[#6E3511] text-4xl md:text-5xl font-anta tracking-wide mb-12">
             Supervisor
         </h2>
 
@@ -258,7 +263,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="vania.jpeg" alt="Vania Siti Fauziah"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Vania Siti Fauziah</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Vania Siti Fauziah</h4>
                 <span
                     class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
             </div>
@@ -266,7 +271,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="daffa.jpeg" alt="Daffa Putra Annaba"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Daffa Putra Annaba</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Daffa Putra Annaba</h4>
                 <span
                     class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
             </div>
@@ -274,7 +279,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="izzat.jpeg" alt="Izzat Muhammad Athar"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Izzat Muhammad Athar</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Izzat Muhammad Athar</h4>
                 <span
                     class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
             </div>
@@ -282,7 +287,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="cipta.jpeg" alt="Cipta Wirya Pratama"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Cipta Wirya Pratama</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Cipta Wirya Pratama</h4>
                 <span
                     class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
             </div>
@@ -291,7 +296,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="ghaniya.jpeg" alt="Ghaniya Elmira Qisthi A."
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Ghaniya Elmira Qisthi A.
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Ghaniya Elmira Qisthi A.
                 </h4>
                 <span
                     class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
@@ -300,7 +305,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="dzaki.jpeg" alt="Muhammad Dzaki Aulia"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Muhammad Dzaki Aulia</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Muhammad Dzaki Aulia</h4>
                 <span
                     class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
             </div>
@@ -308,7 +313,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="deydra.jpeg" alt="Deydra Alnayza R."
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Deydra Alnayza R.</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Deydra Alnayza R.</h4>
                 <span
                     class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
             </div>
@@ -316,7 +321,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="salmaa.jpeg" alt="Salmaa Maisuun"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Salmaa Maisuun</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Salmaa Maisuun</h4>
                 <span
                     class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
             </div>
@@ -325,7 +330,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="nopia.jpeg" alt="Nopia Alpina Pratiwi"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Nopia Alpina Pratiwi</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Nopia Alpina Pratiwi</h4>
                 <span
                     class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
             </div>
@@ -333,7 +338,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="fitri.jpeg" alt="Fitri Aulia Nurinsani"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Fitri Aulia Nurinsani</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Fitri Aulia Nurinsani</h4>
                 <span
                     class="bg-[#e9daf8] text-[#8c5dc4] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Administrasi</span>
             </div>
@@ -341,7 +346,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="vebri.jpeg" alt="Vebri Diaz Triyana"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Vebri Diaz Triyana</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Vebri Diaz Triyana</h4>
                 <span
                     class="bg-[#e9daf8] text-[#8c5dc4] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Administrasi</span>
             </div>
@@ -349,7 +354,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="aprilliani.jpeg" alt="Apriliani Setyaningsih"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Apriliani Setyaningsih</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Apriliani Setyaningsih</h4>
                 <span
                     class="bg-[#e9daf8] text-[#8c5dc4] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Administrasi</span>
             </div>
@@ -358,22 +363,22 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%] mt-4">
                 <img src="zilly.jpeg" alt="Zilly Caesar Ibrahim"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Zilly Caesar Ibrahim</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Zilly Caesar Ibrahim</h4>
                 <span
                     class="bg-[#e0e0e0] text-[#5e5e5e] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Pemrograman</span>
             </div>
 
         </div>
     </section>
-    <section class="bg-[#E2F0F3] py-16 md:py-24 px-6 text-center">
-        <h2 class="text-[#434b6b] text-4xl md:text-5xl font-anta tracking-wide mb-12">
+    <section class="bg-[#F5F7F0] py-16 md:py-24 px-6 text-center">
+        <h2 class="text-[#6E3511] text-4xl md:text-5xl font-anta tracking-wide mb-12">
             Anggota Tim
         </h2>
         <div class="max-w-6xl mx-auto flex flex-wrap justify-center gap-x-6 gap-y-12">
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="desma.JPG" alt="Naura Desma Kaisyla"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Naura Desma Kaisyla</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Naura Desma Kaisyla</h4>
                 <span
                     class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
             </div>
@@ -381,7 +386,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="sachi.jpg" alt="Sachi Putri Lathifani"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Sachi Putri Lathifani</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Sachi Putri Lathifani</h4>
                 <span
                     class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
             </div>
@@ -389,7 +394,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="ilham.JPG" alt="Ilham Fauzan Nur Arifin"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Ilham Fauzan Nur Arifin
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Ilham Fauzan Nur Arifin
                 </h4>
                 <span
                     class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
@@ -398,7 +403,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="kyo.JPG" alt="Rayhan Aliandro Gunawan"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Rayhan Aliandro Gunawan
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Rayhan Aliandro Gunawan
                 </h4>
                 <span
                     class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
@@ -408,7 +413,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="niko.JPG" alt="Niko Resnuputra"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Niko Resnuputra</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Niko Resnuputra</h4>
                 <span
                     class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
             </div>
@@ -416,7 +421,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="eko.JPG" alt="Eko Ardiansyah Sipi"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Eko Ardiansyah Sipi</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Eko Ardiansyah Sipi</h4>
                 <span
                     class="bg-[#fad4d6] text-[#cc4657] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Mekanik</span>
             </div>
@@ -424,7 +429,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="ramen.JPG" alt="Rahmania Ardiesty Dewi"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Rahmania Ardiesty Dewi</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Rahmania Ardiesty Dewi</h4>
                 <span
                     class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
             </div>
@@ -432,7 +437,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="lintang.JPG" alt="Lintang Zalya Safira"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Lintang Zalya Safira</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Lintang Zalya Safira</h4>
                 <span
                     class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
             </div>
@@ -441,7 +446,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="deni.JPG" alt="Deni Rizkiana Anwar H."
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Deni Rizkiana Anwar H.</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Deni Rizkiana Anwar H.</h4>
                 <span
                     class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
             </div>
@@ -449,7 +454,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="dion.JPG" alt="Cristian Dion"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Cristian Dion</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Cristian Dion</h4>
                 <span
                     class="bg-[#fcf2c5] text-[#b8a03c] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Elektro</span>
             </div>
@@ -457,7 +462,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="alya.JPG" alt="Hanifa Rahmaliya"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Hanifa Rahmaliya</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Hanifa Rahmaliya</h4>
                 <span
                     class="bg-[#e9daf8] text-[#8c5dc4] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Administrasi</span>
             </div>
@@ -465,7 +470,7 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="jesin.JPG" alt="Josephin Olga M. T."
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Josephin Olga M. T.</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Josephin Olga M. T.</h4>
                 <span
                     class="bg-[#e9daf8] text-[#8c5dc4] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Administrasi</span>
             </div>
@@ -473,36 +478,36 @@
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="raras.JPG" alt="Raras Adinda Wulandari"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Raras Adinda Wulandari</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Raras Adinda Wulandari</h4>
                 <span
                     class="bg-[#e0e0e0] text-[#5e5e5e] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Pemrograman</span>
             </div>
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="cherrys.JPG" alt="Azqia Cherrys Audya"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Azqia Cherrys Audya</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Azqia Cherrys Audya</h4>
                 <span
                     class="bg-[#e0e0e0] text-[#5e5e5e] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Pemrograman</span>
             </div>
             <div class="flex flex-col items-center w-[45%] sm:w-[30%] md:w-[22%]">
                 <img src="arkan.JPG" alt="Muhamad Alifian Arkan"
                     class="w-36 h-48 md:w-44 md:h-52 object-cover rounded-xl shadow-md mb-4 border border-gray-100">
-                <h4 class="text-[#1396a8] font-bold text-xs md:text-sm mb-2 text-center h-8">Muhamad Alifian Arkan</h4>
+                <h4 class="text-[#2A7C13] font-bold text-xs md:text-sm mb-2 text-center h-8">Muhamad Alifian Arkan</h4>
                 <span
                     class="bg-[#e0e0e0] text-[#5e5e5e] text-[10px] md:text-xs font-bold px-4 py-1 rounded-full w-3/4 max-w-[120px]">Pemrograman</span>
             </div>
         </div>
     </section>
 
-   <footer class="bg-[#118AB2] px-4 sm:px-6 py-10 border-t-[2px] border-[#118AB2]">
+    <footer class="bg-[#2A7C13] px-4 sm:px-6 py-10 border-t-[2px] border-[#2A7C13]">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
 
-            <!-- Kolom 1 (Dibuat lebih lebar/span 2): Lokasi, Email, dan WhatsApp -->
+            <!-- Kolom 1: Lokasi, Email, dan WhatsApp -->
             <div class="md:col-span-2 flex flex-col gap-4 text-white">
                 <h3 class="font-bold text-xl mb-2">Kontak Kami</h3>
 
                 <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9"
-                    class="flex items-start gap-3 hover:text-[#464b71] transition">
+                    class="flex items-start gap-3 hover:text-[#76C457] transition">
                     <i class="fa-solid fa-location-dot text-xl mt-1"></i>
                     <span class="leading-relaxed break-words">
                         Workshop Instrumentasi dan Robotika Kelautan (Bengkel) ITK, Babakan,
@@ -510,14 +515,14 @@
                     </span>
                 </a>
 
-                <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-3 hover:text-[#464b71] transition">
+                <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-3 hover:text-[#76C457] transition">
                     <i class="fa-regular fa-envelope text-xl"></i>
-                    <span>diklatmitrxvi@gmail.com</span>
+                    <span>mitr.ipb@gmail.com</span>
                 </a>
 
-                <a href="https://wa.me/6283898339620" class="flex items-center gap-3 hover:text-[#464b71] transition">
+                <a href="https://wa.me/6281283435353" class="flex items-center gap-3 hover:text-[#76C457] transition">
                     <i class="fa-brands fa-whatsapp text-xl"></i>
-                    <span class="break-words">+6283898339620 (Deni Rizkiana Anwar Hidayat)</span>
+                    <span class="break-words">+6281283435353 (Hanifa Rahmaliya)</span>
                 </a>
             </div>
 
@@ -525,39 +530,41 @@
             <div class="flex flex-col gap-4 text-white">
                 <h3 class="font-bold text-xl mb-2">Media Sosial</h3>
 
-                <a href="https://www.instagram.com/dmitr6teen/"
-                    class="flex items-center gap-3 hover:text-[#464b71] transition">
+                <a href="https://www.instagram.com/mitr_ipb/"
+                    class="flex items-center gap-3 hover:text-[#76C457] transition">
                     <i class="fa-brands fa-instagram text-xl"></i>
-                    <span>@dmitr16teen</span>
+                    <span>@mitr_ipb</span>
                 </a>
-                <!-- Kamu bisa tambahkan link LinkedIn atau YouTube di sini jika ada -->
+                <a href="https://www.instagram.com/dmitr6teen/"
+                    class="flex items-center gap-3 hover:text-[#76C457] transition">
+                    <i class="fa-brands fa-instagram text-xl"></i>
+                    <span>@dmitr6teen</span>
+                </a>
             </div>
 
             <!-- Kolom 3: Logo dan Tombol Back to Top -->
-            <div class="flex flex-col items-start gap-7 text-white">
-                <!-- Tempat untuk Logo MIT+R -->
-                <div class="w-full flex items-center justify-start">
-                    <!-- Ganti "URL_LOGO_KAMU.png" dengan path/link logo yang sebenarnya -->
-                    <img src="logo ALBATROSS.png" alt="Logo Albatross" class="h-40 sm:h-56 object-contain">
+            <div class="flex flex-col items-start gap-7 text-white h-full">
+                <div class="w-full flex flex-wrap items-center justify-start pb-12 gap-4">
+                    <div
+                        class="flex items-center justify-center w-16 h-16 sm:w-28 sm:h-28 bg-white rounded-full shadow-md shrink-0 p-2 transform -translate-x-4 translate-y-8">
+                        <img src="logo mitr.png" alt="Logo MIT+R"
+                            class="h-16 sm:h-[120px] w-auto object-contain transform -translate-y-1">
+                    </div>
+                    <img src="logo ALBATROSS.png" alt="Logo Kedua"
+                        class="h-16 sm:h-[150px] w-auto object-contain transform -translate-x-4 translate-y-8">
                 </div>
 
-                <!-- Tombol Back to Top -->
                 <div class="w-full flex justify-end mt-auto">
-                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-                        class="group flex items-center p-3 bg-white text-white rounded-full shadow-md hover:bg-[#0c6b8a] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
-
-                        <!-- Teks yang Muncul Saat Hover (Sekarang di urutan pertama / sebelah kiri) -->
+                    <button id="back-to-top"
+                        class="group flex items-center p-3 bg-white text-white rounded-full shadow-md hover:bg-[#FFFFFF] hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out cursor-pointer">
                         <span
-                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[160px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold">
+                            class="whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out max-w-0 opacity-0 group-hover:max-w-[160px] group-hover:opacity-100 group-hover:mr-3 group-hover:pl-2 font-semibold text-[#2A7C13]">
                             Kembali ke Atas
                         </span>
-
-                        <!-- Lingkaran Icon Panah (Sekarang di urutan kedua / sebelah kanan) -->
                         <span
-                            class="flex items-center justify-center w-7 h-7 bg-white text-[#118AB2] rounded-full transition-transform duration-500 group-hover:scale-110 shrink-0">
+                            class="flex items-center justify-center w-7 h-7 bg-white text-[#2A7C13] rounded-full transition-transform duration-500 group-hover:scale-110 shrink-0">
                             <i class="fa-solid fa-arrow-up text-sm"></i>
                         </span>
-
                     </button>
                 </div>
             </div>
@@ -565,44 +572,52 @@
     </footer>
 
     <!-- Tambahan kotak/bar kuning diletakkan di LUAR tag footer aslimu -->
-    <div class="w-full relative bg-[#E2F0F3] py-4 px-6 border-t-[1px] border-[#118AB2] overflow-hidden">
+    <div class="w-full relative bg-[#FFFFFF] py-4 px-6 border-t-[1px] border-[#2A7C13] overflow-hidden">
 
         <!-- Pola Pattern di Background -->
         <div class="absolute inset-0 opacity-15 pointer-events-none"
-            style="background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0l15 15-15 15-15-15zm0 30l15 15-15 15-15-15z' fill='%23118AB2' fill-opacity='0.4' fill-rule='evenodd' /%3E%3C/svg%3E&quot;); background-size: 30px 30px;">
+            style="background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0l15 15-15 15-15-15zm0 30l15 15-15 15-15-15z' fill='%232A7C13' fill-opacity='0.8' fill-rule='evenodd' /%3E%3C/svg%3E&quot;); background-size: 30px 30px;">
         </div>
 
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-4 relative z-10">
 
-            <!-- Teks/Hak Cipta di sebelah Kanan -->
-            <div class="text-[#403100] font-semibold text-sm text-center md:text-right">
+            <!-- Teks/Hak Cipta di tengah -->
+            <div class="text-[#403100] font-semibold text-sm text-center">
                 © 2026 Diklat MIT+R 16. All Rights Reserved.
             </div>
+
         </div>
     </div>
-    <script>
-        const mobileToggleBtn = document.getElementById('mobile-toggle-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const toggleIcon = document.getElementById('toggle-icon');
+</body>
 
-        mobileToggleBtn.addEventListener('click', function () {
+<script>
+    const mobileToggleBtn = document.getElementById('mobile-toggle-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const toggleIcon = document.getElementById('toggle-icon');
 
-            mobileMenu.classList.toggle('hidden');
+    mobileToggleBtn.addEventListener('click', function () {
 
-            if (mobileMenu.classList.contains('hidden')) {
+        mobileMenu.classList.toggle('hidden');
 
-                toggleIcon.classList.remove('fa-times');
-                toggleIcon.classList.add('fa-bars');
+        if (mobileMenu.classList.contains('hidden')) {
 
-            } else {
+            toggleIcon.classList.remove('fa-times');
+            toggleIcon.classList.add('fa-bars');
 
-                toggleIcon.classList.remove('fa-bars');
-                toggleIcon.classList.add('fa-times');
+        } else {
 
-            }
+            toggleIcon.classList.remove('fa-bars');
+            toggleIcon.classList.add('fa-times');
 
+        }
+    });
+    document.getElementById('back-to-top').addEventListener('click', function () {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
         });
-    </script>
+    });
+</script>
 </body>
 
 </html>
