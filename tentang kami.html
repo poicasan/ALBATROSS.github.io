@@ -54,7 +54,8 @@
                     <img src="logo mitr.png" alt="LOGO MIT+R" class="h-9 sm:h-12 w-auto object-contain">
                 </a>
                 <a href="#" class="relative flex items-center justify-center transition-transform hover:scale-105">
-                    <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="relative z-10 h-9 sm:h-12 w-auto object-contain">
+                    <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS"
+                        class="relative z-10 h-9 sm:h-12 w-auto object-contain">
                 </a>
             </div>
 
@@ -238,8 +239,28 @@
     </nav>
 
     <!-- Section Pembimbing & Pembina -->
-    <section class="bg-[#2A7C13] py-16 md:py-24 px-6 mt-20">
-        <div class="max-w-5xl mx-auto text-center">
+
+    <!-- Section Pembimbing & Pembina -->
+    <section
+        class="relative isolate overflow-hidden bg-gradient-to-br from-[#1D610D] via-[#2A7C13] to-[#368C1C] py-16 md:py-24 px-6 mt-20">
+
+        <!-- Pola titik-titik -->
+        <div class="absolute inset-0 opacity-[0.13] pointer-events-none"
+            style="background-image: radial-gradient(#FFFFFF 1.5px, transparent 1.5px); background-size: 32px 32px;">
+        </div>
+
+        <!-- Cahaya hijau di sudut kiri atas -->
+        <div class="absolute -top-32 -left-24 w-96 h-96 rounded-full bg-[#76C457]/25 blur-3xl pointer-events-none">
+        </div>
+
+        <!-- Cahaya hijau muda di sudut kanan bawah -->
+        <div
+            class="absolute -bottom-40 -right-24 w-[28rem] h-[28rem] rounded-full bg-[#8EE66B]/20 blur-3xl pointer-events-none">
+        </div>
+
+        <!-- Konten utama -->
+        <div class="relative z-10 max-w-5xl mx-auto text-center">
+
 
             <!-- Judul Section -->
             <h1 class="text-white text-3xl sm:text-4xl md:text-5xl font-anta tracking-wide mb-8 md:mb-12 text-center">
@@ -252,8 +273,7 @@
                 <!-- Kartu Profil 1 -->
                 <div class="flex flex-col items-center text-center w-1/2 max-w-[200px] md:max-w-none">
                     <img src="prof-indra.jpeg" alt="Prof. Dr. Ir. Indra Jaya"
-                        class="w-32 h-40 sm:w-44 sm:h-52 md:w-52 md:h-60 object-cover rounded-2xl shadow-lg mb-3 md:mb-5">
-
+                        class="w-32 h-40 sm:w-44 sm:h-52 md:w-52 md:h-60 object-cover rounded-2xl shadow-[0_10px_25px_rgba(0,0,0,0.35)] mb-3 md:mb-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_35px_rgba(0,0,0,0.45)]">
                     <h3 class="text-white font-inter text-sm sm:text-lg md:text-xl font-medium mb-2 leading-tight">
                         Prof. Dr. Ir. Indra Jaya, M.Sc
                     </h3>
@@ -267,8 +287,7 @@
                 <!-- Kartu Profil 2 -->
                 <div class="flex flex-col items-center text-center w-1/2 max-w-[200px] md:max-w-none">
                     <img src="bang-iqbal.jpeg" alt="Muhammad Iqbal"
-                        class="w-32 h-40 sm:w-44 sm:h-52 md:w-52 md:h-60 object-cover rounded-2xl shadow-lg mb-3 md:mb-5">
-
+                        class="w-32 h-40 sm:w-44 sm:h-52 md:w-52 md:h-60 object-cover rounded-2xl shadow-[0_10px_25px_rgba(0,0,0,0.35)] mb-3 md:mb-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_35px_rgba(0,0,0,0.45)]">
                     <h3 class="text-white font-inter text-sm sm:text-lg md:text-xl font-medium mb-2 leading-tight">
                         Muhammad Iqbal, S.Pi., M.Si.
                     </h3>
@@ -403,7 +422,7 @@
 
         </div>
     </section>
-    
+
     <section class="bg-[#F5F7F0] py-16 md:py-24 px-6 text-center">
         <h2 class="text-[#6E3511] text-4xl md:text-5xl font-anta tracking-wide mb-12">
             Anggota Tim
