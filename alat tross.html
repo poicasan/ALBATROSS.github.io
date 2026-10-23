@@ -47,11 +47,50 @@
             --pattern-opacity: 0.3;
         }
 
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #ffffff;
-            overflow-x: hidden;
+            position: relative;
         }
+
+        /* --- EFEK GLOW COKELAT MENYEBAR PENUH TANPA BATASAN --- */
+        .glow-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1; 
+        }
+
+        .brown-glow-spot {
+            position: absolute;
+            background: radial-gradient(circle, rgba(110, 53, 17, 0.45) 0%, rgba(139, 69, 19, 0.2) 50%, transparent 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 20px 8px rgba(110, 53, 17, 0.2);
+            animation: pulseGlow ease-in-out infinite;
+            box-sizing: border-box;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                opacity: 0.25;
+            }
+            50% {
+                opacity: 0.75;
+            }
+        }
+        /* -------------------------------------------------- */
 
         .top-pattern-wrapper {
             position: relative;
@@ -78,24 +117,20 @@
         }
 
         @keyframes morphWave1 {
-
             0%,
             100% {
                 d: path("M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,50 L1200,120 L0,120 Z");
             }
-
             50% {
                 d: path("M0,20 C150,30 350,80 500,15 C650,90 900,50 1200,10 L1200,120 L0,120 Z");
             }
         }
 
         @keyframes morphWave2 {
-
             0%,
             100% {
                 d: path("M0,30 C200,110 400,-10 600,60 C800,130 1000,20 1200,80 L1200,120 L0,120 Z");
             }
-
             50% {
                 d: path("M0,50 C200,40 400,90 600,20 C800,70 1000,90 1200,40 L1200,120 L0,120 Z");
             }
@@ -111,7 +146,10 @@
     </style>
 </head>
 
-<body class="min-h-screen flex flex-col justify-between text-gray-800 font-inter">
+<body class="min-h-screen flex flex-col justify-between text-gray-800 font-inter relative">
+
+    <!-- Container untuk Efek Glow Cokelat Menyebar Penuh -->
+    <div class="glow-container" id="glowContainer"></div>
 
     <!-- Navbar -->
     <nav id="navbar"
@@ -310,7 +348,7 @@
     </nav>
 
     <!-- Hero Banner -->
-    <section class="bg-[#2A7C13] text-white px-4 sm:px-8 pt-28 pb-10 shadow-inner min-h-[350px]">
+    <section class="bg-[#2A7C13] text-white px-4 sm:px-8 pt-28 pb-10 shadow-inner min-h-[350px] relative z-10">
         <div class="max-w-6xl mx-auto space-y-4">
 
             <nav class="flex items-center space-x-2 text-xs sm:text-sm font-medium font-inter"
@@ -354,7 +392,7 @@
     </section>
 
     <!-- AREA BAGIAN ATAS BER-PATTERN OVAL (FOTO ALAT TROSS) -->
-    <div class="top-pattern-wrapper">
+    <div class="top-pattern-wrapper relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 w-full space-y-8 relative z-10">
 
             <h2 class="text-2xl sm:text-3xl font-bold text-center text-[#6E3511] font-anta">
@@ -373,7 +411,7 @@
         </div>
     </div>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full space-y-6 relative z-20">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full space-y-6 relative z-10 py-6">
         <!-- Grid Container Komponen Elektro & Mekanik -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 w-full items-start">
 
@@ -693,27 +731,8 @@
         </section>
     </main>
 
-
-    <!-- Pemisah Pattern Gelombang SVG Atas (Meliuk-liuk) -->
-    <div class="w-full overflow-hidden m-0 p-0 leading-none">
-        <svg class="block w-full h-12 text-[#6E3511]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path class="wave-path-1" fill="currentColor" fill-opacity="0.25"></path>
-            <path class="wave-path-2" fill="currentColor" fill-opacity="0.45"></path>
-        </svg>
-    </div>
-
-    <!-- Pemisah Pattern Gelombang SVG Bawah (Meliuk-liuk) -->
-    <div class="w-full overflow-hidden m-0 p-0 leading-none rotate-180">
-        <svg class="block w-full h-12 text-[#6E3511]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path class="wave-path-1" fill="currentColor" fill-opacity="0.25" style="animation-duration: 7s;"></path>
-            <path class="wave-path-2" fill="currentColor" fill-opacity="0.45" style="animation-duration: 5s;"></path>
-        </svg>
-    </div>
-
-    <!-- Maintenance Section (Background Putih Bersih) -->
-    <section id="maintenance" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-8 w-full scroll-mt-24">
+    <!-- Maintenance Section -->
+    <section id="maintenance" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-8 w-full scroll-mt-24 relative z-10">
 
         <!-- Section Heading -->
         <div class="text-center mb-6">
@@ -903,7 +922,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-[#2A7C13] px-4 sm:px-6 py-10 border-t-[2px] border-[#2A7C13]">
+    <footer class="bg-[#2A7C13] px-4 sm:px-6 py-10 border-t-[2px] border-[#2A7C13] relative z-10">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
 
             <!-- Kolom 1: Lokasi, Email, dan WhatsApp -->
@@ -1030,6 +1049,63 @@
 
             setupAccordion('mobile-alat-btn', 'mobile-alat-sub', 'mobile-alat-icon');
             setupAccordion('mobile-data-btn', 'mobile-data-sub', 'mobile-data-icon');
+
+            // --- SCRIPT GENERATE EFEK GLOW COKELAT MENYEBAR PENUH & 100% AMAN ---
+            const glowContainer = document.getElementById('glowContainer');
+
+            function generateSpreadGlows() {
+                if (!glowContainer) return;
+                glowContainer.innerHTML = ''; // Clear container
+
+                const maxW = Math.max(
+                    document.documentElement.clientWidth,
+                    window.innerWidth
+                );
+                const maxH = Math.max(
+                    document.body.scrollHeight,
+                    document.body.offsetHeight,
+                    document.documentElement.clientHeight,
+                    document.documentElement.scrollHeight
+                );
+
+                const totalGlows = 35; // Jumlah bulatan glow yang disebar secara merata
+                const stepY = maxH / totalGlows;
+
+                for (let i = 0; i < totalGlows; i++) {
+                    const spot = document.createElement('div');
+                    spot.classList.add('brown-glow-spot');
+
+                    // Ukuran acak bulatan (45px - 80px)
+                    const randomSize = Math.floor(Math.random() * 35) + 45;
+
+                    // Jarak aman minimal 35px dari ujung layar agar tidak terpotong
+                    const minX = 35;
+                    const maxX = maxW - randomSize - 35;
+                    const safeX = maxX > minX ? Math.random() * (maxX - minX) + minX : 20;
+
+                    // Posisi Y dibagi rata secara vertikal dari atas hingga bawah halaman
+                    const minY = i * stepY;
+                    const safeY = minY + Math.random() * (stepY - randomSize);
+
+                    // Variasi durasi dan delay animasi
+                    const randomDuration = Math.random() * 4 + 3;
+                    const randomDelay = Math.random() * 5;
+
+                    spot.style.left = `${safeX}px`;
+                    spot.style.top = `${Math.max(20, safeY)}px`;
+                    spot.style.width = `${randomSize}px`;
+                    spot.style.height = `${randomSize}px`;
+                    spot.style.animationDuration = `${randomDuration}s`;
+                    spot.style.animationDelay = `${randomDelay}s`;
+
+                    glowContainer.appendChild(spot);
+                }
+            }
+
+            generateSpreadGlows();
+
+            // Regenerate saat ukuran layar/browser berubah
+            window.addEventListener('resize', generateSpreadGlows);
         });
     </script>
 </body>
