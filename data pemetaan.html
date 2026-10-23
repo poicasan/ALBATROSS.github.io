@@ -46,7 +46,7 @@
                         anta: ['Anta', 'sans-serif'],
                         inter: ['Inter', 'sans-serif'],
                     },
-                    
+
                     animation: {
                         'blob': 'blob 7s infinite',
                     },
@@ -156,6 +156,7 @@
         .animation-delay-2000 {
             animation-delay: 2s;
         }
+
         .animation-delay-4000 {
             animation-delay: 4s;
         }
@@ -171,12 +172,20 @@
     <!-- ========================================== -->
     <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
         <!-- Pola Titik (Dot Pattern) Global -->
-        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#2A7C13 1.5px, transparent 1.5px); background-size: 32px 32px;"></div>
-        
+        <div class="absolute inset-0 opacity-10"
+            style="background-image: radial-gradient(#2A7C13 1.5px, transparent 1.5px); background-size: 32px 32px;">
+        </div>
+
         <!-- Glowing Blobs (Animasi) -->
-        <div class="absolute top-20 -left-10 w-96 h-96 bg-green-300 rounded-full mix-blend-multiply filter blur-[100px] opacity-40 animate-blob"></div>
-        <div class="absolute top-1/3 -right-10 w-96 h-96 bg-cyan-200 rounded-full mix-blend-multiply filter blur-[100px] opacity-30 animate-blob animation-delay-2000"></div>
-        <div class="absolute bottom-0 left-1/3 w-[30rem] h-[30rem] bg-emerald-200 rounded-full mix-blend-multiply filter blur-[100px] opacity-30 animate-blob animation-delay-4000"></div>
+        <div
+            class="absolute top-20 -left-10 w-96 h-96 bg-green-300 rounded-full mix-blend-multiply filter blur-[100px] opacity-40 animate-blob">
+        </div>
+        <div
+            class="absolute top-1/3 -right-10 w-96 h-96 bg-cyan-200 rounded-full mix-blend-multiply filter blur-[100px] opacity-30 animate-blob animation-delay-2000">
+        </div>
+        <div
+            class="absolute bottom-0 left-1/3 w-[30rem] h-[30rem] bg-emerald-200 rounded-full mix-blend-multiply filter blur-[100px] opacity-30 animate-blob animation-delay-4000">
+        </div>
     </div>
     <!-- ========================================== -->
 
@@ -386,13 +395,15 @@
          SAMA DENGAN DATA BAT
     ====================================================== -->
 
-    <section class="bg-brand-darkGreen text-white px-4 sm:px-8 pt-28 pb-10 shadow-inner min-h-[350px] relative overflow-hidden">
+    <section
+        class="bg-brand-darkGreen text-white px-4 sm:px-8 pt-28 pb-10 shadow-inner min-h-[350px] relative overflow-hidden">
         <!-- Hiasan Hero Banner tanpa Dot Pattern -->
         <div class="absolute -right-20 top-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl"></div>
-        
+
         <div class="max-w-6xl mx-auto w-full space-y-4 relative z-10">
             <!-- Breadcrumbs -->
-            <nav class="flex flex-wrap items-center gap-2 text-xs sm:text-sm font-medium font-inter" style="color: rgba(154, 237, 121, 1);">
+            <nav class="flex flex-wrap items-center gap-2 text-xs sm:text-sm font-medium font-inter"
+                style="color: rgba(154, 237, 121, 1);">
                 <a href="index.html" class="hover:underline flex items-center gap-1 transition-colors hover:text-white">
                     <i class="fa-solid fa-house text-xs"></i>
                     Beranda
@@ -456,25 +467,32 @@
         <!-- Peta Batimetri -->
         <section class="mb-5">
             <div class="text-center mb-5 relative inline-block w-full">
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-10 bg-green-200 blur-2xl opacity-50 rounded-full z-[-1]"></div>
+                <div
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-10 bg-green-200 blur-2xl opacity-50 rounded-full z-[-1]">
+                </div>
                 <div class="flex items-center justify-center gap-3">
                     <i class="fa-solid fa-map-location-dot text-xl text-[#6E3511]"></i>
                     <h2 class="text-2xl sm:text-3xl font-bold text-[#6E3511] font-anta">
                         Peta Batimetri
                     </h2>
                 </div>
-                <p class="text-sm text-[#454545] mt-2 max-w-2xl mx-auto leading-relaxed bg-white/60 backdrop-blur-sm px-4 py-1.5 rounded-full shadow-sm border border-green-50">
+                <p
+                    class="text-sm text-[#454545] mt-2 max-w-2xl mx-auto leading-relaxed bg-white/60 backdrop-blur-sm px-4 py-1.5 rounded-full shadow-sm border border-green-50">
                     Titik-titik pada peta menunjukkan lokasi pengamatan yang digunakan
                     untuk merepresentasikan data kedalaman perairan.
                 </p>
             </div>
         </section>
-        
+
         <section class="mb-10">
-            <div class="bg-white/95 backdrop-blur-sm rounded-2xl border-2 border-[#76C457] shadow-lg p-3 sm:p-5 relative group transition-all duration-300 hover:shadow-xl hover:border-brand-darkGreen">
-                <div class="absolute inset-0 bg-gradient-to-b from-[#76C457]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl pointer-events-none"></div>
+            <div
+                class="bg-white/95 backdrop-blur-sm rounded-2xl border-2 border-[#76C457] shadow-lg p-3 sm:p-5 relative group transition-all duration-300 hover:shadow-xl hover:border-brand-darkGreen">
+                <div
+                    class="absolute inset-0 bg-gradient-to-b from-[#76C457]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl pointer-events-none">
+                </div>
                 <!-- Legenda -->
-                <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-4 text-xs sm:text-sm bg-gray-50/80 py-2 rounded-xl border border-gray-100 relative z-10">
+                <div
+                    class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-4 text-xs sm:text-sm bg-gray-50/80 py-2 rounded-xl border border-gray-100 relative z-10">
                     <div class="flex items-center gap-2 hover:scale-105 transition-transform">
                         <span class="w-3 h-3 rounded-full bg-[#008ba3] shadow-md"></span>
                         <span class="text-gray-700 font-semibold">
@@ -504,76 +522,82 @@
              INFORMASI PEMETAAN
         ====================================================== -->
         <section class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10 relative z-10">
-            <!-- Card 1 -->
+            <!-- Card 1: Data Batimetri -->
             <div class="info-card p-5 group">
-                <div class="flex items-start gap-4">
+                <div class="flex items-center gap-3 mb-3">
                     <div
-                        class="w-11 h-11 rounded-xl bg-brand-iconColor/15 text-brand-iconColor flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-[#6E3511] group-hover:text-white transition-all duration-300">
+                        class="w-11 h-11 rounded-xl bg-brand-iconColor/15 text-brand-iconColor flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-[#6E3511] group-hover:text-white transition-all duration-300 shadow-sm">
                         <i class="fa-solid fa-water text-lg"></i>
                     </div>
+
                     <div>
-                        <p class="text-xs font-semibold text-brand-darkGreen uppercase tracking-wide">
-                            Data batimetri
-                        </p>
-                        <h3 class="font-bold text-brand-darkText mt-1 group-hover:text-brand-darkGreen transition-colors">
-                            Kedalaman Perairan
+                        <h3 class="font-bold text-[#2A7C13] group-hover:text-brand-darkGreen transition-colors">
+                            Data Batimetri
                         </h3>
-                        <p class="text-sm text-gray-500 mt-2 leading-relaxed">
-                            Menampilkan informasi hasil pengukuran kedalaman
-                            pada lokasi pengamatan.
+                        <p class="text-xs text-gray-500 font-medium">
+                            Kedalaman Perairan
                         </p>
                     </div>
                 </div>
+
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    Menampilkan informasi hasil pengukuran kedalaman
+                    pada lokasi pengamatan.
+                </p>
             </div>
             <!-- Card 2 -->
             <div class="info-card p-5 group">
-                <div class="flex items-start gap-4">
+                <div class="flex items-center gap-3 mb-3">
                     <div
-                        class="w-11 h-11 rounded-xl bg-brand-iconColor/15 text-brand-iconColor flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-[#6E3511] group-hover:text-white transition-all duration-300">
+                        class="w-11 h-11 rounded-xl bg-brand-iconColor/15 text-brand-iconColor flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-[#6E3511] group-hover:text-white transition-all duration-300 shadow-sm">
                         <i class="fa-solid fa-location-dot text-lg"></i>
-
                     </div>
+
                     <div>
                         <p class="text-xs font-semibold text-brand-darkGreen uppercase tracking-wide">
                             Koordinat GPS
                         </p>
-                        <h3 class="font-bold text-brand-darkText mt-1 group-hover:text-brand-darkGreen transition-colors">
+                        <h3 class="font-bold text-brand-darkText group-hover:text-brand-darkGreen transition-colors">
                             Posisi Pengukuran
                         </h3>
-                        <p class="text-sm text-gray-500 mt-2 leading-relaxed">
-                            Menunjukkan posisi geografis setiap lokasi
-                            pengukuran pada peta.
-                        </p>
                     </div>
                 </div>
+
+                <p class="text-sm text-gray-500 leading-relaxed">
+                    Menunjukkan posisi geografis setiap lokasi
+                    pengukuran pada peta.
+                </p>
             </div>
+
             <!-- Card 3 -->
             <div class="info-card p-5 group">
-                <div class="flex items-start gap-4">
+                <div class="flex items-center gap-3 mb-3">
                     <div
-                        class="w-11 h-11 rounded-xl bg-brand-iconColor/15 text-brand-iconColor flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-[#6E3511] group-hover:text-white transition-all duration-300">
+                        class="w-11 h-11 rounded-xl bg-brand-iconColor/15 text-brand-iconColor flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-[#6E3511] group-hover:text-white transition-all duration-300 shadow-sm">
                         <i class="fa-solid fa-map-location-dot text-lg"></i>
                     </div>
+
                     <div>
                         <p class="text-xs font-semibold text-brand-darkGreen uppercase tracking-wide">
-                            Visualisasi spasial
+                            Visualisasi Spasial
                         </p>
-
-                        <h3 class="font-bold text-brand-darkText mt-1 group-hover:text-brand-darkGreen transition-colors">
+                        <h3 class="font-bold text-brand-darkText group-hover:text-brand-darkGreen transition-colors">
                             Pemetaan Batimetri
                         </h3>
-                        <p class="text-sm text-gray-500 mt-2 leading-relaxed">
-                            Memvisualisasikan sebaran lokasi pengukuran
-                            batimetri pada wilayah pengamatan.
-                        </p>
                     </div>
                 </div>
+
+                <p class="text-sm text-gray-500 leading-relaxed">
+                    Memvisualisasikan sebaran lokasi pengukuran
+                    batimetri pada wilayah pengamatan.
+                </p>
             </div>
         </section>
         <!-- ====================================================
              INFORMASI DATA
         ====================================================== -->
-        <section class="bg-[#76C457]/10 backdrop-blur-sm rounded-2xl border-l-4 border-l-[#76C457] border-y border-y-[#76C457]/20 border-r border-r-[#76C457]/20 p-5 sm:p-6 mb-4 hover:shadow-md transition-shadow">
+        <section
+            class="bg-[#76C457]/10 backdrop-blur-sm rounded-2xl border-l-4 border-l-[#76C457] border-y border-y-[#76C457]/20 border-r border-r-[#76C457]/20 p-5 sm:p-6 mb-4 hover:shadow-md transition-shadow">
             <div class="flex items-start gap-4">
                 <div
                     class="w-10 h-10 rounded-xl bg-white text-[#6E3511] flex items-center justify-center flex-shrink-0 shadow-md">
@@ -593,7 +617,7 @@
         </section>
     </main>
     <br>
-  
+
     <footer class="bg-[#2A7C13] px-4 sm:px-6 py-10 border-t-[2px] border-[#2A7C13] relative z-20">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
 
@@ -756,7 +780,7 @@
 
         const batimetriPoints = [
 
-             // Stasiun 1
+            // Stasiun 1
             { id: 1, stasiun: 1, time: "08:00", lat: -7.67569642, lng: 108.81990855, data: { kedalaman: 5.2 } },
             { id: 2, stasiun: 1, time: "08:05", lat: -7.6737174, lng: 108.8207788, data: { kedalaman: 5.4 } },
             { id: 3, stasiun: 1, time: "08:10", lat: -7.67554458, lng: 108.82175012, data: { kedalaman: 5.1 } },
@@ -766,7 +790,7 @@
             { id: 7, stasiun: 1, time: "08:30", lat: -7.67511432, lng: 108.82530445, data: { kedalaman: 4.9 } },
             { id: 8, stasiun: 1, time: "08:35", lat: -7.67306148, lng: 108.8262134, data: { kedalaman: 5.3 } },
             { id: 9, stasiun: 1, time: "08:40", lat: -7.6750536, lng: 108.82727331, data: { kedalaman: 5.7 } },
-            { id: 10, stasiun: 1, time: "08:45", lat: -7.67295237, lng: 108.82807376, data: { kedalaman: 6.1} },
+            { id: 10, stasiun: 1, time: "08:45", lat: -7.67295237, lng: 108.82807376, data: { kedalaman: 6.1 } },
             { id: 11, stasiun: 1, time: "08:50", lat: -7.67495512, lng: 108.82911677, data: { kedalaman: 6.5 } },
             { id: 12, stasiun: 1, time: "08:55", lat: -7.67383601, lng: 108.82958, data: { kedalaman: 6.8 } },
             { id: 13, stasiun: 1, time: "09:00", lat: -7.67275144, lng: 108.82901878, data: { kedalaman: 7.2 } },
@@ -774,10 +798,10 @@
             { id: 15, stasiun: 1, time: "09:10", lat: -7.67303742, lng: 108.82713977, data: { kedalaman: 6.6 } },
             { id: 16, stasiun: 1, time: "09:15", lat: -7.67513951, lng: 108.8263465, data: { kedalaman: 6.2 } },
             { id: 17, stasiun: 1, time: "09:20", lat: -7.67313147, lng: 108.82523293, data: { kedalaman: 5.8 } },
-            { id: 18, stasiun: 1, time: "09:25", lat: -7.6752606, lng: 108.8243608, data: { kedalaman: 5.5} },
+            { id: 18, stasiun: 1, time: "09:25", lat: -7.6752606, lng: 108.8243608, data: { kedalaman: 5.5 } },
             { id: 19, stasiun: 1, time: "09:30", lat: -7.6732454, lng: 108.82326752, data: { kedalaman: 5.1 } },
             { id: 20, stasiun: 1, time: "09:35", lat: -7.67545139, lng: 108.82263031, data: { kedalaman: 4.8 } },
-            { id: 21, stasiun: 1, time: "09:40", lat: -7.67353113, lng: 108.82152738, data: { kedalaman: 4.5} },
+            { id: 21, stasiun: 1, time: "09:40", lat: -7.67353113, lng: 108.82152738, data: { kedalaman: 4.5 } },
             { id: 22, stasiun: 1, time: "09:45", lat: -7.67562763, lng: 108.82086413, data: { kedalaman: 4.2 } },
             { id: 23, stasiun: 1, time: "09:50", lat: -7.67384405, lng: 108.81999087, data: { kedalaman: 4.0 } },
             { id: 24, stasiun: 1, time: "09:55", lat: -7.67465575, lng: 108.81951304, data: { kedalaman: 4.3 } },
@@ -854,7 +878,7 @@
             { id: 87, stasiun: 5, time: "14:15", lat: -7.69726442, lng: 108.8809678, data: { kedalaman: 5.8 } },
             { id: 88, stasiun: 5, time: "14:20", lat: -7.69645239, lng: 108.88135672, data: { kedalaman: 5.6 } },
             { id: 89, stasiun: 5, time: "14:25", lat: -7.69725911, lng: 108.88165444, data: { kedalaman: 5.7 } },
-            { id: 90, stasiun: 5, time: "14:30", lat: -7.69645505, lng: 108.88205275, data: { kedalaman: 7.0,  } },
+            { id: 90, stasiun: 5, time: "14:30", lat: -7.69645505, lng: 108.88205275, data: { kedalaman: 7.0, } },
             { id: 91, stasiun: 5, time: "14:35", lat: -7.69721126, lng: 108.88245642, data: { kedalaman: 4.5 } },
             { id: 92, stasiun: 5, time: "14:40", lat: -7.69633012, lng: 108.88263747, data: { kedalaman: 6.8 } },
             { id: 93, stasiun: 5, time: "14:45", lat: -7.69702919, lng: 108.88313234, data: { kedalaman: 7.6 } },
