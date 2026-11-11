@@ -1002,12 +1002,22 @@
                     return;
                 }
 
-                const dataWaktu = rekaman.map((item, index) => ({
-                    ...item,
-                    _detik: parseWaktuBAT(String(item.waktu_update || item.waktu || item.time || '')),
-                    _index: index
-                }));
+                // 1. Ekstrak dan Konversi String Jam ke Detik untuk Keperluan Sorting
+                const dataWaktu = rekaman.map((item, index) => {
+                    // Pastikan mencari properti "waktu" atau "waktu_update" sesuai dengan JSON kamu
+                    const waktuMentah = String(item.waktu_update || item.waktu || item.time || '');
+                    
+                    return {
+                        ...item,
+                        _detik: parseWaktuBAT(waktuMentah), 
+                        _index: index,
+                        _waktuAsli: waktuMentah // Simpan string aslinya untuk tooltip grafik
+                    };
+                });
 
+                // 2. SORTING UTAMA BERDASARKAN WAKTU GPS
+                // Periksa apakah konversi jam (misal 14:30:15) berhasil menjadi detik. 
+                // Jika ya, urutkan seluruh objek dari waktu yang paling pagi hingga terbaru.
                 if (dataWaktu.every(item => Number.isFinite(item._detik))) {
                     dataWaktu.sort((a, b) => a._detik - b._detik);
                 }
@@ -1022,16 +1032,19 @@
                 // Bersihkan marker lama agar tidak bertumpuk setiap 5 detik
                 mapMarkersGroup.clearLayers();
 
+                // 3. Mapping data yang SUDAH BERURUTAN
                 dataWaktu.forEach((point, idx) => {
                     const lat = Number(point.latitude);
                     const lon = Number(point.longitude);
-                    const timeStr = point.waktu_update || point.time || `Titik ${idx + 1}`;
+                    
+                    // Gunakan string waktu asli yang disortir tadi untuk ditampilkan
+                    const timeStr = point._waktuAsli || `Titik ${idx + 1}`;
 
-                    // Kumpulkan data Koordinat untuk Garis Rute
+                    // Kumpulkan data Koordinat untuk Garis Rute (Sekarang ini sudah terurut rapi)
                     mapRouteCoords.push([lat, lon]);
 
                     // Konversi Kecepatan dari km/h (bawaan modul) ke m/s untuk chart
-                    const speedMs = Number(point.kecepatan || 0) / 3.6;
+                    const speedMs = Number(point.kecepatan || point.spd || 0) / 3.6;
                     chartLabels.push(timeStr);
                     chartSpeeds.push(speedMs.toFixed(3));
 
@@ -1042,8 +1055,8 @@
 
                     circleMarker.bindPopup(`
                         <div style="font-family: Arial, sans-serif; line-height: 1.6;">
-                            <strong>Titik Data ${idx + 1}</strong><br>
-                            Waktu: ${timeStr}<br>
+                            <strong>Titik Data (Urutan Waktu: ${idx + 1})</strong><br>
+                            Waktu GPS: ${timeStr}<br>
                             Latitude: ${lat.toFixed(6)}<br>
                             Longitude: ${lon.toFixed(6)}<br>
                             Kecepatan: ${speedMs.toFixed(3)} m/s
@@ -1053,30 +1066,28 @@
                 });
 
                 // Tambahkan Marker Deploy (Awal) dan Marker Posisi Terakhir
+                // Karena dataWaktu sudah disortir, index 0 PASTI waktu paling awal (Deploy)
+                // dan index terakhir PASTI posisi terbaru.
                 const startPoint = dataWaktu[0];
                 const endPoint = dataWaktu[dataWaktu.length - 1];
 
                 L.marker([startPoint.latitude, startPoint.longitude], { icon: deployIcon })
-                    .bindPopup(`<strong>Titik Deploy</strong><br>Waktu: ${startPoint.waktu_update || 'Awal'}`)
+                    .bindPopup(`<strong>Titik Deploy (Awal)</strong><br>Waktu: ${startPoint._waktuAsli}`)
                     .addTo(mapMarkersGroup);
 
                 L.marker([endPoint.latitude, endPoint.longitude], { icon: lastIcon })
-                    .bindPopup(`<strong>Posisi Terakhir</strong><br>Waktu: ${endPoint.waktu_update || 'Terbaru'}`)
+                    .bindPopup(`<strong>Posisi Terakhir</strong><br>Waktu: ${endPoint._waktuAsli}`)
                     .addTo(mapMarkersGroup);
 
-                // Perbarui Garis Rute di Peta
+                // Perbarui Garis Rute di Peta (Garis akan terbentuk sesuai urutan waktu GPS)
                 routeLine.setLatLngs(mapRouteCoords);
 
-                // Perbarui Data Grafik Chart.js
+                // Perbarui Data Grafik Chart.js (Grafik dari kiri ke kanan adalah waktu yang runtut)
                 speedChart.data.labels = chartLabels;
                 speedChart.data.datasets[0].data = chartSpeeds;
                 speedChart.update();
 
-                // Paskan tampilan zoom peta (Hanya dilakukan 1x saat pertama load supaya tidak mengganggu user kalau lagi zoom-in)
-                if (isFirstMapLoad && mapRouteCoords.length > 0) {
-                    map.fitBounds(routeLine.getBounds(), { padding: [35, 35] });
-                    isFirstMapLoad = false;
-                }
+                // ... [Kode perhitungan total jarak dan durasi di bawahnya tetap sama] ...
 
                 // ==============================================
                 // PERHITUNGAN UNTUK KARTU (STAT CARD)
