@@ -26,26 +26,28 @@
                         anta: ['Anta', 'sans-serif'],
                         inter: ['Inter', 'sans-serif'],
                     },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
                 }
             }
         }
     </script>
 
     <style>
-        :root {
-            /* Warna hijau mint lembut untuk pattern */
-            --pattern-color: #a7f3d0; 
-            
-            /* Tingkat Opacity Pattern (Bisa diatur dari 0.1 sampai 1.0) */
-            --pattern-opacity: 0.85;
-        }
-
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
-            background-color: #ffffff;
         }
 
         .font-tech {
@@ -61,47 +63,63 @@
             scrollbar-width: none;
         }
 
-        /* Wrapper Pattern Halftone Oval di Background Konten Utama */
-        .content-pattern-wrapper {
-            position: relative;
-            background-color: #ffffff;
-            overflow: hidden;
+        .animation-delay-2000 {
+            animation-delay: 2s;
         }
 
-        .content-pattern-wrapper::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            opacity: var(--pattern-opacity);
-            
-            /* Pola titik/oval berjejer rapi */
-            background-image: radial-gradient(ellipse 2.5px 1.5px at 50% 50%, var(--pattern-color) 100%, transparent 100%);
-            background-size: 10px 8px;
-            background-repeat: repeat;
-
-            /* Masking Gradient: membuat efek memudar di bagian pinggir */
-            -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0) 100%);
-            mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0) 100%);
+        .animation-delay-4000 {
+            animation-delay: 4s;
         }
     </style>
 </head>
 
-<body class="bg-white text-gray-800 flex flex-col min-h-screen">
+<body class="bg-slate-50 text-gray-800 font-inter relative flex flex-col min-h-screen">
+
+    <!-- ========================================== -->
+    <!-- HIASAN BACKGROUND (GAYA DARI DATA)         -->
+    <!-- ========================================== -->
+    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+        <!-- Pola Titik (Dot Pattern) -->
+        <div class="absolute inset-0 opacity-10"
+            style="background-image: radial-gradient(#2A7C13 1.5px, transparent 1.5px); background-size: 32px 32px;">
+        </div>
+
+        <!-- Glowing Blobs (Animasi) -->
+        <div
+            class="absolute top-0 -left-10 w-96 h-96 bg-green-300 rounded-full mix-blend-multiply filter blur-[100px] opacity-40 animate-blob">
+        </div>
+        <div
+            class="absolute top-40 -right-10 w-96 h-96 bg-emerald-200 rounded-full mix-blend-multiply filter blur-[100px] opacity-40 animate-blob animation-delay-2000">
+        </div>
+        <div
+            class="absolute -bottom-20 left-1/3 w-[30rem] h-[30rem] bg-teal-200 rounded-full mix-blend-multiply filter blur-[100px] opacity-30 animate-blob animation-delay-4000">
+        </div>
+    </div>
+    <!-- ========================================== -->
 
     <!-- Navbar -->
     <nav id="navbar"
-        class="fixed top-0 left-0 w-full z-50 p-3 sm:p-4 lg:px-12 transition-all duration-300 bg-white shadow-md text-[#2A7C13]">
+        class="fixed top-0 left-0 w-full z-50 p-3 sm:p-4 lg:px-12 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-md text-[#2A7C13]">
 
         <div class="max-w-7xl mx-auto flex justify-between items-center relative">
 
             <!-- Logo ALBATROSS -->
-            <div class="relative flex items-center justify-start space-x-2 sm:space-x-3">
-                <a href="#" class="relative z-10 flex items-center justify-center transition-transform hover:scale-105">
-                    <img src="logo mitr.png" alt="LOGO MIT+R" class="h-9 sm:h-12 w-auto object-contain">
+            <div class="relative flex items-center justify-center">
+                <a href="#" id="logo-btn"
+                    class="relative z-10 flex items-center justify-center transition-transform hover:scale-105 mx-[5px]">
+                    <img src="Logo_IPB.png" alt="LOGO IPB University" class="h-12 w-auto object-contain mx-[10px]">
                 </a>
-                <a href="#" class="relative flex items-center justify-center transition-transform hover:scale-105">
-                    <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="relative z-10 h-9 sm:h-12 w-auto object-contain">
+                <a href="#" id="logo-btn-2"
+                    class="relative z-10 flex items-center justify-center transition-transform hover:scale-105 mx-[5px]">
+                    <img src="logo mitr.png" alt="LOGO MIT+R" class="h-12 w-auto object-contain mx-[10px]"
+                        style="margin-left: -5px;">
+                </a>
+                <a href="#" id="logo-btn-3"
+                    class="relative flex items-center justify-center transition-transform hover:scale-105">
+                    <div id="logo-circle"
+                        class="absolute bg-[#2A7C13] rounded-full w-14 h-14 -z-0 opacity-0 scale-75 transition-all duration-300 ease-in-out pointer-events-none">
+                    </div>
+                    <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="relative z-10 h-12 w-auto object-contain">
                 </a>
             </div>
 
@@ -177,13 +195,6 @@
 
                         <div id="data-menu"
                             class="absolute right-0 top-full w-48 bg-[#2A7C13] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200">
-                            <a href="data pemetaan.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors group/item">
-                                <span
-                                    class="relative inline-block hover:font-bold after:absolute after:-bottom-0.5 after:left-0 after:right-0 after:h-[1.5px] after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
-                                    Data Pemetaan
-                                </span>
-                            </a>
                             <a href="data alba.html"
                                 class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors group/item">
                                 <span
@@ -262,10 +273,6 @@
                             class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
                     </button>
                     <div id="mobile-data-sub" class="hidden pl-4 pr-2 py-1 space-y-1">
-                        <a href="data pemetaan.html"
-                            class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#2A7C13] rounded-lg transition-colors">
-                            Data Pemetaan
-                        </a>
                         <a href="data alba.html"
                             class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#2A7C13] rounded-lg transition-colors">
                             Data ALBA
@@ -285,39 +292,57 @@
     </nav>
 
 
-    <!-- ================= KONTEN UTAMA DENGAN PATTERN OVAL ================= -->
-    <main class="flex-grow pt-24 sm:pt-36 pb-16 px-4 sm:px-6 content-pattern-wrapper">
+    <!-- ================= KONTEN UTAMA (ISI KOTAK ALAT + HIASAN DATA) ================= -->
+    <main class="min-h-screen flex-grow flex flex-col items-center justify-center px-4 sm:px-6 pt-28 pb-16 relative z-10">
 
-        <!-- Judul Halaman -->
-        <div class="text-center mb-8 sm:mb-12 relative z-10">
-            <h1 class="font-tech text-3xl sm:text-4xl md:text-5xl font-bold text-[#6E3511] drop-shadow-sm">
-                ALAT
-            </h1>
+        <!-- Judul Halaman (Hiasan Titik & Pill dari Data, Teks dari Alat) -->
+        <div class="text-center mb-10 sm:mb-16">
+            <div class="inline-block relative">
+                <!-- Aksen Hiasan Titik Kiri/Kanan pada Judul -->
+                <div
+                    class="absolute top-1/2 -left-8 w-4 h-4 bg-green-400 rounded-full blur-[2px] opacity-70 -translate-y-1/2">
+                </div>
+                <h1 class="font-tech text-4xl md:text-5xl font-bold text-[#6E3511] relative z-10 drop-shadow-sm">
+                    ALAT
+                </h1>
+                <div
+                    class="absolute top-1/2 -right-8 w-4 h-4 bg-green-400 rounded-full blur-[2px] opacity-70 -translate-y-1/2">
+                </div>
+            </div>
 
-            <p class="font-inter text-xs sm:text-sm md:text-base text-[#454545] mt-2 sm:mt-3 px-4 font-medium max-w-xl mx-auto">
+            <p
+                class="font-inter text-sm md:text-base text-[#454545] mt-4 max-w-lg mx-auto bg-white/50 backdrop-blur-sm py-1 px-4 rounded-full shadow-sm border border-green-50">
                 Mengenal perangkat yang digunakan dalam sistem ALBATROSS.
             </p>
         </div>
 
-        <!-- Grid 3 Kotak Alat (ALBA, BAT, TROSS) -->
-        <div class="relative z-10 w-full max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-y-6 sm:gap-x-8 sm:gap-y-10 items-stretch justify-center px-2 sm:px-0">
+        <!-- Grid 3 Kotak Alat (ALBA, BAT, TROSS) dengan Hiasan Hover Glow dari Data -->
+        <div
+            class="w-full max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-y-10 sm:gap-x-8 sm:gap-y-14 items-stretch justify-center px-2 sm:px-0">
 
-            <!-- ALBA -->
-            <a href="alat alba.html" class="w-full block scale-[0.90] sm:scale-100 transition-transform">
-                <div class="flex flex-col items-center w-full max-w-sm md:max-w-lg mx-auto h-full">
+            <!-- 1. ALBA -->
+            <a href="alat alba.html"
+                class="w-full block max-w-sm md:max-w-lg mx-auto group scale-[0.95] sm:scale-100 transition-transform">
+                <div class="flex flex-col items-center w-full h-full relative">
+                    <!-- Hiasan Cahaya di Balik Card -->
                     <div
-                        class="relative bg-[#2A7C13] p-2 sm:p-4 md:p-5 rounded-3xl shadow-xl transition-transform duration-300 hover:scale-[1.02] w-full pt-7 sm:pt-10 flex-1 flex flex-col">
+                        class="absolute inset-0 bg-green-400 rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300">
+                    </div>
+                    <div
+                        class="relative bg-[#2A7C13] p-4 md:p-5 rounded-3xl shadow-xl transition-all duration-300 group-hover:-translate-y-1 w-full pt-8 sm:pt-10 border border-green-700/50 flex-1 flex flex-col">
+                        <!-- Kotak Putih ALBA -->
                         <div
-                            class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-5 sm:px-8 py-1.5 sm:py-2 rounded-b-xl shadow-md border-b-2 border-[#2A7C13] z-10 whitespace-nowrap">
+                            class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-6 sm:px-8 py-1.5 sm:py-2 rounded-b-xl shadow-md border-b-2 border-[#2A7C13] z-10 whitespace-nowrap">
                             <h2
-                                class="font-tech text-xs sm:text-xl md:text-2xl font-bold text-[#2A7C13] text-center tracking-wide">
+                                class="font-tech text-lg sm:text-xl md:text-2xl font-bold text-[#2A7C13] text-center tracking-wide">
                                 ALBA
                             </h2>
                         </div>
-                        <div class="p-1 flex-1">
-                            <div class="overflow-hidden rounded-2xl w-full h-full bg-white">
+                        <!-- Foto -->
+                        <div class="p-1 flex-1 relative">
+                            <div class="overflow-hidden rounded-2xl w-full h-full bg-white shadow-inner">
                                 <img src="alba.png" alt="Alat Alba"
-                                    class="w-full h-40 sm:h-[260px] md:h-[280px] object-cover rounded-2xl block"
+                                    class="w-full h-44 sm:h-[260px] md:h-[280px] object-cover rounded-2xl block transition-transform duration-500 group-hover:scale-105"
                                     onerror="this.onerror=null; this.src='https://placehold.co/800x450/0883a4/ffffff?text=Alat+Alba';">
                             </div>
                         </div>
@@ -325,22 +350,29 @@
                 </div>
             </a>
 
-            <!-- BAT -->
-            <a href="alat bat.html" class="w-full block scale-[0.90] sm:scale-100 transition-transform">
-                <div class="flex flex-col items-center w-full max-w-sm md:max-w-lg mx-auto h-full">
+            <!-- 2. BAT -->
+            <a href="alat bat.html"
+                class="w-full block max-w-sm md:max-w-lg mx-auto group scale-[0.95] sm:scale-100 transition-transform">
+                <div class="flex flex-col items-center w-full h-full relative">
+                    <!-- Hiasan Cahaya di Balik Card -->
                     <div
-                        class="relative bg-[#2A7C13] p-2 sm:p-4 md:p-5 rounded-3xl shadow-xl transition-transform duration-300 hover:scale-[1.02] w-full pt-7 sm:pt-10 flex-1 flex flex-col">
+                        class="absolute inset-0 bg-green-400 rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300">
+                    </div>
+                    <div
+                        class="relative bg-[#2A7C13] p-4 md:p-5 rounded-3xl shadow-xl transition-all duration-300 group-hover:-translate-y-1 w-full pt-8 sm:pt-10 border border-green-700/50 flex-1 flex flex-col">
+                        <!-- Kotak Putih BAT -->
                         <div
-                            class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-5 sm:px-8 py-1.5 sm:py-2 rounded-b-xl shadow-md border-b-2 border-[#2A7C13] z-10 whitespace-nowrap">
+                            class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-6 sm:px-8 py-1.5 sm:py-2 rounded-b-xl shadow-md border-b-2 border-[#2A7C13] z-10 whitespace-nowrap">
                             <h2
-                                class="font-tech text-xs sm:text-xl md:text-2xl font-bold text-[#2A7C13] text-center tracking-wide">
+                                class="font-tech text-lg sm:text-xl md:text-2xl font-bold text-[#2A7C13] text-center tracking-wide">
                                 BAT
                             </h2>
                         </div>
-                        <div class="p-1 flex-1">
-                            <div class="overflow-hidden rounded-2xl w-full h-full bg-white">
+                        <!-- Foto -->
+                        <div class="p-1 flex-1 relative">
+                            <div class="overflow-hidden rounded-2xl w-full h-full bg-white shadow-inner">
                                 <img src="bat.jpeg" alt="Alat Bat"
-                                    class="w-full h-40 sm:h-[260px] md:h-[280px] object-cover rounded-2xl block"
+                                    class="w-full h-44 sm:h-[260px] md:h-[280px] object-cover rounded-2xl block transition-transform duration-500 group-hover:scale-105"
                                     onerror="this.onerror=null; this.src='https://placehold.co/800x450/0883a4/ffffff?text=Alat+Bat';">
                             </div>
                         </div>
@@ -348,39 +380,46 @@
                 </div>
             </a>
 
-            <!-- TROSS -->
-            <a href="alat tross.html" class="w-full block md:col-span-2 md:max-w-sm md:mx-auto scale-[0.90] sm:scale-100 transition-transform">
-                <div class="flex flex-col items-center w-full max-w-sm mx-auto h-full">
+            <!-- 3. TROSS -->
+            <a href="alat tross.html"
+                class="w-full block max-w-sm md:col-span-2 md:max-w-md mx-auto group scale-[0.95] sm:scale-100 transition-transform">
+                <div class="flex flex-col items-center w-full h-full relative">
+                    <!-- Hiasan Cahaya di Balik Card -->
                     <div
-                        class="relative bg-[#2A7C13] p-2 sm:p-4 md:p-5 rounded-3xl shadow-xl transition-transform duration-300 hover:scale-[1.02] w-full pt-7 sm:pt-10 flex-1 flex flex-col">
+                        class="absolute inset-0 bg-green-400 rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300">
+                    </div>
+                    <div
+                        class="relative bg-[#2A7C13] p-4 md:p-5 rounded-3xl shadow-xl transition-all duration-300 group-hover:-translate-y-1 w-full pt-8 sm:pt-10 border border-green-700/50 flex-1 flex flex-col">
+                        <!-- Kotak Putih TROSS -->
                         <div
-                            class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-5 sm:px-8 py-1.5 sm:py-2 rounded-b-xl shadow-md border-b-2 border-[#2A7C13] z-10 whitespace-nowrap">
+                            class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-6 sm:px-8 py-1.5 sm:py-2 rounded-b-xl shadow-md border-b-2 border-[#2A7C13] z-10 whitespace-nowrap">
                             <h2
-                                class="font-tech text-xs sm:text-xl md:text-2xl font-bold text-[#2A7C13] text-center tracking-wide">
+                                class="font-tech text-lg sm:text-xl md:text-2xl font-bold text-[#2A7C13] text-center tracking-wide">
                                 TROSS
                             </h2>
                         </div>
-                        <div class="p-1 flex-1">
-                            <div class="overflow-hidden rounded-2xl w-full h-full bg-white">
+                        <!-- Foto -->
+                        <div class="p-1 flex-1 relative">
+                            <div class="overflow-hidden rounded-2xl w-full h-full bg-white shadow-inner">
                                 <img src="tross.jpeg" alt="Alat Tross"
-                                    class="w-full h-40 sm:h-[260px] md:h-[280px] object-cover rounded-2xl block"
+                                    class="w-full h-44 sm:h-[260px] md:h-[280px] object-cover rounded-2xl block transition-transform duration-500 group-hover:scale-105"
                                     onerror="this.onerror=null; this.src='https://placehold.co/800x450/0883a4/ffffff?text=Alat+Tross';">
                             </div>
                         </div>
                     </div>
                 </div>
             </a>
+
         </div>
     </main>
 
+    <br>
     <!-- Footer -->
     <footer class="bg-[#2A7C13] px-4 sm:px-6 py-10 border-t-[2px] border-[#2A7C13]">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
 
-            <!-- Kolom 1: Lokasi, Email, dan WhatsApp -->
             <div class="md:col-span-2 flex flex-col gap-4 text-white">
                 <h3 class="font-bold text-xl mb-2">Kontak Kami</h3>
-
                 <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9"
                     class="flex items-start gap-3 hover:text-[#76C457] transition">
                     <i class="fa-solid fa-location-dot text-xl mt-1"></i>
@@ -389,22 +428,18 @@
                         Dramaga, Bogor, Indonesia 16680
                     </span>
                 </a>
-
                 <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-3 hover:text-[#76C457] transition">
                     <i class="fa-regular fa-envelope text-xl"></i>
                     <span>mitr.ipb@gmail.com</span>
                 </a>
-
                 <a href="https://wa.me/6281283435353" class="flex items-center gap-3 hover:text-[#76C457] transition">
                     <i class="fa-brands fa-whatsapp text-xl"></i>
                     <span class="break-words">+6281283435353 (Hanifa Rahmaliya)</span>
                 </a>
             </div>
 
-            <!-- Kolom 2: Sosial Media -->
             <div class="flex flex-col gap-4 text-white">
                 <h3 class="font-bold text-xl mb-2">Media Sosial</h3>
-
                 <a href="https://www.instagram.com/mitr_ipb/"
                     class="flex items-center gap-3 hover:text-[#76C457] transition">
                     <i class="fa-brands fa-instagram text-xl"></i>
@@ -415,18 +450,27 @@
                     <i class="fa-brands fa-instagram text-xl"></i>
                     <span>@dmitr6teen</span>
                 </a>
+                <a href="https://www.tiktok.com/@albatross.project?_r=1&_t=ZS-9Axq4vlIaHd"
+                    class="flex items-center gap-3 hover:text-[#76C457] transition">
+                    <i class="fa-brands fa-tiktok text-xl"></i>
+                    <span>@albatross.project</span>
+                </a>
             </div>
 
-            <!-- Kolom 3: Logo dan Tombol Back to Top -->
             <div class="flex flex-col items-start gap-7 text-white h-full">
-                <div class="w-full flex flex-wrap items-center justify-start pb-12 gap-4">
+                <div class="w-full flex flex-wrap items-center justify-start pb-12 gap-4" style="margin-top: -30px;">
                     <div
-                        class="flex items-center justify-center w-16 h-16 sm:w-28 sm:h-28 bg-white rounded-full shadow-md shrink-0 p-2 transform -translate-x-4 translate-y-8">
-                        <img src="logo mitr.png" alt="Logo MIT+R"
-                            class="h-16 sm:h-[120px] w-auto object-contain transform -translate-y-1">
+                        class="h-16 sm:h-[120px] w-20 h-20 sm:w-28 sm:h-28 object-contain shrink-0 p-0 transform sm:-translate-x-4 translate-y-4 sm:translate-y-8">
+                        <img src="Logo_IPB.png" alt="Logo IPB University"
+                            class="h-16 sm:h-[120px] w-auto object-contain transform sm:-translate-y-1">
                     </div>
-                    <img src="logo ALBATROSS.png" alt="Logo Kedua"
-                        class="h-16 sm:h-[150px] w-auto object-contain transform -translate-x-4 translate-y-8">
+                    <div
+                        class="flex items-center justify-center w-16 h-16 sm:w-28 sm:h-28 bg-white rounded-full shadow-md shrink-0 p-2 transform sm:-translate-x-4 translate-y-3 sm:translate-y-8">
+                        <img src="logo mitr.png" alt="Logo MIT+R"
+                            class="h-16 sm:h-[120px] w-auto object-contain transform sm:-translate-y-1">
+                    </div>
+                    <img src="logo ALBATROSS.png" alt="Logo ALBATROSS"
+                        class="h-16 sm:h-[150px] w-auto object-contain transform sm:-translate-x-9 translate-y-4 sm:translate-y-8">
                 </div>
 
                 <div class="w-full flex justify-end mt-auto">
@@ -453,7 +497,7 @@
         </div>
 
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-4 relative z-10">
-            <div class="text-[#403100] font-semibold text-xs sm:text-sm text-center">
+            <div class="text-[#403100] font-semibold text-sm text-center">
                 © 2026 Diklat MIT+R 16. All Rights Reserved.
             </div>
         </div>
