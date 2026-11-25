@@ -225,7 +225,7 @@
 
 
     <!-- Navbar -->
-     <nav id="navbar"
+    <nav id="navbar"
         class="fixed top-0 left-0 w-full z-50 p-3 sm:p-4 lg:px-12 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-md text-[#2A7C13]">
 
         <div class="max-w-7xl mx-auto flex justify-between items-center relative">
@@ -542,10 +542,22 @@
                     class="w-full h-[450px] sm:h-[550px] rounded-xl overflow-hidden border border-gray-200 shadow-inner relative z-10">
                 </div>
 
+                <!-- TOMBOL DOWNLOAD DATA BATIMETRI DI BAWAH PETA -->
+                <div class="mt-4 pt-3 border-t border-gray-100 flex flex-wrap items-center justify-between gap-3 relative z-10">
+                    <span class="text-xs text-gray-500 font-medium">
+                        Unduh dataset koordinat, kedalaman, dan salinitas seluruh titik pengamatan.
+                    </span>
+                    <button id="download-batimetri-btn" type="button"
+                        class="inline-flex items-center gap-2 px-4 py-2.5 bg-[#2A7C13] hover:bg-[#6E3511] text-white text-xs sm:text-sm font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Download Data Batimetri</span>
+                    </button>
+                </div>
+
             </div>
         </section>
         <!-- =================================================
-             TABEL INDIKATOR KUALITAS PERAIRAN (PER 5 TITIK)
+             TABEL INDIKATOR KUALITAS PERAIRAN
         ================================================== -->
         <section class="mb-10 mt-10">
             <div class="mb-6 relative">
@@ -592,7 +604,6 @@
                 <div class="flex items-center gap-3 mb-3">
                     <div
                         class="w-11 h-11 rounded-xl bg-brand-iconColor/10 flex items-center justify-center text-[#6E3511] text-lg group-hover:scale-110 group-hover:bg-[#6E3511] group-hover:text-white transition-all duration-300 shadow-sm">
-                        <!-- Mengganti icon air menjadi icon droplet/flask untuk merepresentasikan kualitas air -->
                         <i class="fa-solid fa-droplet"></i>
                     </div>
                     <div>
@@ -616,7 +627,6 @@
                 <div class="flex items-center gap-3 mb-3">
                     <div
                         class="w-11 h-11 rounded-xl bg-brand-iconColor/10 flex items-center justify-center text-brand-iconColor text-lg group-hover:scale-110 group-hover:bg-[#6E3511] group-hover:text-white transition-all duration-300 shadow-sm">
-                        <!-- Menggunakan target/crosshairs untuk nuansa navigasi otonom/waypoint -->
                         <i class="fa-solid fa-location-crosshairs"></i>
                     </div>
                     <div>
@@ -667,7 +677,6 @@
             <div class="flex items-start gap-3">
                 <div
                     class="w-10 h-10 shrink-0 rounded-xl bg-white flex items-center justify-center text-[#6E3511] shadow-md">
-                    <!-- Animasi berdenyut dipertahankan -->
                     <i class="fa-solid fa-circle-info animate-pulse"></i>
                 </div>
                 <div>
@@ -675,8 +684,8 @@
                         Informasi Parameter Titik Pengamatan
                     </h3>
                     <p class="text-sm text-gray-700 leading-relaxed">
-                        Klik salah satu titik pada peta untuk melihat informasi lokasi, waktu pencatatan, dan 6
-                        parameter data pengamatan (Suhu, DO, Kedalaman, Kekeruhan, pH, dan Salinitas).
+                        Klik salah satu titik pada peta untuk melihat informasi lokasi, waktu pencatatan, dan 2
+                        parameter data pengamatan (Kedalaman dan Salinitas).
                     </p>
                 </div>
             </div>
@@ -779,15 +788,13 @@
             </div>
 
         </div>
-        </div>
+    </div>
+
     <!-- =====================================================
          LEAFLET JS
     ====================================================== -->
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
-    </script>
-
-
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
         document.getElementById('back-to-top').addEventListener('click', function () {
@@ -937,25 +944,50 @@
         ];
 
         /* =====================================================
+           DOWNLOAD DATA BATIMETRI (CSV)
+        ===================================================== */
+        document.getElementById('download-batimetri-btn').addEventListener('click', function () {
+            const headers = ['id', 'stasiun', 'waktu', 'latitude', 'longitude', 'kedalaman_m', 'salinitas_ppt'];
+            const rows = batimetriPoints.map(point => [
+                point.id,
+                point.stasiun,
+                `"${point.time}"`,
+                point.lat,
+                point.lng,
+                point.data?.kedalaman ?? '',
+                point.data?.salinitas ?? ''
+            ].join(','));
+
+            const csvContent = [headers.join(','), ...rows].join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'data_batimetri_alba.csv';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        });
+
+        /* =====================================================
            INISIALISASI PETA
         ===================================================== */
 
-        const map =
-            L.map('batimetri-map');
+        const map = L.map('batimetri-map');
 
         /* =====================================================
            CITRA SATELIT ESRI
         ===================================================== */
 
-        const satelliteLayer =
-            L.tileLayer(
-                'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-                {
-                    attribution: 'Tiles &copy; Esri',
-                    maxZoom: 19
-                }
-            );
-
+        const satelliteLayer = L.tileLayer(
+            'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+            {
+                attribution: 'Tiles &copy; Esri',
+                maxZoom: 19
+            }
+        );
 
         satelliteLayer.addTo(map);
 
@@ -963,224 +995,114 @@
            MARKER TITIK PENGAMATAN
         ===================================================== */
 
-        batimetriPoints.forEach(
-            (point, index) => {
+        batimetriPoints.forEach((point) => {
+            const markerColor = '#2A7C13';
 
-                const isFirst =
-                    index === 0;
+            const pointIcon = L.divIcon({
+                className: '',
+                html: `
+                    <div
+                        class="batimetri-marker"
+                        style="background:${markerColor};">
+                        ${point.id}
+                    </div>
+                `,
+                iconSize: [28, 28],
+                iconAnchor: [14, 14]
+            });
 
-                const isLast =
-                    index === batimetriPoints.length - 1;
+            const marker = L.marker([point.lat, point.lng], { icon: pointIcon }).addTo(map);
 
-                markerColor = '#2A7C13';
+            const status = `
+                <span style="color:#2A7C13; font-weight:700;">
+                    Titik pengamatan
+                </span>
+            `;
 
-                /* =============================================
-                   ICON MARKER
-                ============================================= */
+            const checkData = (val, unit) =>
+                (val !== null && val !== undefined)
+                    ? `${val} ${unit}`
+                    : '<span style="color:#9ca3af;">N/A</span>';
 
-                const pointIcon =
-                    L.divIcon({
-                        className: '',
-                        html: `
-                            <div
-                                class="batimetri-marker"
-                                style="
-                                    background:${markerColor};
-                                ">
-                                ${point.id}
-                            </div>
-                        `,
-                        iconSize: [28, 28],
-                        iconAnchor: [14, 14]
-                    });
+            const parameterInformation = `
+                <div style="
+                    margin-top:12px;
+                    padding-top:12px;
+                    border-top:1px solid #e5e7eb;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 8px;
+                    font-size: 11px;
+                ">
+                    <div>
+                        <strong style="display:block; color:#4b5563;">Kedalaman</strong>
+                        ${checkData(point.data.kedalaman, 'm')}
+                    </div>
+                    <div>
+                        <strong style="display:block; color:#4b5563;">Salinitas</strong>
+                        ${checkData(point.data.salinitas, 'ppt')}
+                    </div>
+                </div>
+            `;
 
+            marker.bindPopup(`
+                <div style="min-width:260px; font-family:Inter,Arial,sans-serif;">
+                    <div style="font-size:14px; font-weight:800; color:#2d3757; margin-bottom:4px;">
+                        Titik Pengukuran ${point.id}
+                    </div>
+                    <div style="font-size:11px; margin-bottom:10px;">
+                        ${status}
+                    </div>
+                    <div style="font-size:12px; margin-bottom:4px;">
+                        <strong>Waktu:</strong> ${point.time}
+                    </div>
+                    <div style="font-size:12px; margin-bottom:4px;">
+                        <strong>Koordinat:</strong> ${point.lat.toFixed(6)}, ${point.lng.toFixed(6)}
+                    </div>
 
+                    ${parameterInformation}
 
-                const marker =
-                    L.marker(
-                        [point.lat, point.lng],
-                        {
-                            icon: pointIcon
-                        }
-                    ).addTo(map);
-
-                /* =============================================
-                   STATUS TITIK
-                ============================================= */
-
-                status = `
-                        <span style="
-                            color:#2A7C13;
-                            font-weight:700;
-                        ">
-                            Titik pengamatan
-                        </span>
-                    `;
-
-                const checkData = (val, unit) => (val !== null && val !== undefined) ? `${val} ${unit}` : '<span style="color:#9ca3af;">N/A</span>';
-
-                const parameterInformation = `
                     <div style="
                         margin-top:12px;
-                        padding-top:12px;
+                        padding-top:8px;
                         border-top:1px solid #e5e7eb;
-                        display: grid;
-                        grid-template-columns: 1fr 1fr;
-                        gap: 8px;
-                        font-size: 11px;
+                        color:#6b7280;
+                        font-size:10px;
+                        text-align:center;
                     ">
-                         <div>
-                            <strong style="display:block; color:#4b5563;">Suhu</strong>
-                            ${checkData(point.data.suhu, '°C')}
-                        </div>
-                        <div>
-                            <strong style="display:block; color:#4b5563;">DO</strong>
-                            ${checkData(point.data.do, 'mg/L')}
-                        </div>
-                        <div>
-                            <strong style="display:block; color:#4b5563;">Kedalaman</strong>
-                            ${checkData(point.data.kedalaman, 'm')}
-                        </div>
-                        <div>
-                            <strong style="display:block; color:#4b5563;">Kekeruhan</strong>
-                            ${checkData(point.data.kekeruhan, 'NTU')}
-                        </div>
-                        <div>
-                            <strong style="display:block; color:#4b5563;">pH</strong>
-                            ${checkData(point.data.ph, '')}
-                        </div>
-                        <div>
-                            <strong style="display:block; color:#4b5563;">Salinitas</strong>
-                            ${checkData(point.data.salinitas, 'ppt')}
-                        </div>
+                        Metode: Pengukuran Multi-Parameter ALBA
                     </div>
-                `;
+                </div>
+            `);
 
-                marker.bindPopup(`
-                    <div style="min-width:260px; font-family:Inter,Arial,sans-serif;">
-                        <div style="font-size:14px; font-weight:800; color:#2d3757; margin-bottom:4px;">
-                            Titik Pengukuran ${point.id}
-                        </div>
-                        <div style="font-size:11px; margin-bottom:10px;">
-                            ${status}
-                        </div>
-                        <div style="font-size:12px; margin-bottom:4px;">
-                            <strong>Waktu:</strong> ${point.time}
-                        </div>
-                        <div style="font-size:12px; margin-bottom:4px;">
-                            <strong>Koordinat:</strong> ${point.lat.toFixed(6)}, ${point.lng.toFixed(6)}
-                        </div>
-
-                        ${parameterInformation}
-
-                        <div style="
-                            margin-top:12px;
-                            padding-top:8px;
-                            border-top:1px solid #e5e7eb;
-                            color:#6b7280;
-                            font-size:10px;
-                            text-align:center;
-                        ">
-                            Metode: Pengukuran Multi-Parameter ALBA
-                        </div>
-                    </div>
-                `);
-
-                /* =============================================
-                   LABEL
-                ============================================= */
-
-                marker.bindTooltip(
-                    `Titik ${point.id}`,
-                    {
-                        permanent: true,
-                        direction: 'top',
-                        offset: [0, -15],
-                        className:
-                            'data-point-label'
-                    }
-                );
-
-            }
-        );
+            marker.bindTooltip(
+                `Titik ${point.id}`,
+                {
+                    permanent: true,
+                    direction: 'top',
+                    offset: [0, -15],
+                    className: 'data-point-label'
+                }
+            );
+        });
 
         /* =====================================================
            MENYESUAIKAN PETA DENGAN SEMUA TITIK
         ===================================================== */
 
-        const allCoordinates =
-            batimetriPoints.map(
-                point => [
-                    point.lat,
-                    point.lng
-                ]
-            );
+        const allCoordinates = batimetriPoints.map(point => [point.lat, point.lng]);
+        const bounds = L.latLngBounds(allCoordinates);
 
-
-        const bounds =
-            L.latLngBounds(allCoordinates);
-
-
-        map.fitBounds(
-            bounds,
-            {
-                padding: [45, 45]
-            }
-        );
+        map.fitBounds(bounds, { padding: [45, 45] });
 
         /* =====================================================
-           LOGIKA TABEL INDIKATOR PARAMETER
+           LOGIKA TABEL INDIKATOR PARAMETER (KEDALAMAN & SALINITAS)
         ===================================================== */
 
-        // 1. Fungsi menentukan status tiap parameter (SILAKAN SESUAIKAN NILAI AMBANG BATASNYA)
-        // Nilai di bawah ini hanya contoh, bisa kamu sesuaikan dengan Kepmen LH / Literatur ITK
-        function getStatusBadge(paramName, value) {
-            if (value === null || value === undefined) {
-                return '<span class="px-2 py-1 bg-gray-100 text-gray-500 rounded text-xs font-medium border border-gray-200">N/A</span>';
-            }
-
-            let status = "Baik";
-
-            // Contoh aturan ambang batas (Threshold)
-            if (paramName === 'suhu') {
-                if (value < 25 || value > 32) status = "Tidak Baik";
-                else if (value < 27 || value > 30) status = "Kurang Baik";
-            } else if (paramName === 'ph') {
-                if (value < 6 || value > 9) status = "Tidak Baik";
-                else if (value < 7 || value > 8.5) status = "Kurang Baik";
-            } else if (paramName === 'do') {
-                if (value < 3) status = "Tidak Baik";
-                else if (value < 5) status = "Kurang Baik";
-            } else if (paramName === 'kekeruhan') {
-                if (value > 30) status = "Tidak Baik";
-                else if (value > 15) status = "Kurang Baik";
-            } else if (paramName === 'salinitas') {
-                if (value < 5 || value > 36) status = "Tidak Baik";
-                else if (value > 34) status = "Kurang Baik";
-            }
-
-            // Menentukan warna badge berdasarkan Tailwind CSS
-            let badgeClass = "bg-green-100 text-green-700 border-green-200";
-            if (status === "Kurang Baik") {
-                badgeClass = "bg-yellow-100 text-yellow-700 border-yellow-200";
-            } else if (status === "Tidak Baik") {
-                badgeClass = "bg-red-100 text-red-700 border-red-200";
-            }
-
-            return `<span class="px-2 py-1 border ${badgeClass} rounded text-xs font-medium whitespace-nowrap block text-center w-full min-w-[70px]">${status}</span>`;
-        }
-
-        // 2. Render Data ke dalam HTML per 5 Titik
-        /* =====================================================
-           LOGIKA TABEL INDIKATOR PARAMETER (RATA-RATA PER 5 TITIK)
-        ===================================================== */
-
-        // 1. Fungsi untuk menghitung rata-rata dari array (mengabaikan nilai null)
         function getAverage(chunk, paramName) {
             let sum = 0;
             let count = 0;
             for (let point of chunk) {
-                // Pastikan object data ada dan nilainya tidak null
                 if (point.data && point.data[paramName] !== null && point.data[paramName] !== undefined) {
                     sum += point.data[paramName];
                     count++;
@@ -1189,33 +1111,23 @@
             return count > 0 ? (sum / count) : null;
         }
 
-        // 2. Fungsi menentukan status dan mencetak sel tabel (Angka + Badge)
         function formatIndicatorCell(paramName, value, unit = "") {
             if (value === null || value === undefined) {
                 return '<span class="text-gray-400 text-xs">N/A</span>';
             }
 
-            let status = "Baik";
+            // Kedalaman hanya menampilkan nilai rata-rata
+            if (paramName === 'kedalaman') {
+                return `<div class="font-medium text-gray-800">${value.toFixed(2)} ${unit}</div>`;
+            }
 
-            // Ambang batas baku mutu
-            if (paramName === 'suhu') {
-                if (value < 25 || value > 32) status = "Tidak Baik";
-                else if (value < 27 || value > 30) status = "Kurang Baik";
-            } else if (paramName === 'ph') {
-                if (value < 6 || value > 9) status = "Tidak Baik";
-                else if (value < 7 || value > 8.5) status = "Kurang Baik";
-            } else if (paramName === 'do') {
-                if (value < 3) status = "Tidak Baik";
-                else if (value < 5) status = "Kurang Baik";
-            } else if (paramName === 'kekeruhan') {
-                if (value > 30) status = "Tidak Baik";
-                else if (value > 15) status = "Kurang Baik";
-            } else if (paramName === 'salinitas') {
+            // Salinitas menampilkan rata-rata + badge status kualitas air
+            let status = "Baik";
+            if (paramName === 'salinitas') {
                 if (value < 5 || value > 36) status = "Tidak Baik";
                 else if (value > 34) status = "Kurang Baik";
             }
 
-            // Styling Badge Tailwind
             let badgeClass = "bg-green-100 text-green-700 border-green-200";
             if (status === "Kurang Baik") {
                 badgeClass = "bg-yellow-100 text-yellow-700 border-yellow-200";
@@ -1223,12 +1135,6 @@
                 badgeClass = "bg-red-100 text-red-700 border-red-200";
             }
 
-            // Jika parameter kedalaman, tidak perlu pakai badge status kualitas air
-            if (paramName === 'kedalaman') {
-                return `<div class="font-medium text-gray-800">${value.toFixed(2)} ${unit}</div>`;
-            }
-
-            // Tampilkan Angka rata-rata dan Badge-nya
             return `
                 <div class="flex flex-col items-center justify-center gap-1.5 hover:scale-110 transition-transform">
                     <span class="font-medium text-gray-800 text-sm">${value.toFixed(2)} ${unit}</span>
@@ -1239,8 +1145,6 @@
             `;
         }
 
-        // 3. Render Tabel Rata-rata
-        // 3. Render Tabel Rata-rata berdasarkan ID Stasiun
         const tableContainer = document.getElementById('table-indikator-container');
 
         let tableHTML = `
@@ -1249,41 +1153,28 @@
                     <thead class="bg-gray-50/80 text-gray-700 border-b border-[#76C457]/50">
                         <tr>
                             <th class="px-4 py-4 font-semibold text-center border-r border-[#76C457]/20 text-[#2A7C13]">Zona / Kelompok</th>
-                            <th class="px-4 py-4 font-semibold text-center text-[#2A7C13]">Suhu</th>
-                            <th class="px-4 py-4 font-semibold text-center text-[#2A7C13]">DO</th>
-                            <th class="px-4 py-4 font-semibold text-center text-[#2A7C13]">Kedalaman</th>
-                            <th class="px-4 py-4 font-semibold text-center text-[#2A7C13]">Kekeruhan</th>
-                            <th class="px-4 py-4 font-semibold text-center text-[#2A7C13]">pH</th>
+                            <th class="px-4 py-4 font-semibold text-center border-r border-[#76C457]/20 text-[#2A7C13]">Kedalaman</th>
                             <th class="px-4 py-4 font-semibold text-center text-[#2A7C13]">Salinitas</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
         `;
 
-        // Proses pengelompokan data berdasarkan properti 'stasiun'
         const stasiunGroups = {};
         batimetriPoints.forEach(point => {
-            const idStasiun = point.stasiun || 1; // Jika lupa diberi stasiun, otomatis masuk Stasiun 1
+            const idStasiun = point.stasiun || 1;
             if (!stasiunGroups[idStasiun]) {
                 stasiunGroups[idStasiun] = [];
             }
             stasiunGroups[idStasiun].push(point);
         });
 
-        // Looping untuk setiap Stasiun yang sudah dikelompokkan
         for (const idStasiun in stasiunGroups) {
             const titikDiStasiunIni = stasiunGroups[idStasiun];
-
-            // Ambil nomor titik awal dan akhir dari stasiun tersebut
             const startId = titikDiStasiunIni[0].id;
             const endId = titikDiStasiunIni[titikDiStasiunIni.length - 1].id;
 
-            // Hitung rata-rata per parameter
-            const avgSuhu = getAverage(titikDiStasiunIni, 'suhu');
-            const avgDo = getAverage(titikDiStasiunIni, 'do');
             const avgKedalaman = getAverage(titikDiStasiunIni, 'kedalaman');
-            const avgKekeruhan = getAverage(titikDiStasiunIni, 'kekeruhan');
-            const avgPh = getAverage(titikDiStasiunIni, 'ph');
             const avgSalinitas = getAverage(titikDiStasiunIni, 'salinitas');
 
             tableHTML += `
@@ -1292,11 +1183,7 @@
                         <div class="font-bold text-[#6E3511]">Stasiun ${idStasiun}</div>
                         <div class="text-xs text-gray-500 mt-1 font-medium">Titik ${startId} - ${endId}</div>
                     </td>
-                    <td class="px-4 py-4 text-center align-middle">${formatIndicatorCell('suhu', avgSuhu, '°C')}</td>
-                    <td class="px-4 py-4 text-center align-middle">${formatIndicatorCell('do', avgDo, 'mg/L')}</td>
-                    <td class="px-4 py-4 text-center align-middle">${formatIndicatorCell('kedalaman', avgKedalaman, 'm')}</td>
-                    <td class="px-4 py-4 text-center align-middle">${formatIndicatorCell('kekeruhan', avgKekeruhan, 'NTU')}</td>
-                    <td class="px-4 py-4 text-center align-middle">${formatIndicatorCell('ph', avgPh, '')}</td>
+                    <td class="px-4 py-4 border-r border-[#76C457]/10 text-center align-middle">${formatIndicatorCell('kedalaman', avgKedalaman, 'm')}</td>
                     <td class="px-4 py-4 text-center align-middle">${formatIndicatorCell('salinitas', avgSalinitas, 'ppt')}</td>
                 </tr>
             `;
