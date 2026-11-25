@@ -225,19 +225,28 @@
 
 
     <!-- Navbar -->
-    <nav id="navbar"
+     <nav id="navbar"
         class="fixed top-0 left-0 w-full z-50 p-3 sm:p-4 lg:px-12 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-md text-[#2A7C13]">
 
         <div class="max-w-7xl mx-auto flex justify-between items-center relative">
 
             <!-- Logo ALBATROSS -->
-            <div class="relative flex items-center justify-start space-x-2 sm:space-x-3">
-                <a href="#" class="relative z-10 flex items-center justify-center transition-transform hover:scale-105">
-                    <img src="logo mitr.png" alt="LOGO MIT+R" class="h-9 sm:h-12 w-auto object-contain">
+            <div class="relative flex items-center justify-center">
+                <a href="#" id="logo-btn"
+                    class="relative z-10 flex items-center justify-center transition-transform hover:scale-105 mx-[5px]">
+                    <img src="Logo_IPB.png" alt="LOGO IPB University" class="h-12 w-auto object-contain mx-[10px]">
                 </a>
-                <a href="#" class="relative flex items-center justify-center transition-transform hover:scale-105">
-                    <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS"
-                        class="relative z-10 h-9 sm:h-12 w-auto object-contain">
+                <a href="#" id="logo-btn-2"
+                    class="relative z-10 flex items-center justify-center transition-transform hover:scale-105 mx-[5px]">
+                    <img src="logo mitr.png" alt="LOGO MIT+R" class="h-12 w-auto object-contain mx-[10px]"
+                        style="margin-left: -5px;">
+                </a>
+                <a href="#" id="logo-btn-3"
+                    class="relative flex items-center justify-center transition-transform hover:scale-105">
+                    <div id="logo-circle"
+                        class="absolute bg-[#2A7C13] rounded-full w-14 h-14 -z-0 opacity-0 scale-75 transition-all duration-300 ease-in-out pointer-events-none">
+                    </div>
+                    <img src="logo ALBATROSS.png" alt="LOGO ALBATROSS" class="relative z-10 h-12 w-auto object-contain">
                 </a>
             </div>
 
@@ -313,13 +322,6 @@
 
                         <div id="data-menu"
                             class="absolute right-0 top-full w-48 bg-[#2A7C13] text-white rounded-b-2xl rounded-tl-2xl shadow-xl overflow-hidden z-50 pt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200">
-                            <a href="data pemetaan.html"
-                                class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors group/item">
-                                <span
-                                    class="relative inline-block hover:font-bold after:absolute after:-bottom-0.5 after:left-0 after:right-0 after:h-[1.5px] after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300">
-                                    Data Pemetaan
-                                </span>
-                            </a>
                             <a href="data alba.html"
                                 class="block px-5 py-2.5 text-sm normal-case font-normal hover:bg-[#6E3511] transition-colors group/item">
                                 <span
@@ -398,10 +400,6 @@
                             class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
                     </button>
                     <div id="mobile-data-sub" class="hidden pl-4 pr-2 py-1 space-y-1">
-                        <a href="data pemetaan.html"
-                            class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#2A7C13] rounded-lg transition-colors">
-                            Data Pemetaan
-                        </a>
                         <a href="data alba.html"
                             class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#2A7C13] rounded-lg transition-colors">
                             Data ALBA
@@ -465,8 +463,7 @@
                 <h1 class="text-3xl sm:text-4xl font-bold tracking-wide font-anta drop-shadow-md">Data ALBA</h1>
             </div>
             <p class="text-sm sm:text-base text-white/90 max-w-3xl leading-relaxed font-normal font-inter">
-                Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data salinitas, kedalaman, kekeruhan, pH,
-                oksigen terlarut (DO), dan suhu.
+                Monitoring kondisi sekitar Kampung Laut, Nusakambangan dengan data salinitas dan kedalaman.
             </p>
             <div class="pt-4">
 
@@ -609,7 +606,7 @@
                 </div>
 
                 <p class="text-sm text-gray-600 leading-relaxed">
-                    Wahana ALBA mencatat data kedalaman, suhu, kekeruhan, pH, DO, dan salinitas secara terintegrasi pada
+                    Wahana ALBA mencatat data kedalaman dan salinitas secara terintegrasi pada
                     setiap lokasi.
                 </p>
             </div>
@@ -694,10 +691,8 @@
     <footer class="bg-[#2A7C13] px-4 sm:px-6 py-10 border-t-[2px] border-[#2A7C13]">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
 
-            <!-- Kolom 1: Lokasi, Email, dan WhatsApp -->
             <div class="md:col-span-2 flex flex-col gap-4 text-white">
                 <h3 class="font-bold text-xl mb-2">Kontak Kami</h3>
-
                 <a href="https://maps.app.goo.gl/mirmGEEjNxX9zrjp9"
                     class="flex items-start gap-3 hover:text-[#76C457] transition">
                     <i class="fa-solid fa-location-dot text-xl mt-1"></i>
@@ -706,22 +701,18 @@
                         Dramaga, Bogor, Indonesia 16680
                     </span>
                 </a>
-
                 <a href="mailto:mitr.ipb@gmail.com" class="flex items-center gap-3 hover:text-[#76C457] transition">
                     <i class="fa-regular fa-envelope text-xl"></i>
                     <span>mitr.ipb@gmail.com</span>
                 </a>
-
                 <a href="https://wa.me/6281283435353" class="flex items-center gap-3 hover:text-[#76C457] transition">
                     <i class="fa-brands fa-whatsapp text-xl"></i>
                     <span class="break-words">+6281283435353 (Hanifa Rahmaliya)</span>
                 </a>
             </div>
 
-            <!-- Kolom 2: Sosial Media -->
             <div class="flex flex-col gap-4 text-white">
                 <h3 class="font-bold text-xl mb-2">Media Sosial</h3>
-
                 <a href="https://www.instagram.com/mitr_ipb/"
                     class="flex items-center gap-3 hover:text-[#76C457] transition">
                     <i class="fa-brands fa-instagram text-xl"></i>
@@ -732,18 +723,27 @@
                     <i class="fa-brands fa-instagram text-xl"></i>
                     <span>@dmitr6teen</span>
                 </a>
+                <a href="https://www.tiktok.com/@albatross.project?_r=1&_t=ZS-9Axq4vlIaHd"
+                    class="flex items-center gap-3 hover:text-[#76C457] transition">
+                    <i class="fa-brands fa-tiktok text-xl"></i>
+                    <span>@albatross.project</span>
+                </a>
             </div>
 
-            <!-- Kolom 3: Logo dan Tombol Back to Top -->
             <div class="flex flex-col items-start gap-7 text-white h-full">
-                <div class="w-full flex flex-wrap items-center justify-start pb-12 gap-4">
+                <div class="w-full flex flex-wrap items-center justify-start pb-12 gap-4" style="margin-top: -30px;">
                     <div
-                        class="flex items-center justify-center w-16 h-16 sm:w-28 sm:h-28 bg-white rounded-full shadow-md shrink-0 p-2 transform -translate-x-4 translate-y-8">
-                        <img src="logo mitr.png" alt="Logo MIT+R"
-                            class="h-16 sm:h-[120px] w-auto object-contain transform -translate-y-1">
+                        class="h-16 sm:h-[120px] w-20 h-20 sm:w-28 sm:h-28 object-contain shrink-0 p-0 transform sm:-translate-x-4 translate-y-4 sm:translate-y-8">
+                        <img src="Logo_IPB.png" alt="Logo IPB University"
+                            class="h-16 sm:h-[120px] w-auto object-contain transform sm:-translate-y-1">
                     </div>
-                    <img src="logo ALBATROSS.png" alt="Logo Kedua"
-                        class="h-16 sm:h-[150px] w-auto object-contain transform -translate-x-4 translate-y-8">
+                    <div
+                        class="flex items-center justify-center w-16 h-16 sm:w-28 sm:h-28 bg-white rounded-full shadow-md shrink-0 p-2 transform sm:-translate-x-4 translate-y-3 sm:translate-y-8">
+                        <img src="logo mitr.png" alt="Logo MIT+R"
+                            class="h-16 sm:h-[120px] w-auto object-contain transform sm:-translate-y-1">
+                    </div>
+                    <img src="logo ALBATROSS.png" alt="Logo ALBATROSS"
+                        class="h-16 sm:h-[150px] w-auto object-contain transform sm:-translate-x-9 translate-y-4 sm:translate-y-8">
                 </div>
 
                 <div class="w-full flex justify-end mt-auto">
@@ -764,7 +764,7 @@
     </footer>
 
     <!-- Tambahan kotak/bar kuning diletakkan di LUAR tag footer aslimu -->
-    <div class="w-full relative bg-[#FFFFFF] py-4 px-6 border-t-[1px] border-[#2A7C13] overflow-hidden">
+    <div class="w-full relative bg-[#FFFFFF] py-4 px-6 border-t-[1px] border-[#2A7C13] overflow-hidden z-20">
 
         <!-- Pola Pattern di Background -->
         <div class="absolute inset-0 opacity-15 pointer-events-none"
@@ -779,7 +779,7 @@
             </div>
 
         </div>
-    </div>
+        </div>
     <!-- =====================================================
          LEAFLET JS
     ====================================================== -->
