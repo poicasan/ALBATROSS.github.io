@@ -935,6 +935,7 @@
 
         // Variabel untuk membantu agar auto-zoom peta hanya terjadi di awal muat
         let isFirstMapLoad = true;
+        const MAX_KECEPATAN_DRIFTER_MPS = 25.0; // Batas wajar loncatan/kecepatan drifter (m/s)
 
         // ==========================================
         // PENARIKAN DATA FIREBASE & LOGIKA UTAMA
@@ -967,6 +968,14 @@
             }
         }
 
+        function isKoordinatValidBAT(lat, lon) {
+            if (!Number.isFinite(lat) || !Number.isFinite(lon)) return false;
+            if (lat < -90 || lat > 90 || lon < -180 || lon > 180) return false;
+            // Tolak koordinat (0, 0) akibat GPS belum fix / invalid
+            if (Math.abs(lat) < 1e-6 && Math.abs(lon) < 1e-6) return false;
+            return true;
+        }
+
         function normalisasiDataBAT(data) {
             if (!data) return [];
             if (!Array.isArray(data) && typeof data === 'object' && ('latitude' in data || 'longitude' in data || 'kecepatan' in data)) {
@@ -979,7 +988,7 @@
                 kumpulan = Array.isArray(nested) ? nested : Object.values(nested);
                 kumpulan = kumpulan.filter(item => item && typeof item === 'object');
             }
-            return kumpulan.filter(item => Number.isFinite(Number(item.latitude)) && Number.isFinite(Number(item.longitude)));
+            return kumpulan.filter(item => isKoordinatValidBAT(Number(item.latitude), Number(item.longitude)));
         }
 
         function jarakGPSBAT(lat1, lon1, lat2, lon2) {
@@ -991,6 +1000,13 @@
             return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         }
 
+        function hitungSelisihDetikBAT(detikAwal, detikAkhir) {
+            if (!Number.isFinite(detikAwal) || !Number.isFinite(detikAkhir)) return NaN;
+            let selisih = detikAkhir - detikAwal;
+            if (selisih < 0) selisih += 24 * 3600;
+            return selisih;
+        }
+
         async function updateBATCards() {
             try {
                 const response = await fetch(FIREBASE_BAT_URL, { cache: 'no-store' });
@@ -999,28 +1015,60 @@
                 const rekaman = normalisasiDataBAT(json);
 
                 if (rekaman.length === 0) {
-                    setStatusFirebaseBAT('Belum ada data GPS', true);
+                    setStatusFirebaseBAT('Belum ada data GPS valid', true);
                     return;
                 }
 
-                // 1. Ekstrak dan Konversi String Jam ke Detik untuk Keperluan Sorting
+                // 1. Ekstrak dan konversi string jam ke detik untuk keperluan sorting
                 const dataWaktu = rekaman.map((item, index) => {
-                    // Pastikan mencari properti "waktu" atau "waktu_update" sesuai dengan JSON kamu
                     const waktuMentah = String(item.waktu_update || item.waktu || item.time || '');
-                    
                     return {
                         ...item,
-                        _detik: parseWaktuBAT(waktuMentah), 
+                        _lat: Number(item.latitude),
+                        _lon: Number(item.longitude),
+                        _detik: parseWaktuBAT(waktuMentah),
                         _index: index,
-                        _waktuAsli: waktuMentah // Simpan string aslinya untuk tooltip grafik
+                        _waktuAsli: waktuMentah
                     };
                 });
 
-                // 2. SORTING UTAMA BERDASARKAN WAKTU GPS
-                // Periksa apakah konversi jam (misal 14:30:15) berhasil menjadi detik. 
-                // Jika ya, urutkan seluruh objek dari waktu yang paling pagi hingga terbaru.
+                // 2. Sorting utama berdasarkan waktu GPS
                 if (dataWaktu.every(item => Number.isFinite(item._detik))) {
                     dataWaktu.sort((a, b) => a._detik - b._detik);
+                }
+
+                // 3. Filter outlier loncatan ekstrem agar titik nyasar tidak merusak peta & total jarak
+                const dataBersih = [];
+                let totalJarak = 0;
+
+                for (let i = 0; i < dataWaktu.length; i++) {
+                    const curr = dataWaktu[i];
+
+                    if (dataBersih.length === 0) {
+                        dataBersih.push(curr);
+                        continue;
+                    }
+
+                    const prev = dataBersih[dataBersih.length - 1];
+                    const jarakSegmen = jarakGPSBAT(prev._lat, prev._lon, curr._lat, curr._lon);
+                    const dtDetik = hitungSelisihDetikBAT(prev._detik, curr._detik);
+
+                    // Jika selisih waktu valid (> 0), cek kecepatan tersirat antar titik
+                    if (Number.isFinite(dtDetik) && dtDetik > 0) {
+                        const kecepatanLoncatan = jarakSegmen / dtDetik;
+                        if (kecepatanLoncatan > MAX_KECEPATAN_DRIFTER_MPS) {
+                            console.warn(`Titik outlier diabaikan (${curr._waktuAsli}): ${jarakSegmen.toFixed(1)} m dalam ${dtDetik} s`);
+                            continue;
+                        }
+                    }
+
+                    totalJarak += jarakSegmen;
+                    dataBersih.push(curr);
+                }
+
+                if (dataBersih.length === 0) {
+                    setStatusFirebaseBAT('Tidak ada data valid', true);
+                    return;
                 }
 
                 // ==============================================
@@ -1030,26 +1078,22 @@
                 const chartSpeeds = [];
                 const mapRouteCoords = [];
 
-                // Bersihkan marker lama agar tidak bertumpuk setiap 5 detik
                 mapMarkersGroup.clearLayers();
 
-                // 3. Mapping data yang SUDAH BERURUTAN
-                dataWaktu.forEach((point, idx) => {
-                    const lat = Number(point.latitude);
-                    const lon = Number(point.longitude);
-                    
-                    // Gunakan string waktu asli yang disortir tadi untuk ditampilkan
+                dataBersih.forEach((point, idx) => {
+                    const lat = point._lat;
+                    const lon = point._lon;
                     const timeStr = point._waktuAsli || `Titik ${idx + 1}`;
 
-                    // Kumpulkan data Koordinat untuk Garis Rute (Sekarang ini sudah terurut rapi)
                     mapRouteCoords.push([lat, lon]);
 
-                    // Konversi Kecepatan dari km/h (bawaan modul) ke m/s untuk chart
-                    const speedMs = Number(point.kecepatan || point.spd || 0) / 3.6;
+                    let speedMs = Number(point.kecepatan ?? point.spd ?? 0) / 3.6;
+                    if (!Number.isFinite(speedMs) || speedMs < 0 || speedMs > MAX_KECEPATAN_DRIFTER_MPS) {
+                        speedMs = 0;
+                    }
                     chartLabels.push(timeStr);
                     chartSpeeds.push(speedMs.toFixed(3));
 
-                    // Buat marker bulat kuning untuk tiap titik data
                     const circleMarker = L.circleMarker([lat, lon], {
                         radius: 5, color: '#ffffff', weight: 1.5, fillColor: '#facc15', fillOpacity: 1
                     });
@@ -1066,67 +1110,51 @@
                     mapMarkersGroup.addLayer(circleMarker);
                 });
 
-                // Tambahkan Marker Deploy (Awal) dan Marker Posisi Terakhir
-                // Karena dataWaktu sudah disortir, index 0 PASTI waktu paling awal (Deploy)
-                // dan index terakhir PASTI posisi terbaru.
-                const startPoint = dataWaktu[0];
-                const endPoint = dataWaktu[dataWaktu.length - 1];
+                const startPoint = dataBersih[0];
+                const endPoint = dataBersih[dataBersih.length - 1];
 
-                L.marker([startPoint.latitude, startPoint.longitude], { icon: deployIcon })
+                L.marker([startPoint._lat, startPoint._lon], { icon: deployIcon })
                     .bindPopup(`<strong>Titik Deploy (Awal)</strong><br>Waktu: ${startPoint._waktuAsli}`)
                     .addTo(mapMarkersGroup);
 
-                L.marker([endPoint.latitude, endPoint.longitude], { icon: lastIcon })
+                L.marker([endPoint._lat, endPoint._lon], { icon: lastIcon })
                     .bindPopup(`<strong>Posisi Terakhir</strong><br>Waktu: ${endPoint._waktuAsli}`)
                     .addTo(mapMarkersGroup);
 
-                // Perbarui Garis Rute di Peta (Garis akan terbentuk sesuai urutan waktu GPS)
                 routeLine.setLatLngs(mapRouteCoords);
 
-                // Perbarui Data Grafik Chart.js (Grafik dari kiri ke kanan adalah waktu yang runtut)
+                if (isFirstMapLoad && mapRouteCoords.length > 0) {
+                    if (mapRouteCoords.length === 1) {
+                        map.setView(mapRouteCoords[0], 16);
+                    } else {
+                        map.fitBounds(routeLine.getBounds(), { padding: [30, 30] });
+                    }
+                    isFirstMapLoad = false;
+                }
+
                 speedChart.data.labels = chartLabels;
                 speedChart.data.datasets[0].data = chartSpeeds;
                 speedChart.update();
 
-                // ... [Kode perhitungan total jarak dan durasi di bawahnya tetap sama] ...
-
                 // ==============================================
                 // PERHITUNGAN UNTUK KARTU (STAT CARD)
                 // ==============================================
-                let totalJarak = 0;
-
-                for (let i = 1; i < dataWaktu.length; i++) {
-                    const latSebelumnya = Number(dataWaktu[i - 1].latitude);
-                    const lonSebelumnya = Number(dataWaktu[i - 1].longitude);
-                    const latSekarang = Number(dataWaktu[i].latitude);
-                    const lonSekarang = Number(dataWaktu[i].longitude);
-
-                    // Langsung menghitung jarak antara titik saat ini dan sebelumnya tanpa filter
-                    totalJarak += jarakGPSBAT(
-                        latSebelumnya,
-                        lonSebelumnya,
-                        latSekarang,
-                        lonSekarang
-                    );
-                }
-
                 let durasiDetik = NaN;
-                if (dataWaktu.length >= 2 && Number.isFinite(dataWaktu[0]._detik) && Number.isFinite(dataWaktu[dataWaktu.length - 1]._detik)) {
-                    durasiDetik = dataWaktu[dataWaktu.length - 1]._detik - dataWaktu[0]._detik;
-                    if (durasiDetik < 0) durasiDetik += 24 * 3600;
+                if (dataBersih.length >= 2) {
+                    durasiDetik = hitungSelisihDetikBAT(startPoint._detik, endPoint._detik);
                 }
 
                 document.getElementById('duration-value').textContent = Number.isFinite(durasiDetik) ? formatDurasiBAT(durasiDetik) : '--';
-                document.getElementById('distance-value').textContent = dataWaktu.length >= 2 ? `${formatAngkaBAT(totalJarak / 1000)} km` : '--';
+                document.getElementById('distance-value').textContent = dataBersih.length >= 2 ? `${formatAngkaBAT(totalJarak / 1000)} km` : '--';
 
                 let rataRataMS = Number.isFinite(durasiDetik) && durasiDetik > 0 ? totalJarak / durasiDetik : NaN;
                 if (!Number.isFinite(rataRataMS)) {
-                    const speedKmph = Number(dataWaktu[dataWaktu.length - 1].kecepatan);
+                    const speedKmph = Number(endPoint.kecepatan ?? endPoint.spd);
                     if (Number.isFinite(speedKmph)) rataRataMS = speedKmph / 3.6;
                 }
 
                 document.getElementById('average-value').textContent = Number.isFinite(rataRataMS) ? `${formatAngkaBAT(rataRataMS)} m/s` : '--';
-                document.getElementById('points-value').textContent = `${dataWaktu.length} titik`;
+                document.getElementById('points-value').textContent = `${dataBersih.length} titik`;
 
                 setStatusFirebaseBAT('Aktif', true);
             } catch (error) {
